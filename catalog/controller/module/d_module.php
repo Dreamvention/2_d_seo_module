@@ -1,0 +1,4 @@
+<?php
+/*
+ *	location: catalog/controller
+ */

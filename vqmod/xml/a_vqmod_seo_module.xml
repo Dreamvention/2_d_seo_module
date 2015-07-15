@@ -1,0 +1,251 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<modification>
+	<id> SEO module by Dreamvention</id>
+	<version>1.0.0</version>
+	<vqmver required="true">2.5.0</vqmver>
+	<author> Dreamvention </author>
+
+	
+		<file name="admin/model/catalog/product.php">
+		<operation error="skip" >
+			<search position="replace" ><![CDATA[$this->db->query("INSERT INTO " . DB_PREFIX . "product_description SET product_id = '" . (int)$product_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "', tag = '" . $this->db->escape($value['tag']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "'");]]></search>
+			<add><![CDATA[			$this->db->query("INSERT INTO " . DB_PREFIX . "product_description SET product_id = '" . (int)$product_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "', tag = '" . $this->db->escape($value['tag']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "', robots = '" . $this->db->escape($value['rel']) . "'");]]></add>
+		</operation>
+	</file>
+	<file name="admin/controller/catalog/product.php">
+		<operation error="skip" >
+			<search position="before"  ><![CDATA[$data['tab_general'] = $this->language->get('tab_general');]]></search>
+			<add><![CDATA[		$data['tab_general_seo'] = $this->language->get('tab_general_seo');
+					$data['tab_data_seo'] = $this->language->get('tab_data_seo');
+					$data['tags_robots'] = $this->language->get('tags_robots');
+					$data['robots_tooltip'] = $this->language->get('robots_tooltip');]]></add>
+		</operation>
+	</file>
+	<file name="admin/language/english/catalog/product.php">
+		<operation error="skip" >
+			<search position="before"  ><![CDATA[// Help]]></search>
+			
+			<add><![CDATA[		// SEO by Dreamvention
+					$_['tab_general_seo']               = 'General SEO';
+					$_['tags_robots']               = 'Meta tags robots';
+					$_['tab_data_seo']               = 'Data SEO';
+					$_['robots_tooltip']               = 'These meta tags can control the behavior of search engine crawling and indexing.
+														The robots meta tag applies to all search engines, 
+														while the "googlebot" meta tag is specific to Google. The default values are "index, follow"';]]></add>
+					
+					  
+		</operation>
+	</file>
+	<file name="admin/view/template/catalog/product_form.tpl">
+		<operation error="skip" >
+			<search position="after"  offset="29" ><![CDATA[<textarea name="product_description[<?php echo $language['language_id']; ?>][description]" placeholder="<?php echo $entry_description; ?>" id="input-description<?php echo $language['language_id']; ?>"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['description'] : ''; ?></textarea>]]></search>
+			<add><![CDATA[					</div>					
+								<div class="tab-pane" id="tab-data-seo">  
+									<div class="form-group">
+										<label class="col-sm-2 control-label">
+											<span data-toggle="tooltip" title="" data-original-title="<?php echo $robots_tooltip; ?>"><?php echo $tags_robots; ?></span>
+										</label>
+										<div class="col-sm-10">
+											<div class="">
+												<label for="noindex-nofollow" class="radio-inline">
+													<input type="radio" value="noindex,nofollow" name="product_description[<?php echo $language['language_id']; ?>][rel]"  id="noindex-nofollow">
+													noindex,nofollow               
+												</label>
+												<label for="noindex-follow" class="radio-inline">
+													<input type="radio" value="noindex,follow" name="product_description[<?php echo $language['language_id']; ?>][rel]" id="noindex-follow">
+													noindex,follow                  
+												</label>
+												<label for="index-follow" class="radio-inline">
+													<input type="radio" value="index,follow" checked="checked" name="product_description[<?php echo $language['language_id']; ?>][rel]" id="index-follow">
+													index,follow                  
+												</label>
+											</div>
+									    </div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">
+											<span data-toggle="tooltip" title="" data-original-title="<?php echo $robots_tooltip; ?>"><?php echo $tags_robots; ?></span>
+										</label>
+										<div class="col-sm-10">
+											<div class="">
+												 <select name="product_description[<?php echo $language['language_id']; ?>][changefreq]" class="form-control">
+													<option value="always" >always</option>
+													<option value="hourly" >hourly</option>
+													<option value="daily" selected="selected" >daily</option>
+													<option value="weekly" >weekly</option>
+													<option value="monthly" >monthly</option>
+													<option value="yearly" >yearly</option>
+													<option value="never" >never</option>
+												 </select>
+											</div>
+									    </div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">
+											<span data-toggle="tooltip" title="" data-original-title="<?php echo $robots_tooltip; ?>"><?php echo $tags_robots; ?></span>
+										</label>
+										<div class="col-sm-10">
+											<div class="">
+												 <select name="product_description[<?php echo $language['language_id']; ?>][priority]" class="form-control">
+													<option value="1.0" selected="selected" >1.0</option>
+													<option value="0.75" >0.75</option>
+													<option value="0.5" >0.5</option>
+													<option value="0.25" >0.25</option>
+													<option value="0.1" >0.1</option>
+												 </select>
+											</div>
+									    </div>
+									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-2 control-label" for="input-catalog-limit">
+											<span data-toggle="tooltip" title="" data-original-title="Should this page be in the XML Sitemap at all times, regardless of Robots Meta settings?">
+													Show in Sitemap:              
+											</span>
+										</label>
+										<div class="col-sm-10">
+											<div class="checkbox">
+												<label>
+													<?php if ($config_seo_url == 1) { ?>
+														<input type="checkbox" value="1" name="product_description[<?php echo $language['language_id']; ?>][sitemap]" id="checkout_enable" checked="checked"><?php echo $text_enabled; ?>
+													<?php } elseif($config_seo_url == 0) { ?>
+														<input type="checkbox" value="1" name="product_description[<?php echo $language['language_id']; ?>][sitemap]" id="checkout_enable"><?php echo $text_enabled; ?>
+													<?php } else  { ?>
+														<input type="checkbox" value="1" name="product_description[<?php echo $language['language_id']; ?>][sitemap]" id="checkout_enable" checked="checked" ><?php echo $text_enabled; ?>
+													<?php } ?>
+												</label>
+											</div>
+										</div>
+									</div>
+			          
+			            
+			     
+							</div>
+							
+						</div>
+						</div>]]></add>
+		</operation>
+		<operation error="skip" >
+			<search position="after"  offset="2" ><![CDATA[<textarea name="product_description[<?php echo $language['language_id']; ?>][description]" placeholder="<?php echo $entry_description; ?>" id="input-description<?php echo $language['language_id']; ?>"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['description'] : ''; ?></textarea>]]></search>
+			<add><![CDATA[								<div class="col-sm-offset-2 col-sm-10">
+						<ul class="nav nav-tabs">
+							<li class="active"><a href="#tab-general-seo" data-toggle="tab"><?php echo $tab_general_seo; ?></a></li>
+							<li><a href="#tab-data-seo" data-toggle="tab"><?php echo $tab_data_seo; ?></a></li>
+						</ul>
+						<div class="tab-content">
+							<div class="tab-pane active" id="tab-general-seo">  
+								<div class="form-group ">
+									<label class="col-sm-2 control-label" for="input-meta-title<?php echo $language['language_id']; ?>">Snippet Preview</label>
+									<div class="col-sm-10">
+										  <div id="wpseosnippet">
+											<a class="title" id="wpseosnippet_title" href="#"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['meta_title'] : $entry_meta_title; ?></a>
+											<span class="url"><?php  echo $_SERVER['HTTP_HOST']; ?></span>
+											<p class="desc"><span class="autogen"></span><span class="content"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['meta_description'] : $entry_meta_description; ?></span></p>
+										</div>
+									</div>
+									<script> 
+										$(document).ready(function(){
+												$('#input-meta-title<?php echo $language['language_id']; ?>').on("keyup", function(){
+													$("#wpseosnippet_title").text($(this).val());
+												})
+												$('#input-name<?php echo $language['language_id']; ?>').on("focusout", function(){
+													if($('#input-meta-title<?php echo $language['language_id']; ?>').val() == ''){
+														$('#input-meta-title<?php echo $language['language_id']; ?>').val($(this).val());
+														$("#wpseosnippet_title").text($(this).val());
+													}
+												})
+												$('#input-meta-description<?php echo $language['language_id']; ?>').on("keyup", function(){
+
+													$("#wpseosnippet .content").text($(this).val());
+												})
+												$('[name="product_description[<?php echo $language['language_id']; ?>][description]"]').next('.note-editor').find('.note-editable').on("focusout", function(){
+												
+													if($('#input-meta-description<?php echo $language['language_id']; ?>').val() == ''){
+														$('#input-meta-description<?php echo $language['language_id']; ?>').val($(this).text().substr(0,180));
+														$("#wpseosnippet .content").text($(this).text().substr(0,180));
+													}
+												})
+										})
+									</script>
+									<style>
+										#wpseosnippet {
+										  width: auto;
+										  max-width: 520px;
+										  margin: 0 0 10px;
+										  padding: 0 5px;
+										  font-family: Arial,Helvetica,sans-serif;
+										  font-style: normal;
+										}
+										#wpseosnippet .title {
+										  display: block;
+										  overflow: hidden;
+										  width: 512px;
+										  color: #1e0fbe;
+										  font-size: 18px!important;
+										  line-height: 1.2;
+										  white-space: nowrap;
+										  text-overflow: ellipsis;
+										}
+										#wpseosnippet .url {
+										  color: #006621;
+										  font-size: 13px;
+										  line-height: 16px;
+										}
+										#wpseosnippet .desc {
+										  font-size: small;
+										  line-height: 1.4;
+										  word-wrap: break-word;
+										}
+									</style>
+								</div>]]></add>
+		</operation>
+	</file>
+	<file name="system/library/document.php">
+		<operation error="skip" >
+			<search position="after"  ><![CDATA[private $keywords;]]></search>
+			<add><![CDATA[	private $robots;]]></add>
+		</operation>
+		<operation error="skip" >
+			<search position="after"  offset="1" ><![CDATA[return $this->keywords;]]></search>
+			<add><![CDATA[
+	public function setRobots($robots) {
+		$this->robots = $robots;
+	}
+
+	public function getRobots() {
+		return $this->robots;
+	}]]></add>
+		</operation>
+	</file>
+	<file name="catalog/model/catalog/product.php">
+		<operation error="skip" >
+			<search position="after"  ><![CDATA['meta_keyword'     => $query->row['meta_keyword'],]]></search>
+			<add><![CDATA[				'robots'     => $query->row['robots'],]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/product/product.php">
+		<operation error="skip" >
+			<search position="after"  ><![CDATA[$this->document->setKeywords($product_info['meta_keyword']);]]></search>
+			<add><![CDATA[			$this->document->setRobots($product_info['robots']);]]></add>
+		</operation>
+	</file>
+	<file name="catalog/controller/common/header.php">
+		<operation error="skip" >
+			<search position="after"  ><![CDATA[$data['keywords'] = $this->document->getKeywords();]]></search>
+			<add><![CDATA[$data['robots'] = $this->document->getRobots();]]></add>
+		</operation>
+	</file>
+	<file name="catalog/view/theme/*/template/common/header.tpl">
+		<operation error="skip" >
+			<search position="before"  ><![CDATA[</head>]]></search>
+			<add><![CDATA[<?php if ($robots) { ?>
+	<meta name="robots" content="<?php echo $robots; ?>" />
+<?php }else{ ?> 
+	<meta name="robots" content="index,follow" 
+<?php } ?>]]></add>
+		</operation>
+	</file>
+ 
+
+</modification>
+ 
