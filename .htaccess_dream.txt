@@ -1,6 +1,6 @@
 # 1.To use URL Alias you need to be running apache with mod_rewrite enabled. 
 
-# 2. In your opencart directory rename htaccess.txt to .htaccess.
+# 2. In your opencart directory rename htaccess.txt to  we do test.htaccess.
 
 # For any support issues please visit: http://www.opencart.com
 
@@ -17,7 +17,7 @@ Options -Indexes
 
 # SEO URL Settings
 RewriteEngine On
-# If your opencart installation does not run on the main web folder make sure you folder it does run in ie. / becomes /shop/ 
+# If your opencart installation dodddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddes not run on the main web folder make sure you folder it does run in ie. / becomes /shop/ 
 
 RewriteBase /
 RewriteRule ^sitemap.xml$ index.php?route=feed/google_sitemap [L]
