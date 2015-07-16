@@ -10,8 +10,8 @@ $_['text_edit']					= 'Edit Standard Module settings';
 
 
 // Text
-$_['text_block']				= 'Widgets';
-$_['text_module']				= 'Modules';
+$_['text_seo']					= 'URL';
+$_['text_snippet']				= 'Snippet';
 $_['text_setting']				= 'Settings';
 $_['text_instruction']			= 'Instructions';
 $_['text_success']				= 'Success: You have modified module eBay featured!';
