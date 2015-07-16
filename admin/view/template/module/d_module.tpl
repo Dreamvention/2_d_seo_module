@@ -108,12 +108,12 @@
 								<div class="radio">
                   
 												<label for="shipping_method_input_style_radio" class="">
-												  <input type="radio" value="radio" name="d_quickcheckout[step][shipping_method][input_style]" checked="checked" id="shipping_method_input_style_radio">
+												  <input type="radio" value="radio" name="d_seo[url][type]" checked="checked" id="shipping_method_input_style_radio">
 													canonical 
 												</label>
 
 												<label for="shipping_method_input_style_select" class="">
-												  <input type="radio" value="select" name="d_quickcheckout[step][shipping_method][input_style]" id="shipping_method_input_style_select">
+												  <input type="radio" value="select" name="d_seo[url][type]" id="shipping_method_input_style_select">
 													modified					
 												 </label>
 
@@ -146,7 +146,7 @@
 							</span>
 							</label>
 							<div class="col-sm-4">
-							  <select name="<?php echo $id;?>_setting[config]" id="input_config_file" class="form-control">
+							  <select name="d_seo[config]" id="input_config_file" class="form-control">
 								<?php foreach ($config_files as $config_file) { ?>
 								<option value="<?php echo $config_file; ?>"><?php echo $config_file; ?></option>
 								<?php } ?>
@@ -183,7 +183,7 @@
 					</div>
 					<div class="clearfix"></div>
 					<div id="htaccees_textarea" class="col-sm-offset-3 col-sm-9  " style="display:none;">
-						<textarea name="d_quickcheckout[design][custom_style]" id="design_custom_style" class="form-control" rows="5"></textarea>
+						<textarea name="d_seo[htaccess]" id="design_custom_style" class="form-control" rows="5"></textarea>
 					</div>
 				</div>
 	      	</div>
