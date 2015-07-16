@@ -15,7 +15,6 @@ class ControllerModuleDModule extends Controller {
 		parent:: __construct($registry);
 		$this->addDirMain();
 		$this->mbooth = $this->getMboothFile();
-
 	}
  
   
@@ -330,9 +329,6 @@ class ControllerModuleDModule extends Controller {
 			return false;
 		}
 	}
-
-	
-
 	private function isInstalled($code) {
 		$extension_data = array();
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "extension WHERE `code` = '" . $this->db->escape($code) . "'");
@@ -342,7 +338,6 @@ class ControllerModuleDModule extends Controller {
 			return false;
 		}	
 	}
-
 	public function getUpdate($status = 1){
 		$json = array();
 		$this->load->language($this->route);
@@ -394,7 +389,7 @@ class ControllerModuleDModule extends Controller {
 
 		$this->response->setOutput(json_encode($json));
    }
-   private function enable_rewrite(){
+	private function enable_rewrite(){
 		$filename  = DIR_MAIN.".htaccess";
 		   if(file_exists($filename)){
 			   if($this->checkDreamHtaccess($filename)){
@@ -456,14 +451,13 @@ class ControllerModuleDModule extends Controller {
 		}
 		fclose($handle);
 	}
-
 	private function createHtaceessBackup( ) {
 		$dirname = DIR_MAIN."htaccess_backup";
 		$filename = DIR_MAIN.".htaccess";
 		
 		$file = file($filename);
 			
-		$backupfile = $dirname . '/.htaccess_' . date('Y-m-d-H-m-s');
+		$backupfile = $dirname . '/.htaccess_' . date('Y-m-d-H-i-s');
 			
 		if (is_dir($dirname)) {
 			$this->createNote($file, $backupfile);

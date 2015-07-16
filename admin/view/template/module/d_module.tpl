@@ -72,7 +72,120 @@
 
 	      <div class="tab-content">
 	      	<div class="tab-pane active" id="block" >
-	      		<div class="tab-body">block</div>
+	      		<div class="tab-body">
+					 <div class="col-sm-6">
+						<div class="form-group">
+							<label class="col-sm-6 control-label" for="input-catalog-limit">
+								<span data-toggle="tooltip" title="" data-original-title="Enable SEO URL for your site.">
+										Enable/Disable SEO url:              
+								</span>
+							</label>
+							<div class="col-sm-6">
+								<div class="checkbox">
+									<label>
+											<input type="hidden" value="0" name="config_seo_url"> 
+										<?php if ($config_seo_url) { ?>
+											<input type="checkbox" value="1" name="config_seo_url" id="checkout_enable" checked="checked"><?php echo $text_enabled; ?>
+										<?php } else{ ?>
+											<input type="checkbox" value="1" name="config_seo_url" id="checkout_enable"><?php echo $text_enabled; ?>
+										<?php } ?>
+									</label>
+								</div>
+							</div>
+						</div>
+			          
+			            
+			        </div> 
+					<div class="clearfix"></div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label class="col-sm-6 control-label" for="input-catalog-limit">
+								<span data-toggle="tooltip" title="" data-original-title="Enable SEO URL for your site.">
+										Type of SEO url:              
+								</span>
+							</label>
+							<div class="col-sm-6">
+								<div class="radio">
+                  
+												<label for="shipping_method_input_style_radio" class="">
+												  <input type="radio" value="radio" name="d_quickcheckout[step][shipping_method][input_style]" checked="checked" id="shipping_method_input_style_radio">
+													canonical 
+												</label>
+
+												<label for="shipping_method_input_style_select" class="">
+												  <input type="radio" value="select" name="d_quickcheckout[step][shipping_method][input_style]" id="shipping_method_input_style_select">
+												  with out third                    
+												 </label>
+
+                                 </div>
+							</div>
+						</div>
+			        </div> 
+					<div class="clearfix"></div>
+					<div class="col-sm-6">
+						<div class="form-group">
+						  <label class="col-sm-6 control-label" for="input-catalog-limit">
+						   <span data-toggle="tooltip" title="" data-original-title="When there is a new version available, you can download it from the location you have purchased the module.">
+							Do htaccess backup:               </span>
+						  </label>
+						  <div class="col-sm-2">
+							<a id="version_check" class="btn btn-primary"> backup </a>
+						  </div>
+						  <div class="col-sm-4">
+							<div id="version_result"></div>
+						  </div>
+						 </div>
+					</div>
+					<div class="clearfix"></div>
+					<div class="col-sm-6">
+						  <?php if ($config_files) { ?>
+						<div class="form-group">
+							<label class="col-sm-6 control-label" for="input-status"> 
+							<span data-toggle="tooltip" title="" data-original-title="When there is a new version available, you can download it from the location you have purchased the module.">
+							<?php echo $entry_config_files; ?> 
+							</span>
+							</label>
+							<div class="col-sm-4">
+							  <select name="<?php echo $id;?>_setting[config]" id="input_config_file" class="form-control">
+								<?php foreach ($config_files as $config_file) { ?>
+								<option value="<?php echo $config_file; ?>"><?php echo $config_file; ?></option>
+								<?php } ?>
+							  </select>
+							</div>
+							<div class="col-sm-2">
+								<a id="version_check" class="btn btn-primary"> re backup </a>
+							</div>
+						</div>
+			        <?php } ?>
+					</div>
+					<div class="clearfix"></div>
+					<div class="col-sm-6">
+						<div class="form-group">
+						  <label class="col-sm-6 control-label" for="input-catalog-limit">
+						   <span data-toggle="tooltip" title="" data-original-title="When there is a new version available, you can download it from the location you have purchased the module.">
+							Change htaccess:               </span>
+						  </label>
+						  <div class="col-sm-2">
+							<a id="htacess_change" class="btn btn-primary"> Change </a>
+							<script>
+								$("#htacess_change").on("click",function(){
+									 
+									$("#htaccees_textarea").fadeIn( "slow", function() {
+									
+									 });
+								})
+							</script>
+						  </div>
+						  <div class="col-sm-4">
+							<div id="version_result"></div>
+						  </div>
+						 </div>
+					</div>
+					<div class="clearfix"></div>
+					<div id="htaccees_textarea" class="col-sm-offset-3 col-sm-9  " style="display:none;">
+						<textarea name="d_quickcheckout[design][custom_style]" id="design_custom_style" class="form-control" rows="5"></textarea>
+					</div>
+				</div>
 	      	</div>
 	      	<div class="tab-pane" id="module" >
 		      	<div class="tab-body">
@@ -115,41 +228,8 @@
 		      </div>
 	      	<div class="tab-pane" id="setting" >
 	      		<div class="tab-body">
-			            <div class="col-sm-6">
-						<div class="form-group">
-							<label class="col-sm-6 control-label" for="input-catalog-limit">
-								<span data-toggle="tooltip" title="" data-original-title="Enable SEO URL for your site.">
-										Enable/Disable SEO url:              
-								</span>
-							</label>
-							<div class="col-sm-6">
-								<div class="checkbox">
-									<label>
-										<input type="hidden" value="0" name="config_seo_url"> 
-										<?php if ($config_seo_url) { ?>
-											<input type="checkbox" value="1" name="config_seo_url" id="checkout_enable" checked="checked"><?php echo $text_enabled; ?>
-										<?php } else{ ?>
-											<input type="checkbox" value="1" name="config_seo_url" id="checkout_enable"><?php echo $text_enabled; ?>
-										<?php } ?>
-									</label>
-								</div>
-							</div>
-						</div>
 			          
-			            
-			        </div> 
-			        <?php if ($config_files) { ?>
-			        <div class="form-group">
-			            <label class="col-sm-2 control-label" for="input-status"><?php echo $entry_config_files; ?></label>
-			            <div class="col-sm-10">
-			              <select name="<?php echo $id;?>_setting[config]" id="input_config_file" class="form-control">
-			                <?php foreach ($config_files as $config_file) { ?>
-			                <option value="<?php echo $config_file; ?>"><?php echo $config_file; ?></option>
-			                <?php } ?>
-			              </select>
-			            </div>
-			        </div>
-			        <?php } ?>
+			      
 			           
 	      		</div>
 	      	</div>
