@@ -4,7 +4,7 @@
  */
 
 class ControllerModuleDModule extends Controller {
-	private $id = 'd_module';
+	private $id = 'd_seo';
 	private $route = 'module/d_module';
 	private $lite = array('lite', 'light', 'free');
 	private $mbooth = '';
@@ -12,14 +12,15 @@ class ControllerModuleDModule extends Controller {
 	private $error = array(); 
 
 	public function __construct($registry) {
-		parent::__construct($registry);
-
+		parent:: __construct($registry);
+		$this->addDirMain();
 		$this->mbooth = $this->getMboothFile();
 
 	}
+ 
   
 	public function index(){
-	
+
 		$this->load->language($this->route);
 		$this->load->model($this->route);
 		$this->load->model('setting/setting');
@@ -80,7 +81,7 @@ class ControllerModuleDModule extends Controller {
 		// Variable
 		$data['id'] = $this->id;
 		$data['route'] = $this->route;
-		$data['store_id'] = $store_id;
+		//$data['store_id'] = $store_id;
 		$data['stores'] = $this->getStores();
 		$data['mbooth'] = $this->mbooth;
 		$data['config'] = $this->getConfigFile();
@@ -184,9 +185,15 @@ class ControllerModuleDModule extends Controller {
 			if($data['config']){
 				$this->config->load($data['config']);
 				$data['setting'] = ($this->config->get($this->id.'_setting')) ? $this->config->get($this->id.'_setting') : array();
+				// echo $data['setting']['htaccess'];
+			//	$patterns[0] = '/(http|https):\/\/'.$_SERVER['HTTP_HOST'].'/'; 
+	   
+			//	 $text = preg_replace(  $patterns  , '',  HTTP_CATALOG);
+			//	 echo substr_count($data['setting']['htaccess'], '%s');
+			//	print($data['setting']['htaccess']);
 			}
 		}
-
+	
 		if (isset($this->request->post[$this->id.'_status'])) {
 			$data[$this->id.'_status'] = $this->request->post[$this->id.'_status'];
 		} else {
@@ -317,8 +324,8 @@ class ControllerModuleDModule extends Controller {
 
 	private function getVersion($mbooth){
 		if(file_exists(DIR_SYSTEM . 'mbooth/xml/'. $mbooth)){
-			$xml = new SimpleXMLElement(file_get_contents(DIR_SYSTEM . 'mbooth/xml/'. $mbooth));
-			return $xml->version;
+			//$xml = new SimpleXMLElement(file_get_contents(DIR_SYSTEM . 'mbooth/xml/'. $mbooth));
+			//return $xml->version;
 		}else{
 			return false;
 		}
@@ -388,33 +395,57 @@ class ControllerModuleDModule extends Controller {
 		$this->response->setOutput(json_encode($json));
    }
    private function enable_rewrite(){
-	   $filename  = "...\\..\\..\\.htaccess";
-	   $filename_backup  = "...\\..\\..\\htaccess_backup.txt";
-	   $filename_new  = "...\\..\\..\\.htaccess_dream.txt";
-		   if(file_exists ( $filename )){
-			 
-			   if ( !file_exists ( $filename_backup )){
-				     $htaccess = file($filename);
-					//$file = fopen( $filename , "r");
-					//$htaccess = file($filename);
-					$file_backup = fopen( $filename_backup , "c+");
-					foreach ($htaccess as $line_num => $line) {
-						fputs($file_backup,$line );
-					}
-					$htaccess_new = file($filename_new);
-					foreach ($htaccess_new as $line_num => $line) {
-						fputs($file,$line );
-					}
+		$filename  = DIR_MAIN.".htaccess";
+		   if(file_exists($filename)){
+			   if($this->checkDreamHtaccess($filename)){
+				   echo "file exsist all is okey";
+			   }else{
+				   /* Проверка на реврайтинг */
+				   echo "file exsist but it  is not our file";
 			   }
 		   }else{
-				$file = fopen( $filename , "c+");
-				$htaccess = file($filename);
-				$htaccess_new = file($filename_new);
+			   echo 1;
+			   $this->createDreamHtaccess();
+		   }
+	  
+	}
+	private function addDirMain(){
+	 
+		$patterns[0] = '/system\// '; 
+ 
+	    $dir =  preg_replace(  $patterns  , '',  DIR_SYSTEM);			 
+		   
+		define('DIR_MAIN', $dir  );
+	}
+	private function checkDreamHtaccess($filename){
+		 $htaccess = file($filename);
+		 if(strpos($htaccess[0] , "Dreamvention")){
+			 return true;
+		 }else{
+			 return false;
+		 }
+	}
+	private function createDreamHtaccess(){
+		
+		$filename  = DIR_MAIN.".htaccess";
+		$filename_new  =   DIR_MAIN."htaccess_dream.txt";
+	   
+	    $htaccess_new = file($filename_new);
+	   				 
+		$patterns[0] = '/(http|https):\/\/'.$_SERVER['HTTP_HOST'].'/'; 
+	   
+		$text = preg_replace(  $patterns  , '',  HTTP_CATALOG);
+		
+		$htaccess_new[22] = sprintf($htaccess_new[22] , $text);
+		
+		$htaccess = fopen( $filename , "c+");
 				
-				foreach ($htaccess_new as $line_num => $line) {
-					fputs($file,$line );
-				}
-		   }	   
+		foreach ($htaccess_new as $line_num => $line) {
+			fputs($htaccess,$line );				
+		}
+		
+		fclose($htaccess);
+	   
 	}
 }
 ?>
