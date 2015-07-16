@@ -54,11 +54,11 @@
           <ul  class="nav nav-tabs">
 	        <li class="active"><a href="#block" data-toggle="tab">
 	        	<span class="fa fa-puzzle-piece"></span> 
-	        	<?php echo $text_block; ?>
+	        	<?php echo $text_seo; ?>
 	        </a></li>
 	        <li><a href="#module" data-toggle="tab">
 	        	<span class="fa fa-bars"></span> 
-	        	<?php echo $text_module; ?>
+	        	<?php echo $text_snippet; ?>
 	        </a></li>
 	        <li><a href="#setting" data-toggle="tab">
 	        	<span class="fa fa-cog"></span> 

@@ -93,8 +93,8 @@ class ControllerModuleDModule extends Controller {
 		$data['cancel'] = $this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL');
 
 		// Tab
-		$data['text_block'] = $this->language->get('text_block');
-		$data['text_module'] = $this->language->get('text_module');
+		$data['text_seo'] = $this->language->get('text_seo');
+		$data['text_snippet'] = $this->language->get('text_snippet');
 		$data['text_setting'] = $this->language->get('text_setting');
 		$data['text_instruction'] = $this->language->get('text_instruction');
 
