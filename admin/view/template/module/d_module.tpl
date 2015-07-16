@@ -114,7 +114,7 @@
 
 												<label for="shipping_method_input_style_select" class="">
 												  <input type="radio" value="select" name="d_quickcheckout[step][shipping_method][input_style]" id="shipping_method_input_style_select">
-												  with out third                    
+													modified					
 												 </label>
 
                                  </div>
