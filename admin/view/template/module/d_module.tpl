@@ -54,11 +54,11 @@
           <ul  class="nav nav-tabs">
 	        <li class="active"><a href="#block" data-toggle="tab">
 	        	<span class="fa fa-puzzle-piece"></span> 
-	        	<?php echo $text_block; ?>
+	        	<?php echo $text_seo; ?>
 	        </a></li>
 	        <li><a href="#module" data-toggle="tab">
 	        	<span class="fa fa-bars"></span> 
-	        	<?php echo $text_module; ?>
+	        	<?php echo $text_snippet; ?>
 	        </a></li>
 	        <li><a href="#setting" data-toggle="tab">
 	        	<span class="fa fa-cog"></span> 
@@ -72,50 +72,8 @@
 
 	      <div class="tab-content">
 	      	<div class="tab-pane active" id="block" >
-	      		<div class="tab-body">block</div>
-	      	</div>
-	      	<div class="tab-pane" id="module" >
-		      	<div class="tab-body">
-		      		<table id="module" class="table table-striped table-bordered table-hover">
-			            <thead>
-			              <tr>
-			                <td class="text-right">#</td>
-			                <td class="text-left"><?php echo $entry_limit; ?></td>
-			                <td class="text-left"><?php echo $entry_image; ?></td>
-			                <td></td>
-			              </tr>
-			            </thead>
-			            <tbody>
-			              <?php $module_row = 1; ?>
-			              <?php foreach ($modules as $module) { ?>
-			              <tr id="module_row_<?php echo $module['key']; ?>">
-			                <td class="text-right">
-			                	<?php echo $module_row; ?>
-			                </td>
-			                <td class="text-left">
-			                	<input type="text" name="<?php echo $id;?>_module[<?php echo $module['key']; ?>][limit]" value="<?php echo $module['limit']; ?>" placeholder="<?php echo $entry_limit; ?>" class="form-control" />
-			                </td>
-			                <td class="text-left">
-			                	<input type="text" name="<?php echo $id;?>_module[<?php echo $module['key']; ?>][width]" value="<?php echo $module['width']; ?>" placeholder="<?php echo $entry_width; ?>" class="form-control" />
-			                	<input type="text" name="<?php echo $id;?>_module[<?php echo $module['key']; ?>][height]" value="<?php echo $module['height']; ?>" placeholder="<?php echo $entry_height; ?>" class="form-control" />
-			                </td>
-			                <td class="text-left"><button type="button" onclick="$('#module_row_<?php echo $module['key']; ?>').remove();" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
-			              </tr>
-			              <?php $module_row++; ?>
-			              <?php } ?>
-			            </tbody>
-			            <tfoot>
-			              <tr>
-			                <td colspan="3"></td>
-			                <td class="text-left"><button type="button" onclick="addModule();" data-toggle="tooltip" title="<?php echo $button_module_add; ?>" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button></td>
-			              </tr>
-			            </tfoot>
-			        </table>
-		      	</div>
-		      </div>
-	      	<div class="tab-pane" id="setting" >
 	      		<div class="tab-body">
-			            <div class="col-sm-6">
+					 <div class="col-sm-6">
 						<div class="form-group">
 							<label class="col-sm-6 control-label" for="input-catalog-limit">
 								<span data-toggle="tooltip" title="" data-original-title="Enable SEO URL for your site.">
@@ -125,7 +83,7 @@
 							<div class="col-sm-6">
 								<div class="checkbox">
 									<label>
-										<input type="hidden" value="0" name="config_seo_url"> 
+											<input type="hidden" value="0" name="config_seo_url"> 
 										<?php if ($config_seo_url) { ?>
 											<input type="checkbox" value="1" name="config_seo_url" id="checkout_enable" checked="checked"><?php echo $text_enabled; ?>
 										<?php } else{ ?>
@@ -138,18 +96,157 @@
 			          
 			            
 			        </div> 
-			        <?php if ($config_files) { ?>
-			        <div class="form-group">
-			            <label class="col-sm-2 control-label" for="input-status"><?php echo $entry_config_files; ?></label>
-			            <div class="col-sm-10">
-			              <select name="<?php echo $id;?>_setting[config]" id="input_config_file" class="form-control">
-			                <?php foreach ($config_files as $config_file) { ?>
-			                <option value="<?php echo $config_file; ?>"><?php echo $config_file; ?></option>
-			                <?php } ?>
-			              </select>
-			            </div>
-			        </div>
+					<div class="clearfix"></div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label class="col-sm-6 control-label" for="input-catalog-limit">
+								<span data-toggle="tooltip" title="" data-original-title="Enable SEO URL for your site.">
+										Type of SEO url:              
+								</span>
+							</label>
+							<div class="col-sm-6">
+								<div class="radio">
+                  
+												<label for="shipping_method_input_style_radio" class="">
+												  <input type="radio" value="radio" name="d_quickcheckout[step][shipping_method][input_style]" checked="checked" id="shipping_method_input_style_radio">
+													canonical 
+												</label>
+
+												<label for="shipping_method_input_style_select" class="">
+												  <input type="radio" value="select" name="d_quickcheckout[step][shipping_method][input_style]" id="shipping_method_input_style_select">
+													modified					
+												 </label>
+
+                                 </div>
+							</div>
+						</div>
+			        </div> 
+					<div class="clearfix"></div>
+					<div class="col-sm-6">
+						<div class="form-group">
+						  <label class="col-sm-6 control-label" for="input-catalog-limit">
+						   <span data-toggle="tooltip" title="" data-original-title="When there is a new version available, you can download it from the location you have purchased the module.">
+							Do htaccess backup:               </span>
+						  </label>
+						  <div class="col-sm-2">
+							<a id="version_check" class="btn btn-primary"> backup </a>
+						  </div>
+						  <div class="col-sm-4">
+							<div id="version_result"></div>
+						  </div>
+						 </div>
+					</div>
+					<div class="clearfix"></div>
+					<div class="col-sm-6">
+						  <?php if ($config_files) { ?>
+						<div class="form-group">
+							<label class="col-sm-6 control-label" for="input-status"> 
+							<span data-toggle="tooltip" title="" data-original-title="When there is a new version available, you can download it from the location you have purchased the module.">
+							<?php echo $entry_config_files; ?> 
+							</span>
+							</label>
+							<div class="col-sm-4">
+							  <select name="<?php echo $id;?>_setting[config]" id="input_config_file" class="form-control">
+								<?php foreach ($config_files as $config_file) { ?>
+								<option value="<?php echo $config_file; ?>"><?php echo $config_file; ?></option>
+								<?php } ?>
+							  </select>
+							</div>
+							<div class="col-sm-2">
+								<a id="version_check" class="btn btn-primary"> re backup </a>
+							</div>
+						</div>
 			        <?php } ?>
+					</div>
+					<div class="clearfix"></div>
+					<div class="col-sm-6">
+						<div class="form-group">
+						  <label class="col-sm-6 control-label" for="input-catalog-limit">
+						   <span data-toggle="tooltip" title="" data-original-title="When there is a new version available, you can download it from the location you have purchased the module.">
+							Change htaccess:               </span>
+						  </label>
+						  <div class="col-sm-2">
+							<a id="htacess_change" class="btn btn-primary"> Change </a>
+							<script>
+								$("#htacess_change").on("click",function(){
+									 
+									$("#htaccees_textarea").fadeIn( "slow", function() {
+									
+									 });
+								})
+							</script>
+						  </div>
+						  <div class="col-sm-4">
+							<div id="version_result"></div>
+						  </div>
+						 </div>
+					</div>
+					<div class="clearfix"></div>
+					<div id="htaccees_textarea" class="col-sm-offset-3 col-sm-9  " style="display:none;">
+						<textarea name="d_quickcheckout[design][custom_style]" id="design_custom_style" class="form-control" rows="5"></textarea>
+					</div>
+				</div>
+	      	</div>
+	      	<div class="tab-pane" id="module" >
+		      	<div class="tab-body">
+				
+						<div class="form-group ">
+									<label class="col-sm-2 control-label" for="input-meta-title1">Snippet Preview</label>
+									<div class="col-sm-10">
+										  <div id="wpseosnippet">
+											<span class="title" id="wpseosnippet_title" >Apple Cinema 30"  - STORE NAME</span>
+											<span class="url">anton.dreamvention.com</span>
+											<p class="desc"><span class="autogen"></span><span class="content">sdgggggggggggggggggggggggggghsrrrrrthvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvb</span></p>
+										</div>
+									</div>
+									<script> 
+									
+									</script>
+									<style>
+										#wpseosnippet {
+										  width: auto;
+										  max-width: 520px;
+										  margin: 0 0 10px;
+										  padding: 0 5px;
+										  font-family: Arial,Helvetica,sans-serif;
+										  font-style: normal;
+										}
+										#wpseosnippet .title {
+										  display: block;
+										  overflow: hidden;
+										  width: 512px;
+										  color: #1e0fbe;
+										  font-size: 18px!important;
+										  line-height: 1.2;
+										  white-space: nowrap;
+										  text-overflow: ellipsis;
+										}
+										#wpseosnippet .url {
+										  color: #006621;
+										  font-size: 13px;
+										  line-height: 16px;
+										}
+										#wpseosnippet .desc {
+										  font-size: small;
+										  line-height: 1.4;
+										  word-wrap: break-word;
+										}
+									</style>
+						</div>
+						<div class= "col-sm-6">
+							<div class="form-group  ">
+								<label class="col-sm-2 control-label" for="input-meta-title1">Meta Tag Title</label>
+								<div class="col-sm-10">
+									<input type="text" name="product_description[1][meta_title]" value="" placeholder="Meta Tag Title" id="input-meta-title1" class="form-control">
+                                          </div>
+							</div>
+						</div>
+		      	</div>
+		      </div>
+	      	<div class="tab-pane" id="setting" >
+	      		<div class="tab-body">
+			          
+			      
 			           
 	      		</div>
 	      	</div>
