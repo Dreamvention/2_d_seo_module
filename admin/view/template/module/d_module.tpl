@@ -189,41 +189,49 @@
 	      	</div>
 	      	<div class="tab-pane" id="module" >
 		      	<div class="tab-body">
-		      		<table id="module" class="table table-striped table-bordered table-hover">
-			            <thead>
-			              <tr>
-			                <td class="text-right">#</td>
-			                <td class="text-left"><?php echo $entry_limit; ?></td>
-			                <td class="text-left"><?php echo $entry_image; ?></td>
-			                <td></td>
-			              </tr>
-			            </thead>
-			            <tbody>
-			              <?php $module_row = 1; ?>
-			              <?php foreach ($modules as $module) { ?>
-			              <tr id="module_row_<?php echo $module['key']; ?>">
-			                <td class="text-right">
-			                	<?php echo $module_row; ?>
-			                </td>
-			                <td class="text-left">
-			                	<input type="text" name="<?php echo $id;?>_module[<?php echo $module['key']; ?>][limit]" value="<?php echo $module['limit']; ?>" placeholder="<?php echo $entry_limit; ?>" class="form-control" />
-			                </td>
-			                <td class="text-left">
-			                	<input type="text" name="<?php echo $id;?>_module[<?php echo $module['key']; ?>][width]" value="<?php echo $module['width']; ?>" placeholder="<?php echo $entry_width; ?>" class="form-control" />
-			                	<input type="text" name="<?php echo $id;?>_module[<?php echo $module['key']; ?>][height]" value="<?php echo $module['height']; ?>" placeholder="<?php echo $entry_height; ?>" class="form-control" />
-			                </td>
-			                <td class="text-left"><button type="button" onclick="$('#module_row_<?php echo $module['key']; ?>').remove();" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>
-			              </tr>
-			              <?php $module_row++; ?>
-			              <?php } ?>
-			            </tbody>
-			            <tfoot>
-			              <tr>
-			                <td colspan="3"></td>
-			                <td class="text-left"><button type="button" onclick="addModule();" data-toggle="tooltip" title="<?php echo $button_module_add; ?>" class="btn btn-primary"><i class="fa fa-plus-circle"></i></button></td>
-			              </tr>
-			            </tfoot>
-			        </table>
+						<div class="form-group ">
+									<label class="col-sm-2 control-label" for="input-meta-title1">Snippet Preview</label>
+									<div class="col-sm-10">
+										  <div id="wpseosnippet">
+											<span class="title" id="wpseosnippet_title" >Apple Cinema 30"  - STORE NAME</span>
+											<span class="url">anton.dreamvention.com</span>
+											<p class="desc"><span class="autogen"></span><span class="content">sdgggggggggggggggggggggggggghsrrrrrthvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvb</span></p>
+										</div>
+									</div>
+									<script> 
+									
+									</script>
+									<style>
+										#wpseosnippet {
+										  width: auto;
+										  max-width: 520px;
+										  margin: 0 0 10px;
+										  padding: 0 5px;
+										  font-family: Arial,Helvetica,sans-serif;
+										  font-style: normal;
+										}
+										#wpseosnippet .title {
+										  display: block;
+										  overflow: hidden;
+										  width: 512px;
+										  color: #1e0fbe;
+										  font-size: 18px!important;
+										  line-height: 1.2;
+										  white-space: nowrap;
+										  text-overflow: ellipsis;
+										}
+										#wpseosnippet .url {
+										  color: #006621;
+										  font-size: 13px;
+										  line-height: 16px;
+										}
+										#wpseosnippet .desc {
+										  font-size: small;
+										  line-height: 1.4;
+										  word-wrap: break-word;
+										}
+									</style>
+								</div>
 		      	</div>
 		      </div>
 	      	<div class="tab-pane" id="setting" >
