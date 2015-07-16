@@ -106,16 +106,27 @@
 							</label>
 							<div class="col-sm-6">
 								<div class="radio">
-                  
+										<?php if( $type_seo_url == "canonical" ) {?>   
 												<label for="url_type_canonical" class="">
-												  <input type="radio" value="canonical" name="d_seo[url][type]" checked="checked" id="url_type_canonical">
+												  <input type="radio" value="canonical" name="type_seo_url" checked="checked" id="url_type_canonical">
 													canonical 
 												</label>
 
 												<label for="url_type_modified" class="">
-												  <input type="radio" value="modified" name="d_seo[url][type]" id="url_type_modified">
+												  <input type="radio" value="modified" name="type_seo_url" id="url_type_modified">
 													modified					
 												 </label>
+										<?php } else { ?>
+												<label for="url_type_canonical" class="">
+												  <input type="radio" value="canonical" name="type_seo_url" id="url_type_canonical">
+													canonical 
+												</label>
+
+												<label for="url_type_modified" class="">
+												  <input type="radio" value="modified" name="type_seo_url" checked="checked"  id="url_type_modified">
+													modified					
+												 </label>
+										<?php } ?>
 
                                  </div>
 							</div>
@@ -147,14 +158,14 @@
 							</span>
 							</label>
 							<div class="col-sm-4">
-							  <select name="d_seo[config]" id="input_config_file" class="form-control">
+							  <select name="backupname" id="input_backup_file" class="form-control">
 								<?php foreach ($backup_files as $backup_file) { ?>
 								<option value="<?php echo $backup_file; ?>"><?php echo $backup_file; ?></option>
 								<?php } ?>
 							  </select>
 							</div>
 							<div class="col-sm-2">
-								<a id="version_check" class="btn btn-primary"> restore </a>
+								<a id="restore_backup" class="btn btn-primary"> restore </a>
 							</div>
 						</div>
 			        <?php } ?>
@@ -184,11 +195,9 @@
 					</div>
 					<div class="clearfix"></div>
 					<div id="htaccees_textarea" class="col-sm-offset-3 col-sm-9  " style="display:none;">
-						<textarea name="d_seo[htaccess]" id="design_custom_style" class="form-control" rows="5">
-							<?php foreach ($htaccess_content as $line)
+						<textarea name="d_seo[htaccess]" id="design_custom_style" class="form-control" rows="20"><?php foreach ($htaccess_content as $line)
 											echo $line;
-							?>
-						</textarea>
+							?></textarea>
 					</div>
 				</div>
 	      	</div>
@@ -274,6 +283,20 @@
 		$.ajax({
 			url: 'index.php?route=module/d_module/createHtaccessBackup&token=<?php echo $token; ?>',
 			type: 'post',
+			dataType: 'json',
+			success: function( ) {
+				 
+			},
+			error: function(xhr, ajaxOptions, thrownError) {
+				console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+			}
+		});
+	})
+	$("#restore_backup").on("click", function(){
+		$.ajax({
+			url: 'index.php?route=module/d_module/restoreHtaceessBackup&token=<?php echo $token; ?>',
+			type: 'post',
+			data: $('select#input_backup_file'),
 			dataType: 'json',
 			success: function( ) {
 				 

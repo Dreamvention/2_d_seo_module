@@ -35,6 +35,8 @@ class ControllerModuleDModule extends Controller {
 
 			$this->model_setting_setting->editSetting($this->id, $this->request->post, $store_id);
 			
+			$this->settingsSeoUrl($this->request->post);
+			
 			$this->session->data['success'] = $this->language->get('text_success');
 			
 			//$this->model_setting_setting->editSetting('config', $this->request->post['config_seo_url']);
@@ -43,16 +45,10 @@ class ControllerModuleDModule extends Controller {
 			//$this->response->redirect($this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL'));
 			
 		}
-		if (isset($this->request->post['config_seo_url'])) {
-			
+	
 			$global_settings  = $this->model_setting_setting->getSetting('config',$store_id);
-			$global_settings['config_seo_url'] = $this->request->post['config_seo_url'];
-			$data['config_seo_url'] = $this->request->post['config_seo_url'];
-			$this->model_setting_setting->editSetting('config', $global_settings);
-			$this->enable_rewrite();
-		} else {
-			$data['config_seo_url'] = $this->config->get('config_seo_url');
-		}
+			$data['config_seo_url'] = $global_settings['config_seo_url'];
+		
 		
 		// Shopunity (requred)
 		$this->document->addStyle('view/stylesheet/shopunity/default.css');
@@ -198,6 +194,9 @@ class ControllerModuleDModule extends Controller {
    		 Add code here 
 
    		 **/
+		$global_settings  = $this->model_setting_setting->getSetting('config',$store_id);
+		$data['config_seo_url'] = $global_settings['config_seo_url'];
+		$data['type_seo_url'] = $this->typeURL();
 		$data['htaccess_content']= $this->getHtaccess();
 
 		$data['header'] = $this->load->controller('common/header');
@@ -457,8 +456,11 @@ class ControllerModuleDModule extends Controller {
 		}	
 		
 	}
-	private function restoreLastHtaceessBackup($backupname ) {
-        $backupfile = file( DIR_MAIN."htaccess_backup".$backupname);
+	public function restoreHtaceessBackup($backupname) {
+			$backupname = $this->request->post['backupname'];
+		 
+        $backupfile = file( DIR_MAIN."htaccess_backup/".$backupname);
+	 
 		$filename   = DIR_MAIN.".htaccess";
         $this->createNote($backupfile, $filename);
 		
@@ -475,6 +477,42 @@ class ControllerModuleDModule extends Controller {
 	private function getHtaccess(){
 		$file = file(DIR_MAIN.".htaccess");
 		return $file;
+	}
+	private function settingsSeoUrl($settings){
+		if (isset($settings['config_seo_url'])) {
+			$global_settings  = $this->model_setting_setting->getSetting('config',$store_id);
+			$global_settings['config_seo_url'] = $this->request->post['config_seo_url'];
+			$this->model_setting_setting->editSetting('config', $global_settings);
+			$this->enable_rewrite();
+		}
+		if(isset($settings['type_seo_url'])){
+			echo 111;
+			if($settings['type_seo_url'] == "modified" ){
+				echo 222;
+				$this->enableModificationUrl();
+			}else{
+				$this->disableModificationUrl();
+			}
+		}
+	}
+	private function enableModificationUrl() {
+		  $from = str_replace("system", "vqmod/xml", DIR_SYSTEM) . "a_vqmod_mod_seo_url.xml_"; 
+		  $to = str_replace("system", "vqmod/xml", DIR_SYSTEM) . "a_vqmod_mod_seo_url.xml";
+		  if (file_exists($from)) rename($from, $to);
+	}
+		 
+	public function disableModificationUrl() {
+		  $from = str_replace("system", "vqmod/xml", DIR_SYSTEM) . "a_vqmod_mod_seo_url.xml"; 
+		  $to = str_replace("system", "vqmod/xml", DIR_SYSTEM) . "a_vqmod_mod_seo_url.xml_";
+		  if (file_exists($from)) rename($from, $to);	  
+	}
+	function typeURL(){
+		 $from = str_replace("system", "vqmod/xml", DIR_SYSTEM) . "a_vqmod_mod_seo_url.xml"; 
+		 if (file_exists($from)){
+			 return "modified";
+		 }else{
+			 return "canonical";
+		 }
 	}
 }
 ?>
