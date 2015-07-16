@@ -100,20 +100,20 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label class="col-sm-6 control-label" for="input-catalog-limit">
-								<span data-toggle="tooltip" title="" data-original-title="Enable SEO URL for your site.">
+								<span data-toggle="tooltip" title="" data-original-title="Change type of SEO url.">
 										Type of SEO url:              
 								</span>
 							</label>
 							<div class="col-sm-6">
 								<div class="radio">
                   
-												<label for="shipping_method_input_style_radio" class="">
-												  <input type="radio" value="radio" name="d_seo[url][type]" checked="checked" id="shipping_method_input_style_radio">
+												<label for="url_type_canonical" class="">
+												  <input type="radio" value="canonical" name="d_seo[url][type]" checked="checked" id="url_type_canonical">
 													canonical 
 												</label>
 
-												<label for="shipping_method_input_style_select" class="">
-												  <input type="radio" value="select" name="d_seo[url][type]" id="shipping_method_input_style_select">
+												<label for="url_type_modified" class="">
+												  <input type="radio" value="modified" name="d_seo[url][type]" id="url_type_modified">
 													modified					
 												 </label>
 
@@ -125,11 +125,12 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 						  <label class="col-sm-6 control-label" for="input-catalog-limit">
-						   <span data-toggle="tooltip" title="" data-original-title="When there is a new version available, you can download it from the location you have purchased the module.">
-							Do htaccess backup:               </span>
+						   <span data-toggle="tooltip" title="" data-original-title="Do backup of .htaccess before do modification of .htaccess.">
+								Create .htaccess backup:             
+							</span>
 						  </label>
 						  <div class="col-sm-2">
-							<a id="version_check" class="btn btn-primary"> backup </a>
+							<a id="do_backup" class="btn btn-primary"> create </a>
 						  </div>
 						  <div class="col-sm-4">
 							<div id="version_result"></div>
@@ -142,7 +143,7 @@
 						<div class="form-group">
 							<label class="col-sm-6 control-label" for="input-status"> 
 							<span data-toggle="tooltip" title="" data-original-title="When there is a new version available, you can download it from the location you have purchased the module.">
-							<?php echo $entry_config_files; ?> 
+							  Restore .htaccess backup:   
 							</span>
 							</label>
 							<div class="col-sm-4">
@@ -153,7 +154,7 @@
 							  </select>
 							</div>
 							<div class="col-sm-2">
-								<a id="version_check" class="btn btn-primary"> re backup </a>
+								<a id="version_check" class="btn btn-primary"> restore </a>
 							</div>
 						</div>
 			        <?php } ?>
@@ -163,10 +164,10 @@
 						<div class="form-group">
 						  <label class="col-sm-6 control-label" for="input-catalog-limit">
 						   <span data-toggle="tooltip" title="" data-original-title="When there is a new version available, you can download it from the location you have purchased the module.">
-							Change htaccess:               </span>
+							Modification .htaccess : </span>
 						  </label>
 						  <div class="col-sm-2">
-							<a id="htacess_change" class="btn btn-primary"> Change </a>
+							<a id="htacess_change" class="btn btn-primary"> Start </a>
 							<script>
 								$("#htacess_change").on("click",function(){
 									 
