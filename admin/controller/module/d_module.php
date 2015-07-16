@@ -402,9 +402,10 @@ class ControllerModuleDModule extends Controller {
 			   }else{
 				   /* Проверка на реврайтинг */
 				   echo "file exsist but it  is not our file";
+				   $this->createHtaceessBackup();
+				   $this->createDreamHtaccess();
 			   }
 		   }else{
-			   echo 1;
 			   $this->createDreamHtaccess();
 		   }
 	  
@@ -446,6 +447,32 @@ class ControllerModuleDModule extends Controller {
 		
 		fclose($htaccess);
 	   
+	}
+	private function createNote($file, $openfile) {
+		
+		$handle = fopen($openfile, 'w');
+		foreach ($file as $filestring) {
+			fwrite($handle, $filestring);
+		}
+		fclose($handle);
+	}
+
+	private function createHtaceessBackup( ) {
+		$dirname = DIR_MAIN."htaccess_backup";
+		$filename = DIR_MAIN.".htaccess";
+		
+		$file = file($filename);
+			
+		$backupfile = $dirname . '/.htaccess_' . date('Y-m-d-H-m-s');
+			
+		if (is_dir($dirname)) {
+			$this->createNote($file, $backupfile);
+			$createdbackupfile = file($backupfile);
+		} else {
+			mkdir($dirname);
+			$this->createNote($file, $backupfile);
+			$createdbackupfile = file($backupfile);
+		}		
 	}
 }
 ?>
