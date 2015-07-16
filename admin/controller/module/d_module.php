@@ -450,11 +450,12 @@ class ControllerModuleDModule extends Controller {
 		$backupfile = $dirname . '/.htaccess_' . date('Y-m-d-H-i-s');
 			
 		if (is_dir($dirname)) {
-			$this->createNote($file, $backupfile);
+			//$this->createNote($file, $backupfile);
 		} else {
 			mkdir($dirname);
-			$this->createNote($file, $backupfile);
+			//$this->createNote($file, $backupfile);
 		}		
+		
 	}
 	private function restoreLastHtaceessBackup($backupname ) {
         $backupfile = file( DIR_MAIN."htaccess_backup".$backupname);
