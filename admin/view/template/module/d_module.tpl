@@ -139,7 +139,7 @@
 					</div>
 					<div class="clearfix"></div>
 					<div class="col-sm-6">
-						  <?php if ($config_files) { ?>
+						  <?php if ($backup_files) { ?>
 						<div class="form-group">
 							<label class="col-sm-6 control-label" for="input-status"> 
 							<span data-toggle="tooltip" title="" data-original-title="When there is a new version available, you can download it from the location you have purchased the module.">
@@ -148,8 +148,8 @@
 							</label>
 							<div class="col-sm-4">
 							  <select name="d_seo[config]" id="input_config_file" class="form-control">
-								<?php foreach ($config_files as $config_file) { ?>
-								<option value="<?php echo $config_file; ?>"><?php echo $config_file; ?></option>
+								<?php foreach ($backup_files as $backup_file) { ?>
+								<option value="<?php echo $backup_file; ?>"><?php echo $backup_file; ?></option>
 								<?php } ?>
 							  </select>
 							</div>
@@ -167,7 +167,7 @@
 							Modification .htaccess : </span>
 						  </label>
 						  <div class="col-sm-2">
-							<a id="htacess_change" class="btn btn-primary"> Start </a>
+							<a id="htacess_change" class="btn btn-primary"> start</a>
 							<script>
 								$("#htacess_change").on("click",function(){
 									 
@@ -184,7 +184,11 @@
 					</div>
 					<div class="clearfix"></div>
 					<div id="htaccees_textarea" class="col-sm-offset-3 col-sm-9  " style="display:none;">
-						<textarea name="d_seo[htaccess]" id="design_custom_style" class="form-control" rows="5"></textarea>
+						<textarea name="d_seo[htaccess]" id="design_custom_style" class="form-control" rows="5">
+							<?php foreach ($htaccess_content as $line)
+											echo $line;
+							?>
+						</textarea>
 					</div>
 				</div>
 	      	</div>
@@ -266,17 +270,18 @@
     </div>
   </div>
   <script type="text/javascript"><!--
-function addModule() {
-	var token = Math.random().toString(36).substr(2);
-	
-	html  = '<tr id="module-row' + token + '">';
-	html += '  <td class="text-right">' + ($('tbody tr').length + 1) + '</td>';
-	html += '  <td class="text-left"><input type="text" name="<?php echo $id;?>_module[' + token + '][limit]" value="5" placeholder="<?php echo $entry_limit; ?>" class="form-control" /></td>';
-	html += '  <td class="text-left"><input type="text" name="<?php echo $id;?>_module[' + token + '][width]" value="200" placeholder="<?php echo $entry_width; ?>" class="form-control" /> <input type="text" name="<?php echo $id;?>_module[' + token + '][height]" value="200" placeholder="<?php echo $entry_height; ?>" class="form-control" /></td>'; 
-	html += '  <td class="text-left"><button type="button" onclick="$(\'#module_row_' + token + '\').remove();" data-toggle="tooltip" title="<?php echo $button_remove; ?>" class="btn btn-danger"><i class="fa fa-minus-circle"></i></button></td>';
-	html += '</tr>';
-	
-	$('#module tbody').append(html);
-}
+	$("#do_backup").on("click", function(){
+		$.ajax({
+			url: 'index.php?route=module/d_seo/createHtaceessBackup&token=<?php echo $token; ?>',
+			type: 'post',
+			dataType: 'json',
+			success: function( ) {
+				 
+			},
+			error: function(xhr, ajaxOptions, thrownError) {
+				console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+			}
+		});
+	})
 //--></script></div>
 <?php echo $footer; ?>

@@ -53,14 +53,10 @@ class ControllerModuleDModule extends Controller {
 		} else {
 			$data['config_seo_url'] = $this->config->get('config_seo_url');
 		}
-
+		
 		// Shopunity (requred)
 		$this->document->addStyle('view/stylesheet/shopunity/default.css');
-
-		// Add more styles, links or scripts to the project is necessary
-		// $this->document->addLink('//fonts.googleapis.com/css?family=PT+Sans:400,700,700italic,400italic&subset=latin,cyrillic-ext,latin-ext,cyrillic', "stylesheet");
-		// $this->document->addStyle('view/stylesheet/shopunity/normalize.css');
-		// $this->document->addScript('view/javascript/shopunity/tooltip/tooltip.js');
+ 
 
 		$url = '';
 		
@@ -184,12 +180,6 @@ class ControllerModuleDModule extends Controller {
 			if($data['config']){
 				$this->config->load($data['config']);
 				$data['setting'] = ($this->config->get($this->id.'_setting')) ? $this->config->get($this->id.'_setting') : array();
-				// echo $data['setting']['htaccess'];
-			//	$patterns[0] = '/(http|https):\/\/'.$_SERVER['HTTP_HOST'].'/'; 
-	   
-			//	 $text = preg_replace(  $patterns  , '',  HTTP_CATALOG);
-			//	 echo substr_count($data['setting']['htaccess'], '%s');
-			//	print($data['setting']['htaccess']);
 			}
 		}
 	
@@ -200,15 +190,15 @@ class ControllerModuleDModule extends Controller {
 		}
 
 		//get config 
-		$data['config_files'] = $this->getConfigFiles();
-
+		$data['backup_files'] = $this->getHtaceessBackups();
+		$data['token'] = $this->session->data['token']; 
 
    		/**
 
    		 Add code here 
 
    		 **/
-
+		$data['htaccess_content']= $this->getHtaccess();
 
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
@@ -451,7 +441,7 @@ class ControllerModuleDModule extends Controller {
 		}
 		fclose($handle);
 	}
-	private function createHtaceessBackup( ) {
+	public function createHtaceessBackup( ) {
 		$dirname = DIR_MAIN."htaccess_backup";
 		$filename = DIR_MAIN.".htaccess";
 		
@@ -461,12 +451,29 @@ class ControllerModuleDModule extends Controller {
 			
 		if (is_dir($dirname)) {
 			$this->createNote($file, $backupfile);
-			$createdbackupfile = file($backupfile);
 		} else {
 			mkdir($dirname);
 			$this->createNote($file, $backupfile);
-			$createdbackupfile = file($backupfile);
 		}		
+	}
+	private function restoreLastHtaceessBackup($backupname ) {
+        $backupfile = file( DIR_MAIN."htaccess_backup".$backupname);
+		$filename   = DIR_MAIN.".htaccess";
+        $this->createNote($backupfile, $filename);
+		
+    }
+    
+    private function getHtaceessBackups() {
+        $files = array();
+        $results = glob(DIR_MAIN . 'htaccess_backup/.htaccess*');
+        foreach ($results as $result) {
+            $files[] = str_replace(DIR_MAIN . 'htaccess_backup/', '', $result);
+        }
+        return $files;
+    }
+	private function getHtaccess(){
+		$file = file(DIR_MAIN.".htaccess");
+		return $file;
 	}
 }
 ?>
