@@ -272,7 +272,7 @@
   <script type="text/javascript"><!--
 	$("#do_backup").on("click", function(){
 		$.ajax({
-			url: 'index.php?route=module/d_seo/createHtaceessBackup&token=<?php echo $token; ?>',
+			url: 'index.php?route=module/d_module/createHtaccessBackup&token=<?php echo $token; ?>',
 			type: 'post',
 			dataType: 'json',
 			success: function( ) {

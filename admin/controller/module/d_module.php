@@ -76,7 +76,7 @@ class ControllerModuleDModule extends Controller {
 		// Variable
 		$data['id'] = $this->id;
 		$data['route'] = $this->route;
-		//$data['store_id'] = $store_id;
+		$data['store_id'] = $store_id;
 		$data['stores'] = $this->getStores();
 		$data['mbooth'] = $this->mbooth;
 		$data['config'] = $this->getConfigFile();
@@ -441,7 +441,7 @@ class ControllerModuleDModule extends Controller {
 		}
 		fclose($handle);
 	}
-	public function createHtaceessBackup( ) {
+	public function createHtaccessBackup( ) {
 		$dirname = DIR_MAIN."htaccess_backup";
 		$filename = DIR_MAIN.".htaccess";
 		
@@ -450,11 +450,11 @@ class ControllerModuleDModule extends Controller {
 		$backupfile = $dirname . '/.htaccess_' . date('Y-m-d-H-i-s');
 			
 		if (is_dir($dirname)) {
-			//$this->createNote($file, $backupfile);
+			$this->createNote($file, $backupfile);
 		} else {
 			mkdir($dirname);
-			//$this->createNote($file, $backupfile);
-		}		
+			$this->createNote($file, $backupfile);
+		}	
 		
 	}
 	private function restoreLastHtaceessBackup($backupname ) {
