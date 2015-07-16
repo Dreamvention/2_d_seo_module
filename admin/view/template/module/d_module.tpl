@@ -234,7 +234,7 @@
 									</style>
 						</div>
 						<div class= "col-sm-6">
-							<div class="form-group  ">
+							<div class="form-group             ">
 								<label class="col-sm-2 control-label" for="input-meta-title1">Meta Tag Title</label>
 								<div class="col-sm-10">
 									<input type="text" name="product_description[1][meta_title]" value="" placeholder="Meta Tag Title" id="input-meta-title1" class="form-control">
