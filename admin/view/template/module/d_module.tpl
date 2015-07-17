@@ -199,11 +199,11 @@
 						<textarea name="d_seo[htaccess]" id="design_custom_style" class="form-control" rows="20"><?php foreach ($htaccess_content as $line)
 											echo $line;
 							?></textarea>
-						<div class="form-group">
-							<div class="col-sm-2">
+						 
+							<div class="col-sm-2" style="margin-top: 10px;">
 								<a id="do_backup" class="btn btn-primary"> create </a>
 							</div>
-						</div>
+					 
 					</div>
 					
 				</div>
