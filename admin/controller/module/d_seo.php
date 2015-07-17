@@ -33,9 +33,13 @@ class ControllerModuleDSeo extends Controller {
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 
-			$this->model_setting_setting->editSetting($this->id, $this->request->post, $store_id);
+			//$this->model_setting_setting->editSetting($this->id, $this->request->post, $store_id);
 			
-			$this->settingsSeoUrl($this->request->post);
+		/// $this->request->post['snipet'];
+			
+			//$this->model_setting_setting->editSetting('snipet', $this->request->post['snipet'], $store_id);
+			
+			$this->settingsSeoUrl($this->request->post);  
 			
 			$this->session->data['success'] = $this->language->get('text_success');
 			
@@ -179,11 +183,11 @@ class ControllerModuleDSeo extends Controller {
 			}
 		}
 	
-		if (isset($this->request->post[$this->id.'_status'])) {
-			$data[$this->id.'_status'] = $this->request->post[$this->id.'_status'];
-		} else {
-			$data[$this->id.'_status'] = $this->config->get($this->id.'_status');
-		}
+		//if (isset($this->request->post[$this->id.'_status'])) {
+		//	$data[$this->id.'_status'] = $this->request->post[$this->id.'_status'];
+		//} else {
+		//	$data[$this->id.'_status'] = $this->config->get($this->id.'_status');
+		//}
 
 		//get config 
 		$data['backup_files'] = $this->getHtaceessBackups();
@@ -194,7 +198,7 @@ class ControllerModuleDSeo extends Controller {
    		 Add code here 
 
    		 **/
-		$global_settings  = $this->model_setting_setting->getSetting('config',$store_id);
+		$global_settings  = $this->model_setting_setting->getSetting($this->id,$store_id);
 		$data['config_seo_url'] = $global_settings['config_seo_url'];
 		$data['type_seo_url'] = $this->typeURL();
 		$data['htaccess_content']= $this->getHtaccess();
