@@ -3,9 +3,9 @@
  *	location: admin/controller
  */
 
-class ControllerModuleDModule extends Controller {
+class ControllerModuleDSeo extends Controller {
 	private $id = 'd_seo';
-	private $route = 'module/d_module';
+	private $route = 'module/d_seo';
 	private $lite = array('lite', 'light', 'free');
 	private $mbooth = '';
 	private $prefix = '';
@@ -481,11 +481,12 @@ class ControllerModuleDModule extends Controller {
 	
 	private function settingsSeoUrl($settings){
 		if (isset($settings['config_seo_url'])) {
+		 
 			$global_settings  = $this->model_setting_setting->getSetting('config',0);
 			
-			if(!$global_settings['config_seo_url']){
+		 
 				$this->enable_rewrite();
-			}
+		 
 			
 			$global_settings['config_seo_url'] = $this->request->post['config_seo_url'];
 			$this->model_setting_setting->editSetting('config', $global_settings);
