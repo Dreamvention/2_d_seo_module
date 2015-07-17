@@ -1,5 +1,5 @@
 <extension>
-    <id>d_module</id>
+    <id>d_seo</id>
     <name>Standard Module</name>
     <description>
     Standard Module is a dummy module that a developer can use to speed up the process of creating new modules.
@@ -11,16 +11,16 @@
     <mbooth_version>3.0</mbooth_version>
     <author>Dreamvention</author>
     <files>
-        <file>system/mbooth/xml/mbooth_d_module.xml</file>
+        <file>system/mbooth/xml/mbooth_d_seo.xml</file>
 
-        <file>admin/controller/module/d_module.php</file>
-        <file>admin/model/module/d_module.php</file>
-        <file>admin/language/english/module/d_module.php</file>
-        <file>admin/view/template/module/d_module.tpl</file>
+        <file>admin/controller/module/d_seo.php</file>
+        <file>admin/model/module/d_seo.php</file>
+        <file>admin/language/english/module/d_seo.php</file>
+        <file>admin/view/template/module/d_seo.tpl</file>
         
-        <file>catalog/controller/module/d_module.php</file>
-        <file>catalog/model/module/d_module.php</file>
-        <file>catalog/view/theme/default/template/module/d_module.tpl</file>
+        <file>catalog/controller/module/d_seo.php</file>
+        <file>catalog/model/module/d_seo.php</file>
+        <file>catalog/view/theme/default/template/module/d_seo.tpl</file>
 
 
     </files>
