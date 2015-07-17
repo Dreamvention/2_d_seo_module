@@ -1,4 +1,4 @@
-# Dreamvention
+
 # 1.To use URL Alias you need to be running apache with mod_rewrite enabled. 
 
 # 2. In your opencart directory rename htaccess.txt to .htaccess.
