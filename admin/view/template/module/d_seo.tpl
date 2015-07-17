@@ -212,12 +212,16 @@
 		      	<div class="tab-body">
 				
 						<div class="form-group ">
-									<label class="col-sm-2 control-label" for="input-meta-title1">Snippet Preview</label>
-									<div class="col-sm-10">
+									<label class="col-sm-3 control-label" for="input-meta-title1">Snippet Preview</label>
+									<div class="col-sm-9">
 										  <div id="wpseosnippet">
-											<span class="title" id="wpseosnippet_title" >Apple Cinema 30"  - STORE NAME</span>
-											<span class="url">anton.dreamvention.com</span>
-											<p class="desc"><span class="autogen"></span><span class="content">sdgggggggggggggggggggggggggghsrrrrrthvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvvb</span></p>
+											<span class="title" id="wpseosnippet_title" >Page Title  <span>- STORE NAME </span></span>
+											<span class="url"><?php  echo $_SERVER['HTTP_HOST']; ?></span>
+											<p class="desc"><span class="autogen"></span>
+											<span class="content">
+											sdggg  gg ggggggggggg ggggggg ggghsrrrr rt <br/>
+											hvvv vvvvvvvvvv vvvvvvvvvv vvvvvvvv vvvvv <br/>
+											vvvvvvvvvvvvvvv vvvvvb</span></p>
 										</div>
 									</div>
 									<script> 
@@ -254,15 +258,16 @@
 										}
 									</style>
 						</div>
-						<div class= "col-sm-6">
-							<div class="form-group             ">
-								<label class="col-sm-2 control-label" for="input-meta-title1">Meta Tag Title</label>
-								<div class="col-sm-10">
-									<input type="text" name="product_description[1][meta_title]" value="" placeholder="Meta Tag Title" id="input-meta-title1" class="form-control">
-                                          </div>
+						
+					</div>
+					<div class= "col-sm-6">
+							<div class="form-group">
+								<label class="col-sm-6 control-label" for="input-snipet-separator">Separator</label>
+								<div class="col-sm-6">
+									<input type="text" name="snipet[separator]" maxlength="" value="- STORE NAME" placeholder="Separator" id="input-snipet-separator" class="form-control">
+                                </div>
 							</div>
-						</div>
-		      	</div>
+					</div>
 		      </div>
 	      	<div class="tab-pane" id="setting" >
 	      		<div class="tab-body">
@@ -312,6 +317,9 @@
 				console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 			}
 		});
+	})
+	$('#input-snipet-separator').on("keyup", function(){
+		$("#wpseosnippet_title span").text($(this).val());
 	})
 //--></script></div>
 <?php echo $footer; ?>
