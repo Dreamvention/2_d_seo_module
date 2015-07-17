@@ -33,7 +33,7 @@ class ControllerModuleDSeo extends Controller {
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 
-			//$this->model_setting_setting->editSetting($this->id, $this->request->post, $store_id);
+		// $this->model_setting_setting->editSetting($this->id, $this->request->post, $store_id);
 			
 		/// $this->request->post['snipet'];
 			
