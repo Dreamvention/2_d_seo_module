@@ -194,11 +194,16 @@
 						 </div>
 					</div>
 					<div class="clearfix"></div>
+					
 					<div id="htaccees_textarea" class="col-sm-offset-3 col-sm-9  " style="display:none;">
 						<textarea name="d_seo[htaccess]" id="design_custom_style" class="form-control" rows="20"><?php foreach ($htaccess_content as $line)
 											echo $line;
 							?></textarea>
+							<div class="col-sm-2">
+							<a id="do_backup" class="btn btn-primary"> create </a>
+						</div>
 					</div>
+					
 				</div>
 	      	</div>
 	      	<div class="tab-pane" id="module" >
