@@ -129,7 +129,7 @@
 			<search position="after"  offset="2" ><![CDATA[<textarea name="product_description[<?php echo $language['language_id']; ?>][description]" placeholder="<?php echo $entry_description; ?>" id="input-description<?php echo $language['language_id']; ?>"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['description'] : ''; ?></textarea>]]></search>
 			<add><![CDATA[								<div class="col-sm-offset-2 col-sm-10">
 						<ul class="nav nav-tabs">
-							<li class="active"><a href="#tab-general-seo" data-toggle="tab"><?php echo $tab_general_seo; ?></a></li>
+							<li class="active"><a href="" data-toggle="tab"><?php echo $tab_general_seo; ?> <span>- STORE NAME</span></a></li>
 							<li><a href="#tab-data-seo" data-toggle="tab"><?php echo $tab_data_seo; ?></a></li>
 						</ul>
 						<div class="tab-content">
