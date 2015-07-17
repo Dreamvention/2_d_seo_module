@@ -382,11 +382,11 @@ class ControllerModuleDModule extends Controller {
 		$filename  = DIR_MAIN.".htaccess";
 		   if(file_exists($filename)){
 			   if($this->checkDreamHtaccess($filename)){
-				   echo "file exsist all is okey";
+				 //  echo "file exsist all is okey";
 			   }else{
 				   /* Проверка на реврайтинг */
-				   echo "file exsist but it  is not our file";
-				   $this->createHtaceessBackup();
+				  // echo "file exsist but it  is not our file";
+				   $this->createHtaccessBackup();
 				   $this->createDreamHtaccess();
 			   }
 		   }else{
@@ -478,23 +478,28 @@ class ControllerModuleDModule extends Controller {
 		$file = file(DIR_MAIN.".htaccess");
 		return $file;
 	}
+	
 	private function settingsSeoUrl($settings){
 		if (isset($settings['config_seo_url'])) {
-			$global_settings  = $this->model_setting_setting->getSetting('config',$store_id);
+			$global_settings  = $this->model_setting_setting->getSetting('config',0);
+			
+			if(!$global_settings['config_seo_url']){
+				$this->enable_rewrite();
+			}
+			
 			$global_settings['config_seo_url'] = $this->request->post['config_seo_url'];
 			$this->model_setting_setting->editSetting('config', $global_settings);
-			$this->enable_rewrite();
 		}
+		
 		if(isset($settings['type_seo_url'])){
-			echo 111;
 			if($settings['type_seo_url'] == "modified" ){
-				echo 222;
 				$this->enableModificationUrl();
 			}else{
 				$this->disableModificationUrl();
 			}
 		}
 	}
+	
 	private function enableModificationUrl() {
 		  $from = str_replace("system", "vqmod/xml", DIR_SYSTEM) . "a_vqmod_mod_seo_url.xml_"; 
 		  $to = str_replace("system", "vqmod/xml", DIR_SYSTEM) . "a_vqmod_mod_seo_url.xml";
@@ -506,6 +511,7 @@ class ControllerModuleDModule extends Controller {
 		  $to = str_replace("system", "vqmod/xml", DIR_SYSTEM) . "a_vqmod_mod_seo_url.xml_";
 		  if (file_exists($from)) rename($from, $to);	  
 	}
+	
 	function typeURL(){
 		 $from = str_replace("system", "vqmod/xml", DIR_SYSTEM) . "a_vqmod_mod_seo_url.xml"; 
 		 if (file_exists($from)){
