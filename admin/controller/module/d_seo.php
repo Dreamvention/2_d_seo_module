@@ -33,11 +33,7 @@ class ControllerModuleDSeo extends Controller {
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 
-		// $this->model_setting_setting->editSetting($this->id, $this->request->post, $store_id);
-			
-		/// $this->request->post['snipet'];
-			
-			//$this->model_setting_setting->editSetting('snipet', $this->request->post['snipet'], $store_id);
+			$this->model_setting_setting->editSetting($this->id, $this->request->post, $store_id);
 			
 			$this->settingsSeoUrl($this->request->post);  
 			
@@ -50,8 +46,8 @@ class ControllerModuleDSeo extends Controller {
 			
 		}
 	
-			$global_settings  = $this->model_setting_setting->getSetting('config',$store_id);
-			$data['config_seo_url'] = $global_settings['config_seo_url'];
+		//$global_settings  = $this->model_setting_setting->getSetting('config',$store_id);
+		//$data['config_seo_url'] = $global_settings['config_seo_url'];
 		
 		
 		// Shopunity (requred)
@@ -170,19 +166,19 @@ class ControllerModuleDSeo extends Controller {
 			$data['modules'] = (isset($data['modules'][$this->id.'_module'])) ? $data['modules'][$this->id.'_module'] : array();
 		}
 
-		$data['setting'] = array();
+			$data['setting'] = array();
 		if (isset($this->request->post[$this->id.'_setting'])) {
 			$data['setting'] = $this->request->post[$this->id.'_setting'];
 		} elseif ($this->model_setting_setting->getSetting($this->id, $store_id)) { 
-			$data['setting'] = $this->model_setting_setting->getSetting($this->id, $store_id);
-			$data['setting'] = (isset($data['setting'][$this->id.'_setting'])) ? $data['setting'][$this->id.'_setting'] : array();
+			$data  = array_merge($data, $this->model_setting_setting->getSetting($this->id, $store_id));
+			//$data['setting'] = (isset($data['setting'][$this->id.'_setting'])) ? $data['setting'][$this->id.'_setting'] : array();
 		} else {
 			if($data['config']){
 				$this->config->load($data['config']);
 				$data['setting'] = ($this->config->get($this->id.'_setting')) ? $this->config->get($this->id.'_setting') : array();
 			}
 		}
-	
+		//echo "<pre>"; print_r($data ); echo "</pre>";
 		//if (isset($this->request->post[$this->id.'_status'])) {
 		//	$data[$this->id.'_status'] = $this->request->post[$this->id.'_status'];
 		//} else {
@@ -198,7 +194,7 @@ class ControllerModuleDSeo extends Controller {
    		 Add code here 
 
    		 **/
-		$global_settings  = $this->model_setting_setting->getSetting($this->id,$store_id);
+		$global_settings  = $this->model_setting_setting->getSetting('config',$store_id);
 		if(isset($global_settings['config_seo_url'])){
 			$data['config_seo_url'] = $global_settings['config_seo_url'];
 		}else{
@@ -210,7 +206,7 @@ class ControllerModuleDSeo extends Controller {
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
-
+		//echo "<pre>"; print_r($global_settings ); echo "</pre>";
 		$this->response->setOutput($this->load->view($this->route.'.tpl', $data));
 	}
 
@@ -496,8 +492,8 @@ class ControllerModuleDSeo extends Controller {
 				$this->enable_rewrite();
 		 
 			
-			$global_settings['config_seo_url'] = $this->request->post['config_seo_url'];
-			$this->model_setting_setting->editSetting('config', $global_settings);
+			//$global_settings['config_seo_url'] = $this->request->post['config_seo_url'];
+			//$this->model_setting_setting->editSetting('config', $global_settings);
 		}
 		
 		if(isset($settings['type_seo_url'])){

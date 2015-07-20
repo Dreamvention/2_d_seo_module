@@ -78,8 +78,13 @@
 							<label class="col-sm-2 control-label" for="input-status">Status</label>
 							<div class="col-sm-10">
 								 <select name="d_seo_status" id="input-status" class="form-control">
-									<option value="1"><?php echo $text_enabled; ?></option>
-									<option value="0" selected="selected"><?php echo $text_disabled; ?></option>
+								 <?php if( $d_seo_status  ) {?>   
+									<option value="1" selected="selected"><?php echo $text_enabled; ?></option>
+									<option value="0" ><?php echo $text_disabled; ?></option>
+								 <?php }else{?>
+										<option value="1" ><?php echo $text_enabled; ?></option>
+										<option value="0" selected="selected" ><?php echo $text_disabled; ?></option>
+								 <?php } ?>
 								</select>
 							</div>
 						  </div>
@@ -176,7 +181,7 @@
 							</span>
 							</label>
 							<div class="col-sm-4">
-							  <select name="backupname" id="input_backup_file" class="form-control">
+							  <select name="d_seo_htacess[backup]" id="input_backup_file" class="form-control">
 								<?php foreach ($backup_files as $backup_file) { ?>
 								<option value="<?php echo $backup_file; ?>"><?php echo $backup_file; ?></option>
 								<?php } ?>
@@ -214,7 +219,7 @@
 					<div class="clearfix"></div>
 					
 					<div id="htaccees_textarea" class="col-sm-offset-3 col-sm-9  " style="display:none;">
-						<textarea name="d_seo[htaccess]" id="design_custom_style" class="form-control" rows="20"><?php foreach ($htaccess_content as $line)
+						<textarea name="d_seo_htacess[htaccess]" id="design_custom_style" class="form-control" rows="20"><?php foreach ($htaccess_content as $line)
 											echo $line;
 							?></textarea>
 						 
@@ -233,7 +238,7 @@
 									<label class="col-sm-3 control-label" for="input-meta-title1">Snippet Preview</label>
 									<div class="col-sm-9">
 										  <div id="wpseosnippet">
-											<span class="title" id="wpseosnippet_title" >Page Title  <span>- STORE NAME </span></span>
+											<span class="title" id="wpseosnippet_title" >Page Title  <span><?php echo $d_seo_snipet['separator']; ?></span></span>
 											<span class="url"><?php  echo $_SERVER['HTTP_HOST']; ?></span>
 											<p class="desc"><span class="autogen"></span>
 											<span class="content">
@@ -282,7 +287,7 @@
 							<div class="form-group">
 								<label class="col-sm-6 control-label" for="input-snipet-separator">Separator</label>
 								<div class="col-sm-6">
-									<input type="text" name="snipet[separator]" maxlength="" value="- STORE NAME" placeholder="Separator" id="input-snipet-separator" class="form-control">
+									<input type="text" name="d_seo_snipet[separator]" maxlength="" value="<?php echo $d_seo_snipet['separator']; ?>" placeholder="Separator" id="input-snipet-separator" class="form-control">
                                 </div>
 							</div>
 					</div>
