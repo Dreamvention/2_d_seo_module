@@ -479,15 +479,21 @@ class ControllerModuleDSeo extends Controller {
     }
 	private	function	getHtaccess()	{
 		
-		if	(file_exists($file))	{
+		if	($this->exsistHtaccess())	{
 				$file	=	file(DIR_MAIN	.	".htaccess");
 				return	$file;
 			} else	{
 				return false;
 			}
 	}
-
-				private function settingsSeoUrl($settings){
+	private function exsistHtaccess(){
+		if(file_exists(DIR_MAIN	.	".htaccess")){
+			return true;
+		}else{
+			return false;
+		}
+	}
+	private function settingsSeoUrl($settings){
 		if (isset($settings['config_seo_url'])) {
 		 
 			$global_settings  = $this->model_setting_setting->getSetting('config',0);
