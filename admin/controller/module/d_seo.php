@@ -178,16 +178,11 @@ class ControllerModuleDSeo extends Controller {
 				$data['setting'] = ($this->config->get($this->id.'_setting')) ? $this->config->get($this->id.'_setting') : array();
 			}
 		}
-		echo $data['d_seo_snipet']['separator']."22222222222";
+	 
 		if(!isset($data['d_seo_snipet']['separator'])) {
-			$data['d_seo_snipet']['separator'] = "- ".$this->config->get('config_name');
+			$data['d_seo_snipet']['separator'] = " - ".$this->config->get('config_name');
 		}
-		//echo "<pre>"; print_r($data ); echo "</pre>";
-		//if (isset($this->request->post[$this->id.'_status'])) {
-		//	$data[$this->id.'_status'] = $this->request->post[$this->id.'_status'];
-		//} else {
-		//	$data[$this->id.'_status'] = $this->config->get($this->id.'_status');
-		//}
+
 
 		//get config 
 		$data['backup_files'] = $this->getHtaceessBackups();
