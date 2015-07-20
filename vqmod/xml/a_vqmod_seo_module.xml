@@ -20,7 +20,7 @@
 					$data['tags_robots'] = $this->language->get('tags_robots');
 					$data['robots_tooltip'] = $this->language->get('robots_tooltip');
 					$this->load->model('setting/setting');
-					$data['snipet'] = $this->model_setting_setting->getSettingValue('d_seo' , 'd_seo_snipet' , $store_id );
+					$data['snipet'] = $this->model_setting_setting->getSettingValue('d_seo' , 'd_seo_snipet'  );
 					  ]]></add>
 		</operation>
 	</file>
@@ -55,7 +55,11 @@
 				$setting_data = unserialize($result['value']);
 			}
 		}
-		return $setting_data;
+		if(isset($setting_data )){
+			return $setting_data;
+		}else{
+			return false;
+		}
 	}]]></add>
 		</operation>
 	</file>
