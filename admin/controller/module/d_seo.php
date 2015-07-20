@@ -191,7 +191,8 @@ class ControllerModuleDSeo extends Controller {
 		//get config 
 		$data['backup_files'] = $this->getHtaceessBackups();
 		$data['token'] = $this->session->data['token']; 
-
+		$this->load->model('localisation/language');
+		$data['languages'] = $this->model_localisation_language->getLanguages();
    		/**
 
    		 Add code here 

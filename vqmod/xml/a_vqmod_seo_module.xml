@@ -18,7 +18,10 @@
 			<add><![CDATA[		$data['tab_general_seo'] = $this->language->get('tab_general_seo');
 					$data['tab_data_seo'] = $this->language->get('tab_data_seo');
 					$data['tags_robots'] = $this->language->get('tags_robots');
-					$data['robots_tooltip'] = $this->language->get('robots_tooltip');]]></add>
+					$data['robots_tooltip'] = $this->language->get('robots_tooltip');
+					$this->load->model('setting/setting');
+					$data['snipet'] = $this->model_setting_setting->getSettingValue('d_seo' , 'd_seo_snipet' , $store_id );
+					  ]]></add>
 		</operation>
 	</file>
 	<file name="admin/language/english/catalog/product.php">
@@ -129,7 +132,7 @@
 			<search position="after"  offset="2" ><![CDATA[<textarea name="product_description[<?php echo $language['language_id']; ?>][description]" placeholder="<?php echo $entry_description; ?>" id="input-description<?php echo $language['language_id']; ?>"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['description'] : ''; ?></textarea>]]></search>
 			<add><![CDATA[								<div class="col-sm-offset-2 col-sm-10">
 						<ul class="nav nav-tabs">
-							<li class="active"><a href="" data-toggle="tab"><?php echo $tab_general_seo; ?> <span>- STORE NAME</span></a></li>
+							<li class="active"><a href="#tab-general-seo" data-toggle="tab"><?php echo $tab_general_seo; ?> </a></li>
 							<li><a href="#tab-data-seo" data-toggle="tab"><?php echo $tab_data_seo; ?></a></li>
 						</ul>
 						<div class="tab-content">
@@ -137,16 +140,19 @@
 								<div class="form-group ">
 									<label class="col-sm-2 control-label" for="input-meta-title<?php echo $language['language_id']; ?>">Snippet Preview</label>
 									<div class="col-sm-10">
-										  <div id="wpseosnippet">
-											<a class="title" id="wpseosnippet_title" href="#"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['meta_title'] : $entry_meta_title; ?></a>
+									 
+										  <div id="wpseosnippet">																															
+											<a class="title" id="wpseosnippet_title" href="#"><span class = "snipet-body"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['meta_title'] : $entry_meta_title; ?></span><span><?php echo isset($snipet[$language['language_id']]['separator']) ? $snipet[$language['language_id']]['separator'] :''; ?></span></a>
 											<span class="url"><?php  echo $_SERVER['HTTP_HOST']; ?></span>
-											<p class="desc"><span class="autogen"></span><span class="content"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['meta_description'] : $entry_meta_description; ?></span></p>
+											<p class="desc"><span class="autogen"></span><span class="content"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['meta_description'] : 'Here You can see your meta description.  
+											Which include 160 symbols from product or page description or 
+											custom text which You insert in field "meta description"!' ?></span></p>
 										</div>
 									</div>
 									<script> 
 										$(document).ready(function(){
 												$('#input-meta-title<?php echo $language['language_id']; ?>').on("keyup", function(){
-													$("#wpseosnippet_title").text($(this).val());
+													$("#wpseosnippet_title span.snipet-body").text($(this).val());
 												})
 												$('#input-name<?php echo $language['language_id']; ?>').on("focusout", function(){
 													if($('#input-meta-title<?php echo $language['language_id']; ?>').val() == ''){
