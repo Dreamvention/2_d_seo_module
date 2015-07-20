@@ -179,7 +179,7 @@ class ControllerModuleDSeo extends Controller {
 			}
 		}
 		if(!isset($data['d_seo_snipet']['separator'])) {
-			$data['d_seo_snipet']['separator'] = $this->config->get('config_name');
+			$data['d_seo_snipet']['separator'] = "- ".$this->config->get('config_name');
 		}
 		//echo "<pre>"; print_r($data ); echo "</pre>";
 		//if (isset($this->request->post[$this->id.'_status'])) {
