@@ -52,17 +52,17 @@
       <div class="panel-body">
         <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form-bestseller" class="form-horizontal">
           <ul  class="nav nav-tabs">
-	        <li class="active"><a href="#block" data-toggle="tab">
+	        <li class="active"><a href="#setting" data-toggle="tab">
 	        	<span class="fa fa-puzzle-piece"></span> 
-	        	<?php echo $text_seo; ?>
+	        	<?php echo $text_setting; ?>
 	        </a></li>
 	        <li><a href="#module" data-toggle="tab">
 	        	<span class="fa fa-bars"></span> 
 	        	<?php echo $text_snippet; ?>
 	        </a></li>
-	        <li><a href="#setting" data-toggle="tab">
+	        <li><a href="#block" data-toggle="tab">
 	        	<span class="fa fa-cog"></span> 
-	        	<?php echo $text_setting; ?>
+	        	<?php echo $text_seo; ?>
 	        </a></li>
 	        <li><a href="#instruction" data-toggle="tab">
 	        	<span class="fa fa-graduation-cap"></span> 
@@ -71,7 +71,25 @@
 	      </ul>
 
 	      <div class="tab-content">
-	      	<div class="tab-pane active" id="block" >
+			<div class="tab-pane active" id="setting" >
+	      		<div class="tab-body">
+			          <div class="col-sm-6">
+						<div class="form-group">
+							<label class="col-sm-2 control-label" for="input-status">Status</label>
+							<div class="col-sm-10">
+							  <select name="status" id="input-status" class="form-control">
+												<option value="1">text_enabled</option>
+								<option value="0" selected="selected">text_disabled</option>
+											  </select>
+							</div>
+						  </div>
+			            
+			        </div>
+			      
+			           
+	      		</div>
+	      	</div>
+	      	<div class="tab-pane " id="block" >
 	      		<div class="tab-body">
 					 <div class="col-sm-6">
 						<div class="form-group">
@@ -269,13 +287,7 @@
 							</div>
 					</div>
 		      </div>
-	      	<div class="tab-pane" id="setting" >
-	      		<div class="tab-body">
-			          
-			      
-			           
-	      		</div>
-	      	</div>
+	      	
 	      	<div class="tab-pane" id="instruction" >
 	      		<div class="tab-body">instruction</div>
 	      	</div>
