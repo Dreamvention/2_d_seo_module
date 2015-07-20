@@ -478,14 +478,14 @@ class ControllerModuleDSeo extends Controller {
         return $files;
     }
 	private	function	getHtaccess()	{
-			$file	=	file(DIR_MAIN	.	".htaccess");
-				if	(file_exists($file))	{
-					echo 1111
-					return	$file;
-				} else	{
-					return false;
-				}
-				}
+		
+		if	(file_exists($file))	{
+				$file	=	file(DIR_MAIN	.	".htaccess");
+				return	$file;
+			} else	{
+				return false;
+			}
+	}
 
 				private function settingsSeoUrl($settings){
 		if (isset($settings['config_seo_url'])) {
