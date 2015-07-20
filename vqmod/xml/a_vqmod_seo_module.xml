@@ -162,13 +162,13 @@
 						<div class="tab-content">
 							<div class="tab-pane active" id="tab-general-seo">  
 								<div class="form-group ">
-									<label class="col-sm-2 control-label" for="input-meta-title<?php echo $language['language_id']; ?>">Snippet Preview</label>
+									<label class="col-sm-2 control-label" for="wpseosnippet-<?php echo $language['language_id']; ?>">Snippet Preview</label>
 									<div class="col-sm-10">
 									 
-										  <div id="wpseosnippet">																															
-											<a class="title" id="wpseosnippet_title" href="#"><span class = "snipet-body"><?php echo isset($product_description[$language['language_id']]['meta_title']) ? $product_description[$language['language_id']]['meta_title'] : $entry_meta_title; ?></span><span><?php echo isset($snipet[$language['language_id']]['separator']) ? $snipet[$language['language_id']]['separator'] :''; ?></span></a>
+										  <div id="wpseosnippet-<?php echo $language['language_id']; ?>">																															
+											<a class="title" id="wpseosnippet_title-<?php echo $language['language_id']; ?>"  ><span class = "snipet-body"><?php echo (isset($product_description[$language['language_id']]['meta_title']) && !empty($product_description[$language['language_id']]['meta_title'])) ? $product_description[$language['language_id']]['meta_title'] : $entry_meta_title; ?></span><span><?php echo isset($snipet[$language['language_id']]['separator']) ? $snipet[$language['language_id']]['separator'] :''; ?></span></a>
 											<span class="url"><?php  echo $_SERVER['HTTP_HOST']; ?></span>
-											<p class="desc"><span class="autogen"></span><span class="content"><?php echo isset($product_description[$language['language_id']]['meta_description']) ? $product_description[$language['language_id']]['meta_description'] : 'Here You can see your meta description.  
+											<p class="desc"><span class="autogen"></span><span class="content"><?php echo (isset($product_description[$language['language_id']]['meta_title']) && !empty($product_description[$language['language_id']]['meta_title'])) ? $product_description[$language['language_id']]['meta_description'] : 'Here You can see your meta description.  
 											Which include 160 symbols from product or page description or 
 											custom text which You insert in field "meta description"!' ?></span></p>
 										</div>
@@ -176,29 +176,29 @@
 									<script> 
 										$(document).ready(function(){
 												$('#input-meta-title<?php echo $language['language_id']; ?>').on("keyup", function(){
-													$("#wpseosnippet_title span.snipet-body").text($(this).val());
+													$("#wpseosnippet_title-<?php echo $language['language_id']; ?> span.snipet-body").text($(this).val());
 												})
 												$('#input-name<?php echo $language['language_id']; ?>').on("focusout", function(){
 													if($('#input-meta-title<?php echo $language['language_id']; ?>').val() == ''){
 														$('#input-meta-title<?php echo $language['language_id']; ?>').val($(this).val());
-														$("#wpseosnippet_title").text($(this).val());
+														$("#wpseosnippet_title-<?php echo $language['language_id']; ?> span.snipet-body").text($(this).val());
 													}
 												})
 												$('#input-meta-description<?php echo $language['language_id']; ?>').on("keyup", function(){
 
-													$("#wpseosnippet .content").text($(this).val());
+													$("#wpseosnippet-<?php echo $language['language_id']; ?> .content").text($(this).val());
 												})
 												$('[name="product_description[<?php echo $language['language_id']; ?>][description]"]').next('.note-editor').find('.note-editable').on("focusout", function(){
 												
 													if($('#input-meta-description<?php echo $language['language_id']; ?>').val() == ''){
-														$('#input-meta-description<?php echo $language['language_id']; ?>').val($(this).text().substr(0,180));
-														$("#wpseosnippet .content").text($(this).text().substr(0,180));
+														$('#input-meta-description<?php echo $language['language_id']; ?>').val($(this).text().replace(/\s+/g, ' ').substr(0,180));
+														$("#wpseosnippet-<?php echo $language['language_id']; ?> .content").text($(this).text().replace(/\s+/g, ' ').substr(0,180));
 													}
 												})
 										})
 									</script>
 									<style>
-										#wpseosnippet {
+										#wpseosnippet-<?php echo $language['language_id']; ?> {
 										  width: auto;
 										  max-width: 520px;
 										  margin: 0 0 10px;
@@ -206,7 +206,7 @@
 										  font-family: Arial,Helvetica,sans-serif;
 										  font-style: normal;
 										}
-										#wpseosnippet .title {
+										#wpseosnippet-<?php echo $language['language_id']; ?> .title {
 										  display: block;
 										  overflow: hidden;
 										  width: 512px;
@@ -216,12 +216,12 @@
 										  white-space: nowrap;
 										  text-overflow: ellipsis;
 										}
-										#wpseosnippet .url {
+										#wpseosnippet-<?php echo $language['language_id']; ?> .url {
 										  color: #006621;
 										  font-size: 13px;
 										  line-height: 16px;
 										}
-										#wpseosnippet .desc {
+										#wpseosnippet-<?php echo $language['language_id']; ?> .desc {
 										  font-size: small;
 										  line-height: 1.4;
 										  word-wrap: break-word;
