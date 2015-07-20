@@ -183,7 +183,7 @@ class ControllerModuleDSeo extends Controller {
 			$data['d_seo_snipet']['separator'] = " - ".$this->config->get('config_name');
 		}
 
-
+ 
 		//get config 
 		$data['backup_files'] = $this->getHtaceessBackups();
 		$data['token'] = $this->session->data['token']; 
