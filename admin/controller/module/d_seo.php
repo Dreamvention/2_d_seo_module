@@ -178,6 +178,7 @@ class ControllerModuleDSeo extends Controller {
 				$data['setting'] = ($this->config->get($this->id.'_setting')) ? $this->config->get($this->id.'_setting') : array();
 			}
 		}
+		echo $data['d_seo_snipet']['separator']."22222222222";
 		if(!isset($data['d_seo_snipet']['separator'])) {
 			$data['d_seo_snipet']['separator'] = "- ".$this->config->get('config_name');
 		}
@@ -210,7 +211,6 @@ class ControllerModuleDSeo extends Controller {
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
-		//echo "<pre>"; print_r($global_settings ); echo "</pre>";
 		$this->response->setOutput($this->load->view($this->route.'.tpl', $data));
 	}
 
