@@ -166,9 +166,9 @@
 									<div class="col-sm-10">
 									 
 										  <div id="wpseosnippet">																															
-											<a class="title" id="wpseosnippet_title" href="#"><span class = "snipet-body"><?php echo isset($product_description[$language['language_id']]['meta_title']) ? $product_description[$language['language_id']]['meta_title'] : $entry_meta_title; ?></span><span><?php echo isset($snipet[$language['language_id']]['separator']) ? $snipet[$language['language_id']]['separator'] :''; ?></span></a>
+											<a class="title" id="wpseosnippet_title" href="#"><span class = "snipet-body"><?php echo (isset($product_description[$language['language_id']]['meta_title']) && !empty($product_description[$language['language_id']]['meta_title'])) ? $product_description[$language['language_id']]['meta_title'] : $entry_meta_title; ?></span><span><?php echo isset($snipet[$language['language_id']]['separator']) ? $snipet[$language['language_id']]['separator'] :''; ?></span></a>
 											<span class="url"><?php  echo $_SERVER['HTTP_HOST']; ?></span>
-											<p class="desc"><span class="autogen"></span><span class="content"><?php echo isset($product_description[$language['language_id']]['meta_description']) ? $product_description[$language['language_id']]['meta_description'] : 'Here You can see your meta description.  
+											<p class="desc"><span class="autogen"></span><span class="content"><?php echo (isset($product_description[$language['language_id']]['meta_title']) && !empty($product_description[$language['language_id']]['meta_title'])) ? $product_description[$language['language_id']]['meta_description'] : 'Here You can see your meta description.  
 											Which include 160 symbols from product or page description or 
 											custom text which You insert in field "meta description"!' ?></span></p>
 										</div>
