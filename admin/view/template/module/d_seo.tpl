@@ -9,7 +9,7 @@
     <div class="container-fluid">
       <div class="pull-right">
       	<?php if($stores){ ?>
-	    <select class="form-control" onChange="location='<?php echo $module_link; ?>&store_id='+$(this).val()">
+	    <select class="form-control" onChange="location='<?php echo $module_link; ?>&store_id='+$(this).val();">
 	     <?php foreach($stores as $store){ ?>
 	     <?php if($store['store_id'] == $store_id){ ?>
 	     <option value="<?php echo $store['store_id']; ?>" selected="selected" ><?php echo $store['name']; ?></option>
@@ -18,7 +18,7 @@
 	     <?php } ?>
 	     <?php } ?>
 	    </select><?php } ?>
-	    <button onClick="saveAndStay()" data-toggle="tooltip" title="<?php echo $button_save_and_stay; ?>" class="btn btn-success"><i class="fa fa-save"></i></button>
+	    <button onClick="saveAndStay();" data-toggle="tooltip" title="<?php echo $button_save_and_stay; ?>" class="btn btn-success"><i class="fa fa-save"></i></button>
         <button type="submit" form="form-bestseller" data-toggle="tooltip" title="<?php echo $button_save; ?>" class="btn btn-primary"><i class="fa fa-save"></i></button>
         <a href="<?php echo $cancel; ?>" data-toggle="tooltip" title="<?php echo $button_cancel; ?>" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
       <h1><?php echo $heading_title; ?></h1>
@@ -100,7 +100,7 @@
 						<div class="form-group">
 							<label class="col-sm-6 control-label" for="input-catalog-limit">
 								<span data-toggle="tooltip" title="" data-original-title="Enable SEO URL for your site.">
-										Enable/Disable SEO url:              
+										<?php echo $text_seo_switch ?>             
 								</span>
 							</label>
 							<div class="col-sm-6">
@@ -124,7 +124,7 @@
 						<div class="form-group">
 							<label class="col-sm-6 control-label" for="input-catalog-limit">
 								<span data-toggle="tooltip" title="" data-original-title="Change type of SEO url.">
-										Type of SEO url:              
+										<?php echo $text_seo_type ?>              
 								</span>
 							</label>
 							<div class="col-sm-6">
@@ -132,35 +132,34 @@
 										<?php if( $type_seo_url == "canonical" ) {?>   
 												<label for="url_type_canonical" class="">
 												  <input type="radio" value="canonical" name="type_seo_url" checked="checked" id="url_type_canonical">
-													canonical 
+													<?php echo $button_canonical ?> 
 												</label>
 
 												<label for="url_type_modified" class="">
 												  <input type="radio" value="modified" name="type_seo_url" id="url_type_modified">
-													modified					
+													 <?php echo $button_modified ?> 					
 												 </label>
 										<?php } else { ?>
 												<label for="url_type_canonical" class="">
 												  <input type="radio" value="canonical" name="type_seo_url" id="url_type_canonical">
-													canonical 
+													<?php echo $button_canonical ?>  
 												</label>
 
 												<label for="url_type_modified" class="">
 												  <input type="radio" value="modified" name="type_seo_url" checked="checked"  id="url_type_modified">
-													modified					
+													<?php echo $button_modified ?> 					
 												 </label>
 										<?php } ?>
-
-                                 </div>
+								</div>
 							</div>
 						</div>
-			        </div> 
+				</div> 
 					<div class="clearfix"></div>
 					<div class="col-sm-6">
 						<div class="form-group">
 						  <label class="col-sm-6 control-label" for="input-catalog-limit">
 						   <span data-toggle="tooltip" title="" data-original-title="Do backup of .htaccess before do modification of .htaccess.">
-								Create .htaccess backup:             
+								<?php echo $text_create_backup ?>             
 							</span>
 						  </label>
 						  <div class="col-sm-2">
@@ -177,7 +176,7 @@
 						<div class="form-group">
 							<label class="col-sm-6 control-label" for="input-status"> 
 							<span data-toggle="tooltip" title="" data-original-title="When there is a new version available, you can download it from the location you have purchased the module.">
-							  Restore .htaccess backup:   
+							  <?php echo $text_restore_backup ?>  
 							</span>
 							</label>
 							<div class="col-sm-4">
@@ -198,7 +197,8 @@
 						<div class="form-group">
 						  <label class="col-sm-6 control-label" for="input-catalog-limit">
 						   <span data-toggle="tooltip" title="" data-original-title="When there is a new version available, you can download it from the location you have purchased the module.">
-							Modification .htaccess : </span>
+											 <?php echo text_modification ?> 
+									</span>
 						  </label>
 						  <div class="col-sm-2">
 							<a id="htacess_change" class="btn btn-primary"> start</a>
@@ -208,7 +208,7 @@
 									$("#htaccees_textarea").fadeIn( "slow", function() {
 									
 									 });
-								})
+								});
 							</script>
 						  </div>
 						  <div class="col-sm-4">
@@ -245,15 +245,15 @@
 						<div class="form-group ">
 									<label class="col-sm-3 control-label" for="input-meta-title1">Snippet Preview</label>
 									<div class="col-sm-9">
-										  <div id="wpseosnippet">
-											<span class="title" id="wpseosnippet_title" >Page Title  <span><?php echo isset($d_seo_snipet[$language['language_id']]['separator']) ? $d_seo_snipet[$language['language_id']]['separator'] : $d_seo_snipet['separator']; ?></span></span>
-											<span class="url"><?php  echo $_SERVER['HTTP_HOST']; ?>/url-of-page</span>
-											<p class="desc"><span class="autogen"></span>
-											<span class="content">
-											Here You can see your meta description.  
-											Which include 160 symbols from product or page description or 
-											custom text which You insert in field "meta description"!</span></p>
-										</div>
+												<div id="wpseosnippet">
+																<span class="title" id="wpseosnippet_title" >Page Title  <span><?php echo isset($d_seo_snipet[$language['language_id']]['separator']) ? $d_seo_snipet[$language['language_id']]['separator'] : $d_seo_snipet['separator']; ?></span></span>
+																<span class="url"><?php  echo $_SERVER['HTTP_HOST']; ?>/url-of-page</span>
+																<p class="desc"><span class="autogen"></span>
+																				<span class="content">
+																					<?php echo $text_metadescription ?>
+																				</span>		
+																</p>
+												</div>
 									</div>
 									<script> 
 									
@@ -331,7 +331,7 @@
 				console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 			}
 		});
-	})
+	});
 	$("#restore_backup").on("click", function(){
 		$.ajax({
 			url: 'index.php?route=module/d_module/restoreHtaceessBackup&token=<?php echo $token; ?>',
@@ -345,10 +345,10 @@
 				console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 			}
 		});
-	})
+	});
 	$('#input-snipet-separator').on("keyup", function(){
 		$("#wpseosnippet_title span").text($(this).val());
-	})
+	});
 //--></script>
   <script type="text/javascript"><!--
 $('#language a:first').tab('show');

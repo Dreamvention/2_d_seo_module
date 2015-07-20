@@ -98,6 +98,8 @@ class ControllerModuleDSeo extends Controller {
 		$data['button_remove'] = $this->language->get('button_remove');
 		$data['button_version'] = $this->language->get('button_version');
 		$data['button_update'] = $this->language->get('button_update');
+		$data['button_canonical'] = $this->language->get('button_canonical');
+		$data['button_modified'] = $this->language->get('button_modified');
 
 		// Entry
 		$data['entry_product'] = $this->language->get('entry_product');
@@ -115,7 +117,13 @@ class ControllerModuleDSeo extends Controller {
 		// Text
 		$data['text_enabled'] = $this->language->get('text_enabled');
 		$data['text_disabled'] = $this->language->get('text_disabled');
-
+		
+		$data['text_seo_switch'] = $this->language->get('text_seo_switch');
+		$data['text_seo_type'] = $this->language->get('text_seo_type');
+		$data['text_create_backup'] = $this->language->get('text_create_backup');
+		$data['text_restore_backup'] = $this->language->get('text_restore_backup');
+		$data['text_modification'] = $this->language->get('text_modification');
+		$data['text_metadescription'] = $this->language->get('text_metadescription');
 
 		// Notification
         if (isset($this->error['warning'])) {
