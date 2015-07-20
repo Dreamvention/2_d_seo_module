@@ -106,9 +106,9 @@
 										<div class="col-sm-10">
 											<div class="checkbox">
 												<label>
-													<?php if ($config_seo_url == 1) { ?>
+													<?php if (1) { ?>
 														<input type="checkbox" value="1" name="product_description[<?php echo $language['language_id']; ?>][sitemap]" id="checkout_enable" checked="checked"><?php echo $text_enabled; ?>
-													<?php } elseif($config_seo_url == 0) { ?>
+													<?php  } elseif( 0) { ?>
 														<input type="checkbox" value="1" name="product_description[<?php echo $language['language_id']; ?>][sitemap]" id="checkout_enable"><?php echo $text_enabled; ?>
 													<?php } else  { ?>
 														<input type="checkbox" value="1" name="product_description[<?php echo $language['language_id']; ?>][sitemap]" id="checkout_enable" checked="checked" ><?php echo $text_enabled; ?>
