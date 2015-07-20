@@ -495,8 +495,8 @@ class ControllerModuleDSeo extends Controller {
 				$this->enable_rewrite();
 		 
 			
-			//$global_settings['config_seo_url'] = $this->request->post['config_seo_url'];
-			//$this->model_setting_setting->editSetting('config', $global_settings);
+			 $global_settings['config_seo_url'] = $this->request->post['config_seo_url'];
+			 $this->model_setting_setting->editSetting('config', $global_settings);
 		}
 		
 		if(isset($settings['type_seo_url'])){
