@@ -477,12 +477,16 @@ class ControllerModuleDSeo extends Controller {
         }
         return $files;
     }
-	private function getHtaccess(){
-		$file = file(DIR_MAIN.".htaccess");
-		return $file;
-	}
-	
-	private function settingsSeoUrl($settings){
+				private	function	getHtaccess()	{
+								$file	=	file(DIR_MAIN	.	".htaccess");
+								if	(file_exists($file))	{
+												return	$file;
+								} else	{
+												return FALSE;
+								}
+				}
+
+				private function settingsSeoUrl($settings){
 		if (isset($settings['config_seo_url'])) {
 		 
 			$global_settings  = $this->model_setting_setting->getSetting('config',0);
@@ -525,4 +529,3 @@ class ControllerModuleDSeo extends Controller {
 		 }
 	}
 }
-?>
