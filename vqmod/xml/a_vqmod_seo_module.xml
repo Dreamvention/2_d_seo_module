@@ -191,8 +191,8 @@
 												$('[name="product_description[<?php echo $language['language_id']; ?>][description]"]').next('.note-editor').find('.note-editable').on("focusout", function(){
 												
 													if($('#input-meta-description<?php echo $language['language_id']; ?>').val() == ''){
-														$('#input-meta-description<?php echo $language['language_id']; ?>').val($(this).text().substr(0,180));
-														$("#wpseosnippet-<?php echo $language['language_id']; ?> .content").text($(this).text().substr(0,180));
+														$('#input-meta-description<?php echo $language['language_id']; ?>').val($(this).text().replace(/(^\s+|\s+$)/g,'').substr(0,180));
+														$("#wpseosnippet-<?php echo $language['language_id']; ?> .content").text($(this).text().replace(/(^\s+|\s+$)/g,'').substr(0,180));
 													}
 												})
 										})
