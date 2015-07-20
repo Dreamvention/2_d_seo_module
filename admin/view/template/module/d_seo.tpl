@@ -246,7 +246,7 @@
 									<label class="col-sm-3 control-label" for="input-meta-title1">Snippet Preview</label>
 									<div class="col-sm-9">
 										  <div id="wpseosnippet">
-											<span class="title" id="wpseosnippet_title" >Page Title  <span><?php echo $d_seo_snipet[$language['language_id']]['separator']; ?></span></span>
+											<span class="title" id="wpseosnippet_title" >Page Title  <span><?php echo isset($d_seo_snipet[$language['language_id']]['separator']) ? $d_seo_snipet[$language['language_id']]['separator'] : $d_seo_snipet['separator']; ?></span></span>
 											<span class="url"><?php  echo $_SERVER['HTTP_HOST']; ?>/url-of-page</span>
 											<p class="desc"><span class="autogen"></span>
 											<span class="content">
@@ -293,7 +293,7 @@
 							<div class="form-group">
 								<label class="col-sm-6 control-label" for="input-snipet-separator">Separator</label>
 								<div class="col-sm-6">
-									<input type="text" name="d_seo_snipet[<?php echo $language['language_id']; ?>][separator]" maxlength="" value="<?php echo $d_seo_snipet[$language['language_id']]['separator']; ?>" placeholder="Separator" id="input-snipet-separator" class="form-control">
+									<input type="text" name="d_seo_snipet[<?php echo $language['language_id']; ?>][separator]" maxlength="" value="<?php echo isset($d_seo_snipet[$language['language_id']]['separator']) ? $d_seo_snipet[$language['language_id']]['separator'] : $d_seo_snipet['separator']; ?>" placeholder="Separator" id="input-snipet-separator" class="form-control">
                                 </div>
 							</div>
 						</div>
