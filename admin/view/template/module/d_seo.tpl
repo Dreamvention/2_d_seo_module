@@ -77,7 +77,7 @@
 						<div class="form-group">
 							<label class="col-sm-2 control-label" for="input-status">Status</label>
 							<div class="col-sm-10">
-								 <select name="status" id="input-status" class="form-control">
+								 <select name="d_seo_status" id="input-status" class="form-control">
 									<option value="1"><?php echo $text_enabled; ?></option>
 									<option value="0" selected="selected"><?php echo $text_disabled; ?></option>
 								</select>

@@ -199,7 +199,11 @@ class ControllerModuleDSeo extends Controller {
 
    		 **/
 		$global_settings  = $this->model_setting_setting->getSetting($this->id,$store_id);
-		$data['config_seo_url'] = $global_settings['config_seo_url'];
+		if(isset($global_settings['config_seo_url'])){
+			$data['config_seo_url'] = $global_settings['config_seo_url'];
+		}else{
+			$data['config_seo_url'] = 0;
+		}
 		$data['type_seo_url'] = $this->typeURL();
 		$data['htaccess_content']= $this->getHtaccess();
 
