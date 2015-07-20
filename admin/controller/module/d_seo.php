@@ -477,13 +477,14 @@ class ControllerModuleDSeo extends Controller {
         }
         return $files;
     }
-				private	function	getHtaccess()	{
-								$file	=	file(DIR_MAIN	.	".htaccess");
-								if	(file_exists($file))	{
-												return	$file;
-								} else	{
-												return FALSE;
-								}
+	private	function	getHtaccess()	{
+			$file	=	file(DIR_MAIN	.	".htaccess");
+				if	(file_exists($file))	{
+					echo 1111
+					return	$file;
+				} else	{
+					return false;
+				}
 				}
 
 				private function settingsSeoUrl($settings){
