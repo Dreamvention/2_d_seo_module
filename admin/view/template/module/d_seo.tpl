@@ -197,7 +197,7 @@
 						<div class="form-group">
 						  <label class="col-sm-6 control-label" for="input-catalog-limit">
 						   <span data-toggle="tooltip" title="" data-original-title="When there is a new version available, you can download it from the location you have purchased the module.">
-											 <?php echo text_modification ?> 
+											 <?php echo $text_modification ?> 
 									</span>
 						  </label>
 						  <div class="col-sm-2">
