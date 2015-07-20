@@ -321,7 +321,7 @@
   <script type="text/javascript"><!--
 	$("#do_backup").on("click", function(){
 		$.ajax({
-			url: 'index.php?route=module/d_module/createHtaccessBackup&token=<?php echo $token; ?>',
+			url: 'index.php?route=module/d_seo/createHtaccessBackup&token=<?php echo $token; ?>',
 			type: 'post',
 			dataType: 'json',
 			success: function( ) {
@@ -334,7 +334,7 @@
 	})
 	$("#restore_backup").on("click", function(){
 		$.ajax({
-			url: 'index.php?route=module/d_module/restoreHtaceessBackup&token=<?php echo $token; ?>',
+			url: 'index.php?route=module/d_seo/restoreHtaceessBackup&token=<?php echo $token; ?>',
 			type: 'post',
 			data: $('select#input_backup_file'),
 			dataType: 'json',
