@@ -39,6 +39,26 @@
 					  
 		</operation>
 	</file>
+	<file name="admin/model/setting/setting.php">
+		<operation error="skip" >
+			<search position="before"  ><![CDATA[public function editSettingValue($code = '', $key = '', $value = '', $store_id = 0) {]]></search>
+			<add><![CDATA[	public function getSettingValue($code , $key , $store_id = 0) {
+		 
+		
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "setting WHERE store_id = '" . (int)$store_id . "' AND `code` = '" . $this->db->escape($code) . "'AND `key` = '" . $this->db->escape($key) . "'");
+		
+		foreach ($query->rows as $result) {
+			 
+			if (!$result['serialized']) {
+				$setting_data= $result['value'];
+			} else {
+				$setting_data = unserialize($result['value']);
+			}
+		}
+		return $setting_data;
+	}]]></add>
+		</operation>
+	</file>
 	<file name="admin/view/template/catalog/product_form.tpl">
 		<operation error="skip" >
 			<search position="after"  offset="29" ><![CDATA[<textarea name="product_description[<?php echo $language['language_id']; ?>][description]" placeholder="<?php echo $entry_description; ?>" id="input-description<?php echo $language['language_id']; ?>"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['description'] : ''; ?></textarea>]]></search>
