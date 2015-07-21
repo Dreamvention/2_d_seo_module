@@ -21,11 +21,6 @@
 					$data['robots_tooltip'] = $this->language->get('robots_tooltip');
 					$this->load->model('setting/setting');
 					$data['snipet'] = $this->model_setting_setting->getSettingValue('d_seo' , 'd_seo_snipet'  );
-                                        $route =  $_SERVER['REQUEST_URI'] ;
-                                        $dir =   explode( '/admin', $route);
-                                        $dir[1] = str_replace('catalog','product', $dir[1] );
-                print_r($dir);
-                                        $data['dir'] = $dir[0];
 					  ]]></add>
         </operation>
     </file>
@@ -172,7 +167,7 @@
 									 
 										  <div id="wpseosnippet-<?php echo $language['language_id']; ?>">																															
 											<a class="title" id="wpseosnippet_title-<?php echo $language['language_id']; ?>"  ><span class = "snipet-body"><?php echo (isset($product_description[$language['language_id']]['meta_title']) && !empty($product_description[$language['language_id']]['meta_title'])) ? $product_description[$language['language_id']]['meta_title'] : $entry_meta_title; ?><?php echo isset($snipet[$language['language_id']]['separator']) ? $snipet[$language['language_id']]['separator'] :''; ?></span></a>
-											<span class="url"><?php  echo $dir; ?></span>
+											<span class="url"><?php  echo $_SERVER['HTTP_HOST']; ?></span>
 											<p class="desc"><span class="autogen"></span><span class="content"><?php echo (isset($product_description[$language['language_id']]['meta_title']) && !empty($product_description[$language['language_id']]['meta_title'])) ? $product_description[$language['language_id']]['meta_description'] : 'Here You can see your meta description.  
 											Which include 160 symbols from product or page description or 
 											custom text which You insert in field "meta description"!' ?></span></p>
