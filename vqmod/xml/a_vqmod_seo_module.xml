@@ -195,7 +195,15 @@
 													}
 												})
 												$('#input-meta-description<?php echo $language['language_id']; ?>').on("keyup", function(){
-
+													
+													if((title.length  > 180 ) && !$('#input-meta-title<?php echo $language['language_id']; ?> + .alert-danger').length){
+														$(this).after('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> Warning: Please check the form carefully for errors!      <button type="button" class="close" data-dismiss="alert">×</button></div>');
+														 
+													}
+													if((title.length  < 180 ) && $('#input-meta-title<?php echo $language['language_id']; ?> + .alert-danger').length){
+														$('#input-meta-title<?php echo $language['language_id']; ?> + .alert-danger').remove();
+														 
+													}
 													$("#wpseosnippet-<?php echo $language['language_id']; ?> .content").text($(this).val());
 												})
 												$('[name="product_description[<?php echo $language['language_id']; ?>][description]"]').next('.note-editor').find('.note-editable').on("focusout", function(){
