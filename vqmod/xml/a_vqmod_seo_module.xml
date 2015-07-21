@@ -206,10 +206,10 @@
 													$("#wpseosnippet_title-<?php echo $language['language_id']; ?> span.snipet-body").text($(this).val());
 												})
                                                                                                 $('#input-meta-title<?php echo $language['language_id']; ?>').on("click", function() {
-                                                                                                                $meta-title = $(this);
-                                                                                                                if($meta-title.val().length == 0 ){
-                                                                                                                 $meta-title.val('хуй');
-                                                                                                                 $meta-title.putCursorAtStart();
+                                                                                                                $metaTitle = $(this);
+                                                                                                                if($metaTitle.val().length == 0 ){
+                                                                                                                 $metaTitle.val('хуй');
+                                                                                                                 $metaTitle.putCursorAtStart();
                                                                                                               }
                                                                                                  })
 
