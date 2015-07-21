@@ -352,7 +352,7 @@
 		$.ajax({
 			url: 'index.php?route=module/d_seo/editHtaceessBackup&token=<?php echo $token; ?>',
 			type: 'post',
-			data: $htaccess,
+			data:   $htaccess.serializeArray(), 
 			dataType: 'json',
 			success: function( ) {
 				 
