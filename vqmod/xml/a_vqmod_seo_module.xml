@@ -173,7 +173,8 @@
 											custom text which You insert in field "meta description"!' ?></span></p>
 										</div>
 									</div>
-									<script> jQuery.fn.putCursorAtStart = function() {
+									<script>
+jQuery.fn.putCursorAtStart = function() {
 
   return this.each(function() {
 
@@ -222,7 +223,7 @@
                                                                                                 
 												$('#input-meta-title1').on("focus", function() {
 															if($(this).val().length == 0 ){
-																$(this).val($(this).val() + 'хуй');
+																$(this).val('хуй');
 																$(this).putCursorAtStart();
 													}
 												})
