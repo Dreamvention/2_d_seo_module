@@ -481,7 +481,7 @@ class ControllerModuleDSeo extends Controller {
     
     public function editHtaceessBackup( ) {
         
-	$htaccess = $this->request->post['htaccess'];
+	$htaccess = $this->request->post['d_seo_htacess']['htaccess'];
 		 
          echo $htaccess;
 		
