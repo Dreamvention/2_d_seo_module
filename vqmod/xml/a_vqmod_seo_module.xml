@@ -21,8 +21,9 @@
 					$data['robots_tooltip'] = $this->language->get('robots_tooltip');
 					$this->load->model('setting/setting');
 					$data['snipet'] = $this->model_setting_setting->getSettingValue('d_seo' , 'd_seo_snipet'  );
-                                        $url =  $_SERVER['REQUEST_URI'] ;
-                                        $data['dir'] =  substr( $url, 0 , strripos($url, '/index'));
+                                        $route =  $_SERVER['REQUEST_URI'] ;
+                                        $dir =   explode($route, '/admin');
+                                        $data['dir'] = $dir[0];
 					  ]]></add>
         </operation>
     </file>
