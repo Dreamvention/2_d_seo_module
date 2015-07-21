@@ -224,7 +224,7 @@
 							?></textarea>
 						 
 							<div class="col-sm-2" style="margin-top: 10px;">
-								<a id="do_backup" class="btn btn-primary"> create </a>
+								<a id="save_htacess" class="btn btn-primary"> create </a>
 							</div>
 					 
 					</div>
@@ -346,7 +346,7 @@
 			}
 		});
 	});
-        $("#restore_backup").on("click", function(){
+        $("#save_htacess").on("click", function(){
 		$.ajax({
 			url: 'index.php?route=module/d_seo/restoreHtaceessBackup&token=<?php echo $token; ?>',
 			type: 'post',
