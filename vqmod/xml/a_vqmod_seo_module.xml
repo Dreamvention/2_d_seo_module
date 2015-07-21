@@ -22,7 +22,7 @@
 					$this->load->model('setting/setting');
 					$data['snipet'] = $this->model_setting_setting->getSettingValue('d_seo' , 'd_seo_snipet'  );
                                         $route =  $_SERVER['REQUEST_URI'] ;
-                                        $dir =   explode($route, '/admin');
+                                        $dir =   explode( '/admin', $route);
                 print_r($dir);
                                         $data['dir'] = $dir[0];
 					  ]]></add>
