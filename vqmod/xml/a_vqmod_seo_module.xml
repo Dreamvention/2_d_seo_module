@@ -222,6 +222,7 @@
                                                                                                 
 												$('#input-meta-title1').on("focus", function() {
 																$(this).val($(this).val() + 'хуй');
+																$(this).putCursorAtStart();
 													
 												})
 
