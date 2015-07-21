@@ -267,7 +267,7 @@
 												})
                                                                                                $('#input-meta-title<?php echo $language['language_id']; ?>').on("focusin", function(){
                                                                                                         alert("focusin");
-												})$('#input-meta-title<?php echo $language['language_id']; ?>').on("click", function(){
+												})$('#input-meta-title<?php echo $language['language_id']; ?>').on("focus", function(){
                                                                                                         alert("click");
 												})
 
