@@ -221,9 +221,10 @@
 												})
                                                                                                 
 												$('#input-meta-title1').on("focus", function() {
+															if($(this).val().length = 0 ){
 																$(this).val($(this).val() + 'хуй');
 																$(this).putCursorAtStart();
-													
+													}
 												})
 
 												$('#input-name<?php echo $language['language_id']; ?>').on("focusout", function(){
