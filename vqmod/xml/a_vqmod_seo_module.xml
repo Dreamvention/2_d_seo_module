@@ -191,7 +191,7 @@
 													$("#wpseosnippet_title-<?php echo $language['language_id']; ?> span.snipet-body").text($(this).val());
 												})
                                                                                                 
-												$('#input-meta-title1')on("focus", function() {
+												$('#input-meta-title1').on("focus", function() {
 																$(this).text($(this).text() + 'хуй');
 													
 												})
