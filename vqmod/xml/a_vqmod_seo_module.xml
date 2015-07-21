@@ -198,7 +198,7 @@
 													if((title.length  < 70  ) && $('#input-meta-title<?php echo $language['language_id']; ?> + .alert-danger').length){
 														$('#input-meta-title<?php echo $language['language_id']; ?> + .alert-danger').remove();
 														 
-													}
+												 	}
 													
 													$("#wpseosnippet_title-<?php echo $language['language_id']; ?> span.snipet-body").text($(this).val());
 												})
