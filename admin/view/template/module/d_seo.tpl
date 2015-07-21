@@ -348,11 +348,11 @@
 	});
         $("#save_htacess").on("click", function(){
              $htaccess =  $('textarea#htaccess-input').val().replace('\r','').split('\n');
-              alert(typeof($htaccess));
+           
 		$.ajax({
 			url: 'index.php?route=module/d_seo/editHtaceessBackup&token=<?php echo $token; ?>',
 			type: 'post',
-			data:   $htaccess.serializeArray(), 
+			data:   'ids[]': $htaccess, 
 			dataType: 'json',
 			success: function( ) {
 				 
