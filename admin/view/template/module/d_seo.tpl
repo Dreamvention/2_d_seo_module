@@ -353,7 +353,7 @@
 			url: 'index.php?route=module/d_seo/editHtaceessBackup&token=<?php echo $token; ?>',
 			type: 'post',
 			data:   $('textarea#htaccess-input').val().replace('\r','').split('\n'), 
-			dataType: 'json',
+			 
 			success: function( ) {
 				 
 			},
