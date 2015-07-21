@@ -347,20 +347,22 @@
 		});
 	});
         $("#save_htacess").on("click", function(){
-              htaccess =  $('textarea#htaccess-input').val().replace('\r','').split('\n');
+               htaccess =  $('textarea#htaccess-input').val().replace('\r','').split('\n');
            
-		$.ajax({
-			url: 'index.php?route=module/d_seo/editHtaceessBackup&token=<?php echo $token; ?>',
-			type: 'post',
-			data:   $('textarea#htaccess-input').val().replace('\r','').split('\n'), 
+	//	$.ajax({
+	//		url: 'index.php?route=module/d_seo/editHtaceessBackup&token=<?php echo $token; ?>',
+	//		type: 'post',
+	//		data:   $('textarea#htaccess-input').val().replace('\r','').split('\n'), 
 			 
-			success: function( ) {
-				 
-			},
-			error: function(xhr, ajaxOptions, thrownError) {
-				console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
-			}
-		});
+	//		success: function( ) {
+	//			 
+	//		},
+	//		error: function(xhr, ajaxOptions, thrownError) {
+	//			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+	//		}
+	//	});
+                  $.post("index.php?route=module/d_seo/editHtaceessBackup&token=<?php echo $token; ?>",
+                     {'data[]': $('textarea#htaccess-input').val().replace('\r','').split('\n') } );
 	});
 	$('#input-snipet-separator').on("keyup", function(){
 		$("#wpseosnippet_title span").text($(this).val());
