@@ -166,7 +166,7 @@
 									<div class="col-sm-10">
 									 
 										  <div id="wpseosnippet-<?php echo $language['language_id']; ?>">																															
-											<a class="title" id="wpseosnippet_title-<?php echo $language['language_id']; ?>"  ><span class = "snipet-body"><?php echo (isset($product_description[$language['language_id']]['meta_title']) && !empty($product_description[$language['language_id']]['meta_title'])) ? $product_description[$language['language_id']]['meta_title'] : $entry_meta_title; ?></span><span><?php echo isset($snipet[$language['language_id']]['separator']) ? $snipet[$language['language_id']]['separator'] :''; ?></span></a>
+											<a class="title" id="wpseosnippet_title-<?php echo $language['language_id']; ?>"  ><span class = "snipet-body"><?php echo (isset($product_description[$language['language_id']]['meta_title']) && !empty($product_description[$language['language_id']]['meta_title'])) ? $product_description[$language['language_id']]['meta_title'] : $entry_meta_title; ?></span><span></span></a>
 											<span class="url"><?php  echo $_SERVER['HTTP_HOST']; ?></span>
 											<p class="desc"><span class="autogen"></span><span class="content"><?php echo (isset($product_description[$language['language_id']]['meta_title']) && !empty($product_description[$language['language_id']]['meta_title'])) ? $product_description[$language['language_id']]['meta_description'] : 'Here You can see your meta description.  
 											Which include 160 symbols from product or page description or 
@@ -191,7 +191,7 @@
 												$('#input-name<?php echo $language['language_id']; ?>').on("focusout", function(){
 													if($('#input-meta-title<?php echo $language['language_id']; ?>').val() == ''){
 														$('#input-meta-title<?php echo $language['language_id']; ?>').val($(this).val());
-														$("#wpseosnippet_title-<?php echo $language['language_id']; ?> span.snipet-body").text($(this).val());
+														$("#wpseosnippet_title-<?php echo $language['language_id']; ?> span.snipet-body").text($(this).val() + "<?php echo isset($snipet[$language['language_id']]['separator']) ? $snipet[$language['language_id']]['separator'] :''; ?>" );
 													}
 												})
 												$('#input-meta-description<?php echo $language['language_id']; ?>').on("keyup", function(){
@@ -201,7 +201,7 @@
 														 
 													}
 													if((descript.length  < 180 ) && $('#input-meta-description<?php echo $language['language_id']; ?> + .alert-danger').length){
-														$('#input-meta-title<?php echo $language['language_id']; ?> + .alert-danger').remove();
+														$('#input-meta-description<?php echo $language['language_id']; ?> + .alert-danger').remove();
 														 
 													}
 													$("#wpseosnippet-<?php echo $language['language_id']; ?> .content").text($(this).val());
