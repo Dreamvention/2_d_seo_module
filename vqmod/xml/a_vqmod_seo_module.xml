@@ -265,10 +265,13 @@
 													
 													$("#wpseosnippet_title-<?php echo $language['language_id']; ?> span.snipet-body").text($(this).val());
 												})
-                                                                                               $('#input-meta-title<?php echo $language['language_id']; ?>').on("focusin", function(){
-                                                                                                        alert("focusin");
-												})$('#input-meta-title<?php echo $language['language_id']; ?>').on("focus", function(){
+                                                                                                $('#input-meta-title1').on("focusin", function(e){
+                                                                                                            alert("focusin");
+													   e.preventDefault();
+												})
+												$('#input-meta-title1').on("focus", function(e){
                                                                                                         alert("click");
+															  
 												})
 
 												$('#input-name<?php echo $language['language_id']; ?>').on("focusout", function(){
