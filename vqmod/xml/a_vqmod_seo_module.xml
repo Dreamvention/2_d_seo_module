@@ -1,34 +1,34 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <modification>
-	<id> SEO module by Dreamvention</id>
-	<version>1.0.0</version>
-	<vqmver required="true">2.5.0</vqmver>
-	<author> Dreamvention </author>
+    <id> SEO module by Dreamvention</id>
+    <version>1.0.0</version>
+    <vqmver required="true">2.5.0</vqmver>
+    <author> Dreamvention </author>
 
 	
-		<file name="admin/model/catalog/product.php">
-		<operation error="skip" >
-			<search position="replace" ><![CDATA[$this->db->query("INSERT INTO " . DB_PREFIX . "product_description SET product_id = '" . (int)$product_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "', tag = '" . $this->db->escape($value['tag']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "'");]]></search>
-			<add><![CDATA[			$this->db->query("INSERT INTO " . DB_PREFIX . "product_description SET product_id = '" . (int)$product_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "', tag = '" . $this->db->escape($value['tag']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "', robots = '" . $this->db->escape($value['rel']) . "'");]]></add>
-		</operation>
-	</file>
-	<file name="admin/controller/catalog/product.php">
-		<operation error="skip" >
-			<search position="before"  ><![CDATA[$data['tab_general'] = $this->language->get('tab_general');]]></search>
-			<add><![CDATA[		$data['tab_general_seo'] = $this->language->get('tab_general_seo');
+    <file name="admin/model/catalog/product.php">
+        <operation error="skip" >
+            <search position="replace" ><![CDATA[$this->db->query("INSERT INTO " . DB_PREFIX . "product_description SET product_id = '" . (int)$product_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "', tag = '" . $this->db->escape($value['tag']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "'");]]></search>
+            <add><![CDATA[			$this->db->query("INSERT INTO " . DB_PREFIX . "product_description SET product_id = '" . (int)$product_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "', tag = '" . $this->db->escape($value['tag']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "', robots = '" . $this->db->escape($value['rel']) . "'");]]></add>
+        </operation>
+    </file>
+    <file name="admin/controller/catalog/product.php">
+        <operation error="skip" >
+            <search position="before"  ><![CDATA[$data['tab_general'] = $this->language->get('tab_general');]]></search>
+            <add><![CDATA[		$data['tab_general_seo'] = $this->language->get('tab_general_seo');
 					$data['tab_data_seo'] = $this->language->get('tab_data_seo');
 					$data['tags_robots'] = $this->language->get('tags_robots');
 					$data['robots_tooltip'] = $this->language->get('robots_tooltip');
 					$this->load->model('setting/setting');
 					$data['snipet'] = $this->model_setting_setting->getSettingValue('d_seo' , 'd_seo_snipet'  );
 					  ]]></add>
-		</operation>
-	</file>
-	<file name="admin/language/english/catalog/product.php">
-		<operation error="skip" >
-			<search position="before"  ><![CDATA[// Help]]></search>
+        </operation>
+    </file>
+    <file name="admin/language/english/catalog/product.php">
+        <operation error="skip" >
+            <search position="before"  ><![CDATA[// Help]]></search>
 			
-			<add><![CDATA[		// SEO by Dreamvention
+            <add><![CDATA[		// SEO by Dreamvention
 					$_['tab_general_seo']               = 'General SEO';
 					$_['tags_robots']               = 'Meta tags robots';
 					$_['tab_data_seo']               = 'Data SEO';
@@ -37,12 +37,12 @@
 														while the "googlebot" meta tag is specific to Google. The default values are "index, follow"';]]></add>
 					
 					  
-		</operation>
-	</file>
-	<file name="admin/model/setting/setting.php">
-		<operation error="skip" >
-			<search position="before"  ><![CDATA[public function editSettingValue($code = '', $key = '', $value = '', $store_id = 0) {]]></search>
-			<add><![CDATA[	public function getSettingValue($code , $key , $store_id = 0) {
+        </operation>
+    </file>
+    <file name="admin/model/setting/setting.php">
+        <operation error="skip" >
+            <search position="before"  ><![CDATA[public function editSettingValue($code = '', $key = '', $value = '', $store_id = 0) {]]></search>
+            <add><![CDATA[	public function getSettingValue($code , $key , $store_id = 0) {
 		 
 		
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "setting WHERE store_id = '" . (int)$store_id . "' AND `code` = '" . $this->db->escape($code) . "'AND `key` = '" . $this->db->escape($key) . "'");
@@ -61,12 +61,12 @@
 			return false;
 		}
 	}]]></add>
-		</operation>
-	</file>
-	<file name="admin/view/template/catalog/product_form.tpl">
-		<operation error="skip" >
-			<search position="after"  offset="29" ><![CDATA[<textarea name="product_description[<?php echo $language['language_id']; ?>][description]" placeholder="<?php echo $entry_description; ?>" id="input-description<?php echo $language['language_id']; ?>"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['description'] : ''; ?></textarea>]]></search>
-			<add><![CDATA[					</div>					
+        </operation>
+    </file>
+    <file name="admin/view/template/catalog/product_form.tpl">
+        <operation error="skip" >
+            <search position="after"  offset="29" ><![CDATA[<textarea name="product_description[<?php echo $language['language_id']; ?>][description]" placeholder="<?php echo $entry_description; ?>" id="input-description<?php echo $language['language_id']; ?>"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['description'] : ''; ?></textarea>]]></search>
+            <add><![CDATA[					</div>					
 								<div class="tab-pane" id="tab-data-seo">  
 									<div class="form-group">
 										<label class="col-sm-2 control-label">
@@ -151,10 +151,10 @@
 							
 						</div>
 						</div>]]></add>
-		</operation>
-		<operation error="skip" >
-			<search position="after"  offset="2" ><![CDATA[<textarea name="product_description[<?php echo $language['language_id']; ?>][description]" placeholder="<?php echo $entry_description; ?>" id="input-description<?php echo $language['language_id']; ?>"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['description'] : ''; ?></textarea>]]></search>
-			<add><![CDATA[								<div class="col-sm-offset-2 col-sm-10">
+        </operation>
+        <operation error="skip" >
+            <search position="after"  offset="2" ><![CDATA[<textarea name="product_description[<?php echo $language['language_id']; ?>][description]" placeholder="<?php echo $entry_description; ?>" id="input-description<?php echo $language['language_id']; ?>"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['description'] : ''; ?></textarea>]]></search>
+            <add><![CDATA[								<div class="col-sm-offset-2 col-sm-10">
 						<ul class="nav nav-tabs">
 							<li class="active"><a href="#tab-general-seo" data-toggle="tab"><?php echo $tab_general_seo; ?> </a></li>
 							<li><a href="#tab-data-seo" data-toggle="tab"><?php echo $tab_data_seo; ?></a></li>
@@ -177,7 +177,7 @@
 										$(document).ready(function(){
 												$('#input-meta-title<?php echo $language['language_id']; ?>').on("keyup", function(){
 													title = $(this).val();
-													if((title.length  > 10) && !$('#input-meta-title<?php echo $language['language_id']; ?> ~ .alert-danger'){
+													if((title.length  > 10) && !$('#input-meta-title<?php echo $language['language_id']; ?> + .alert-danger'){
 														$(this).after('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> Warning: Please check the form carefully for errors!      <button type="button" class="close" data-dismiss="alert">×</button></div>');
 														//$(this).val(title.substring(0 , 10));
 													}
@@ -234,16 +234,16 @@
 										}
 									</style>
 								</div>]]></add>
-		</operation>
-	</file>
-	<file name="system/library/document.php">
-		<operation error="skip" >
-			<search position="after"  ><![CDATA[private $keywords;]]></search>
-			<add><![CDATA[	private $robots;]]></add>
-		</operation>
-		<operation error="skip" >
-			<search position="after"  offset="1" ><![CDATA[return $this->keywords;]]></search>
-			<add><![CDATA[
+        </operation>
+    </file>
+    <file name="system/library/document.php">
+        <operation error="skip" >
+            <search position="after"  ><![CDATA[private $keywords;]]></search>
+            <add><![CDATA[	private $robots;]]></add>
+        </operation>
+        <operation error="skip" >
+            <search position="after"  offset="1" ><![CDATA[return $this->keywords;]]></search>
+            <add><![CDATA[
 	public function setRobots($robots) {
 		$this->robots = $robots;
 	}
@@ -251,36 +251,36 @@
 	public function getRobots() {
 		return $this->robots;
 	}]]></add>
-		</operation>
-	</file>
-	<file name="catalog/model/catalog/product.php">
-		<operation error="skip" >
-			<search position="after"  ><![CDATA['meta_keyword'     => $query->row['meta_keyword'],]]></search>
-			<add><![CDATA[				'robots'     => $query->row['robots'],]]></add>
-		</operation>
-	</file>
-	<file name="catalog/controller/product/product.php">
-		<operation error="skip" >
-			<search position="after"  ><![CDATA[$this->document->setKeywords($product_info['meta_keyword']);]]></search>
-			<add><![CDATA[			$this->document->setRobots($product_info['robots']);]]></add>
-		</operation>
-	</file>
-	<file name="catalog/controller/common/header.php">
-		<operation error="skip" >
-			<search position="after"  ><![CDATA[$data['keywords'] = $this->document->getKeywords();]]></search>
-			<add><![CDATA[$data['robots'] = $this->document->getRobots();]]></add>
-		</operation>
-	</file>
-	<file name="catalog/view/theme/*/template/common/header.tpl">
-		<operation error="skip" >
-			<search position="before"  ><![CDATA[</head>]]></search>
-			<add><![CDATA[<?php if ($robots) { ?>
+        </operation>
+    </file>
+    <file name="catalog/model/catalog/product.php">
+        <operation error="skip" >
+            <search position="after"  ><![CDATA['meta_keyword'     => $query->row['meta_keyword'],]]></search>
+            <add><![CDATA[				'robots'     => $query->row['robots'],]]></add>
+        </operation>
+    </file>
+    <file name="catalog/controller/product/product.php">
+        <operation error="skip" >
+            <search position="after"  ><![CDATA[$this->document->setKeywords($product_info['meta_keyword']);]]></search>
+            <add><![CDATA[			$this->document->setRobots($product_info['robots']);]]></add>
+        </operation>
+    </file>
+    <file name="catalog/controller/common/header.php">
+        <operation error="skip" >
+            <search position="after"  ><![CDATA[$data['keywords'] = $this->document->getKeywords();]]></search>
+            <add><![CDATA[$data['robots'] = $this->document->getRobots();]]></add>
+        </operation>
+    </file>
+    <file name="catalog/view/theme/*/template/common/header.tpl">
+        <operation error="skip" >
+            <search position="before"  ><![CDATA[</head>]]></search>
+            <add><![CDATA[<?php if ($robots) { ?>
 	<meta name="robots" content="<?php echo $robots; ?>" />
 <?php }else{ ?> 
 	<meta name="robots" content="index,follow" 
 <?php } ?>]]></add>
-		</operation>
-	</file>
+        </operation>
+    </file>
  
 
 </modification>
