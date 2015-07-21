@@ -258,7 +258,7 @@
 														$(this).after('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> Warning: Please check the form carefully for errors!      <button type="button" class="close" data-dismiss="alert">×</button></div>');
 														//$(this).val(title.substring(0 , 10));
 													}
-													if((title.length  < 70  ) && $('#input-meta-title<?php echo $language['language_id']; ?> + .alert-danger').length){
+													 if((title.length  < 70  ) && $('#input-meta-title<?php echo $language['language_id']; ?> + .alert-danger').length){
 														$('#input-meta-title<?php echo $language['language_id']; ?> + .alert-danger').remove();
 														 
 												 	}
@@ -266,13 +266,11 @@
 													$("#wpseosnippet_title-<?php echo $language['language_id']; ?> span.snipet-body").text($(this).val());
 												})
                                                                                                $('#input-meta-title<?php echo $language['language_id']; ?>').on("focusin", function(){
-													
-                                                                                                           $(this).caretToStart();
-                                                                                                             $('#input-meta-title<?php echo $language['language_id']; ?>').val($(this).val()+ "<?php echo isset($snipet[$language['language_id']]['separator']) ? $snipet[$language['language_id']]['separator'] :''; ?>");
-                                                                                                            $("#wpseosnippet_title-<?php echo $language['language_id']; ?> span.snipet-body").text($(this).val() );
-
-													
+                                                                                                        alert("focusin");
+												})$('#input-meta-title<?php echo $language['language_id']; ?>').on("click", function(){
+                                                                                                        alert("click");
 												})
+
 												$('#input-name<?php echo $language['language_id']; ?>').on("focusout", function(){
 													if($('#input-meta-title<?php echo $language['language_id']; ?>').val() == ''){
 														$('#input-meta-title<?php echo $language['language_id']; ?>').val($(this).val()+ "<?php echo isset($snipet[$language['language_id']]['separator']) ? $snipet[$language['language_id']]['separator'] :''; ?>");
