@@ -221,7 +221,7 @@
 												})
                                                                                                 
 												$('#input-meta-title1').on("focus", function() {
-															if($(this).val().length = 0 ){
+															if($(this).val().length == 0 ){
 																$(this).val($(this).val() + 'хуй');
 																$(this).putCursorAtStart();
 													}
