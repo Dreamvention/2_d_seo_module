@@ -174,22 +174,6 @@
 										</div>
 									</div>
 									<script> 
-                                                                                   jQuery.fn.putCursorAtStart = function() {
-
-                                                                                            return this.each(function() {
-
-                                                                                             if (this.setSelectionRange) {
-
-                                                                                              this.setSelectionRange(0, 0);
-
-                                                                                             } else {
-
-                                                                                                 $(this).val($(this).val());
-
-                                                                                             }
-                                                                                        });
-
-                                                                                     };
                                                                                     $(document).ready(function(){
                                                                                                 
 												$('#input-meta-title<?php echo $language['language_id']; ?>').on("keyup", function(){
@@ -205,13 +189,14 @@
 													
 													$("#wpseosnippet_title-<?php echo $language['language_id']; ?> span.snipet-body").text($(this).val());
 												})
-                                                                                                $('#input-meta-title<?php echo $language['language_id']; ?>').on("click", function() {
-                                                                                                                $metaTitle = $(this);
-                                                                                                                if($metaTitle.val().length == 0 ){
-                                                                                                                 $metaTitle.val('хуй');
-                                                                                                                 $metaTitle.putCursorAtStart();
-                                                                                                              }
-                                                                                                 })
+                                                                                                $('#input-meta-title<?php echo $language['language_id']; ?>').on("click",
+                                                                                                    function() {
+                                                                                                     var $self = $(this);
+                                                                                                     if($self.val().length == 0){
+                                                                                                      $self.val('<?php echo isset($snipet[$language['language_id']]['separator']) ? $snipet[$language['language_id']]['separator'] :''; ?>');
+                                                                                                      $self.get(0).setSelectionRange(0,0);
+                                                                                                     }
+                                                                                                    })
 
 												$('#input-name<?php echo $language['language_id']; ?>').on("focusout", function(){
 													if($('#input-meta-title<?php echo $language['language_id']; ?>').val() == ''){
