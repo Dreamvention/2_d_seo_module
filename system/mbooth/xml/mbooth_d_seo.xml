@@ -1,8 +1,8 @@
 <extension>
     <id>d_seo</id>
-    <name>Standard Module</name>
+    <name>Seo Module</name>
     <description>
-    Standard Module is a dummy module that a developer can use to speed up the process of creating new modules.
+        Seo Module!.
     </description>
     <type>module</type>
     <version>1.0</version>

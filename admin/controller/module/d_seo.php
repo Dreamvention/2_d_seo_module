@@ -126,7 +126,7 @@ class ControllerModuleDSeo extends Controller {
 		$data['text_metadescription'] = $this->language->get('text_metadescription');
 
 		// Notification
-        if (isset($this->error['warning'])) {
+                if (isset($this->error['warning'])) {
 			$data['warning'] = $this->error['warning'];
 		} elseif (isset($this->session->data['warning'] )) {
 			$data['warning'] = $this->session->data['warning'] ;
@@ -152,21 +152,22 @@ class ControllerModuleDSeo extends Controller {
 		// Breadcrumbs
 		$data['breadcrumbs'] = array(); 
    		$data['breadcrumbs'][] = array(
-       		'text' => $this->language->get('text_home'),
+                        'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL')
    		);
 
-        $data['breadcrumbs'][] = array(
-       		'text'      => $this->language->get('text_module'),
+                $data['breadcrumbs'][] = array(
+                        'text'      => $this->language->get('text_module'),
 			'href'      => $this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL')
    		);
 
    		$data['breadcrumbs'][] = array(
-       		'text' => $this->language->get('heading_title_main'),
+                        'text' => $this->language->get('heading_title_main'),
 			'href' => $this->url->link($this->route, 'token=' . $this->session->data['token'] . $url, 'SSL')
    		);
 
    		$data['modules'] = array();
+                
    		if (isset($this->request->post[$this->id.'_module'])) {
 			$data['modules'] = $this->request->post[$this->id.'_module'];
 		} elseif ($this->model_setting_setting->getSetting($this->id, $store_id)) { 
@@ -174,7 +175,8 @@ class ControllerModuleDSeo extends Controller {
 			$data['modules'] = (isset($data['modules'][$this->id.'_module'])) ? $data['modules'][$this->id.'_module'] : array();
 		}
 
-			$data['setting'] = array();
+		$data['setting'] = array();
+                
 		if (isset($this->request->post[$this->id.'_setting'])) {
 			$data['setting'] = $this->request->post[$this->id.'_setting'];
 		} elseif ($this->model_setting_setting->getSetting($this->id, $store_id)) { 
@@ -191,24 +193,24 @@ class ControllerModuleDSeo extends Controller {
 			$data['d_seo_snipet']['separator'] = " - ".$this->config->get('config_name');
 		}
 
- 
+
 		//get config 
 		$data['backup_files'] = $this->getHtaceessBackups();
 		$data['token'] = $this->session->data['token']; 
 		$this->load->model('localisation/language');
 		$data['languages'] = $this->model_localisation_language->getLanguages();
-   		/**
-
-   		 Add code here 
-
-   		 **/
-		$global_settings  = $this->model_setting_setting->getSetting('config',$store_id);
+   		 
+	
+                $global_settings  = $this->model_setting_setting->getSetting('config',$store_id);
+                
 		if(isset($global_settings['config_seo_url'])){
 			$data['config_seo_url'] = $global_settings['config_seo_url'];
 		}else{
 			$data['config_seo_url'] = 0;
 		}
+                
 		$data['type_seo_url'] = $this->typeURL();
+                
 		$data['htaccess_content']= $this->getHtaccess();
 
 		$data['header'] = $this->load->controller('common/header');
@@ -389,7 +391,7 @@ class ControllerModuleDSeo extends Controller {
 
 		$this->response->setOutput(json_encode($json));
    }
-	private function enable_rewrite(){
+	private function enableRewrite(){
 		$filename  = DIR_MAIN.".htaccess";
 		   if(file_exists($filename)){
 			   if($this->checkDreamHtaccess($filename)){
@@ -485,43 +487,41 @@ class ControllerModuleDSeo extends Controller {
         }
         return $files;
     }
-	private	function	getHtaccess()	{
-		
-		if	($this->exsistHtaccess())	{
-				$file	=	file(DIR_MAIN	.	".htaccess");
-				return	$file;
-			} else	{
-				return false;
-			}
+    private function getHtaccess() {
+	 
+	if($this->exsistHtaccess())	{
+            $file = file(DIR_MAIN.".htaccess");
+		return	$file;
+        }else{
+            $this->createDreamHtaccess();
+            $this->getHtaccess();
 	}
-	private function exsistHtaccess(){
-		if(file_exists(DIR_MAIN	.	".htaccess")){
-			return true;
+    }
+    private function exsistHtaccess(){
+	if(file_exists(DIR_MAIN.".htaccess")){
+            return true;
+	}else{
+            return false;
+	}
+    }
+	
+    private function settingsSeoUrl($settings){
+	if (isset($settings['config_seo_url'])) {
+		 
+            $global_settings  = $this->model_setting_setting->getSetting('config',0);	
+            $this->enableRewrite();	
+            $global_settings['config_seo_url'] = $this->request->post['config_seo_url'];	
+            $this->model_setting_setting->editSetting('config', $global_settings);
+            
+        }
+	if(isset($settings['type_seo_url'])){
+		if($settings['type_seo_url'] == "modified" ){
+                    $this->enableModificationUrl();
 		}else{
-			return false;
+                    $this->disableModificationUrl();
 		}
-	}
-	private function settingsSeoUrl($settings){
-		if (isset($settings['config_seo_url'])) {
-		 
-			$global_settings  = $this->model_setting_setting->getSetting('config',0);
-			
-		 
-				$this->enable_rewrite();
-		 
-			
-			 $global_settings['config_seo_url'] = $this->request->post['config_seo_url'];
-			 $this->model_setting_setting->editSetting('config', $global_settings);
-		}
-		
-		if(isset($settings['type_seo_url'])){
-			if($settings['type_seo_url'] == "modified" ){
-				$this->enableModificationUrl();
-			}else{
-				$this->disableModificationUrl();
-			}
-		}
-	}
+	 }
+    }
 	
 	private function enableModificationUrl() {
 		  $from = str_replace("system", "vqmod/xml", DIR_SYSTEM) . "a_vqmod_mod_seo_url.xml_"; 

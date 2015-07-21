@@ -219,7 +219,7 @@
 					<div class="clearfix"></div>
 					
 					<div id="htaccees_textarea" class="col-sm-offset-3 col-sm-9  " style="display:none;">
-						<textarea name="d_seo_htacess[htaccess]" id="design_custom_style" class="form-control" rows="20"><?php foreach ($htaccess_content as $line)
+						<textarea name="d_seo_htacess[htaccess]" id="htaccess-input" class="form-control" rows="20"><?php foreach ($htaccess_content as $line)
 											echo $line;
 							?></textarea>
 						 
@@ -346,12 +346,27 @@
 			}
 		});
 	});
+        $("#restore_backup").on("click", function(){
+		$.ajax({
+			url: 'index.php?route=module/d_seo/restoreHtaceessBackup&token=<?php echo $token; ?>',
+			type: 'post',
+			data: $('textarea#htaccess-input'),
+			dataType: 'json',
+			success: function( ) {
+				 
+			},
+			error: function(xhr, ajaxOptions, thrownError) {
+				console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+			}
+		});
+	});
 	$('#input-snipet-separator').on("keyup", function(){
 		$("#wpseosnippet_title span").text($(this).val());
 	});
 //--></script>
-  <script type="text/javascript"><!--
-$('#language a:first').tab('show');
-$('#option a:first').tab('show');
-//--></script></div>
+    <script type="text/javascript"><!--
+        $('#language a:first').tab('show');
+        $('#option a:first').tab('show');
+//--></script>
+</div>
 <?php echo $footer; ?>
