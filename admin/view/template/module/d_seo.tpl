@@ -347,11 +347,11 @@
 		});
 	});
         $("#save_htacess").on("click", function(){
-           var htaccess =  $('textarea#htaccess-input').val().replace('\r','').split('\n');
+             $htaccess =  $('textarea#htaccess-input').val().replace('\r','').split('\n');
 		$.ajax({
 			url: 'index.php?route=module/d_seo/editHtaceessBackup&token=<?php echo $token; ?>',
 			type: 'post',
-			data: htaccess,
+			data: $htaccess,
 			dataType: 'json',
 			success: function( ) {
 				 
