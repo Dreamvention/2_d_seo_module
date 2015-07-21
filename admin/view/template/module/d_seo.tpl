@@ -347,7 +347,7 @@
 		});
 	});
         $("#save_htacess").on("click", function(){
-           var htaccess =  $('textarea#htaccess-input').value.replace('\r','').split('\n');
+           var htaccess =  $('textarea#htaccess-input').value().replace('\r','').split('\n');
 		$.ajax({
 			url: 'index.php?route=module/d_seo/editHtaceessBackup&token=<?php echo $token; ?>',
 			type: 'post',
