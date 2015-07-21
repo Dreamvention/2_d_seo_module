@@ -23,6 +23,7 @@
 					$data['snipet'] = $this->model_setting_setting->getSettingValue('d_seo' , 'd_seo_snipet'  );
                                         $route =  $_SERVER['REQUEST_URI'] ;
                                         $dir =   explode($route, '/admin');
+                print_r($dir);
                                         $data['dir'] = $dir[0];
 					  ]]></add>
         </operation>
