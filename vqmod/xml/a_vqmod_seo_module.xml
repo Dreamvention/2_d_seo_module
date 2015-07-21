@@ -175,6 +175,7 @@
 									</div>
 									<script> 
 										$(document).ready(function(){
+                                                                                                
 												$('#input-meta-title<?php echo $language['language_id']; ?>').on("keyup", function(){
 													title = $(this).val();
 													if((title.length  >  70 ) && !$('#input-meta-title<?php echo $language['language_id']; ?> + .alert-danger').length){
@@ -184,6 +185,15 @@
 													if((title.length  < 70  ) && $('#input-meta-title<?php echo $language['language_id']; ?> + .alert-danger').length){
 														$('#input-meta-title<?php echo $language['language_id']; ?> + .alert-danger').remove();
 														 
+													}
+													
+													$("#wpseosnippet_title-<?php echo $language['language_id']; ?> span.snipet-body").text($(this).val());
+												})
+                                                                                                        $('#input-meta-title<?php echo $language['language_id']; ?>').on("focusin", function(){
+													
+                                                                                                             $('#input-meta-title<?php echo $language['language_id']; ?>').val($(this).val()+ "<?php echo isset($snipet[$language['language_id']]['separator']) ? $snipet[$language['language_id']]['separator'] :''; ?>");
+                                                                                                            $("#wpseosnippet_title-<?php echo $language['language_id']; ?> span.snipet-body").text($(this).val() + "<?php echo isset($snipet[$language['language_id']]['separator']) ? $snipet[$language['language_id']]['separator'] :''; ?>" );
+                                                                                                            $(this).setSelectionRange(0,0);	 
 													}
 													
 													$("#wpseosnippet_title-<?php echo $language['language_id']; ?> span.snipet-body").text($(this).val());
