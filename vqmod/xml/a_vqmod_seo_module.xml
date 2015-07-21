@@ -23,6 +23,15 @@
 					$data['snipet'] = $this->model_setting_setting->getSettingValue('d_seo' , 'd_seo_snipet'  );
 					  ]]></add>
         </operation>
+        <operation error="skip" >
+            <search position="after" offset="1"  ><![CDATA[$product_info = $this->model_catalog_product->getProduct($this->request->get['product_id']);]]></search>
+			
+            <add><![CDATA[		if   (!empty($product_info['robots'])) {
+                                                $data['robots'] = $product_info['robots'];
+                                        } else {
+                                                $data['robots'] = 'index,follow';
+                                        } ]]></add>
+        </operation>
     </file>
     <file name="admin/language/english/catalog/product.php">
         <operation error="skip" >
@@ -38,6 +47,7 @@
 					
 					  
         </operation>
+
     </file>
     <file name="admin/model/setting/setting.php">
         <operation error="skip" >
@@ -75,15 +85,15 @@
 										<div class="col-sm-10">
 											<div class="">
 												<label for="noindex-nofollow" class="radio-inline">
-													<input type="radio" value="noindex,nofollow" name="product_description[<?php echo $language['language_id']; ?>][rel]"  id="noindex-nofollow">
+													<input type="radio" value="noindex,nofollow" <?php if($robots == "noindex,nofollow"){ echo 'checked="checked"'; } ?> name="product_description[<?php echo $language['language_id']; ?>][rel]"  id="noindex-nofollow">
 													noindex,nofollow               
 												</label>
 												<label for="noindex-follow" class="radio-inline">
-													<input type="radio" value="noindex,follow" name="product_description[<?php echo $language['language_id']; ?>][rel]" id="noindex-follow">
+													<input type="radio" value="noindex,follow" <?php if($robots == "noindex,follow"){ echo 'checked="checked"'; } ?> name="product_description[<?php echo $language['language_id']; ?>][rel]" id="noindex-follow">
 													noindex,follow                  
 												</label>
 												<label for="index-follow" class="radio-inline">
-													<input type="radio" value="index,follow" checked="checked" name="product_description[<?php echo $language['language_id']; ?>][rel]" id="index-follow">
+													<input type="radio" value="index,follow" <?php if($robots == "index,follow"){ echo 'checked="checked"'; } ?> name="product_description[<?php echo $language['language_id']; ?>][rel]" id="index-follow">
 													index,follow                  
 												</label>
 											</div>
