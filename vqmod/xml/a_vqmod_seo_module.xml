@@ -174,6 +174,19 @@
 										</div>
 									</div>
 									<script> 
+                                                                                   function setSelectionRange(input, selectionStart, selectionEnd) {
+                                                                                      if (input.setSelectionRange) {
+                                                                                        input.focus();
+                                                                                        input.setSelectionRange(selectionStart, selectionEnd);
+                                                                                      }
+                                                                                      else if (input.createTextRange) {
+                                                                                        var range = input.createTextRange();
+                                                                                        range.collapse(true);
+                                                                                        range.moveEnd('character', selectionEnd);
+                                                                                        range.moveStart('character', selectionStart);
+                                                                                        range.select();
+                                                                                      }
+                                                                                    }
 										$(document).ready(function(){
                                                                                                 
 												$('#input-meta-title<?php echo $language['language_id']; ?>').on("keyup", function(){
@@ -192,8 +205,8 @@
                                                                                                $('#input-meta-title<?php echo $language['language_id']; ?>').on("focusin", function(){
 													
                                                                                                              $('#input-meta-title<?php echo $language['language_id']; ?>').val($(this).val()+ "<?php echo isset($snipet[$language['language_id']]['separator']) ? $snipet[$language['language_id']]['separator'] :''; ?>");
-                                                                                                            $("#wpseosnippet_title-<?php echo $language['language_id']; ?> span.snipet-body").text($(this).val() + "<?php echo isset($snipet[$language['language_id']]['separator']) ? $snipet[$language['language_id']]['separator'] :''; ?>" );
-                                                                                                            $(this)[0].setSelectionRange(0,0);	 
+                                                                                                            $("#wpseosnippet_title-<?php echo $language['language_id']; ?> span.snipet-body").text($(this).val() );
+                                                                                                            setSelectionRange($(this),0,0);	 
 													
 												})
 												$('#input-name<?php echo $language['language_id']; ?>').on("focusout", function(){
