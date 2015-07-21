@@ -22,7 +22,7 @@
 					$this->load->model('setting/setting');
 					$data['snipet'] = $this->model_setting_setting->getSettingValue('d_seo' , 'd_seo_snipet'  );
                                         $url =  $_SERVER['REQUEST_URI'] ;
-                                        $data['dir'] =  substr( $url, 0 , strripos($url));
+                                        $data['dir'] =  substr( $url, 0 , strripos($url, '/'));
 					  ]]></add>
         </operation>
     </file>
