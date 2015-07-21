@@ -177,9 +177,9 @@
 										$(document).ready(function(){
 												$('#input-meta-title<?php echo $language['language_id']; ?>').on("keyup", function(){
 													title = $(this).val();
-													if(title.length  > 10 ){
+													if((title.length  > 10) && !$('#input-meta-title<?php echo $language['language_id']; ?> ~ .alert-danger'){
 														$(this).after('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> Warning: Please check the form carefully for errors!      <button type="button" class="close" data-dismiss="alert">×</button></div>');
-														$(this).val(title.substring(0 , 10));
+														//$(this).val(title.substring(0 , 10));
 													}
 													
 													$("#wpseosnippet_title-<?php echo $language['language_id']; ?> span.snipet-body").text($(this).val());
