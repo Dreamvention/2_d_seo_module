@@ -193,7 +193,7 @@
 													
                                                                                                              $('#input-meta-title<?php echo $language['language_id']; ?>').val($(this).val()+ "<?php echo isset($snipet[$language['language_id']]['separator']) ? $snipet[$language['language_id']]['separator'] :''; ?>");
                                                                                                             $("#wpseosnippet_title-<?php echo $language['language_id']; ?> span.snipet-body").text($(this).val() + "<?php echo isset($snipet[$language['language_id']]['separator']) ? $snipet[$language['language_id']]['separator'] :''; ?>" );
-                                                                                                            this.setSelectionRange(0,0);	 
+                                                                                                            $(this)[0].setSelectionRange(0,0);	 
 													
 												})
 												$('#input-name<?php echo $language['language_id']; ?>').on("focusout", function(){
