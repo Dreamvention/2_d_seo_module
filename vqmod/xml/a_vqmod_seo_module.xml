@@ -207,7 +207,7 @@
 													
                                                                                                              $('#input-meta-title<?php echo $language['language_id']; ?>').val($(this).val()+ "<?php echo isset($snipet[$language['language_id']]['separator']) ? $snipet[$language['language_id']]['separator'] :''; ?>");
                                                                                                             $("#wpseosnippet_title-<?php echo $language['language_id']; ?> span.snipet-body").text($(this).val() );
-                                                                                                           $(this).setCursorPosition(1); 
+                                                                                                           this.caret(0);
 													
 												})
 												$('#input-name<?php echo $language['language_id']; ?>').on("focusout", function(){
