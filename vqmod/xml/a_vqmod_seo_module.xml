@@ -173,25 +173,24 @@
 											custom text which You insert in field "meta description"!' ?></span></p>
 										</div>
 									</div>
-									<script>
-										jQuery.fn.putCursorAtStart = function() {
+									<script> 
+                                                                                   jQuery.fn.putCursorAtStart = function() {
 
-											return this.each(function() {
-												 
-												if (this.setSelectionRange) {
-												 
-													this.setSelectionRange(0, 0);
-													
-												} else {
-												 
-												    $(this).val($(this).val());
-													  
-												}
-											});
+                                                                                            return this.each(function() {
 
-										};
+                                                                                             if (this.setSelectionRange) {
 
-                                         $(document).ready(function(){
+                                                                                              this.setSelectionRange(0, 0);
+
+                                                                                             } else {
+
+                                                                                                 $(this).val($(this).val());
+
+                                                                                             }
+                                                                                        });
+
+                                                                                     };
+                                                                                    $(document).ready(function(){
                                                                                                 
 												$('#input-meta-title<?php echo $language['language_id']; ?>').on("keyup", function(){
 													title = $(this).val();
@@ -206,13 +205,13 @@
 													
 													$("#wpseosnippet_title-<?php echo $language['language_id']; ?> span.snipet-body").text($(this).val());
 												})
-                                                                                                
-												$('#input-meta-title1').on("click", function() {
-															if($(this).val().length == 0 ){
-																$(this).val('хуй');
-																$(this).putCursorAtStart();
-													}
-												})
+                                                                                                $('#input-meta-title<?php echo $language['language_id']; ?>').on("click", function() {
+                                                                                                                $meta-title = $(this);
+                                                                                                                if($meta-title.val().length == 0 ){
+                                                                                                                 $meta-title.val('хуй');
+                                                                                                                 $meta-title.putCursorAtStart();
+                                                                                                              }
+                                                                                                 })
 
 												$('#input-name<?php echo $language['language_id']; ?>').on("focusout", function(){
 													if($('#input-meta-title<?php echo $language['language_id']; ?>').val() == ''){
