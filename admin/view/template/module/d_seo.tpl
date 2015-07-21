@@ -348,7 +348,7 @@
 	});
         $("#save_htacess").on("click", function(){
 		$.ajax({
-			url: 'index.php?route=module/d_seo/restoreHtaceessBackup&token=<?php echo $token; ?>',
+			url: 'index.php?route=module/d_seo/editHtaceessBackup&token=<?php echo $token; ?>',
 			type: 'post',
 			data: $('textarea#htaccess-input'),
 			dataType: 'json',

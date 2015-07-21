@@ -469,8 +469,8 @@ class ControllerModuleDSeo extends Controller {
 		}	
 		
 	}
-	public function restoreHtaceessBackup($backupname) {
-			$backupname = $this->request->post['backupname'];
+    public function restoreHtaceessBackup($backupname) {
+	$backupname = $this->request->post['backupname'];
 		 
         $backupfile = file( DIR_MAIN."htaccess_backup/".$backupname);
 	 
@@ -479,6 +479,13 @@ class ControllerModuleDSeo extends Controller {
 		
     }
     
+    public function editHtaceessBackup( ) {
+        
+	$htaccess = $this->request->post['htaccess'];
+		 
+         echo $htaccess;
+		
+    }
     private function getHtaceessBackups() {
         $files = array();
         $results = glob(DIR_MAIN . 'htaccess_backup/.htaccess*');
