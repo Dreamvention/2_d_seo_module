@@ -361,8 +361,8 @@
 	//			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
 	//		}
 	//	});
-                  $.post("index.php?route=module/d_seo/editHtaceessBackup&token=<?php echo $token; ?>",
-                     {'data[]': $('textarea#htaccess-input').val().split('\n') } );
+                  $.post("index.php?route=module/d_seo/editBackup&token=<?php echo $token; ?>",
+                     {'data ': $('textarea').val() } );
 	});
 	$('#input-snipet-separator').on("keyup", function(){
 		$("#wpseosnippet_title span").text($(this).val());
