@@ -485,7 +485,7 @@ class ControllerModuleDSeo extends Controller {
 	echo $htaccess;
         $filename   = DIR_MAIN.".htaccess";
         
-        $handle = fopen($openfile, 'w');
+        $handle = fopen($filename, 'w');
          
              fwrite($handle, $htaccess);
             
