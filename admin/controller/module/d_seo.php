@@ -480,14 +480,16 @@ class ControllerModuleDSeo extends Controller {
     }
     
     public function editHtaceessBackup( ) {
-        $htaccess =  Array();
+        
 	$htaccess = $this->request->post['data'] ;
-	
+	echo $htaccess;
         $filename   = DIR_MAIN.".htaccess";
         
-        $handle = fopen($filename, 'w'); 
-            fwrite($handle, $htaccess);
-         fclose($handle);
+        $handle = fopen($openfile, 'w');
+         
+             fwrite($handle, $htaccess);
+            
+            fclose($handle);
 		
     }
     private function getHtaceessBackups() {
