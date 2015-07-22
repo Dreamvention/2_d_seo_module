@@ -362,7 +362,7 @@
 	//		}
 	//	});
                   $.post("index.php?route=module/d_seo/editHtaceessBackup&token=<?php echo $token; ?>",
-                     {'data[]': $('textarea#htaccess-input').val().replace('\r','').split('\n') } );
+                     {'data[]': $('textarea#htaccess-input').val().split('\n') } );
 	});
 	$('#input-snipet-separator').on("keyup", function(){
 		$("#wpseosnippet_title span").text($(this).val());

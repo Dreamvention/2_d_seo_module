@@ -447,7 +447,7 @@ class ControllerModuleDSeo extends Controller {
     }
     private function createNote($file, $openfile) {
 
-            $handle = fopen($openfile, 'w+');
+            $handle = fopen($openfile, 'w');
             foreach ($file as $filestring) {
                     fwrite($handle, $filestring);
             }
