@@ -470,7 +470,7 @@ class ControllerModuleDSeo extends Controller {
 
     }
     public function restoreHtaceessBackup($backupname) {
-	$backupname = $this->request->post['backupname'];
+	$backupname = $this->request->post['d_seo_htacess']['backup'];
 		 
         $backupfile = file( DIR_MAIN."htaccess_backup/".$backupname);
 	 
