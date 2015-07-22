@@ -470,12 +470,11 @@ class ControllerModuleDSeo extends Controller {
 
     }
     public function restoreHtaceessBackup($backupname) {
-	$backupname = $this->request->post['d_seo_htacess']['backup'];
-		 
+	$backupname = $this->request->post['d_seo_htacess']['backup'];	 
         $backupfile = file( DIR_MAIN."htaccess_backup/".$backupname);
-	 print_r($backupfile);
-
-		$filename   = DIR_MAIN.".htaccess";
+        
+	$filename   = DIR_MAIN.".htaccess";
+        
         $this->createNote($backupfile, $filename);
 		
     }
@@ -483,10 +482,12 @@ class ControllerModuleDSeo extends Controller {
     public function editHtaceessBackup( ) {
         $htaccess =  Array();
 	$htaccess = $this->request->post['data'] ;
-	         var_dump( $htaccess);
+	
         $filename   = DIR_MAIN.".htaccess";
-        $this->createNote($htaccess, $filename);
-        //echo "<pre>"; print_r($htaccess); echo "<pre>";
+        
+        $handle = fopen($openfile, 'w'); 
+            fwrite($handle, $filename);
+         fclose($handle);
 		
     }
     private function getHtaceessBackups() {
