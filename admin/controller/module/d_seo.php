@@ -482,12 +482,12 @@ class ControllerModuleDSeo extends Controller {
     public function editHtaceessBackup( ) {
         
 	$htaccess = $this->request->post['data'] ;
-	echo $htaccess;
+	echo json_decode($htaccess);
         $filename   = DIR_MAIN.".htaccess";
         
         $handle = fopen($filename, 'w');
          
-             fwrite($handle, $htaccess);
+             fwrite($handle, json_decode($htaccess));
             
             fclose($handle);
 		
