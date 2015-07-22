@@ -391,84 +391,84 @@ class ControllerModuleDSeo extends Controller {
 
 		$this->response->setOutput(json_encode($json));
    }
-	private function enableRewrite(){
-		$filename  = DIR_MAIN.".htaccess";
-		   if(file_exists($filename)){
-			   if($this->checkDreamHtaccess($filename)){
-				 //  echo "file exsist all is okey";
-			   }else{
-				   /* Проверка на реврайтинг */
-				  // echo "file exsist but it  is not our file";
-				   $this->createHtaccessBackup();
-				   $this->createDreamHtaccess();
-			   }
-		   }else{
-			   $this->createDreamHtaccess();
-		   }
-	  
-	}
-	private function addDirMain(){
-	 
-		$patterns[0] = '/system\// '; 
- 
-	    $dir =  preg_replace(  $patterns  , '',  DIR_SYSTEM);			 
-		   
-		define('DIR_MAIN', $dir  );
-	}
-	private function checkDreamHtaccess($filename){
-		 $htaccess = file($filename);
-		 if(strpos($htaccess[0] , "Dreamvention")){
-			 return true;
-		 }else{
-			 return false;
-		 }
-	}
-	private function createDreamHtaccess(){
-		
-		$filename  = DIR_MAIN.".htaccess";
-		$filename_new  =   DIR_MAIN."htaccess_dream.txt";
-	   
-	    $htaccess_new = file($filename_new);
-	   				 
-		$patterns[0] = '/(http|https):\/\/'.$_SERVER['HTTP_HOST'].'/'; 
-	   
-		$text = preg_replace(  $patterns  , '',  HTTP_CATALOG);
-		
-		$htaccess_new[22] = sprintf($htaccess_new[22] , $text);
-		
-		$htaccess = fopen( $filename , "c+");
-				
-		foreach ($htaccess_new as $line_num => $line) {
-			fputs($htaccess,$line );				
-		}
-		
-		fclose($htaccess);
-	   
-	}
-	private function createNote($file, $openfile) {
-		
-		$handle = fopen($openfile, 'w');
-		foreach ($file as $filestring) {
-			fwrite($handle, $filestring);
-		}
-		fclose($handle);
-	}
-	public function createHtaccessBackup( ) {
-		$dirname = DIR_MAIN."htaccess_backup";
-		$filename = DIR_MAIN.".htaccess";
-		
-		$file = file($filename);
-			
-		$backupfile = $dirname . '/.htaccess_' . date('Y-m-d-H-i-s');
-			
-		if (is_dir($dirname)) {
-			$this->createNote($file, $backupfile);
-		} else {
-			mkdir($dirname);
-			$this->createNote($file, $backupfile);
-		}	
-		
-	}
+    private function enableRewrite(){
+            $filename  = DIR_MAIN.".htaccess";
+               if(file_exists($filename)){
+                       if($this->checkDreamHtaccess($filename)){
+                             //  echo "file exsist all is okey";
+                       }else{
+                               /* Проверка на реврайтинг */
+                              // echo "file exsist but it  is not our file";
+                               $this->createHtaccessBackup();
+                               $this->createDreamHtaccess();
+                       }
+               }else{
+                       $this->createDreamHtaccess();
+               }
+
+    }
+    private function addDirMain(){
+
+            $patterns[0] = '/system\// '; 
+
+        $dir =  preg_replace(  $patterns  , '',  DIR_SYSTEM);			 
+
+            define('DIR_MAIN', $dir  );
+    }
+    private function checkDreamHtaccess($filename){
+             $htaccess = file($filename);
+             if(strpos($htaccess[0] , "Dreamvention")){
+                     return true;
+             }else{
+                     return false;
+             }
+    }
+    private function createDreamHtaccess(){
+
+            $filename  = DIR_MAIN.".htaccess";
+            $filename_new  =   DIR_MAIN."htaccess_dream.txt";
+
+        $htaccess_new = file($filename_new);
+
+            $patterns[0] = '/(http|https):\/\/'.$_SERVER['HTTP_HOST'].'/'; 
+
+            $text = preg_replace(  $patterns  , '',  HTTP_CATALOG);
+
+            $htaccess_new[22] = sprintf($htaccess_new[22] , $text);
+
+            $htaccess = fopen( $filename , "c+");
+
+            foreach ($htaccess_new as $line_num => $line) {
+                    fputs($htaccess,$line );				
+            }
+
+            fclose($htaccess);
+
+    }
+    private function createNote($file, $openfile) {
+
+            $handle = fopen($openfile, 'w');
+            foreach ($file as $filestring) {
+                    fwrite($handle, $filestring);
+            }
+            fclose($handle);
+    }
+    public function createHtaccessBackup( ) {
+            $dirname = DIR_MAIN."htaccess_backup";
+            $filename = DIR_MAIN.".htaccess";
+
+            $file = file($filename);
+
+            $backupfile = $dirname . '/.htaccess_' . date('Y-m-d-H-i-s');
+
+            if (is_dir($dirname)) {
+                    $this->createNote($file, $backupfile);
+            } else {
+                    mkdir($dirname);
+                    $this->createNote($file, $backupfile);
+            }	
+
+    }
     public function restoreHtaceessBackup($backupname) {
 	$backupname = $this->request->post['backupname'];
 		 
@@ -480,10 +480,10 @@ class ControllerModuleDSeo extends Controller {
     }
     
     public function editHtaceessBackup( ) {
-        
-	$htaccess = $this->request->post['d_seo_htacess']['htaccess'];
+        $htaccess =  Array();
+	$htaccess = $this->request->post['data'] ;
 		 
-         echo $htaccess;
+        echo "<pre>"; print_r($htaccess); echo "<pre>";
 		
     }
     private function getHtaceessBackups() {
@@ -527,27 +527,26 @@ class ControllerModuleDSeo extends Controller {
 		}else{
                     $this->disableModificationUrl();
 		}
-	 }
+            }
     }
-	
-	private function enableModificationUrl() {
-		  $from = str_replace("system", "vqmod/xml", DIR_SYSTEM) . "a_vqmod_mod_seo_url.xml_"; 
-		  $to = str_replace("system", "vqmod/xml", DIR_SYSTEM) . "a_vqmod_mod_seo_url.xml";
-		  if (file_exists($from)) rename($from, $to);
-	}
-		 
-	public function disableModificationUrl() {
-		  $from = str_replace("system", "vqmod/xml", DIR_SYSTEM) . "a_vqmod_mod_seo_url.xml"; 
-		  $to = str_replace("system", "vqmod/xml", DIR_SYSTEM) . "a_vqmod_mod_seo_url.xml_";
-		  if (file_exists($from)) rename($from, $to);	  
-	}
-	
-	function typeURL(){
-		 $from = str_replace("system", "vqmod/xml", DIR_SYSTEM) . "a_vqmod_mod_seo_url.xml"; 
-		 if (file_exists($from)){
-			 return "modified";
-		 }else{
-			 return "canonical";
-		 }
-	}
+    private function enableModificationUrl() {
+              $from = str_replace("system", "vqmod/xml", DIR_SYSTEM) . "a_vqmod_mod_seo_url.xml_"; 
+              $to = str_replace("system", "vqmod/xml", DIR_SYSTEM) . "a_vqmod_mod_seo_url.xml";
+              if (file_exists($from)) rename($from, $to);
+    }
+
+    public function disableModificationUrl() {
+              $from = str_replace("system", "vqmod/xml", DIR_SYSTEM) . "a_vqmod_mod_seo_url.xml"; 
+              $to = str_replace("system", "vqmod/xml", DIR_SYSTEM) . "a_vqmod_mod_seo_url.xml_";
+              if (file_exists($from)) rename($from, $to);	  
+    }
+
+    function typeURL(){
+             $from = str_replace("system", "vqmod/xml", DIR_SYSTEM) . "a_vqmod_mod_seo_url.xml"; 
+             if (file_exists($from)){
+                     return "modified";
+             }else{
+                     return "canonical";
+             }
+    }
 }
