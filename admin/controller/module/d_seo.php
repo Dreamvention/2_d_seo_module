@@ -485,8 +485,8 @@ class ControllerModuleDSeo extends Controller {
  
         $filename   = DIR_MAIN.".htaccess";
         
-              $htaccess = str_replace(array('\r','\n'),array("\r","\n"),$htaccess);
-                file_put_contents( $filename , $htaccess); 
+              $htaccess = str_replace(array('/\r','/\n'),array("\r","\n"),$htaccess);
+                file_put_contents( $filename , $htaccess);  
 		
     }
     private function getHtaceessBackups() {
