@@ -483,7 +483,7 @@ class ControllerModuleDSeo extends Controller {
     public function editHtaceessBackup( ) {
         $htaccess =  Array();
 	$htaccess = $this->request->post['data'] ;
-	         var_dump(json_decode($htaccess));
+	         var_dump( $htaccess);
         $filename   = DIR_MAIN.".htaccess";
         $this->createNote($htaccess, $filename);
         //echo "<pre>"; print_r($htaccess); echo "<pre>";
