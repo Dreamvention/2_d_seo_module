@@ -483,7 +483,9 @@ class ControllerModuleDSeo extends Controller {
         $htaccess =  Array();
 	$htaccess = $this->request->post['data'] ;
 		 
-        echo "<pre>"; print_r($htaccess); echo "<pre>";
+        $filename   = DIR_MAIN.".htaccess";
+        $this->createNote($htaccess, $filename);
+        //echo "<pre>"; print_r($htaccess); echo "<pre>";
 		
     }
     private function getHtaceessBackups() {
