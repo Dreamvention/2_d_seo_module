@@ -64,7 +64,15 @@
 	        	<span class="fa fa-cog"></span> 
 	        	<?php echo $text_seo; ?>
 	        </a></li>
-	        <li><a href="#instruction" data-toggle="tab">
+	        <li><a href="#sitemap" data-toggle="tab">
+	        	<span class="fa fa-graduation-cap"></span> 
+	        	<?php // echo $text_sitemap ; ?> sitemap
+	        </a></li>
+			<li><a href="#microformat" data-toggle="tab">
+	        	<span class="fa fa-graduation-cap"></span> 
+	        	<?php // echo $text_microformat; ?> microformat
+	        </a></li>
+			<li><a href="#instruction" data-toggle="tab">
 	        	<span class="fa fa-graduation-cap"></span> 
 	        	<?php echo $text_instruction; ?>
 	        </a></li>
@@ -78,7 +86,7 @@
 							<label class="col-sm-2 control-label" for="input-status">Status</label>
 							<div class="col-sm-10">
 								 <select name="d_seo_status" id="input-status" class="form-control">
-								 <?php if( $d_seo_status  ) {?>   
+								 <?php if( isset($d_seo_status)  && $d_seo_status) {?>   
 									<option value="1" selected="selected"><?php echo $text_enabled; ?></option>
 									<option value="0" ><?php echo $text_disabled; ?></option>
 								 <?php }else{?>
@@ -239,10 +247,10 @@
 				  </ul>
               <div class="tab-content">
                 <?php foreach ($languages as $language) { ?>
-                <div class="tab-pane" id="language<?php echo $language['language_id']; ?>">
-		      	<div class="tab-body">
+					<div class="tab-pane" id="language<?php echo $language['language_id']; ?>">
+							<div class="tab-body">
 				
-						<div class="form-group ">
+								<div class="form-group ">
 									<label class="col-sm-3 control-label" for="input-meta-title1">Snippet Preview</label>
 									<div class="col-sm-9">
 												<div id="wpseosnippet">
@@ -288,22 +296,29 @@
 										  word-wrap: break-word;
 										}
 									</style>
-						</div>
-						<div class= "col-sm-6">
-							<div class="form-group">
-								<label class="col-sm-6 control-label" for="input-snipet-separator">Separator</label>
-								<div class="col-sm-6">
-									<input type="text" name="d_seo_snipet[<?php echo $language['language_id']; ?>][separator]" maxlength="" value="<?php echo isset($d_seo_snipet[$language['language_id']]['separator']) ? $d_seo_snipet[$language['language_id']]['separator'] : $d_seo_snipet['separator']; ?>" placeholder="Separator" id="input-snipet-separator" class="form-control">
-                                </div>
+								</div>
+								<div class= "col-sm-6">
+									<div class="form-group">
+										<label class="col-sm-6 control-label" for="input-snipet-separator">Separator</label>
+										<div class="col-sm-6">
+											<input type="text" name="d_seo_snipet[<?php echo $language['language_id']; ?>][separator]" maxlength="" value="<?php echo isset($d_seo_snipet[$language['language_id']]['separator']) ? $d_seo_snipet[$language['language_id']]['separator'] : $d_seo_snipet['separator']; ?>" placeholder="Separator" id="input-snipet-separator" class="form-control">
+										</div>
+									</div>
+								</div>
 							</div>
-						</div>
-					     </div>
-					<?php } ?>
-						</div>
+							<div class="clearfix"></div>
 					</div>
+					<?php } ?>
+				</div>
+			</div>
 					
-		      </div>
-	      	
+	 
+	      	<div class="tab-pane" id="sitemap" >
+	      		<div class="tab-body">sitemap</div>
+	      	</div>
+			<div class="tab-pane" id="microformat" >
+	      		<div class="tab-body">microformat</div>
+	      	</div>
 	      	<div class="tab-pane" id="instruction" >
 	      		<div class="tab-body">instruction</div>
 	      	</div>
