@@ -55,8 +55,9 @@ class ControllerModuleDSeo extends Controller {
 		
 		
 		// Shopunity (requred)
-		$this->document->addStyle('view/stylesheet/shopunity/default.css');
- 
+		//$this->document->addStyle('view/stylesheet/shopunity/default.css');
+		$this->document->addStyle('view/stylesheet/d_quickcheckout.css');
+		$this->document->addStyle('view/stylesheet/shopunity/bootstrap.css');
 
 		$url = '';
 		
@@ -67,7 +68,7 @@ class ControllerModuleDSeo extends Controller {
 		if(isset($this->response->get['config'])){
 			$url +=  '&config='.$this->response->get['config'];
 		}
- 
+		 
 		
 		// Heading
 		$this->document->setTitle($this->language->get('heading_title_main'));
@@ -80,10 +81,10 @@ class ControllerModuleDSeo extends Controller {
 		$data['store_id'] = $this->store_id;
 		$data['stores'] = $this->getStores();
 		$data['mbooth'] = $this->mbooth;
-		$data['config'] = $this->getConfigFile();
+		//$data['config'] = $this->getConfigFile();
 		$data['version'] = $this->getVersion($data['mbooth']);
 		$data['token'] =  $this->session->data['token'];
-
+	
 		// Action
 		$data['module_link'] = $this->url->link($this->route, 'token=' . $this->session->data['token'], 'SSL');
 		$data['action'] = $this->url->link($this->route,  'token=' . $this->session->data['token'] . '&store_id='.$this->store_id, 'SSL');
@@ -171,58 +172,35 @@ class ControllerModuleDSeo extends Controller {
 			'href' => $this->url->link($this->route, 'token=' . $this->session->data['token'] . $url, 'SSL')
    		);
 
-   		$data['modules'] = array();
-                
-   		if (isset($this->request->post[$this->id.'_module'])) {
-			$data['modules'] = $this->request->post[$this->id.'_module'];
-		} elseif ($this->model_setting_setting->getSetting($this->id, $this->store_id)) { 
-			$data['modules'] = $this->model_setting_setting->getSetting($this->id, $this->store_id);
-			$data['modules'] = (isset($data['modules'][$this->id.'_module'])) ? $data['modules'][$this->id.'_module'] : array();
-		}
-
-		$data['setting'] = array();
-                
-		if (isset($this->request->post[$this->id.'_setting'])) {
-			$data['setting'] = $this->request->post[$this->id.'_setting'];
-		} elseif ($this->model_setting_setting->getSetting($this->id, $this->store_id)) { 
- 
+		if($this->model_setting_setting->getSetting($this->id, $this->store_id)) { 
 			$data  = array_merge($data, $this->model_setting_setting->getSetting($this->id, $this->store_id));
-			//$data['setting'] = (isset($data['setting'][$this->id.'_setting'])) ? $data['setting'][$this->id.'_setting'] : array();
 		} else {
 			if($data['config']){
 				$this->config->load($data['config']);
 				$data['setting'] = ($this->config->get($this->id.'_setting')) ? $this->config->get($this->id.'_setting') : array();
 			}
-		}
-	 
+		} 
 		if(!isset($data['d_seo_snipet']['separator'])) {
-			$data['d_seo_snipet']['separator'] = " - ".$this->config->get('config_name');
+			$data['d_seo_snipet']['separator'] = " - ".$this->model_setting_setting->getSettingValue('config','config_meta_title', $this->store_id);
 		}
-
-
-		//get config 
+		
 		$data['backup_files'] = $this->getHtaceessBackups();
-		$data['token'] = $this->session->data['token']; 
+	 
 		$this->load->model('localisation/language');
 		$data['languages'] = $this->model_localisation_language->getLanguages();
    		 
-	
-                $global_settings  = $this->model_setting_setting->getSetting('config',$this->store_id);
-                
-		if(isset($global_settings['config_seo_url'])){
-			$data['config_seo_url'] = $global_settings['config_seo_url'];
-		}else{
-			$data['config_seo_url'] = 0;
-		}
-                
-		$data['type_seo_url'] = $this->typeURL();
+		$data['config_seo_url'] = $this->model_setting_setting->getSettingValue('config', 'config_seo_url',$this->store_id);
+	               
+		//$data['type_seo_url'] = $this->model_setting_setting->getSettingValue($this->id, 'd',$this->store_id);;
                 
 		$data['htaccess_content']= $this->getHtaccess();
  
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
-		$this->response->setOutput($this->load->view($this->route.'.tpl', $data));
+		
+		echo "<pre>"; print_r($data['d_seo_url_type']); echo "</pre>";
+ 		$this->response->setOutput($this->load->view($this->route.'.tpl', $data));
 	}
 
    	/**
@@ -340,8 +318,8 @@ class ControllerModuleDSeo extends Controller {
 
 	private function getVersion($mbooth){
 		if(file_exists(DIR_SYSTEM . 'mbooth/xml/'. $mbooth)){
-			//$xml = new SimpleXMLElement(file_get_contents(DIR_SYSTEM . 'mbooth/xml/'. $mbooth));
-			//return $xml->version;
+			 $xml = new SimpleXMLElement(file_get_contents(DIR_SYSTEM . 'mbooth/xml/'. $mbooth));
+			 return $xml->version;
 		}else{
 			return false;
 		}
@@ -539,10 +517,10 @@ class ControllerModuleDSeo extends Controller {
     private function settingsSeoUrl($settings){
 	if (isset($settings['config_seo_url'])) {
 		 
-            $global_settings  = $this->model_setting_setting->getSetting('config',$this->store_id);	
+          
             $this->enableRewrite();	
-            $global_settings['config_seo_url'] = $this->request->post['config_seo_url'];	
-            $this->model_setting_setting->editSetting('config', $global_settings,$this->store_id);
+            $this->model_setting_setting->editSettingValue('config', 'config_seo_url',$settings['config_seo_url'],$this->store_id);
+          
             
         }
 	if(isset($settings['type_seo_url'])){

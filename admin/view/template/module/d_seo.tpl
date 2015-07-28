@@ -7,7 +7,7 @@
 <div id="content">
   <div class="page-header">
     <div class="container-fluid">
-      <div class="pull-right">
+      <div class="pull-right  form-inline" >
       	<?php if($stores){ ?>
 	    <select class="form-control" onChange="location='<?php echo $module_link; ?>&store_id='+$(this).val();">
 	     <?php foreach($stores as $store){ ?>
@@ -21,7 +21,7 @@
 	    <button onClick="saveAndStay();" data-toggle="tooltip" title="<?php echo $button_save_and_stay; ?>" class="btn btn-success"><i class="fa fa-save"></i></button>
         <button type="submit" form="form-bestseller" data-toggle="tooltip" title="<?php echo $button_save; ?>" class="btn btn-primary"><i class="fa fa-save"></i></button>
         <a href="<?php echo $cancel; ?>" data-toggle="tooltip" title="<?php echo $button_cancel; ?>" class="btn btn-default"><i class="fa fa-reply"></i></a></div>
-      <h1><?php echo $heading_title; ?></h1>
+      <h1><?php echo $heading_title; ?>  <?php echo $version; ?></h1>
       <ul class="breadcrumb">
         <?php foreach ($breadcrumbs as $breadcrumb) { ?>
         <li><a href="<?php echo $breadcrumb['href']; ?>"><?php echo $breadcrumb['text']; ?></a></li>
@@ -137,24 +137,24 @@
 							</label>
 							<div class="col-sm-6">
 								<div class="radio">
-										<?php if( $type_seo_url == "canonical" ) {?>   
+										<?php if( $d_seo_url_type == 1 ) {?>   
 												<label for="url_type_canonical" class="">
-												  <input type="radio" value="canonical" name="type_seo_url" checked="checked" id="url_type_canonical">
+												  <input type="radio" value="0" name="d_seo_url_type"  id="url_type_canonical">
 													<?php echo $button_canonical ?> 
 												</label>
 
 												<label for="url_type_modified" class="">
-												  <input type="radio" value="modified" name="type_seo_url" id="url_type_modified">
+												  <input type="radio" value="1" name="d_seo_url_type"  checked="checked" id="url_type_modified">
 													 <?php echo $button_modified ?> 					
 												 </label>
 										<?php } else { ?>
 												<label for="url_type_canonical" class="">
-												  <input type="radio" value="canonical" name="type_seo_url" id="url_type_canonical">
+												  <input type="radio" value="0" name="d_seo_url_type" checked="checked"  id="url_type_canonical">
 													<?php echo $button_canonical ?>  
 												</label>
 
 												<label for="url_type_modified" class="">
-												  <input type="radio" value="modified" name="type_seo_url" checked="checked"  id="url_type_modified">
+												  <input type="radio" value="1" name="d_seo_url_type"  id="url_type_modified">
 													<?php echo $button_modified ?> 					
 												 </label>
 										<?php } ?>
@@ -253,8 +253,8 @@
 								<div class="form-group ">
 									<label class="col-sm-3 control-label" for="input-meta-title1">Snippet Preview</label>
 									<div class="col-sm-9">
-												<div id="wpseosnippet">
-																<span class="title" id="wpseosnippet_title" >Page Title  <span><?php echo isset($d_seo_snipet[$language['language_id']]['separator']) ? $d_seo_snipet[$language['language_id']]['separator'] : $d_seo_snipet['separator']; ?></span></span>
+												<div id="wpseosnippet-<?php echo $language['language_id']; ?>">
+																<span class="title" id="wpseosnippet_title-<?php echo $language['language_id']; ?>" >Page Title  <span><?php echo isset($d_seo_snipet[$language['language_id']]['separator']) ? $d_seo_snipet[$language['language_id']]['separator'] : $d_seo_snipet['separator']; ?></span></span>
 																<span class="url"><?php  echo $_SERVER['HTTP_HOST']; ?>/url-of-page</span>
 																<p class="desc"><span class="autogen"></span>
 																				<span class="content">
@@ -267,7 +267,7 @@
 									
 									</script>
 									<style>
-										#wpseosnippet {
+										#wpseosnippet-<?php echo $language['language_id']; ?> {
 										  width: auto;
 										  max-width: 520px;
 										  margin: 0 0 10px;
@@ -275,7 +275,7 @@
 										  font-family: Arial,Helvetica,sans-serif;
 										  font-style: normal;
 										}
-										#wpseosnippet .title {
+										#wpseosnippet-<?php echo $language['language_id']; ?> .title {
 										  display: block;
 										  overflow: hidden;
 										  width: 512px;
@@ -285,12 +285,12 @@
 										  white-space: nowrap;
 										  text-overflow: ellipsis;
 										}
-										#wpseosnippet .url {
+										#wpseosnippet-<?php echo $language['language_id']; ?> .url {
 										  color: #006621;
 										  font-size: 13px;
 										  line-height: 16px;
 										}
-										#wpseosnippet .desc {
+										#wpseosnippet-<?php echo $language['language_id']; ?> .desc {
 										  font-size: small;
 										  line-height: 1.4;
 										  word-wrap: break-word;
@@ -299,12 +299,17 @@
 								</div>
 								<div class= "col-sm-6">
 									<div class="form-group">
-										<label class="col-sm-6 control-label" for="input-snipet-separator">Separator</label>
+										<label class="col-sm-6 control-label" for="input-snipet-separator-<?php echo $language['language_id']; ?>">Separator</label>
 										<div class="col-sm-6">
-											<input type="text" name="d_seo_snipet[<?php echo $language['language_id']; ?>][separator]" maxlength="" value="<?php echo isset($d_seo_snipet[$language['language_id']]['separator']) ? $d_seo_snipet[$language['language_id']]['separator'] : $d_seo_snipet['separator']; ?>" placeholder="Separator" id="input-snipet-separator" class="form-control">
+											<input type="text" name="d_seo_snipet[<?php echo $language['language_id']; ?>][separator]" maxlength="" value="<?php echo isset($d_seo_snipet[$language['language_id']]['separator']) ? $d_seo_snipet[$language['language_id']]['separator'] : $d_seo_snipet['separator']; ?>" placeholder="Separator" id="input-snipet-separator-<?php echo $language['language_id']; ?>" class="form-control">
 										</div>
 									</div>
 								</div>
+								<script>
+										$('#input-snipet-separator-<?php echo $language['language_id']; ?>').on("keyup", function(){
+											$("#wpseosnippet_title-<?php echo $language['language_id']; ?> span").text($(this).val());
+										});
+								</script>
 							</div>
 							<div class="clearfix"></div>
 					</div>
@@ -379,9 +384,7 @@
                   $.post("index.php?route=module/d_seo/editHtaceessBackup&token=<?php echo $token; ?>",
                      {'data': JSON.stringify($('textarea#htaccess-input').val() ) } );
 	});
-	$('#input-snipet-separator').on("keyup", function(){
-		$("#wpseosnippet_title span").text($(this).val());
-	});
+
 //--></script>
     <script type="text/javascript"><!--
         $('#language a:first').tab('show');

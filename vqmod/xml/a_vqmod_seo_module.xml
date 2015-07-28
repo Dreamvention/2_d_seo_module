@@ -288,7 +288,7 @@
     <file name="catalog/model/catalog/product.php">
         <operation error="skip" >
             <search position="after"  ><![CDATA['meta_keyword'     => $query->row['meta_keyword'],]]></search>
-            <add><![CDATA[				'robots'     => $query->row['robots'],]]></add>
+            <add><![CDATA[				'robots'    	 => (isset($query->row['robots'])) ? $query->row['robots']  : "",]]></add>
         </operation>
     </file>
     <file name="catalog/controller/product/product.php">
