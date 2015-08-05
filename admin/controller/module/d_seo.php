@@ -37,6 +37,8 @@ class ControllerModuleDSeo extends Controller {
 
 			$this->model_setting_setting->editSetting($this->id, $this->request->post, $this->store_id);
 			
+			$this->model_setting_setting->editSetting('google_sitemap', $this->request->post, $this->store_id);
+			
 			$this->settingsSeoUrl($this->request->post);  
 			
 			$this->session->data['success'] = $this->language->get('text_success');
@@ -96,6 +98,7 @@ class ControllerModuleDSeo extends Controller {
 		$data['text_setting'] = $this->language->get('text_setting');
 		$data['text_instruction'] = $this->language->get('text_instruction');
 
+
 		// Button
 		$data['button_save'] = $this->language->get('button_save');
 		$data['button_save_and_stay'] = $this->language->get('button_save_and_stay');
@@ -123,14 +126,15 @@ class ControllerModuleDSeo extends Controller {
 		// Text
 		$data['text_enabled'] = $this->language->get('text_enabled');
 		$data['text_disabled'] = $this->language->get('text_disabled');
-		
+		$data['text_changefreq'] = $this->language->get('text_changefreq');
+                $data['text_priority'] = $this->language->get('text_priority');
 		$data['text_seo_switch'] = $this->language->get('text_seo_switch');
 		$data['text_seo_type'] = $this->language->get('text_seo_type');
 		$data['text_create_backup'] = $this->language->get('text_create_backup');
 		$data['text_restore_backup'] = $this->language->get('text_restore_backup');
 		$data['text_modification'] = $this->language->get('text_modification');
 		$data['text_metadescription'] = $this->language->get('text_metadescription');
-
+		
 		// Notification
         if (isset($this->error['warning'])) {
 			$data['warning'] = $this->error['warning'];
@@ -175,7 +179,7 @@ class ControllerModuleDSeo extends Controller {
 		if($this->model_setting_setting->getSetting($this->id, $this->store_id)) { 
 			$data  = array_merge($data, $this->model_setting_setting->getSetting($this->id, $this->store_id));
 		} else {
-			if($data['config']){
+			if(isset($data['config'])){
 				$this->config->load($data['config']);
 				$data['setting'] = ($this->config->get($this->id.'_setting')) ? $this->config->get($this->id.'_setting') : array();
 			}
@@ -185,7 +189,8 @@ class ControllerModuleDSeo extends Controller {
 		}
 		
 		$data['backup_files'] = $this->getHtaceessBackups();
-	 
+		$data['data_feed'] = HTTP_CATALOG . 'sitemap.xml';
+		$data['sitemap_action'] = HTTP_SERVER.'/index.php?route=feed/google_sitemap&token='; 
 		$this->load->model('localisation/language');
 		$data['languages'] = $this->model_localisation_language->getLanguages();
    		 
@@ -199,7 +204,7 @@ class ControllerModuleDSeo extends Controller {
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
 		
-		echo "<pre>"; print_r($data['d_seo_url_type']); echo "</pre>";
+		 
  		$this->response->setOutput($this->load->view($this->route.'.tpl', $data));
 	}
 
@@ -280,7 +285,7 @@ class ControllerModuleDSeo extends Controller {
 				$this->db->query("ALTER TABLE " . DB_PREFIX . "product_description  ADD changefreq TEXT");
 			}
 			if(!array_key_exists('priority', $rows->row )){
-				$this->db->query("ALTER TABLE " . DB_PREFIX . "product_description  ADD priority FLOAT");
+				$this->db->query("ALTER TABLE " . DB_PREFIX . "product_description  ADD priority varchar(5)");
 			}
 			if(!array_key_exists('sitemap', $rows->row )){
 				$this->db->query("ALTER TABLE " . DB_PREFIX . "product_description  ADD sitemap BOOLEAN");

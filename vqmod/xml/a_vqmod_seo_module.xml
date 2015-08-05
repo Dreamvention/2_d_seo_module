@@ -9,7 +9,13 @@
     <file name="admin/model/catalog/product.php">
         <operation error="skip" >
             <search position="replace" ><![CDATA[$this->db->query("INSERT INTO " . DB_PREFIX . "product_description SET product_id = '" . (int)$product_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "', tag = '" . $this->db->escape($value['tag']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "'");]]></search>
-            <add><![CDATA[			$this->db->query("INSERT INTO " . DB_PREFIX . "product_description SET product_id = '" . (int)$product_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "', tag = '" . $this->db->escape($value['tag']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "', robots = '" . $this->db->escape($value['rel']) . "'");]]></add>
+            <add><![CDATA[			$this->db->query("INSERT INTO " . DB_PREFIX . "product_description SET product_id = '" . (int)$product_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "', tag = '" . $this->db->escape($value['tag']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "', robots = '" . $this->db->escape($value['robots']) . "'
+			, changefreq = '" . $this->db->escape($value['changefreq']) . "', priority = '" . $this->db->escape($value['priority']) . "', sitemap = '" . $this->db->escape($value['sitemap']) . "'");]]></add>
+        </operation>
+		  <operation error="skip" >
+            <search position="replace" ><![CDATA[ meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "'");]]></search>
+            <add><![CDATA[			$this->db->query("INSERT INTO " . DB_PREFIX . "product_description SET product_id = '" . (int)$product_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "', tag = '" . $this->db->escape($value['tag']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "', robots = '" . $this->db->escape($value['robots']) . "'
+			, changefreq = '" . $this->db->escape($value['changefreq']) . "', priority = '" . $this->db->escape($value['priority']) . "', sitemap = '" . $this->db->escape($value['sitemap']) . "'");]]></add>
         </operation>
     </file>
     <file name="admin/controller/catalog/product.php">
@@ -29,7 +35,7 @@
             <add><![CDATA[		if   (!empty($product_info['robots'])) {
                                                 $data['robots'] = $product_info['robots'];
                                         } else {
-                                                $data['robots'] = 'index,follow';
+                                                $data['priority'] = 'index,follow';
                                         } ]]></add>
         </operation>
     </file>
@@ -77,23 +83,24 @@
         <operation error="skip" >
             <search position="after"  offset="29" ><![CDATA[<textarea name="product_description[<?php echo $language['language_id']; ?>][description]" placeholder="<?php echo $entry_description; ?>" id="input-description<?php echo $language['language_id']; ?>"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['description'] : ''; ?></textarea>]]></search>
             <add><![CDATA[					</div>					
-								<div class="tab-pane" id="tab-data-seo">  
+								<div class="tab-pane" id="tab-data-seo-<?php echo $language['language_id']; ?>">  
 									<div class="form-group">
 										<label class="col-sm-2 control-label">
 											<span data-toggle="tooltip" title="" data-original-title="<?php echo $robots_tooltip; ?>"><?php echo $tags_robots; ?></span>
 										</label>
 										<div class="col-sm-10">
 											<div class="">
+											 
 												<label for="noindex-nofollow" class="radio-inline">
-													<input type="radio" value="noindex,nofollow" <?php if($robots == "noindex,nofollow"){ echo 'checked="checked"'; } ?> name="product_description[<?php echo $language['language_id']; ?>][rel]"  id="noindex-nofollow">
+													<input type="radio" value="noindex,nofollow" <?php if($product_description[$language['language_id']]['robots'] == "noindex,nofollow"){ echo 'checked="checked"'; } ?> name="product_description[<?php echo $language['language_id']; ?>][robots]"  id="noindex-nofollow">
 													noindex,nofollow               
 												</label>
 												<label for="noindex-follow" class="radio-inline">
-													<input type="radio" value="noindex,follow" <?php if($robots == "noindex,follow"){ echo 'checked="checked"'; } ?> name="product_description[<?php echo $language['language_id']; ?>][rel]" id="noindex-follow">
+													<input type="radio" value="noindex,follow" <?php if($product_description[$language['language_id']]['robots'] == "noindex,follow"){ echo 'checked="checked"'; } ?> name="product_description[<?php echo $language['language_id']; ?>][robots]" id="noindex-follow">
 													noindex,follow                  
 												</label>
 												<label for="index-follow" class="radio-inline">
-													<input type="radio" value="index,follow" <?php if($robots == "index,follow"){ echo 'checked="checked"'; } ?> name="product_description[<?php echo $language['language_id']; ?>][rel]" id="index-follow">
+													<input type="radio" value="index,follow" <?php if(($product_description[$language['language_id']]['robots'] == "index,follow") || (empty($product_description[$language['language_id']]['robots']))){ echo 'checked="checked"'; } ?> name="product_description[<?php echo $language['language_id']; ?>][robots]" id="index-follow">
 													index,follow                  
 												</label>
 											</div>
@@ -106,13 +113,41 @@
 										<div class="col-sm-10">
 											<div class="">
 												 <select name="product_description[<?php echo $language['language_id']; ?>][changefreq]" class="form-control">
-													<option value="always" >always</option>
-													<option value="hourly" >hourly</option>
-													<option value="daily" selected="selected" >daily</option>
-													<option value="weekly" >weekly</option>
-													<option value="monthly" >monthly</option>
-													<option value="yearly" >yearly</option>
-													<option value="never" >never</option>
+													<?php if($product_description[$language['language_id']]['changefreq'] == "always") {?>
+															<option value="always" selected="selected" >always</option>
+													<?php } else { ?>
+															<option value="always" >always</option>
+													<?php }   ?>
+													<?php if($product_description[$language['language_id']]['changefreq'] == "hourly") {?>
+														<option value="hourly" selected="selected">hourly</option>
+													<?php } else { ?>
+														<option value="hourly" >hourly</option>
+													<?php } ?>
+													<?php if(($product_description[$language['language_id']]['changefreq'] == "daily") ||  empty($product_description[$language['language_id']]['changefreq'])){ ?>
+														<option value="daily" selected="selected" >daily</option>
+													<?php } else { ?>
+														<option value="daily"  >daily</option>
+													<?php } ?>
+													<?php if($product_description[$language['language_id']]['changefreq'] == "weekly") { ?>
+														<option value="weekly" selected="selected">weekly</option>
+													<?php } else { ?>
+														<option value="weekly" >weekly</option>
+													<?php } ?>
+													<?php if($product_description[$language['language_id']]['changefreq'] == "monthly") { ?>
+														<option value="monthly" selected="selected" >monthly</option>
+													<?php } else { ?>
+														<option value="monthly" >monthly</option>
+													<?php } ?>
+`													<?php if($product_description[$language['language_id']]['changefreq'] == "yearly") { ?>
+														<option value="yearly" selected="selected">yearly</option>
+													<?php } else { ?>
+														<option value="yearly" >yearly</option>
+													<?php } ?>
+													<?php if($product_description[$language['language_id']]['changefreq'] == "never") {?>
+														<option value="never" selected="selected" >never</option>
+													<?php } else { ?>
+														<option value="never" >never</option>
+													<?php } ?>
 												 </select>
 											</div>
 									    </div>
@@ -124,11 +159,31 @@
 										<div class="col-sm-10">
 											<div class="">
 												 <select name="product_description[<?php echo $language['language_id']; ?>][priority]" class="form-control">
-													<option value="1.0" selected="selected" >1.0</option>
-													<option value="0.75" >0.75</option>
-													<option value="0.5" >0.5</option>
-													<option value="0.25" >0.25</option>
-													<option value="0.1" >0.1</option>
+													<?php if($product_description[$language['language_id']]['priority'] == 1.0 ||  empty($product_description[$language['language_id']]['priority'])) {?>
+														<option value="1.0" selected="selected" >1.0</option>
+													<?php } else { ?>
+														<option value="1.0"  >1.0</option>
+													<?php } ?>
+													<?php if($product_description[$language['language_id']]['priority'] == 0.75) {?>
+														<option value="0.75" selected="selected" >0.75</option>
+													<?php } else { ?>
+														<option value="0.75" >0.75</option>
+													<?php } ?>
+													<?php if($product_description[$language['language_id']]['priority'] == 0.5) {?>
+														<option value="0.5" selected="selected" >0.5</option>
+													<?php } else { ?>
+														<option value="0.5" >0.5</option>
+													<?php } ?>
+													<?php if($product_description[$language['language_id']]['priority'] == 0.25) {?>
+														<option value="0.25" selected="selected" >0.25</option>
+													<?php } else { ?>
+														<option value="0.25" >0.25</option>
+													<?php } ?>
+													<?php if($product_description[$language['language_id']]['priority'] == 0.1 ) {?>
+														<option value="0.1" selected="selected" >0.1</option>
+													<?php } else { ?>
+														<option value="0.1" >0.1</option>
+													<?php } ?>
 												 </select>
 											</div>
 									    </div>
@@ -143,12 +198,11 @@
 										<div class="col-sm-10">
 											<div class="checkbox">
 												<label>
-													<?php if (1) { ?>
-														<input type="checkbox" value="1" name="product_description[<?php echo $language['language_id']; ?>][sitemap]" id="checkout_enable" checked="checked"><?php echo $text_enabled; ?>
-													<?php  } elseif( 0) { ?>
-														<input type="checkbox" value="1" name="product_description[<?php echo $language['language_id']; ?>][sitemap]" id="checkout_enable"><?php echo $text_enabled; ?>
-													<?php } else  { ?>
-														<input type="checkbox" value="1" name="product_description[<?php echo $language['language_id']; ?>][sitemap]" id="checkout_enable" checked="checked" ><?php echo $text_enabled; ?>
+														<input type="hidden" value="0" name="product_description[<?php echo $language['language_id']; ?>][sitemap]" >
+													<?php if ( $product_description[$language['language_id']]['sitemap'] == 0) { ?>
+														<input type="checkbox" value="1" name="product_description[<?php echo $language['language_id']; ?>][sitemap]"><?php echo $text_enabled; ?>
+													<?php  } else  { ?>
+														<input type="checkbox" value="1" name="product_description[<?php echo $language['language_id']; ?>][sitemap]"  checked="checked" ><?php echo $text_enabled; ?>
 													<?php } ?>
 												</label>
 											</div>
@@ -166,17 +220,17 @@
             <search position="after"  offset="2" ><![CDATA[<textarea name="product_description[<?php echo $language['language_id']; ?>][description]" placeholder="<?php echo $entry_description; ?>" id="input-description<?php echo $language['language_id']; ?>"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['description'] : ''; ?></textarea>]]></search>
             <add><![CDATA[								<div class="col-sm-offset-2 col-sm-10">
 						<ul class="nav nav-tabs">
-							<li class="active"><a href="#tab-general-seo" data-toggle="tab"><?php echo $tab_general_seo; ?> </a></li>
-							<li><a href="#tab-data-seo" data-toggle="tab"><?php echo $tab_data_seo; ?></a></li>
+							<li class="active"><a href="#tab-general-seo-<?php echo $language['language_id']; ?>" data-toggle="tab"><?php echo $tab_general_seo; ?> </a></li>
+							<li><a href="#tab-data-seo-<?php echo $language['language_id']; ?>" data-toggle="tab"><?php echo $tab_data_seo; ?></a></li>
 						</ul>
 						<div class="tab-content">
-							<div class="tab-pane active" id="tab-general-seo">  
+							<div class="tab-pane active" id="tab-general-seo-<?php echo $language['language_id']; ?>">  
 								<div class="form-group ">
 									<label class="col-sm-2 control-label" for="wpseosnippet-<?php echo $language['language_id']; ?>">Snippet Preview</label>
 									<div class="col-sm-10">
 									 
 										  <div id="wpseosnippet-<?php echo $language['language_id']; ?>">																															
-											<a class="title" id="wpseosnippet_title-<?php echo $language['language_id']; ?>"  ><span class = "snipet-body"><?php echo (isset($product_description[$language['language_id']]['meta_title']) && !empty($product_description[$language['language_id']]['meta_title'])) ? $product_description[$language['language_id']]['meta_title'] : $entry_meta_title; ?> <?php echo isset($snipet[$language['language_id']]['separator']) ? $snipet[$language['language_id']]['separator'] :''; ?></span></a>
+											<a class="title" id="wpseosnippet_title-<?php echo $language['language_id']; ?>"  ><span class = "snipet-body"><?php echo (isset($product_description[$language['language_id']]['meta_title']) && !empty($product_description[$language['language_id']]['meta_title'])) ? $product_description[$language['language_id']]['meta_title'] : $entry_meta_title; ?></span></a>
 											<span class="url"><?php  echo $_SERVER['HTTP_HOST']; ?></span>
 											<p class="desc"><span class="autogen"></span><span class="content"><?php echo (isset($product_description[$language['language_id']]['meta_title']) && !empty($product_description[$language['language_id']]['meta_title'])) ? $product_description[$language['language_id']]['meta_description'] : 'Here You can see your meta description.  
 											Which include 160 symbols from product or page description or 
@@ -288,7 +342,10 @@
     <file name="catalog/model/catalog/product.php">
         <operation error="skip" >
             <search position="after"  ><![CDATA['meta_keyword'     => $query->row['meta_keyword'],]]></search>
-            <add><![CDATA[				'robots'    	 => (isset($query->row['robots'])) ? $query->row['robots']  : "",]]></add>
+            <add><![CDATA[				'robots'    	 => (isset($query->row['robots'])) ? $query->row['robots']  : "",
+										'changefreq'    	 => (isset($query->row['changefreq'])) ? $query->row['changefreq']  : "",
+										'priority'    	 => (isset($query->row['priority'])) ? $query->row['priority']  : "",
+										'sitemap'    	 => (isset($query->row['sitemap'])) ? $query->row['sitemap']  : "",]]></add>
         </operation>
     </file>
     <file name="catalog/controller/product/product.php">
@@ -311,6 +368,30 @@
 <?php }else{ ?> 
 	<meta name="robots" content="index,follow" 
 <?php } ?>]]></add>
+        </operation>
+    </file>
+	 <file name="catalog/model/setting/setting.php">
+        <operation error="skip" >
+            <search position="after"  ><![CDATA[class ModelSettingSetting extends Model {]]></search>
+            <add><![CDATA[	public function getSettingValue($code , $key , $store_id = 0) {
+		 
+		
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "setting WHERE store_id = '" . (int)$store_id . "' AND `code` = '" . $this->db->escape($code) . "'AND `key` = '" . $this->db->escape($key) . "'");
+		
+		foreach ($query->rows as $result) {
+			 
+			if (!$result['serialized']) {
+				$setting_data= $result['value'];
+			} else {
+				$setting_data = unserialize($result['value']);
+			}
+		}
+		if(isset($setting_data )){
+			return $setting_data;
+		}else{
+			return false;
+		}
+	}]]></add>
         </operation>
     </file>
  

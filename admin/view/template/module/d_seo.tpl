@@ -106,19 +106,19 @@
 	      		<div class="tab-body">
 					 <div class="col-sm-6">
 						<div class="form-group">
-							<label class="col-sm-6 control-label" for="input-catalog-limit">
+							<label class="col-sm-4 control-label" for="input-catalog-limit">
 								<span data-toggle="tooltip" title="" data-original-title="Enable SEO URL for your site.">
 										<?php echo $text_seo_switch ?>             
 								</span>
 							</label>
-							<div class="col-sm-6">
+							<div class="col-sm-8">
 								<div class="checkbox">
 									<label>
 											<input type="hidden" value="0" name="config_seo_url"> 
 										<?php if ($config_seo_url) { ?>
-											<input type="checkbox" value="1" name="config_seo_url" id="checkout_enable" checked="checked"><?php echo $text_enabled; ?>
+											<input type="checkbox" value="1" name="config_seo_url" id="checkout_enable" checked="checked"><span><?php echo $text_enabled; ?></span>
 										<?php } else{ ?>
-											<input type="checkbox" value="1" name="config_seo_url" id="checkout_enable"><?php echo $text_enabled; ?>
+											<input type="checkbox" value="1" name="config_seo_url" id="checkout_enable"><span><?php echo $text_enabled; ?></span>
 										<?php } ?>
 									</label>
 								</div>
@@ -130,14 +130,14 @@
 					<div class="clearfix"></div>
 					<div class="col-sm-6">
 						<div class="form-group">
-							<label class="col-sm-6 control-label" for="input-catalog-limit">
+							<label class="col-sm-4 control-label" for="input-catalog-limit">
 								<span data-toggle="tooltip" title="" data-original-title="Change type of SEO url.">
 										<?php echo $text_seo_type ?>              
 								</span>
 							</label>
-							<div class="col-sm-6">
+							<div class="col-sm-8">
 								<div class="radio">
-										<?php if( $d_seo_url_type == 1 ) {?>   
+										<?php if( isset($d_seo_url_type) && $d_seo_url_type == 1 ) {?>   
 												<label for="url_type_canonical" class="">
 												  <input type="radio" value="0" name="d_seo_url_type"  id="url_type_canonical">
 													<?php echo $button_canonical ?> 
@@ -165,15 +165,15 @@
 					<div class="clearfix"></div>
 					<div class="col-sm-6">
 						<div class="form-group">
-						  <label class="col-sm-6 control-label" for="input-catalog-limit">
+						  <label class="col-sm-4 control-label" for="input-catalog-limit">
 						   <span data-toggle="tooltip" title="" data-original-title="Do backup of .htaccess before do modification of .htaccess.">
 								<?php echo $text_create_backup ?>             
 							</span>
 						  </label>
-						  <div class="col-sm-2">
+						  <div class="col-sm-3">
 							<a id="do_backup" class="btn btn-primary"> create </a>
 						  </div>
-						  <div class="col-sm-4">
+						  <div class="col-sm-5">
 							<div id="version_result"></div>
 						  </div>
 						 </div>
@@ -182,12 +182,12 @@
 					<div class="col-sm-6">
 						  <?php if ($backup_files) { ?>
 						<div class="form-group">
-							<label class="col-sm-6 control-label" for="input-status"> 
+							<label class="col-sm-4 control-label" for="input-status"> 
 							<span data-toggle="tooltip" title="" data-original-title="When there is a new version available, you can download it from the location you have purchased the module.">
 							  <?php echo $text_restore_backup ?>  
 							</span>
 							</label>
-							<div class="col-sm-4">
+							<div class="col-sm-6">
 							  <select name="d_seo_htacess[backup]" id="input_backup_file" class="form-control">
 								<?php foreach ($backup_files as $backup_file) { ?>
 								<option value="<?php echo $backup_file; ?>"><?php echo $backup_file; ?></option>
@@ -203,7 +203,7 @@
 					<div class="clearfix"></div>
 					<div class="col-sm-6">
 						<div class="form-group">
-						  <label class="col-sm-6 control-label" for="input-catalog-limit">
+						  <label class="col-sm-4 control-label" for="input-catalog-limit">
 						   <span data-toggle="tooltip" title="" data-original-title="When there is a new version available, you can download it from the location you have purchased the module.">
 											 <?php echo $text_modification ?> 
 									</span>
@@ -226,7 +226,7 @@
 					</div>
 					<div class="clearfix"></div>
 					
-					<div id="htaccees_textarea" class="col-sm-offset-3 col-sm-9  " style="display:none;">
+					<div id="htaccees_textarea" class="col-sm-offset-2 col-sm-10  " style="display:none;">
 						<textarea name="d_seo_htacess[htaccess]" id="htaccess-input" class="form-control" rows="20"><?php foreach ($htaccess_content as $line)
 											echo $line;
 							?></textarea>
@@ -319,7 +319,120 @@
 					
 	 
 	      	<div class="tab-pane" id="sitemap" >
-	      		<div class="tab-body">sitemap</div>
+	      		<div class="tab-body">
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label class="col-sm-4 control-label" for="input-catalog-limit">
+								<span data-toggle="tooltip" title="" data-original-title="Enable SEO URL for your site.">
+										Enable/Disable Sitemap:             
+								</span>
+							</label>
+							<div class="col-sm-8">
+								<div class="checkbox">
+									<input type="hidden" value="0" name="google_sitemap_status"> 
+									<input type="checkbox" value="1" name="google_sitemap_status" id="checkout_enable" checked="checked"><label><?php echo $text_enabled; ?></label>																		</label>
+								</div>
+							</div>
+						</div>   
+					</div>
+					<div class="clearfix"></div>
+					<div class="col-sm-6">
+						<div class="form-group">
+							<label class="col-sm-4 control-label" for="input-data-feed"> URL of site map	</label>
+							<div class="col-sm-8  checkbox">
+							  <span id="input-data-feed"  ><?php echo $data_feed; ?></span>
+							</div>
+						</div>
+					</div>
+					<div class="clearfix"></div>
+					<div class="col-sm-6">
+						 	<div class="form-group">
+										<label class="col-sm-4 control-label">
+											<span data-toggle="tooltip" title="" data-original-title="<?php echo $robots_tooltip; ?>"><?php echo $text_changefreq; ?></span>
+										</label>
+										<div class="col-sm-8">
+											<div class="">
+												 <select name="d_seo_sitemap[changefreq]" class="form-control">
+													<?php if($d_seo_sitemap['changefreq'] == "always" ) {?>
+															<option value="always" selected="selected" >always</option>
+													<?php } else { ?>
+															<option value="always" >always</option>
+													<?php }   ?>
+													<?php if($d_seo_sitemap['changefreq'] == "hourly") {?>
+														<option value="hourly" selected="selected">hourly</option>
+													<?php } else { ?>
+														<option value="hourly" >hourly</option>
+													<?php } ?>
+													<?php if(($d_seo_sitemap['changefreq'] == "daily") ||  empty($d_seo_sitemap['changefreq'])){ ?>
+														<option value="daily" selected="selected" >daily</option>
+													<?php } else { ?>
+														<option value="daily"  >daily</option>
+													<?php } ?>
+													<?php if($d_seo_sitemap['changefreq'] == "weekly") { ?>
+														<option value="weekly" selected="selected">weekly</option>
+													<?php } else { ?>
+														<option value="weekly" >weekly</option>
+													<?php } ?>
+													<?php if($d_seo_sitemap['changefreq'] == "monthly") { ?>
+														<option value="monthly" selected="selected" >monthly</option>
+													<?php } else { ?>
+														<option value="monthly" >monthly</option>
+													<?php } ?>
+`													<?php if($d_seo_sitemap['changefreq'] == "yearly") { ?>
+														<option value="yearly" selected="selected">yearly</option>
+													<?php } else { ?>
+														<option value="yearly" >yearly</option>
+													<?php } ?>
+													<?php if($d_seo_sitemap['changefreq'] == "never") {?>
+														<option value="never" selected="selected" >never</option>
+													<?php } else { ?>
+														<option value="never" >never</option>
+													<?php } ?>
+												 </select>
+											</div>
+									    </div>
+									</div>
+							</div>
+							<div class="clearfix"></div>
+							<div class="col-sm-6">
+									<div class="form-group">
+										<label class="col-sm-4 control-label">
+											<span data-toggle="tooltip" title="" data-original-title="<?php echo $robots_tooltip; ?>"><?php echo $text_priority; ?></span>
+										</label>
+										<div class="col-sm-8">
+											<div class="">
+												 <select name="d_seo_sitemap[priority]" class="form-control">
+													<?php if($d_seo_sitemap['priority'] == 1.0 ||  empty($d_seo_sitemap['priority'])) {?>
+														<option value="1.0" selected="selected" >1.0</option>
+													<?php } else { ?>
+														<option value="1.0"  >1.0</option>
+													<?php } ?>
+													<?php if($d_seo_sitemap['priority'] == 0.75) {?>
+														<option value="0.75" selected="selected" >0.75</option>
+													<?php } else { ?>
+														<option value="0.75" >0.75</option>
+													<?php } ?>
+													<?php if($d_seo_sitemap['priority'] == 0.5) {?>
+														<option value="0.5" selected="selected" >0.5</option>
+													<?php } else { ?>
+														<option value="0.5" >0.5</option>
+													<?php } ?>
+													<?php if($d_seo_sitemap['priority'] == 0.25) {?>
+														<option value="0.25" selected="selected" >0.25</option>
+													<?php } else { ?>
+														<option value="0.25" >0.25</option>
+													<?php } ?>
+													<?php if($d_seo_sitemap['priority'] == 0.1 ) {?>
+														<option value="0.1" selected="selected" >0.1</option>
+													<?php } else { ?>
+														<option value="0.1" >0.1</option>
+													<?php } ?>
+												 </select>
+											</div>
+									    </div>
+									</div>
+								</div>
+				</div>
 	      	</div>
 			<div class="tab-pane" id="microformat" >
 	      		<div class="tab-body">microformat</div>
