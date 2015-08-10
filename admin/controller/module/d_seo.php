@@ -162,12 +162,12 @@ class ControllerModuleDSeo extends Controller {
 		// Breadcrumbs
 		$data['breadcrumbs'] = array(); 
    		$data['breadcrumbs'][] = array(
-            'text' => $this->language->get('text_home'),
+                          'text' => $this->language->get('text_home'),
 			'href' => $this->url->link('common/home', 'token=' . $this->session->data['token'], 'SSL')
    		);
 
-          $data['breadcrumbs'][] = array(
-            'text'      => $this->language->get('text_module'),
+                $data['breadcrumbs'][] = array(
+                        'text'      => $this->language->get('text_module'),
 			'href'      => $this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL')
    		);
 
@@ -191,6 +191,7 @@ class ControllerModuleDSeo extends Controller {
 		$data['backup_files'] = $this->getHtaceessBackups();
 		$data['data_feed'] = HTTP_CATALOG . 'sitemap.xml';
 		$data['sitemap_action'] = HTTP_SERVER.'/index.php?route=feed/google_sitemap&token='; 
+                $data['google_sitemap_status'] =  $this->model_setting_setting->getSetting('google_sitemap',$this->store_id);
 		$this->load->model('localisation/language');
 		$data['languages'] = $this->model_localisation_language->getLanguages();
    		 
@@ -288,7 +289,20 @@ class ControllerModuleDSeo extends Controller {
 				$this->db->query("ALTER TABLE " . DB_PREFIX . "product_description  ADD priority varchar(5)");
 			}
 			if(!array_key_exists('sitemap', $rows->row )){
-				$this->db->query("ALTER TABLE " . DB_PREFIX . "product_description  ADD sitemap BOOLEAN");
+				$this->db->query("ALTER TABLE " . DB_PREFIX . "category_description  ADD sitemap BOOLEAN");
+			}
+                        $rows = $this->db->query("SELECT * FROM " . DB_PREFIX . "category_description ");
+			if(!array_key_exists('robots', $rows->row )){
+				$this->db->query("ALTER TABLE " . DB_PREFIX . "category_description  ADD robots TEXT");
+			}
+			if(!array_key_exists('changefreq', $rows->row )){
+				$this->db->query("ALTER TABLE " . DB_PREFIX . "category_description  ADD changefreq TEXT");
+			}
+			if(!array_key_exists('priority', $rows->row )){
+				$this->db->query("ALTER TABLE " . DB_PREFIX . "category_description  ADD priority varchar(5)");
+			}
+			if(!array_key_exists('sitemap', $rows->row )){
+				$this->db->query("ALTER TABLE " . DB_PREFIX . "category_description  ADD sitemap BOOLEAN");
 			}
 		$this->getUpdate(1);	  
 	}

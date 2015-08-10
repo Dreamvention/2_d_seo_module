@@ -251,8 +251,8 @@
 							<div class="tab-body">
 				
 								<div class="form-group ">
-									<label class="col-sm-3 control-label" for="input-meta-title1">Snippet Preview</label>
-									<div class="col-sm-9">
+									<label class="col-sm-2 control-label" for="input-meta-title1">Snippet Preview</label>
+									<div class="col-sm-10">
 												<div id="wpseosnippet-<?php echo $language['language_id']; ?>">
 																<span class="title" id="wpseosnippet_title-<?php echo $language['language_id']; ?>" >Page Title  <span><?php echo isset($d_seo_snipet[$language['language_id']]['separator']) ? $d_seo_snipet[$language['language_id']]['separator'] : $d_seo_snipet['separator']; ?></span></span>
 																<span class="url"><?php  echo $_SERVER['HTTP_HOST']; ?>/url-of-page</span>
@@ -299,8 +299,8 @@
 								</div>
 								<div class= "col-sm-6">
 									<div class="form-group">
-										<label class="col-sm-6 control-label" for="input-snipet-separator-<?php echo $language['language_id']; ?>">Separator</label>
-										<div class="col-sm-6">
+										<label class="col-sm-4 control-label" for="input-snipet-separator-<?php echo $language['language_id']; ?>">Separator</label>
+										<div class="col-sm-8">
 											<input type="text" name="d_seo_snipet[<?php echo $language['language_id']; ?>][separator]" maxlength="" value="<?php echo isset($d_seo_snipet[$language['language_id']]['separator']) ? $d_seo_snipet[$language['language_id']]['separator'] : $d_seo_snipet['separator']; ?>" placeholder="Separator" id="input-snipet-separator-<?php echo $language['language_id']; ?>" class="form-control">
 										</div>
 									</div>
@@ -329,8 +329,15 @@
 							</label>
 							<div class="col-sm-8">
 								<div class="checkbox">
-									<input type="hidden" value="0" name="google_sitemap_status"> 
-									<input type="checkbox" value="1" name="google_sitemap_status" id="checkout_enable" checked="checked"><label><?php echo $text_enabled; ?></label>																		</label>
+                                                                        <label>
+										 <input type="hidden" value="0" name="google_sitemap_status"> 
+										<?php if ($google_sitemap_status) { ?>
+											<input type="checkbox" value="1" name="google_sitemap_status" id="checkout_enable" checked="checked"><span><?php echo $text_enabled; ?></span>
+										<?php } else{ ?>
+											<input type="checkbox" value="1" name="google_sitemap_status" id="checkout_enable"><span><?php echo $text_enabled; ?></span>
+										<?php } ?>
+									</label>
+									 																		</label>
 								</div>
 							</div>
 						</div>   

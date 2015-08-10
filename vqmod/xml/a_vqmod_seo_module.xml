@@ -11,14 +11,26 @@
             <search position="replace" ><![CDATA[$this->db->query("INSERT INTO " . DB_PREFIX . "product_description SET product_id = '" . (int)$product_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "', tag = '" . $this->db->escape($value['tag']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "'");]]></search>
             <add><![CDATA[			$this->db->query("INSERT INTO " . DB_PREFIX . "product_description SET product_id = '" . (int)$product_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "', tag = '" . $this->db->escape($value['tag']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "', robots = '" . $this->db->escape($value['robots']) . "'
 			, changefreq = '" . $this->db->escape($value['changefreq']) . "', priority = '" . $this->db->escape($value['priority']) . "', sitemap = '" . $this->db->escape($value['sitemap']) . "'");]]></add>
-        </operation>
-		  <operation error="skip" >
+      </operation>
+   <!--       <operation error="skip" >
             <search position="replace" ><![CDATA[ meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "'");]]></search>
             <add><![CDATA[			$this->db->query("INSERT INTO " . DB_PREFIX . "product_description SET product_id = '" . (int)$product_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "', tag = '" . $this->db->escape($value['tag']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "', robots = '" . $this->db->escape($value['robots']) . "'
 			, changefreq = '" . $this->db->escape($value['changefreq']) . "', priority = '" . $this->db->escape($value['priority']) . "', sitemap = '" . $this->db->escape($value['sitemap']) . "'");]]></add>
-        </operation>
+        </operation>-->
     </file>
-    <file name="admin/controller/catalog/product.php">
+        <file name="admin/model/catalog/category.php">
+        <operation error="skip" >
+            <search position="replace" ><![CDATA[$this->db->query("INSERT INTO " . DB_PREFIX . "category_description SET category_id = '" . (int)$category_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "'");]]></search>
+            <add><![CDATA[			$this->db->query("INSERT INTO " . DB_PREFIX . "category_description SET category_id = '" . (int)$category_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "', robots = '" . $this->db->escape($value['robots']) . "'
+			, changefreq = '" . $this->db->escape($value['changefreq']) . "', priority = '" . $this->db->escape($value['priority']) . "', sitemap = '" . $this->db->escape($value['sitemap']) . "'");]]></add>
+        </operation>
+<!--        <operation error="skip" >
+            <search position="replace" ><![CDATA[ meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "'");]]></search>
+            <add><![CDATA[			$this->db->query("INSERT INTO " . DB_PREFIX . "category_description SET category_id = '" . (int)category_id . "', language_id = '" . (int)$language_id . "', name = '" . $this->db->escape($value['name']) . "', description = '" . $this->db->escape($value['description']) . "', tag = '" . $this->db->escape($value['tag']) . "', meta_title = '" . $this->db->escape($value['meta_title']) . "', meta_description = '" . $this->db->escape($value['meta_description']) . "', meta_keyword = '" . $this->db->escape($value['meta_keyword']) . "', robots = '" . $this->db->escape($value['robots']) . "'
+			, changefreq = '" . $this->db->escape($value['changefreq']) . "', priority = '" . $this->db->escape($value['priority']) . "', sitemap = '" . $this->db->escape($value['sitemap']) . "'");]]></add>
+        </operation>-->
+    </file>
+    <file path="admin/controller/catalog/" name="product.php,category.php" >
         <operation error="skip" >
             <search position="before"  ><![CDATA[$data['tab_general'] = $this->language->get('tab_general');]]></search>
             <add><![CDATA[		$data['tab_general_seo'] = $this->language->get('tab_general_seo');
@@ -29,17 +41,19 @@
 					$data['snipet'] = $this->model_setting_setting->getSettingValue('d_seo' , 'd_seo_snipet'  );
 					  ]]></add>
         </operation>
+      </file>
+    <file name="admin/controller/catalog/product.php">
         <operation error="skip" >
             <search position="after" offset="1"  ><![CDATA[$product_info = $this->model_catalog_product->getProduct($this->request->get['product_id']);]]></search>
 			
             <add><![CDATA[		if   (!empty($product_info['robots'])) {
                                                 $data['robots'] = $product_info['robots'];
                                         } else {
-                                                $data['priority'] = 'index,follow';
+                                                $data['robots'] = 'index,follow';
                                         } ]]></add>
         </operation>
     </file>
-    <file name="admin/language/english/catalog/product.php">
+    <file path="admin/language/english/catalog/" name="product.php,category.php">
         <operation error="skip" >
             <search position="before"  ><![CDATA[// Help]]></search>
 			
@@ -79,7 +93,7 @@
 	}]]></add>
         </operation>
     </file>
-    <file name="admin/view/template/catalog/product_form.tpl">
+    <file name="admin/view/template/catalog/product_form.tpl, ">
         <operation error="skip" >
             <search position="after"  offset="29" ><![CDATA[<textarea name="product_description[<?php echo $language['language_id']; ?>][description]" placeholder="<?php echo $entry_description; ?>" id="input-description<?php echo $language['language_id']; ?>"><?php echo isset($product_description[$language['language_id']]) ? $product_description[$language['language_id']]['description'] : ''; ?></textarea>]]></search>
             <add><![CDATA[					</div>					
@@ -91,16 +105,16 @@
 										<div class="col-sm-10">
 											<div class="">
 											 
-												<label for="noindex-nofollow" class="radio-inline">
-													<input type="radio" value="noindex,nofollow" <?php if($product_description[$language['language_id']]['robots'] == "noindex,nofollow"){ echo 'checked="checked"'; } ?> name="product_description[<?php echo $language['language_id']; ?>][robots]"  id="noindex-nofollow">
+												<label for="noindex-nofollow-<?php echo $language['language_id']; ?>" class="radio-inline">
+													<input type="radio" value="noindex,nofollow" <?php if(isset($product_description[$language['language_id']]['robots']) && $product_description[$language['language_id']]['robots'] == "noindex,nofollow"){ echo 'checked="checked"'; } ?> name="product_description[<?php echo $language['language_id']; ?>][robots]"  id="noindex-nofollow-<?php echo $language['language_id']; ?>">
 													noindex,nofollow               
 												</label>
-												<label for="noindex-follow" class="radio-inline">
-													<input type="radio" value="noindex,follow" <?php if($product_description[$language['language_id']]['robots'] == "noindex,follow"){ echo 'checked="checked"'; } ?> name="product_description[<?php echo $language['language_id']; ?>][robots]" id="noindex-follow">
+												<label for="noindex-follow-<?php echo $language['language_id']; ?>" class="radio-inline">
+													<input type="radio" value="noindex,follow" <?php if(isset($product_description[$language['language_id']]['robots']) && $product_description[$language['language_id']]['robots'] == "noindex,follow"){ echo 'checked="checked"'; } ?> name="product_description[<?php echo $language['language_id']; ?>][robots]" id="noindex-follow-<?php echo $language['language_id']; ?>">
 													noindex,follow                  
 												</label>
-												<label for="index-follow" class="radio-inline">
-													<input type="radio" value="index,follow" <?php if(($product_description[$language['language_id']]['robots'] == "index,follow") || (empty($product_description[$language['language_id']]['robots']))){ echo 'checked="checked"'; } ?> name="product_description[<?php echo $language['language_id']; ?>][robots]" id="index-follow">
+												<label for="index-follow-<?php echo $language['language_id']; ?>" class="radio-inline">
+													<input type="radio" value="index,follow" <?php if((isset($product_description[$language['language_id']]['robots']) && $product_description[$language['language_id']]['robots'] == "index,follow") || (!isset($product_description[$language['language_id']]['robots']) || empty($product_description[$language['language_id']]['robots']))){ echo 'checked="checked"'; } ?> name="product_description[<?php echo $language['language_id']; ?>][robots]" id="index-follow-<?php echo $language['language_id']; ?>">
 													index,follow                  
 												</label>
 											</div>
@@ -322,6 +336,249 @@
 								</div>]]></add>
         </operation>
     </file>
+      <file name="admin/view/template/catalog/category_form.tpl, ">
+        <operation error="skip" >
+            <search position="after"  offset="23" ><![CDATA[ <textarea name="category_description[<?php echo $language['language_id']; ?>][description]" placeholder="<?php echo $entry_description; ?>" id="input-description<?php echo $language['language_id']; ?>" class="form-control"><?php echo isset($category_description[$language['language_id']]) ? $category_description[$language['language_id']]['description'] : ''; ?></textarea>]]></search>
+            <add><![CDATA[					</div>					
+								<div class="tab-pane" id="tab-data-seo-<?php echo $language['language_id']; ?>">  
+									<div class="form-group">
+										<label class="col-sm-2 control-label">
+											<span data-toggle="tooltip" title="" data-original-title="<?php echo $robots_tooltip; ?>"><?php echo $tags_robots; ?></span>
+										</label>
+										<div class="col-sm-10">
+											<div class="">
+											 
+												<label for="noindex-nofollow-<?php echo $language['language_id']; ?>" class="radio-inline">
+													<input type="radio" value="noindex,nofollow" <?php if(isset($category_description_description[$language['language_id']]['robots']) && $category_description[$language['language_id']]['robots'] == "noindex,nofollow"){ echo 'checked="checked"'; } ?> name="category_description[<?php echo $language['language_id']; ?>][robots]"  id="noindex-nofollow-<?php echo $language['language_id']; ?>">
+													noindex,nofollow               
+												</label>
+												<label for="noindex-follow-<?php echo $language['language_id']; ?>" class="radio-inline">
+													<input type="radio" value="noindex,follow" <?php if(isset($category_description_description[$language['language_id']]['robots']) && $category_description[$language['language_id']]['robots'] == "noindex,follow"){ echo 'checked="checked"'; } ?> name="category_description[<?php echo $language['language_id']; ?>][robots]" id="noindex-follow-<?php echo $language['language_id']; ?>">
+													noindex,follow                  
+												</label>
+												<label for="index-follow-<?php echo $language['language_id']; ?>" class="radio-inline-">
+													<input type="radio" value="index,follow" <?php if((isset($category_description_description[$language['language_id']]['robots']) && $category_description[$language['language_id']]['robots'] == "index,follow") || (!isset($category_description_description[$language['language_id']]['robots']) || empty($category_description[$language['language_id']]['robots']))){ echo 'checked="checked"'; } ?> name="category_description[<?php echo $language['language_id']; ?>][robots]" id="index-follow-<?php echo $language['language_id']; ?>">
+													index,follow                  
+												</label>
+											</div>
+									    </div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">
+											<span data-toggle="tooltip" title="" data-original-title="<?php echo $robots_tooltip; ?>"><?php echo $tags_robots; ?></span>
+										</label>
+										<div class="col-sm-10">
+											<div class="">
+												 <select name="category_description[<?php echo $language['language_id']; ?>][changefreq]" class="form-control">
+													<?php if($category_description[$language['language_id']]['changefreq'] == "always") {?>
+															<option value="always" selected="selected" >always</option>
+													<?php } else { ?>
+															<option value="always" >always</option>
+													<?php }   ?>
+													<?php if($category_description[$language['language_id']]['changefreq'] == "hourly") {?>
+														<option value="hourly" selected="selected">hourly</option>
+													<?php } else { ?>
+														<option value="hourly" >hourly</option>
+													<?php } ?>
+													<?php if(($category_description[$language['language_id']]['changefreq'] == "daily") ||  empty($category_description[$language['language_id']]['changefreq'])){ ?>
+														<option value="daily" selected="selected" >daily</option>
+													<?php } else { ?>
+														<option value="daily"  >daily</option>
+													<?php } ?>
+													<?php if($category_description[$language['language_id']]['changefreq'] == "weekly") { ?>
+														<option value="weekly" selected="selected">weekly</option>
+													<?php } else { ?>
+														<option value="weekly" >weekly</option>
+													<?php } ?>
+													<?php if($category_description[$language['language_id']]['changefreq'] == "monthly") { ?>
+														<option value="monthly" selected="selected" >monthly</option>
+													<?php } else { ?>
+														<option value="monthly" >monthly</option>
+													<?php } ?>
+`													<?php if($category_description[$language['language_id']]['changefreq'] == "yearly") { ?>
+														<option value="yearly" selected="selected">yearly</option>
+													<?php } else { ?>
+														<option value="yearly" >yearly</option>
+													<?php } ?>
+													<?php if($category_description[$language['language_id']]['changefreq'] == "never") {?>
+														<option value="never" selected="selected" >never</option>
+													<?php } else { ?>
+														<option value="never" >never</option>
+													<?php } ?>
+												 </select>
+											</div>
+									    </div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label">
+											<span data-toggle="tooltip" title="" data-original-title="<?php echo $robots_tooltip; ?>"><?php echo $tags_robots; ?></span>
+										</label>
+										<div class="col-sm-10">
+											<div class="">
+												 <select name="category_description[<?php echo $language['language_id']; ?>][priority]" class="form-control">
+													<?php if($category_description[$language['language_id']]['priority'] == 1.0 ||  empty($category_description[$language['language_id']]['priority'])) {?>
+														<option value="1.0" selected="selected" >1.0</option>
+													<?php } else { ?>
+														<option value="1.0"  >1.0</option>
+													<?php } ?>
+													<?php if($category_description[$language['language_id']]['priority'] == 0.75) {?>
+														<option value="0.75" selected="selected" >0.75</option>
+													<?php } else { ?>
+														<option value="0.75" >0.75</option>
+													<?php } ?>
+													<?php if($category_description[$language['language_id']]['priority'] == 0.5) {?>
+														<option value="0.5" selected="selected" >0.5</option>
+													<?php } else { ?>
+														<option value="0.5" >0.5</option>
+													<?php } ?>
+													<?php if($category_description[$language['language_id']]['priority'] == 0.25) {?>
+														<option value="0.25" selected="selected" >0.25</option>
+													<?php } else { ?>
+														<option value="0.25" >0.25</option>
+													<?php } ?>
+													<?php if($category_description[$language['language_id']]['priority'] == 0.1 ) {?>
+														<option value="0.1" selected="selected" >0.1</option>
+													<?php } else { ?>
+														<option value="0.1" >0.1</option>
+													<?php } ?>
+												 </select>
+											</div>
+									    </div>
+									</div>
+									
+									<div class="form-group">
+										<label class="col-sm-2 control-label" for="input-catalog-limit">
+											<span data-toggle="tooltip" title="" data-original-title="Should this page be in the XML Sitemap at all times, regardless of Robots Meta settings?">
+													Show in Sitemap:              
+											</span>
+										</label>
+										<div class="col-sm-10">
+											<div class="checkbox">
+												<label>
+														<input type="hidden" value="0" name="category_description[<?php echo $language['language_id']; ?>][sitemap]" >
+													<?php if ( $category_description[$language['language_id']]['sitemap'] == 0) { ?>
+														<input type="checkbox" value="1" name="category_description[<?php echo $language['language_id']; ?>][sitemap]"><?php echo $text_enabled; ?>
+													<?php  } else  { ?>
+														<input type="checkbox" value="1" name="category_description[<?php echo $language['language_id']; ?>][sitemap]"  checked="checked" ><?php echo $text_enabled; ?>
+													<?php } ?>
+												</label>
+											</div>
+										</div>
+									</div>
+			          
+			            
+			     
+							</div>
+							
+						</div>
+						</div>]]></add>
+        </operation>
+        <operation error="skip" >
+            <search position="after"  offset="2" ><![CDATA[ <textarea name="category_description[<?php echo $language['language_id']; ?>][description]" placeholder="<?php echo $entry_description; ?>" id="input-description<?php echo $language['language_id']; ?>" class="form-control"><?php echo isset($category_description[$language['language_id']]) ? $category_description[$language['language_id']]['description'] : ''; ?></textarea>]]></search>
+            <add><![CDATA[								<div class="col-sm-offset-2 col-sm-10">
+						<ul class="nav nav-tabs">
+							<li class="active"><a href="#tab-general-seo-<?php echo $language['language_id']; ?>" data-toggle="tab"><?php echo $tab_general_seo; ?> </a></li>
+							<li><a href="#tab-data-seo-<?php echo $language['language_id']; ?>" data-toggle="tab"><?php echo $tab_data_seo; ?></a></li>
+						</ul>
+						<div class="tab-content">
+							<div class="tab-pane active" id="tab-general-seo-<?php echo $language['language_id']; ?>">  
+								<div class="form-group ">
+									<label class="col-sm-2 control-label" for="wpseosnippet-<?php echo $language['language_id']; ?>">Snippet Preview</label>
+									<div class="col-sm-10">
+									 
+										  <div id="wpseosnippet-<?php echo $language['language_id']; ?>">																															
+											<a class="title" id="wpseosnippet_title-<?php echo $language['language_id']; ?>"  ><span class = "snipet-body"><?php echo (isset($category_description[$language['language_id']]['meta_title']) && !empty($category_description[$language['language_id']]['meta_title'])) ? $category_description[$language['language_id']]['meta_title'] : $entry_meta_title; ?></span></a>
+											<span class="url"><?php  echo $_SERVER['HTTP_HOST']; ?></span>
+											<p class="desc"><span class="autogen"></span><span class="content"><?php echo (isset($category_description[$language['language_id']]['meta_title']) && !empty($category_description[$language['language_id']]['meta_title'])) ? $category_description[$language['language_id']]['meta_description'] : 'Here You can see your meta description.  
+											Which include 160 symbols from product or page description or 
+											custom text which You insert in field "meta description"!' ?></span></p>
+										</div>
+									</div>
+									<script> 
+                                                                                    $(document).ready(function(){
+                                                                                                
+												$('#input-meta-title<?php echo $language['language_id']; ?>').on("keyup", function(){
+													title = $(this).val();
+													if((title.length  >  70 ) && !$('#input-meta-title<?php echo $language['language_id']; ?> + .alert-danger').length){
+														$(this).after('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> Warning: Please check the form carefully for errors!      <button type="button" class="close" data-dismiss="alert">×</button></div>');
+														 
+													}
+													 if((title.length  < 70  ) && $('#input-meta-title<?php echo $language['language_id']; ?> + .alert-danger').length){
+														$('#input-meta-title<?php echo $language['language_id']; ?> + .alert-danger').remove();
+														 
+												 	}
+													
+													$("#wpseosnippet_title-<?php echo $language['language_id']; ?> span.snipet-body").text($(this).val());
+												})
+                                                                                                $('#input-meta-title<?php echo $language['language_id']; ?>').on("click",
+                                                                                                    function() {
+                                                                                                     var $self = $(this);
+                                                                                                     if($self.val().length == 0){
+                                                                                                      $self.val('<?php echo isset($snipet[$language['language_id']]['separator']) ? $snipet[$language['language_id']]['separator'] :''; ?>');
+                                                                                                      $self.get(0).setSelectionRange(0,0);
+                                                                                                     }
+                                                                                                    })
+
+												$('#input-name<?php echo $language['language_id']; ?>').on("focusout", function(){
+													if($('#input-meta-title<?php echo $language['language_id']; ?>').val() == ''){
+														$('#input-meta-title<?php echo $language['language_id']; ?>').val($(this).val()+ " <?php echo isset($snipet[$language['language_id']]['separator']) ? $snipet[$language['language_id']]['separator'] :''; ?>");
+														$("#wpseosnippet_title-<?php echo $language['language_id']; ?> span.snipet-body").text($(this).val() + " <?php echo isset($snipet[$language['language_id']]['separator']) ? $snipet[$language['language_id']]['separator'] :''; ?>" );
+													}
+												})
+												$('#input-meta-description<?php echo $language['language_id']; ?>').on("keyup", function(){
+														descript = $(this).val();
+													if((descript.length  > 180 ) && !$('#input-meta-description<?php echo $language['language_id']; ?> + .alert-danger').length){
+														$(this).after('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> Warning: Please check the form carefully for errors!      <button type="button" class="close" data-dismiss="alert">×</button></div>');
+														 
+													}
+													if((descript.length  < 180 ) && $('#input-meta-description<?php echo $language['language_id']; ?> + .alert-danger').length){
+														$('#input-meta-description<?php echo $language['language_id']; ?> + .alert-danger').remove();
+														 
+													}
+													$("#wpseosnippet-<?php echo $language['language_id']; ?> .content").text($(this).val());
+												})
+												$('[name="category_description[<?php echo $language['language_id']; ?>][description]"]').next('.note-editor').find('.note-editable').on("focusout", function(){
+												
+													if($('#input-meta-description<?php echo $language['language_id']; ?>').val() == ''){
+														$('#input-meta-description<?php echo $language['language_id']; ?>').val($(this).text().replace(/\s+/g, ' ').substr(0,180));
+														$("#wpseosnippet-<?php echo $language['language_id']; ?> .content").text($(this).text().replace(/\s+/g, ' ').substr(0,180));
+													}
+												})
+										})
+									</script>
+									<style>
+										#wpseosnippet-<?php echo $language['language_id']; ?> {
+										  width: auto;
+										  max-width: 520px;
+										  margin: 0 0 10px;
+										  padding: 0 5px;
+										  font-family: Arial,Helvetica,sans-serif;
+										  font-style: normal;
+										}
+										#wpseosnippet-<?php echo $language['language_id']; ?> .title {
+										  display: block;
+										  overflow: hidden;
+										  width: 512px;
+										  color: #1e0fbe;
+										  font-size: 18px!important;
+										  line-height: 1.2;
+										  white-space: nowrap;
+										  text-overflow: ellipsis;
+										}
+										#wpseosnippet-<?php echo $language['language_id']; ?> .url {
+										  color: #006621;
+										  font-size: 13px;
+										  line-height: 16px;
+										}
+										#wpseosnippet-<?php echo $language['language_id']; ?> .desc {
+										  font-size: small;
+										  line-height: 1.4;
+										  word-wrap: break-word;
+										}
+									</style>
+								</div>]]></add>
+        </operation>
+    </file>
     <file name="system/library/document.php">
         <operation error="skip" >
             <search position="after"  ><![CDATA[private $keywords;]]></search>
@@ -348,6 +605,22 @@
 										'sitemap'    	 => (isset($query->row['sitemap'])) ? $query->row['sitemap']  : "",]]></add>
         </operation>
     </file>
+      <file name="admin/model/catalog/category.php">
+        <operation error="skip" >
+            <search position="replase"  ><![CDATA['description'      => $result['description']]]></search>
+            <add><![CDATA[                          'description'      => $result['description'],	
+                                                    'robots'    	 => (isset($query->row['robots'])) ? $query->row['robots']  : "",
+										'changefreq'    	 => (isset($query->row['changefreq'])) ? $query->row['changefreq']  : "",
+										'priority'    	 => (isset($query->row['priority'])) ? $query->row['priority']  : "",
+										'sitemap'    	 => (isset($query->row['sitemap'])) ? $query->row['sitemap']  : "",]]></add>
+        </operation>
+    </file>   
+  <file name="catalog/controller/product/category.php">
+        <operation error="skip" >
+            <search position="after"  ><![CDATA[$this->document->setKeywords($category_info['meta_keyword']);]]></search>
+            <add><![CDATA[			$this->document->setRobots($category_info['robots']);]]></add>
+        </operation>
+    </file>
     <file name="catalog/controller/product/product.php">
         <operation error="skip" >
             <search position="after"  ><![CDATA[$this->document->setKeywords($product_info['meta_keyword']);]]></search>
@@ -370,7 +643,7 @@
 <?php } ?>]]></add>
         </operation>
     </file>
-	 <file name="catalog/model/setting/setting.php">
+    <file name="catalog/model/setting/setting.php">
         <operation error="skip" >
             <search position="after"  ><![CDATA[class ModelSettingSetting extends Model {]]></search>
             <add><![CDATA[	public function getSettingValue($code , $key , $store_id = 0) {
