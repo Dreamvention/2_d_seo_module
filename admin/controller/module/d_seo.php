@@ -57,7 +57,7 @@ class ControllerModuleDSeo extends Controller {
 		
 		
 		// Shopunity (requred)
-		//$this->document->addStyle('view/stylesheet/shopunity/default.css');
+		$this->document->addStyle('view/stylesheet/shopunity/bootstrap.css');
 		$this->document->addStyle('view/stylesheet/d_quickcheckout.css');
 		$this->document->addStyle('view/stylesheet/shopunity/bootstrap.css');
 
@@ -96,6 +96,7 @@ class ControllerModuleDSeo extends Controller {
 		$data['text_seo'] = $this->language->get('text_seo');
 		$data['text_snippet'] = $this->language->get('text_snippet');
 		$data['text_setting'] = $this->language->get('text_setting');
+                $data['text_sitemap'] = $this->language->get('text_sitemap');
 		$data['text_instruction'] = $this->language->get('text_instruction');
 
 
@@ -109,6 +110,9 @@ class ControllerModuleDSeo extends Controller {
 		$data['button_update'] = $this->language->get('button_update');
 		$data['button_canonical'] = $this->language->get('button_canonical');
 		$data['button_modified'] = $this->language->get('button_modified');
+                $data['button_create'] = $this->language->get('button_create');
+		$data['button_restore'] = $this->language->get('button_restore');
+		$data['button_start'] = $this->language->get('button_start');
 
 		// Entry
 		$data['entry_product'] = $this->language->get('entry_product');
@@ -121,8 +125,15 @@ class ControllerModuleDSeo extends Controller {
 		$data['entry_config_files'] = $this->language->get('entry_config_files');
 
 		// Help
-		$data['help_status'] = $this->language->get('help_status');
-
+		$data['help_seo_url_status'] = $this->language->get('help_seo_url_status');
+                $data['help_seo_url_type'] = $this->language->get('help_seo_url_type');
+                $data['help_htacess_backup'] = $this->language->get('help_htacess_backup');
+                $data['help_htacess_restore'] = $this->language->get('help_htacess_restore');
+                $data['help_htacess_start'] = $this->language->get('help_htacess_start');
+                $data['help_sitemap_status'] = $this->language->get('help_sitemap_status');
+                $data['help_sitemap_changefreq'] = $this->language->get('help_sitemap_changefreq');
+                $data['help_sitemap_priority'] = $this->language->get('help_sitemap_priority');
+              
 		// Text
 		$data['text_enabled'] = $this->language->get('text_enabled');
 		$data['text_disabled'] = $this->language->get('text_disabled');
@@ -134,6 +145,9 @@ class ControllerModuleDSeo extends Controller {
 		$data['text_restore_backup'] = $this->language->get('text_restore_backup');
 		$data['text_modification'] = $this->language->get('text_modification');
 		$data['text_metadescription'] = $this->language->get('text_metadescription');
+                $data['text_separator'] = $this->language->get('text_separator');
+                $data['text_sitemap_switch'] = $this->language->get('text_sitemap_switch');
+                $data['text_sitemap_link'] = $this->language->get('text_sitemap_link');
 		
 		// Notification
         if (isset($this->error['warning'])) {
@@ -304,6 +318,44 @@ class ControllerModuleDSeo extends Controller {
 			if(!array_key_exists('sitemap', $rows->row )){
 				$this->db->query("ALTER TABLE " . DB_PREFIX . "category_description  ADD sitemap BOOLEAN");
 			}
+                      
+                        $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('common/home', '')");
+                        $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('account/wishlist', 'wishlist')");
+                        $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('account/account', 'my-account')");
+                        $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('checkout/cart', 'cart')");
+                        $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('checkout/checkout', 'checkout')");
+                        $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('account/login', 'login')");
+                        $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('account/logout', 'logout')");
+                        $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('account/order', 'order-history')");
+                        $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('account/newsletter', 'newsletter')");
+                        $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('product/special', 'specials')");
+                        $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('affiliate/account', 'affiliates')");
+                        $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('checkout/voucher', 'gift-vouchers')");
+                        $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('product/manufacturer', 'brands')");
+                        $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('information/contact', 'contact-us')");
+                        $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('account/return/insert', 'request-return')");
+                        $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('information/sitemap', 'sitemap')");
+                        $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('account/forgotten', 'forgot-password')");
+                        $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('account/download', 'downloads')");
+                        $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('account/return', 'returns')");
+                        $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('account/transaction', 'transactions')");
+                        $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('account/register', 'create-account')");
+                        $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('product/compare', 'compare-products')");
+                        $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('product/search', 'search')");
+                        $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('account/edit', 'edit-account')");
+                        $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('account/password', 'change-password')");
+                        $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('account/address', 'address-book')");
+                        $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('account/reward', 'reward-points')");
+                        $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('affiliate/edit', 'edit-affiliate-account')");
+                        $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('affiliate/password', 'change-affiliate-password')");
+                        $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('affiliate/payment', 'affiliate-payment-options')");
+                        $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('affiliate/tracking', 'affiliate-tracking-code')");
+                        $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('affiliate/transaction', 'affiliate-transactions')");
+                        $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('affiliate/logout', 'affiliate-logout')");
+                        $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('affiliate/forgotten', 'affiliate-forgot-password')");
+                        $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('affiliate/register', 'create-affiliate-account')");
+                        $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('affiliate/login', 'affiliate-login')");
+                        $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('account/voucher', 'account-voucher')");
 		$this->getUpdate(1);	  
 	}
 		 

@@ -37,6 +37,12 @@
 					$data['tab_data_seo'] = $this->language->get('tab_data_seo');
 					$data['tags_robots'] = $this->language->get('tags_robots');
 					$data['robots_tooltip'] = $this->language->get('robots_tooltip');
+                                        $data['help_sitemap_changefreq'] = $this->language->get('help_sitemap_changefreq');
+                                        $data['help_sitemap_priority'] = $this->language->get('help_sitemap_priority');
+                                        $data['text_changefreq'] = $this->language->get('text_changefreq');
+                                        $data['text_priority'] = $this->language->get('text_priority');
+                                        $data['text_sitemap_show'] = $this->language->get('text_sitemap_show');
+                                        $data['help_sitemap_show'] = $this->language->get('help_sitemap_show');
 					$this->load->model('setting/setting');
 					$data['snipet'] = $this->model_setting_setting->getSettingValue('d_seo' , 'd_seo_snipet'  );
 					  ]]></add>
@@ -58,12 +64,16 @@
             <search position="before"  ><![CDATA[// Help]]></search>
 			
             <add><![CDATA[		// SEO by Dreamvention
-					$_['tab_general_seo']               = 'General SEO';
-					$_['tags_robots']               = 'Meta tags robots';
-					$_['tab_data_seo']               = 'Data SEO';
-					$_['robots_tooltip']               = 'These meta tags can control the behavior of search engine crawling and indexing.
-														The robots meta tag applies to all search engines, 
-														while the "googlebot" meta tag is specific to Google. The default values are "index, follow"';]]></add>
+                                        $_['text_changefreq']			= 'Changefreq';
+                                        $_['text_priority']			= 'Priority';
+                                        $_['help_sitemap_changefreq']		= 'Changefreq  value.';
+                                        $_['help_sitemap_priority']		= 'Priority  value.';
+                                        $_['help_sitemap_show']                 = 'Should this page be in the XML Sitemap at all times, regardless of Robots Meta settings?';
+                                        $_['text_sitemap_show']                 = 'Show in Sitemap:';
+					$_['tab_general_seo']                   = 'General SEO';
+					$_['tags_robots']                       = 'Meta tags robots';
+					$_['tab_data_seo']                      = 'Data SEO';
+					$_['robots_tooltip']                    = 'These meta tags can control the behavior of search engine crawling and indexing.';]]></add>
 					
 					  
         </operation>
@@ -122,7 +132,7 @@
 									</div>
 									<div class="form-group">
 										<label class="col-sm-2 control-label">
-											<span data-toggle="tooltip" title="" data-original-title="<?php echo $robots_tooltip; ?>"><?php echo $tags_robots; ?></span>
+											<span data-toggle="tooltip" title="" data-original-title="<?php echo $help_sitemap_changefreq; ?>"><?php echo $text_changefreq; ?></span>
 										</label>
 										<div class="col-sm-10">
 											<div class="">
@@ -168,7 +178,7 @@
 									</div>
 									<div class="form-group">
 										<label class="col-sm-2 control-label">
-											<span data-toggle="tooltip" title="" data-original-title="<?php echo $robots_tooltip; ?>"><?php echo $tags_robots; ?></span>
+											<span data-toggle="tooltip" title="" data-original-title="<?php echo $help_sitemap_priority; ?>"><?php echo $text_priority; ?></span>
 										</label>
 										<div class="col-sm-10">
 											<div class="">
@@ -205,8 +215,8 @@
 									
 									<div class="form-group">
 										<label class="col-sm-2 control-label" for="input-catalog-limit">
-											<span data-toggle="tooltip" title="" data-original-title="Should this page be in the XML Sitemap at all times, regardless of Robots Meta settings?">
-													Show in Sitemap:              
+											<span data-toggle="tooltip" title="" data-original-title="<?php echo $help_sitemap_show; ?>">
+													<?php echo $text_sitemap_show; ?>          
 											</span>
 										</label>
 										<div class="col-sm-10">
@@ -349,15 +359,15 @@
 											<div class="">
 											 
 												<label for="noindex-nofollow-<?php echo $language['language_id']; ?>" class="radio-inline">
-													<input type="radio" value="noindex,nofollow" <?php if(isset($category_description_description[$language['language_id']]['robots']) && $category_description[$language['language_id']]['robots'] == "noindex,nofollow"){ echo 'checked="checked"'; } ?> name="category_description[<?php echo $language['language_id']; ?>][robots]"  id="noindex-nofollow-<?php echo $language['language_id']; ?>">
+													<input type="radio" value="noindex,nofollow" <?php if(isset($category_description[$language['language_id']]['robots']) && $category_description[$language['language_id']]['robots'] == "noindex,nofollow"){ echo 'checked="checked"'; } ?> name="category_description[<?php echo $language['language_id']; ?>][robots]"  id="noindex-nofollow-<?php echo $language['language_id']; ?>">
 													noindex,nofollow               
 												</label>
 												<label for="noindex-follow-<?php echo $language['language_id']; ?>" class="radio-inline">
-													<input type="radio" value="noindex,follow" <?php if(isset($category_description_description[$language['language_id']]['robots']) && $category_description[$language['language_id']]['robots'] == "noindex,follow"){ echo 'checked="checked"'; } ?> name="category_description[<?php echo $language['language_id']; ?>][robots]" id="noindex-follow-<?php echo $language['language_id']; ?>">
+													<input type="radio" value="noindex,follow" <?php if(isset($category_description[$language['language_id']]['robots']) && $category_description[$language['language_id']]['robots'] == "noindex,follow"){ echo 'checked="checked"'; } ?> name="category_description[<?php echo $language['language_id']; ?>][robots]" id="noindex-follow-<?php echo $language['language_id']; ?>">
 													noindex,follow                  
 												</label>
-												<label for="index-follow-<?php echo $language['language_id']; ?>" class="radio-inline-">
-													<input type="radio" value="index,follow" <?php if((isset($category_description_description[$language['language_id']]['robots']) && $category_description[$language['language_id']]['robots'] == "index,follow") || (!isset($category_description_description[$language['language_id']]['robots']) || empty($category_description[$language['language_id']]['robots']))){ echo 'checked="checked"'; } ?> name="category_description[<?php echo $language['language_id']; ?>][robots]" id="index-follow-<?php echo $language['language_id']; ?>">
+												<label for="index-follow-<?php echo $language['language_id']; ?>" class="radio-inline">
+													<input type="radio" value="index,follow" <?php if((isset($category_description[$language['language_id']]['robots']) && $category_description[$language['language_id']]['robots'] == "index,follow") || (!isset($category_description[$language['language_id']]['robots']) || empty($category_description[$language['language_id']]['robots']))){ echo 'checked="checked"'; } ?> name="category_description[<?php echo $language['language_id']; ?>][robots]" id="index-follow-<?php echo $language['language_id']; ?>">
 													index,follow                  
 												</label>
 											</div>
@@ -365,7 +375,7 @@
 									</div>
 									<div class="form-group">
 										<label class="col-sm-2 control-label">
-											<span data-toggle="tooltip" title="" data-original-title="<?php echo $robots_tooltip; ?>"><?php echo $tags_robots; ?></span>
+											<span data-toggle="tooltip" title="" data-original-title="<?php echo $help_sitemap_changefreq; ?>"><?php echo $text_changefreq; ?></span>
 										</label>
 										<div class="col-sm-10">
 											<div class="">
@@ -411,7 +421,7 @@
 									</div>
 									<div class="form-group">
 										<label class="col-sm-2 control-label">
-											<span data-toggle="tooltip" title="" data-original-title="<?php echo $robots_tooltip; ?>"><?php echo $tags_robots; ?></span>
+											<span data-toggle="tooltip" title="" data-original-title="<?php echo $help_sitemap_priority; ?>"><?php echo $text_priority; ?></span>
 										</label>
 										<div class="col-sm-10">
 											<div class="">
@@ -448,15 +458,15 @@
 									
 									<div class="form-group">
 										<label class="col-sm-2 control-label" for="input-catalog-limit">
-											<span data-toggle="tooltip" title="" data-original-title="Should this page be in the XML Sitemap at all times, regardless of Robots Meta settings?">
-													Show in Sitemap:              
+											<span data-toggle="tooltip" title="" data-original-title="<?php echo $help_sitemap_show; ?> ">
+													<?php echo $text_sitemap_show; ?>       
 											</span>
 										</label>
 										<div class="col-sm-10">
 											<div class="checkbox">
 												<label>
 														<input type="hidden" value="0" name="category_description[<?php echo $language['language_id']; ?>][sitemap]" >
-													<?php if ( $category_description[$language['language_id']]['sitemap'] == 0) { ?>
+													<?php if ( !empty($category_description[$language['language_id']]['sitemap']) && $category_description[$language['language_id']]['sitemap'] == 0) { ?>
 														<input type="checkbox" value="1" name="category_description[<?php echo $language['language_id']; ?>][sitemap]"><?php echo $text_enabled; ?>
 													<?php  } else  { ?>
 														<input type="checkbox" value="1" name="category_description[<?php echo $language['language_id']; ?>][sitemap]"  checked="checked" ><?php echo $text_enabled; ?>
@@ -609,10 +619,10 @@
         <operation error="skip" >
             <search position="replase"  ><![CDATA['description'      => $result['description']]]></search>
             <add><![CDATA[                          'description'      => $result['description'],	
-                                                    'robots'    	 => (isset($query->row['robots'])) ? $query->row['robots']  : "",
-										'changefreq'    	 => (isset($query->row['changefreq'])) ? $query->row['changefreq']  : "",
-										'priority'    	 => (isset($query->row['priority'])) ? $query->row['priority']  : "",
-										'sitemap'    	 => (isset($query->row['sitemap'])) ? $query->row['sitemap']  : "",]]></add>
+                                                    'robots'    	 => $result['robots'] ,
+										'changefreq'    	 => $result['changefreq'] ,
+										'priority'    	 => $result['priority'] ,
+										'sitemap'    	 => $result['sitemap'] ,]]></add>
         </operation>
     </file>   
   <file name="catalog/controller/product/category.php">
@@ -623,8 +633,9 @@
     </file>
     <file name="catalog/controller/product/product.php">
         <operation error="skip" >
-            <search position="after"  ><![CDATA[$this->document->setKeywords($product_info['meta_keyword']);]]></search>
-            <add><![CDATA[			$this->document->setRobots($product_info['robots']);]]></add>
+            <search position="replace"  ><![CDATA[$this->document->addLink($this->url->link('product/product', 'product_id=' . $this->request->get['product_id']), 'canonical');]]></search>
+            <add><![CDATA[			$this->document->setRobots($product_info['robots']); 
+                $this->document->addLink($this->url->link('product/product',  $url . '&product_id=' . $this->request->get['product_id']), 'canonical');]]></add>
         </operation>
     </file>
     <file name="catalog/controller/common/header.php">
@@ -665,6 +676,64 @@
 			return false;
 		}
 	}]]></add>
+        </operation>
+    </file>
+	<file name="catalog/controller/feed/google_sitemap.php">
+        <operation error="skip" >
+            <search position="after"  ><![CDATA[$this->load->model('tool/image');]]></search>
+            <add><![CDATA[	 		$this->load->model('setting/setting');
+			$store_id = $this->config->get('config_store_id');
+			$setting = $this->model_setting_setting->getSettingValue('d_seo','d_seo_sitemap', $store_id );
+			]]></add>
+        </operation>
+		<operation error="skip" >
+            <search position="replace"  ><![CDATA[if ($product['image']) {]]></search>
+            <add><![CDATA[	 		 
+				if ($product['image'] && $product['sitemap']) {
+			]]></add>
+        </operation>
+		 <operation error="skip" >
+            <search position="after"  ><![CDATA[$results = $this->model_catalog_category->getCategories($parent_id);]]></search>
+            <add><![CDATA[	
+			$store_id = $this->config->get('config_store_id');
+			$setting = $this->model_setting_setting->getSettingValue('d_seo','d_seo_sitemap', $store_id );
+			]]></add>
+        </operation>
+		<operation error="skip" >
+            <search position="replace"  ><![CDATA[if ($product['image']) {]]></search>
+            <add><![CDATA[	 		 
+				if ($product['image'] && $product['sitemap']) {
+			]]></add>
+        </operation>
+		<operation error="skip" >
+            <search position="replace" offset="1" index="1" ><![CDATA[	$output .= '<changefreq>weekly</changefreq>'; ]]></search>
+            <add><![CDATA[$output .= '<changefreq>'.($product['changefreq'] ? $product['changefreq'] : ($setting['changefreq'] ? $setting['changefreq'] : 'weekly')).'</changefreq>';
+					$output .= '<priority>'.($product['priority'] ? $product['priority'] : ($setting['priority'] ? $setting['priority'] : '1.0')).'</priority>';]]></add>
+        </operation>
+		<operation error="skip" >
+            <search position="replace" offset="1" index="4" ><![CDATA[	$output .= '<changefreq>weekly</changefreq>'; ]]></search>
+            <add><![CDATA[$output .= '<changefreq>'.($result['changefreq'] ? $result['changefreq'] : ($setting['changefreq'] ? $setting['changefreq'] : 'weekly')).'</changefreq>';
+					$output .= '<priority>'.($result['priority'] ? $result['priority'] : ($setting['priority'] ? $setting['priority'] : '0.7')).'</priority>';]]></add>
+        </operation>
+		<operation error="skip" >
+            <search position="replace" offset="8"   ><![CDATA[$products = $this->model_catalog_product->getProducts(array('filter_manufacturer_id' => $manufacturer['manufacturer_id']));]]></search>
+            <add><![CDATA[]]></add>
+        </operation>
+		<operation error="skip" >
+            <search position="replace" offset="8"   ><![CDATA[	$products = $this->model_catalog_product->getProducts(array('filter_category_id' => $result['category_id'])); ]]></search>
+            <add><![CDATA[]]></add>
+        </operation>
+		 <operation error="skip" >
+            <search position="after"  offset = "2" ><![CDATA[$new_path = $current_path . '_' . $result['category_id'];]]></search>
+            <add><![CDATA[	
+			if ($result['sitemap']) {
+			]]></add>
+        </operation>
+		 <operation error="skip" >
+            <search position="before"    ><![CDATA[$output .= $this->getCategories($result['category_id'], $new_path);]]></search>
+            <add><![CDATA[	
+			}
+			]]></add>
         </operation>
     </file>
  

@@ -21,7 +21,10 @@
         <file>catalog/controller/module/d_seo.php</file>
         <file>catalog/model/module/d_seo.php</file>
         <file>catalog/view/theme/default/template/module/d_seo.tpl</file>
-
+	
+		<file>vqmod/xml/a_vqmod_mod_seo_url.xml </file>
+        <file>vqmod/xml/a_vqmod_seo_module.xml</file>
+  
 
     </files>
     <required>

@@ -53,7 +53,7 @@
         <form action="<?php echo $action; ?>" method="post" enctype="multipart/form-data" id="form-bestseller" class="form-horizontal">
           <ul  class="nav nav-tabs">
 	        <li class="active"><a href="#setting" data-toggle="tab">
-	        	<span class="fa fa-puzzle-piece"></span> 
+	        	<span class="fa fa-cog"></span> 
 	        	<?php echo $text_setting; ?>
 	        </a></li>
 	        <li><a href="#module" data-toggle="tab">
@@ -61,15 +61,15 @@
 	        	<?php echo $text_snippet; ?>
 	        </a></li>
 	        <li><a href="#block" data-toggle="tab">
-	        	<span class="fa fa-cog"></span> 
+	        	<span class="fa fa-link"></span> 
 	        	<?php echo $text_seo; ?>
 	        </a></li>
 	        <li><a href="#sitemap" data-toggle="tab">
-	        	<span class="fa fa-graduation-cap"></span> 
-	        	<?php // echo $text_sitemap ; ?> sitemap
+	        	<span class="fa fa-sitemap"></span> 
+	        	<?php  echo $text_sitemap ; ?> 
 	        </a></li>
 			<li><a href="#microformat" data-toggle="tab">
-	        	<span class="fa fa-graduation-cap"></span> 
+	        	<span class="fa fa-list-alt"></span> 
 	        	<?php // echo $text_microformat; ?> microformat
 	        </a></li>
 			<li><a href="#instruction" data-toggle="tab">
@@ -107,7 +107,7 @@
 					 <div class="col-sm-6">
 						<div class="form-group">
 							<label class="col-sm-4 control-label" for="input-catalog-limit">
-								<span data-toggle="tooltip" title="" data-original-title="Enable SEO URL for your site.">
+                                                            <span data-toggle="tooltip" title="" data-original-title="<?php echo $help_seo_url_status; ?>">
 										<?php echo $text_seo_switch ?>             
 								</span>
 							</label>
@@ -131,7 +131,7 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label class="col-sm-4 control-label" for="input-catalog-limit">
-								<span data-toggle="tooltip" title="" data-original-title="Change type of SEO url.">
+								<span data-toggle="tooltip" title="" data-original-title="<?php echo $help_seo_url_type; ?>">
 										<?php echo $text_seo_type ?>              
 								</span>
 							</label>
@@ -166,12 +166,12 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 						  <label class="col-sm-4 control-label" for="input-catalog-limit">
-						   <span data-toggle="tooltip" title="" data-original-title="Do backup of .htaccess before do modification of .htaccess.">
-								<?php echo $text_create_backup ?>             
+						   <span data-toggle="tooltip" title="" data-original-title="<?php echo $help_htacess_backup; ?>">
+								<?php echo $text_create_backup; ?>             
 							</span>
 						  </label>
 						  <div class="col-sm-3">
-							<a id="do_backup" class="btn btn-primary"> create </a>
+							<a id="do_backup" class="btn btn-primary"><?php echo $button_create;  ?> </a>
 						  </div>
 						  <div class="col-sm-5">
 							<div id="version_result"></div>
@@ -183,7 +183,7 @@
 						  <?php if ($backup_files) { ?>
 						<div class="form-group">
 							<label class="col-sm-4 control-label" for="input-status"> 
-							<span data-toggle="tooltip" title="" data-original-title="When there is a new version available, you can download it from the location you have purchased the module.">
+							<span data-toggle="tooltip" title="" data-original-title="<?php echo $help_htacess_restore; ?>">
 							  <?php echo $text_restore_backup ?>  
 							</span>
 							</label>
@@ -195,7 +195,7 @@
 							  </select>
 							</div>
 							<div class="col-sm-2">
-								<a id="restore_backup" class="btn btn-primary"> restore </a>
+								<a id="restore_backup" class="btn btn-primary"> <?php echo $button_restore;  ?> </a>
 							</div>
 						</div>
 			        <?php } ?>
@@ -204,12 +204,12 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 						  <label class="col-sm-4 control-label" for="input-catalog-limit">
-						   <span data-toggle="tooltip" title="" data-original-title="When there is a new version available, you can download it from the location you have purchased the module.">
+						   <span data-toggle="tooltip" title="" data-original-title="<?php echo $help_htacess_start; ?>">
 											 <?php echo $text_modification ?> 
 									</span>
 						  </label>
 						  <div class="col-sm-2">
-							<a id="htacess_change" class="btn btn-primary"> start</a>
+							<a id="htacess_change" class="btn btn-primary"> <?php echo $button_start;  ?> </a>
 							<script>
 								$("#htacess_change").on("click",function(){
 									 
@@ -232,7 +232,7 @@
 							?></textarea>
 						 
 							<div class="col-sm-2" style="margin-top: 10px;">
-								<a id="save_htacess" class="btn btn-primary"> create </a>
+								<a id="save_htacess" class="btn btn-primary"> <?php echo $button_save;  ?> </a>
 							</div>
 					 
 					</div>
@@ -299,7 +299,7 @@
 								</div>
 								<div class= "col-sm-6">
 									<div class="form-group">
-										<label class="col-sm-4 control-label" for="input-snipet-separator-<?php echo $language['language_id']; ?>">Separator</label>
+										<label class="col-sm-4 control-label" for="input-snipet-separator-<?php echo $language['language_id']; ?>"><?php echo $text_separator; ?></label>
 										<div class="col-sm-8">
 											<input type="text" name="d_seo_snipet[<?php echo $language['language_id']; ?>][separator]" maxlength="" value="<?php echo isset($d_seo_snipet[$language['language_id']]['separator']) ? $d_seo_snipet[$language['language_id']]['separator'] : $d_seo_snipet['separator']; ?>" placeholder="Separator" id="input-snipet-separator-<?php echo $language['language_id']; ?>" class="form-control">
 										</div>
@@ -323,9 +323,7 @@
 					<div class="col-sm-6">
 						<div class="form-group">
 							<label class="col-sm-4 control-label" for="input-catalog-limit">
-								<span data-toggle="tooltip" title="" data-original-title="Enable SEO URL for your site.">
-										Enable/Disable Sitemap:             
-								</span>
+                                                            <span data-toggle="tooltip" title="" data-original-title="<?php echo $help_sitemap_status; ?>"><?php echo $text_sitemap_switch; ?></span>
 							</label>
 							<div class="col-sm-8">
 								<div class="checkbox">
@@ -345,7 +343,7 @@
 					<div class="clearfix"></div>
 					<div class="col-sm-6">
 						<div class="form-group">
-							<label class="col-sm-4 control-label" for="input-data-feed"> URL of site map	</label>
+							<label class="col-sm-4 control-label" for="input-data-feed"> <?php echo $text_sitemap_link; ?></label>
 							<div class="col-sm-8  checkbox">
 							  <span id="input-data-feed"  ><?php echo $data_feed; ?></span>
 							</div>
@@ -355,7 +353,7 @@
 					<div class="col-sm-6">
 						 	<div class="form-group">
 										<label class="col-sm-4 control-label">
-											<span data-toggle="tooltip" title="" data-original-title="<?php echo $robots_tooltip; ?>"><?php echo $text_changefreq; ?></span>
+											<span data-toggle="tooltip" title="" data-original-title="<?php echo $help_sitemap_changefreq; ?>"><?php echo $text_changefreq; ?></span>
 										</label>
 										<div class="col-sm-8">
 											<div class="">
@@ -404,7 +402,7 @@
 							<div class="col-sm-6">
 									<div class="form-group">
 										<label class="col-sm-4 control-label">
-											<span data-toggle="tooltip" title="" data-original-title="<?php echo $robots_tooltip; ?>"><?php echo $text_priority; ?></span>
+											<span data-toggle="tooltip" title="" data-original-title="<?php echo $help_sitemap_priority; ?>"><?php echo $text_priority; ?></span>
 										</label>
 										<div class="col-sm-8">
 											<div class="">
@@ -442,10 +440,19 @@
 				</div>
 	      	</div>
 			<div class="tab-pane" id="microformat" >
-	      		<div class="tab-body">microformat</div>
+	      		<div class="tab-body"> 
+                                <div class="bs-callout bs-callout-warning"><h4>In Development</h4>
+                                         <p>Please feel free to send us feedback on the functionality you would like to see in the next updates via <a href="http://dreamvention.com/support">support</a></p>
+                                </div>
+                             </div>
 	      	</div>
 	      	<div class="tab-pane" id="instruction" >
-	      		<div class="tab-body">instruction</div>
+	      		<div class="tab-body"> 
+                            <div class="bs-callout bs-callout-warning"><h4>In Development</h4>
+                                         <p>Please feel free to send us feedback on the functionality you would like to see in the next updates via <a href="http://dreamvention.com/support">support</a></p>
+                            </div>
+                                    
+                        </div>
 	      	</div>
 
 

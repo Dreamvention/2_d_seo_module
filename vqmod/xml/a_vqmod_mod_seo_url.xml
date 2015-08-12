@@ -3,27 +3,34 @@
     <version>1.0</version>
     <vqmver>2.1.1</vqmver>
     <author>Dreamvention.com</author>
-    	
+    <file name="catalog/controller/common/seo_url.php">
+        <operation>
+            <search position="after" index="2" offset="1"><![CDATA[unset($data[$key]);]]></search>
+            <add><![CDATA[else{
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE `query` = '" . $this->db->escape($value) . "'");
+		if (($query->num_rows && $query->row['keyword']) or $value == 'common/home') {
+			$url .= '/' . $query->row['keyword'];
+ 
+			unset($data[$key]);
+		}
+ 
+	} ]]></add>
+        </operation>	
+	</file>
 	<file name="system/library/url.php">
         <operation>
             <search position="after"><![CDATA[private $ssl;]]></search>
-            <add><![CDATA[
-               public $currentUrl;
-            ]]></add>
+            <add><![CDATA[	public $currentUrl; ]]></add>
         </operation>
         <operation>
             <search position="after"><![CDATA[$this->ssl = $ssl;]]></search>
-            <add><![CDATA[
-               $this->setCurrentUrl();
-            ]]></add>
+            <add><![CDATA[		$this->setCurrentUrl(); ]]></add>
         </operation>
         <operation>
             <search position="before"><![CDATA[public function link($route, $args = '', $secure = false) {]]></search>
             <add><![CDATA[
-                /*
-                * DV Code START
-                */
-		public function setCurrentUrl() {
+ /* DV Code START */
+	public function setCurrentUrl() {
 		$pageURL = 'http';
 		if(isset($_SERVER["HTTPS"])){
 			if ($_SERVER["HTTPS"] == "on") {$pageURL .= "s";}
@@ -36,20 +43,21 @@
 		}
 		$this->currentUrl =  str_replace("&", "&amp;", str_replace("&amp;", "&",$pageURL));
 		}
-                /*
-                * DV Code END
-                */
+ /* DV Code END */
             ]]></add>
         </operation>
 	</file>
        	
 	<file name="catalog/controller/product/category.php">
+		<operation>
+            <search position="after"  ><![CDATA[$this->load->model('catalog/category');]]></search>
+            <add><![CDATA[ 
+		$this->load->model('setting/setting');]]></add>
+        </operation>	
         <operation>
             <search position="after" index="1"><![CDATA[$data['continue'] = $this->url->link('common/home');]]></search>
             <add><![CDATA[
-			/*
-            * DV Code START
-            */
+/* DV Code START*/
 			$this->document->addLink($this->url->link('product/category', 'path=' . $this->request->get['path']), 'canonical');
 			if(isset($this->request->get['page']) && $this->request->get['page'] == 1){
 				$this->response->redirect($this->url->link('product/category', 'path=' . $this->request->get['path'], 'SSL'), '301');
@@ -64,9 +72,7 @@
 				$page_next = (int)$page + 1; 
 			$this->document->addLink($this->url->link('product/category', 'path=' . $this->request->get['path'] . $url  .'&page='  . $page_next ), 'next');
 			}
-			/*
-            * DV Code END
-            */
+/* 	DV Code END  */
             ]]></add>
         </operation>				
     </file>	
@@ -74,9 +80,7 @@
         <operation>
             <search position="after" index="1"><![CDATA[$pagination->url = $this->url->link('product/search', $url . '&page={page}');]]></search>
             <add><![CDATA[
-			/*
-            * DV Code START
-            */
+/*  DV Code START  */
 			$this->document->addLink($this->url->link('product/search'), 'canonical');
 			if(isset($this->request->get['page']) && $this->request->get['page'] == 1){
 				$this->response->redirect($this->url->link('product/search','', 'SSL'), '301');
@@ -91,9 +95,7 @@
 				$page_next = (int)$page + 1; 
 			$this->document->addLink($this->url->link('product/search', $url . '&page='  . $page_next ), 'next');
 			}
-			/*
-            * DV Code END
-            */
+/*   DV Code END  */
             ]]></add>
         </operation>				
     </file>	
@@ -101,9 +103,7 @@
         <operation>
             <search position="after" index="1"><![CDATA[$pagination->url = $this->url->link('product/manufacturer/info', 'manufacturer_id=' . $this->request->get['manufacturer_id'] .  $url . '&page={page}');]]></search>
             <add><![CDATA[
-			/*
-            * DV Code START
-            */
+/* DV Code START  */
 			$this->document->addLink($this->url->link('product/manufacturer/info','manufacturer_id=' . $this->request->get['manufacturer_id']), 'canonical');
 			if(isset($this->request->get['page']) && $this->request->get['page'] == 1){
 				$this->response->redirect($this->url->link('product/manufacturer/info','manufacturer_id=' . $this->request->get['manufacturer_id'], 'SSL'), '301');
@@ -118,9 +118,7 @@
 				$page_next = (int)$page + 1; 
 			$this->document->addLink($this->url->link('product/manufacturer/info','manufacturer_id=' . $this->request->get['manufacturer_id'] .  $url . '&page='  . $page_next ), 'next');
 			}
-			/*
-            * DV Code END
-            */
+/*  DV Code END */
             ]]></add>
         </operation>				
     </file>
@@ -128,9 +126,7 @@
         <operation>
             <search position="after" index="1"><![CDATA[$pagination->url = $this->url->link('product/special', $url . '&page={page}');]]></search>
             <add><![CDATA[
-			/*
-            * DV Code START
-            */
+/*  DV Code START   */
 			$this->document->addLink($this->url->link('product/special'), 'canonical');
 			if(isset($this->request->get['page']) && $this->request->get['page'] == 1){
 				$this->response->redirect($this->url->link('product/special', '', 'SSL'), '301');
@@ -145,9 +141,7 @@
 				$page_next = (int)$page + 1; 
 			$this->document->addLink($this->url->link('product/special', $url . '&page='  . $page_next ), 'next');
 			}
-			/*
-            * DV Code END
-            */
+/*  DV Code END */
             ]]></add>
         </operation>				
     </file>
@@ -155,32 +149,55 @@
 	<file name="catalog/controller/product/category.php">
         <operation>
             <search position="replace"><![CDATA['href'        => $this->url->link('product/product', 'path=' . $this->request->get['path'] . '&product_id=' . $result['product_id'] . $url)]]></search>
-            <add><![CDATA['href'        => $this->url->link('product/product', 'product_id=' . $result['product_id'])]]></add>
+            <add><![CDATA[
+								'href' => 	($this->model_setting_setting->getSettingValue('d_seo', 'd_seo_url_type',$this->config->get('config_store_id')) ) ? ($this->url->link('product/product', 'product_id=' . $result['product_id'])) : $this->url->link('product/product', 'path=' . $this->request->get['path'] . '&product_id=' . $result['product_id'] . $url)
+												]]></add>
         </operation>				
     </file>
 	<file name="catalog/controller/product/manufacturer.php">
         <operation>
             <search position="replace"><![CDATA['href'        => $this->url->link('product/product', 'manufacturer_id=' . $result['manufacturer_id'] . '&product_id=' . $result['product_id'] . $url)]]></search>
-            <add><![CDATA['href'        => $this->url->link('product/product', 'product_id=' . $result['product_id'])]]></add>
-        </operation>				
+            <add><![CDATA[
+								'href' =>	(($this->model_setting_setting->getSettingValue('d_seo', 'd_seo_url_type',$this->config->get('config_store_id')))  ) ? ($this->url->link('product/product', 'product_id=' . $result['product_id'])) : $this->url->link('product/product', 'manufacturer_id=' . $result['manufacturer_id'] . '&product_id=' . $result['product_id'] . $url)
+												]]></add>
+        </operation>
+		<operation>
+            <search position="after"  ><![CDATA[$this->load->language('product/manufacturer');]]></search>
+            <add><![CDATA[ 
+		$this->load->model('setting/setting');]]></add>
+        </operation>			
     </file>
 	<file name="catalog/controller/product/search.php">
         <operation>
             <search position="replace"><![CDATA['href'        => $this->url->link('product/product', 'product_id=' . $result['product_id'] . $url)]]></search>
-            <add><![CDATA['href'        => $this->url->link('product/product', 'product_id=' . $result['product_id'])]]></add>
+            <add><![CDATA[
+				'href' =>	(($this->model_setting_setting->getSettingValue('d_seo', 'd_seo_url_type',$this->config->get('config_store_id'))) ) ? ($this->url->link('product/product', 'product_id=' . $result['product_id'])) : $this->url->link('product/product', 'product_id=' . $result['product_id'] . $url)
+												]]></add>
         </operation>				
+		<operation>
+            <search position="after"  ><![CDATA[$this->load->language('product/search');]]></search>
+            <add><![CDATA[ 
+		$this->load->model('setting/setting');]]></add>
+        </operation>	
     </file>
 	<file name="catalog/controller/product/special.php">
         <operation>
             <search position="replace"><![CDATA['href'        => $this->url->link('product/product', 'product_id=' . $result['product_id'] . $url)]]></search>
-            <add><![CDATA['href'        => $this->url->link('product/product', 'product_id=' . $result['product_id'])]]></add>
-        </operation>				
+            <add><![CDATA[
+												'href' =>	(($this->model_setting_setting->getSettingValue('d_seo', 'd_seo_url_type',$this->config->get('config_store_id')))  ) ? ($this->url->link('product/product', 'product_id=' . $result['product_id']))	: $this->url->link('product/product', 'product_id=' . $result['product_id'] . $url)
+												]]></add>
+        </operation>
+		<operation>
+            <search position="after"  ><![CDATA[$this->load->language('product/special');]]></search>
+            <add><![CDATA[ 
+		$this->load->model('setting/setting');]]></add>
+        </operation>			
     </file>
 	<file name="catalog/model/catalog/category.php">
         <operation>
             <search position="before"><![CDATA[public function getTotalCategoriesByCategoryId($parent_id = 0) {]]></search>
             <add><![CDATA[
-			/*
+												/*
             * DV Code START
             */	
 	public function getPath($category_id) {
@@ -216,10 +233,9 @@
         <operation>
             <search position="after"><![CDATA[$this->load->model('catalog/category');]]></search>
             <add><![CDATA[
-			/*
-            * DV Code START
-            */
-
+/*  DV Code START  */
+		$this->load->model('setting/setting');
+		if($this->model_setting_setting->getSettingValue('d_seo', 'd_seo_url_type',$this->config->get('config_store_id'))) {
 			if($this->url->link('product/product', 'product_id=' . $this->request->get['product_id']) != $this->url->currentUrl){$this->response->redirect($this->url->link('product/product', 'product_id=' . $this->request->get['product_id'], 'SSL'), '301');}
 			
 			if (isset($this->request->get['product_id'])) {
@@ -232,9 +248,8 @@
 		$path_id = end($categories);
 		$path = $this->model_catalog_category->getPath($path_id['category_id']);
 		$this->request->get['path'] = $path;
-			/*
-            * DV Code END
-            */
+		}
+/*  DV Code END */
             ]]></add>
         </operation>				
     </file>	
@@ -242,9 +257,7 @@
         <operation>
             <search position="before"><![CDATA[$category_info = $this->model_catalog_category->getCategory($category_id);]]></search>
             <add><![CDATA[
-			/*
-            * DV Code START
-            */
+/* DV Code START  */
 			
 		$path = $this->model_catalog_category->getPath($category_id);
 		if($path){
@@ -271,9 +284,7 @@
 		if($this->url->link('product/category', 'path=' . $this->request->get['path'].$url) != $this->url->currentUrl){
 			$this->response->redirect($this->url->link('product/category', 'path=' . $this->request->get['path'].$url, 'SSL'), '301');
 		}
-			/*
-            * DV Code END
-            */
+/*  DV Code END */
             ]]></add>
         </operation>				
     </file>	
@@ -286,63 +297,4 @@
 		</operation>
 	</file>
 
-            
-
-
-
-	<!--<file name="catalog/controller/common/seo_url.php">
-                <operation>
-                        <search position="after">$parts = explode('/', $this->request->get['_route_']);
-                        </search>
-                        <add><![CDATA[
-						$route = "";
-                        ]]></add>
-                </operation>
-                <operation>
-                        <search position="after">$url = explode('=', $query->row['query']);
-                        </search>
-                        <add><![CDATA[
-						if(count($url) > 1){
-                        ]]></add>
-                </operation>
-                <operation>
-                        <search position="before" offset="1"><![CDATA[$this->request->get['route'] = 'error/not_found';]]>
-                        </search>
-                        <add><![CDATA[
-						}else{
-						$route = $url[0];
-						}
-                        ]]></add>
-                </operation>
-                <operation>
-                        <search position="after" offset="1"><![CDATA[$this->request->get['route'] = 'information/information';]]>
-                        </search>
-                        <add><![CDATA[
-						else {
-						$this->request->get['route'] = $route;
-						}
-                        ]]></add>
-                </operation>
-                <operation>
-                        <search position="replace"><![CDATA[if (isset($this->request->get['route'])) {]]>
-                        </search>
-                        <add><![CDATA[
-                        	if (isset($this->request->get['route']) && $this->request->get['route'] != 'captcha' ) {//Add && $this->request->get['route'] != 'captcha' for don't rewrite when using captcha function.
-                        ]]></add>
-                </operation>
-                <operation>
-					<search position="after" index="4" offset="1"><![CDATA[unset($data[$key]);]]></search>
-						<add><![CDATA[
-						elseif ($key == 'route') {
-						$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_alias WHERE `query` = '" . $this->db->escape($value) . "'");
-				
-						if ($query->num_rows) {
-							$url .= '/' . $query->row['keyword'];
-					
-							unset($data[$key]);
-						}
-						}
-						]]></add>
-                </operation>
-        </file>-->
 </modification>
