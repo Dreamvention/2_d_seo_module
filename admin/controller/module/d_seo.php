@@ -303,7 +303,7 @@ class ControllerModuleDSeo extends Controller {
 				$this->db->query("ALTER TABLE " . DB_PREFIX . "product_description  ADD priority varchar(5)");
 			}
 			if(!array_key_exists('sitemap', $rows->row )){
-				$this->db->query("ALTER TABLE " . DB_PREFIX . "category_description  ADD sitemap BOOLEAN");
+				$this->db->query("ALTER TABLE " . DB_PREFIX . "product_description  ADD sitemap BOOLEAN DEFAULT 1");
 			}
                         $rows = $this->db->query("SELECT * FROM " . DB_PREFIX . "category_description ");
 			if(!array_key_exists('robots', $rows->row )){
@@ -316,7 +316,7 @@ class ControllerModuleDSeo extends Controller {
 				$this->db->query("ALTER TABLE " . DB_PREFIX . "category_description  ADD priority varchar(5)");
 			}
 			if(!array_key_exists('sitemap', $rows->row )){
-				$this->db->query("ALTER TABLE " . DB_PREFIX . "category_description  ADD sitemap BOOLEAN");
+				$this->db->query("ALTER TABLE " . DB_PREFIX . "category_description  ADD sitemap BOOLEAN DEFAULT 1");
 			}
                       
                         $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('common/home', '')");

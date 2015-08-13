@@ -233,12 +233,8 @@
         <operation>
             <search position="after"><![CDATA[$this->load->model('catalog/category');]]></search>
             <add><![CDATA[
-/*  DV Code START  */
-		$this->load->model('setting/setting');
-		if($this->model_setting_setting->getSettingValue('d_seo', 'd_seo_url_type',$this->config->get('config_store_id'))) {
-			if($this->url->link('product/product', 'product_id=' . $this->request->get['product_id']) != $this->url->currentUrl){$this->response->redirect($this->url->link('product/product', 'product_id=' . $this->request->get['product_id'], 'SSL'), '301');}
-			
-			if (isset($this->request->get['product_id'])) {
+/*  DV Code START  */	
+            if (isset($this->request->get['product_id'])) {
 			$product_id = (int)$this->request->get['product_id'];
 		} else {
 			$product_id = 0;
@@ -248,10 +244,24 @@
 		$path_id = end($categories);
 		$path = $this->model_catalog_category->getPath($path_id['category_id']);
 		$this->request->get['path'] = $path;
-		}
+
 /*  DV Code END */
             ]]></add>
-        </operation>				
+        </operation>
+         <operation>
+            <search position="before"><![CDATA[$this->document->setTitle($product_info['meta_title']);]]></search>
+            <add><![CDATA[
+/*  DV Code START  */	
+                $this->load->model('setting/setting');
+		if($this->model_setting_setting->getSettingValue('d_seo', 'd_seo_url_type',$this->config->get('config_store_id'))) {
+			if($this->url->link('product/product', 'product_id=' . $this->request->get['product_id']) != $this->url->currentUrl){$this->response->redirect($this->url->link('product/product', 'product_id=' . $this->request->get['product_id'], 'SSL'), '301');}
+
+                }else{
+                    if($this->url->link('product/product', $url . '&product_id=' . $this->request->get['product_id']) != $this->url->currentUrl){$this->response->redirect($this->url->link('product/product', $url . '&product_id=' . $this->request->get['product_id'], 'SSL'), '301');}
+                }
+/*  DV Code END */
+            ]]></add>
+        </operation>			
     </file>	
 	<file name="catalog/controller/product/category.php">
         <operation>
