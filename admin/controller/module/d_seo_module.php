@@ -273,7 +273,7 @@ class ControllerModuleDSeoModule extends Controller {
 
 	private function getMboothFile(){
 		$full = DIR_SYSTEM . 'mbooth/xml/mbooth_'. $this->id .'_module.xml';
-                echo $full;
+                //echo $full;
 		if (file_exists($full)) {
 			return 'mbooth_'. $this->id . '_module.xml';
 		} else{

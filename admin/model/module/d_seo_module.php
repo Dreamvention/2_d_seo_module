@@ -3,7 +3,7 @@
  *	location: admin/model
  */
 
-class ModelModuleDSeo extends Model {
+class ModelModuleDSeoModule extends Model {
 
 }
 ?>
