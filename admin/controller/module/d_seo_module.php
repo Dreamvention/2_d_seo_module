@@ -3,9 +3,9 @@
  *	location: admin/controller
  */
 
-class ControllerModuleDSeo extends Controller {
+class ControllerModuleDSeoModule extends Controller {
 	private $id = 'd_seo';
-	private $route = 'module/d_seo';
+	private $route = 'module/d_seo_module';
 	private $lite = array('lite', 'light', 'free');
 	private $mbooth = '';
 	private $prefix = '';
@@ -272,14 +272,15 @@ class ControllerModuleDSeo extends Controller {
 	}
 
 	private function getMboothFile(){
-		$full = DIR_SYSTEM . 'mbooth/xml/mbooth_'. $this->id .'.xml';
+		$full = DIR_SYSTEM . 'mbooth/xml/mbooth_'. $this->id .'_module.xml';
+                echo $full;
 		if (file_exists($full)) {
-			return 'mbooth_'. $this->id . '.xml';
+			return 'mbooth_'. $this->id . '_module.xml';
 		} else{
 			foreach ($this->lite as $file){
-				if (file_exists(DIR_SYSTEM . 'mbooth/xml/mbooth_'. $this->id . '_' . $file . '.php')) {
-					$this->prefix = '_' . $file;
-					return $this->id . '_' . $file;
+				if (file_exists(DIR_SYSTEM . 'mbooth/xml/mbooth_'. $this->id . '_module_' . $file . '.php')) {
+					$this->prefix = '_module_' . $file;
+					return $this->id . '__module' . $file;
 				}
 			}
 		}
