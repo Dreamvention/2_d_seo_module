@@ -38,6 +38,19 @@ class ControllerModuleDSeo extends Controller {
 			$this->model_setting_setting->editSetting($this->id, $this->request->post, $this->store_id);
 			
 			$this->model_setting_setting->editSetting('google_sitemap', $this->request->post, $this->store_id);
+                              $this->load->model('extension/extension');
+                        if ($this->validatePermission() && $this->request->post['google_sitemap_status'] ) {
+                            $this->model_extension_extension->install('feed', 'google_sitemap');
+
+                            $this->load->model('user/user_group');
+
+                            $this->model_user_user_group->addPermission($this->user->getGroupId(), 'access', 'feed/' . 'google_sitemap');
+                            $this->model_user_user_group->addPermission($this->user->getGroupId(), 'modify', 'feed/' . 'google_sitemap');
+
+                            // Call install method if it exsits
+                            $this->load->controller('feed/' . 'google_sitemap' . '/install');
+
+                        }
 			
 			$this->settingsSeoUrl($this->request->post);  
 			
@@ -621,5 +634,12 @@ class ControllerModuleDSeo extends Controller {
              }else{
                      return "canonical";
              }
+    }
+    protected function validatePermission() {
+		if (!$this->user->hasPermission('modify', 'extension/feed')) {
+			$this->error['warning'] = $this->language->get('error_permission');
+		}
+
+		return !$this->error;
     }
 }
