@@ -752,8 +752,8 @@
         </operation>
 		<operation error="skip" >
             <search position="replace" offset="1" index="4" ><![CDATA[	$output .= '<changefreq>weekly</changefreq>'; ]]></search>
-            <add><![CDATA[$output .= '<changefreq>'.( !empty($result[['changefreq']) ? $result['changefreq'] : ($setting['changefreq'] ? $setting['changefreq'] : 'weekly')).'</changefreq>';
-					$output .= '<priority>'.( !empty($result[['priority']) ? $result['priority'] : ($setting['priority'] ? $setting['priority'] : '0.7')).'</priority>';]]></add>
+            <add><![CDATA[$output .= '<changefreq>'.( !empty($result['changefreq']) ? $result['changefreq'] : ($setting['changefreq'] ? $setting['changefreq'] : 'weekly')).'</changefreq>';
+					$output .= '<priority>'.( !empty($result['priority']) ? $result['priority'] : ($setting['priority'] ? $setting['priority'] : '0.7')).'</priority>';]]></add>
         </operation>
 		<operation error="skip" >
             <search position="replace" offset="8"   ><![CDATA[$products = $this->model_catalog_product->getProducts(array('filter_manufacturer_id' => $manufacturer['manufacturer_id']));]]></search>
