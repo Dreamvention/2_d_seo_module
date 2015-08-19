@@ -465,7 +465,23 @@
       </div>
     </div>
   </div>
-  <script type="text/javascript"><!--
+<script type="text/javascript"><!--
+    function saveAndStay(){
+          $.ajax( {
+            type: "POST",
+            url: 'index.php?route=module/d_seo&token=<?php echo $token; ?>&save',
+            data: $('#form-featured').serialize(),
+            beforeSend: function() {
+                $('#form-featured').fadeTo('slow', 0.5);
+            },
+            complete: function() {
+                $('#form-featured').fadeTo('slow', 1);  
+            },
+            success: function( response ) {
+              console.log( response );
+            }
+        }); 
+     }
 	$("#do_backup").on("click", function(){
 		$.ajax({
 			url: 'index.php?route=module/d_seo/createHtaccessBackup&token=<?php echo $token; ?>',

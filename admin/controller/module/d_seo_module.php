@@ -34,6 +34,10 @@ class ControllerModuleDSeoModule extends Controller {
 		}
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
+                        
+                        if (isset($_SERVER['HTTPS']) && (($_SERVER['HTTPS'] == 'on') || ($_SERVER['HTTPS'] == '1'))) {
+                            $this->model_setting_setting->editSettingValue('config', 'config_secure' , '1', $this->store_id);
+                        }
 
 			$this->model_setting_setting->editSetting($this->id, $this->request->post, $this->store_id);
 			
@@ -56,12 +60,10 @@ class ControllerModuleDSeoModule extends Controller {
 			
 			$this->session->data['success'] = $this->language->get('text_success');
 			
-			//echo $this->store_id;
-			//echo "<pre>"; print_r($this->request->post); echo "</pre>";
-			//$this->model_setting_setting->editSetting('config', $this->request->post['config_seo_url']);
-			
 		
-			//$this->response->redirect($this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL'));
+			if(!isset($this->request->post['save'])){
+				$this->response->redirect($this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL'));
+			}
 			
 		}
  
@@ -370,6 +372,7 @@ class ControllerModuleDSeoModule extends Controller {
                         $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('affiliate/register', 'create-affiliate-account')");
                         $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('affiliate/login', 'affiliate-login')");
                         $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('account/voucher', 'account-voucher')");
+                       
 		$this->getUpdate(1);	  
 	}
 		 
