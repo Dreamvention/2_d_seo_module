@@ -25,7 +25,9 @@
     <required>
         <require version="2.0.0">shopunity</require>
     </required>
-    <update version="1.0"></update>
-         1. Final version
+    <updates>
+        <update version="1.0">
+            1. Final version
+        </update>   
     </updates>
 </extension>
