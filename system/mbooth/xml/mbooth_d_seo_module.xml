@@ -1,12 +1,10 @@
 <extension>
     <id>d_seo_module</id>
     <name>Seo Module</name>
-    <description>
-        Seo Module!.
-    </description>
+    <description> Seo Module!</description>
     <type>module</type>
     <version>1.0.0</version>
-    <license>light</license>
+    <license>full</license>
     <opencart_version>2.0.0.0,2.0.1.0,2.0.1.1,2.0.2.0,2.0.3.1</opencart_version>
     <mbooth_version>3.0</mbooth_version>
     <author>Dreamvention</author>
