@@ -142,12 +142,16 @@ class ControllerModuleDSeoModule extends Controller {
 		// Help
 		$data['help_seo_url_status'] = $this->language->get('help_seo_url_status');
                 $data['help_seo_url_type'] = $this->language->get('help_seo_url_type');
+                $data['help_button_canonical'] = $this->language->get('help_button_canonical');
+		$data['help_button_modified'] = $this->language->get('help_button_modified');
                 $data['help_htacess_backup'] = $this->language->get('help_htacess_backup');
                 $data['help_htacess_restore'] = $this->language->get('help_htacess_restore');
                 $data['help_htacess_start'] = $this->language->get('help_htacess_start');
                 $data['help_sitemap_status'] = $this->language->get('help_sitemap_status');
                 $data['help_sitemap_changefreq'] = $this->language->get('help_sitemap_changefreq');
                 $data['help_sitemap_priority'] = $this->language->get('help_sitemap_priority');
+                $data['help_snippet_preview'] = $this->language->get('help_snippet_preview');
+                $data['help_separator'] = $this->language->get('help_separator');
               
 		// Text
 		$data['text_enabled'] = $this->language->get('text_enabled');
@@ -161,6 +165,7 @@ class ControllerModuleDSeoModule extends Controller {
 		$data['text_modification'] = $this->language->get('text_modification');
 		$data['text_metadescription'] = $this->language->get('text_metadescription');
                 $data['text_separator'] = $this->language->get('text_separator');
+                $data['text_snippet_preview'] = $this->language->get('text_snippet_preview');
                 $data['text_sitemap_switch'] = $this->language->get('text_sitemap_switch');
                 $data['text_sitemap_link'] = $this->language->get('text_sitemap_link');
 		
