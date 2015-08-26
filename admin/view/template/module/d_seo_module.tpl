@@ -484,7 +484,7 @@
         function saveAndStay(){
                 $.ajax({
                 type: "POST",
-                        url: 'index.php?route=module/d_seo_module&token=<?php echo $token; ?>&save',
+                        url: 'index.php?route=module/d_seo_module/save&token=<?php echo $token; ?>',
                         data: $('#form-featured').serialize(),
                         beforeSend: function() {
                         $('#form-featured').fadeTo('slow', 0.5);
