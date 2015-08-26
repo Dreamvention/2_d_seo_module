@@ -1026,11 +1026,26 @@
             <add><![CDATA[
 /*  DV Code START  */	
                 $this->load->model('setting/setting');
-		if($this->model_setting_setting->getSettingValue('d_seo', 'd_seo_url_type',$this->config->get('config_store_id'))) {
-			if($this->url->link('product/product', 'product_id=' . $this->request->get['product_id']) != $this->url->currentUrl){$this->response->redirect($this->url->link('product/product', 'product_id=' . $this->request->get['product_id'], 'SSL'), '301');}
-
+                if (isset($_SERVER['HTTPS']) && (($_SERVER['HTTPS'] == 'on') || ($_SERVER['HTTPS'] == '1'))) {
+                    if($this->model_setting_setting->getSettingValue('d_seo', 'd_seo_url_type',$this->config->get('config_store_id'))) {
+			if($this->url->link('product/product', 'product_id=' . $this->request->get['product_id'], 'SSL') != $this->url->currentUrl){
+                                $this->response->redirect($this->url->link('product/product', 'product_id=' . $this->request->get['product_id'], 'SSL'), '301');
+                        }
+                    }else{
+                        if($this->url->link('product/product', $url . '&product_id=' . $this->request->get['product_id'], 'SSL') != $this->url->currentUrl){
+                                $this->response->redirect($this->url->link('product/product', $url . '&product_id=' . $this->request->get['product_id'], 'SSL'), '301');
+                        }
+                    }
                 }else{
-                    if($this->url->link('product/product', $url . '&product_id=' . $this->request->get['product_id']) != $this->url->currentUrl){$this->response->redirect($this->url->link('product/product', $url . '&product_id=' . $this->request->get['product_id'], 'SSL'), '301');}
+                    if($this->model_setting_setting->getSettingValue('d_seo', 'd_seo_url_type',$this->config->get('config_store_id'))) {
+			if($this->url->link('product/product', 'product_id=' . $this->request->get['product_id']) != $this->url->currentUrl){
+                                $this->response->redirect($this->url->link('product/product', 'product_id=' . $this->request->get['product_id']), '301');
+                        }
+                    }else{
+                        if($this->url->link('product/product', $url . '&product_id=' . $this->request->get['product_id']) != $this->url->currentUrl){
+                                $this->response->redirect($this->url->link('product/product', $url . '&product_id=' . $this->request->get['product_id']), '301');
+                        }
+                    }
                 }
 /*  DV Code END */
             ]]></add>
@@ -1063,10 +1078,15 @@
 		if(isset($this->request->get['filter'])){
 			$url = $url.'&filter='.$this->request->get['filter'];
 		} 
-
-		if($this->url->link('product/category', 'path=' . $this->request->get['path'].$url) != $this->url->currentUrl){
-			$this->response->redirect($this->url->link('product/category', 'path=' . $this->request->get['path'].$url, 'SSL'), '301');
-		}
+                if (isset($_SERVER['HTTPS']) && (($_SERVER['HTTPS'] == 'on') || ($_SERVER['HTTPS'] == '1'))) {
+                    if($this->url->link('product/category', 'path=' . $this->request->get['path'].$url, 'SSL') != $this->url->currentUrl){
+                            $this->response->redirect($this->url->link('product/category', 'path=' . $this->request->get['path'].$url, 'SSL'), '301');
+                    }
+                }else{
+                    if($this->url->link('product/category', 'path=' . $this->request->get['path'].$url) != $this->url->currentUrl){
+                            $this->response->redirect($this->url->link('product/category', 'path=' . $this->request->get['path'].$url), '301');
+                    }
+                }
 /*  DV Code END */
             ]]></add>
         </operation>				
