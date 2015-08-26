@@ -1,5 +1,0 @@
-<?php
-/*
- *	location: catalog/view
- */
-?>

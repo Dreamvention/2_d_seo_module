@@ -1,28 +1,21 @@
 <extension>
-    <id>d_seo</id>
+    <id>d_seo_module</id>
     <name>Seo Module</name>
-    <description>
-        Seo Module!.
-    </description>
+    <description> Seo Module!</description>
     <type>module</type>
-    <version>1.1</version>
-    <license>light</license>
+    <version>1.0.0</version>
+    <license>full</license>
     <opencart_version>2.0.0.0,2.0.1.0,2.0.1.1,2.0.2.0,2.0.3.1</opencart_version>
     <mbooth_version>3.0</mbooth_version>
     <author>Dreamvention</author>
     <files>
-        <file>system/mbooth/xml/mbooth_d_seo.xml</file>
+        <file>system/mbooth/xml/mbooth_d_seo_module.xml</file>
 
-        <file>admin/controller/module/d_seo.php</file>
-        <file>admin/model/module/d_seo.php</file>
-        <file>admin/language/english/module/d_seo.php</file>
-        <file>admin/view/template/module/d_seo.tpl</file>
+        <file>admin/controller/module/d_seo_module.php</file>
+        <file>admin/model/module/d_seo_module.php</file>
+        <file>admin/language/english/module/d_seo_module.php</file>
+        <file>admin/view/template/module/d_seo_module.tpl</file>
         
-        <file>catalog/controller/module/d_seo.php</file>
-        <file>catalog/model/module/d_seo.php</file>
-        <file>catalog/view/theme/default/template/module/d_seo.tpl</file>
-	
-     
         <file>vqmod/xml/a_vqmod_seo_module.xml</file>
   
         <file>htaccess_dream.txt</file>
@@ -31,6 +24,8 @@
         <require version="2.0.0">shopunity</require>
     </required>
     <updates>
-        <update version="1.0"></update>
+        <update version="1.0">
+            1. Final version
+        </update>   
     </updates>
 </extension>

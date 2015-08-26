@@ -33,7 +33,10 @@
     <file path="admin/controller/catalog/" name="product.php,category.php" >
         <operation error="skip" >
             <search position="before"  ><![CDATA[$data['tab_general'] = $this->language->get('tab_general');]]></search>
-            <add><![CDATA[		$data['tab_general_seo'] = $this->language->get('tab_general_seo');
+            <add><![CDATA[		
+                                        $data['text_snippet_preview'] = $this->language->get('text_snippet_preview');
+                                        $data['help_snippet_preview'] = $this->language->get('help_snippet_preview');
+                                        $data['tab_general_seo'] = $this->language->get('tab_general_seo');
 					$data['tab_data_seo'] = $this->language->get('tab_data_seo');
 					$data['tags_robots'] = $this->language->get('tags_robots');
 					$data['robots_tooltip'] = $this->language->get('robots_tooltip');
@@ -64,16 +67,18 @@
             <search position="before"  ><![CDATA[// Help]]></search>
 			
             <add><![CDATA[		// SEO by Dreamvention
-                                        $_['text_changefreq']			= 'Changefreq';
+                                        $_['text_snippet_preview']		= 'Snippet Preview';
+                                        $_['help_snippet_preview']		= 'Search snippet appearance to the client in search results.';
+                                        $_['text_changefreq']			= 'Scanning  frequency';
                                         $_['text_priority']			= 'Priority';
-                                        $_['help_sitemap_changefreq']		= 'Changefreq  value.';
-                                        $_['help_sitemap_priority']		= 'Priority  value.';
-                                        $_['help_sitemap_show']                 = 'Should this page be in the XML Sitemap at all times, regardless of Robots Meta settings?';
-                                        $_['text_sitemap_show']                 = 'Show in Sitemap:';
+                                        $_['help_sitemap_changefreq']		= 'Set the frequency for the search bots to scan the page in sitemap file.';
+                                        $_['help_sitemap_priority']		= 'The priority of the page among other pages.';
+                                        $_['help_sitemap_show']                 = 'Add this page to be listed in the sitemap.xml';
+                                        $_['text_sitemap_show']                 = 'Display in Sitemap:';
 					$_['tab_general_seo']                   = 'General SEO';
-					$_['tags_robots']                       = 'Meta tags robots';
+					$_['tags_robots']                       = 'Meta Tags Robots';
 					$_['tab_data_seo']                      = 'Data SEO';
-					$_['robots_tooltip']                    = 'These meta tags can control the behavior of search engine crawling and indexing.';]]></add>
+					$_['robots_tooltip']                    = 'Enable / disable the indexing of the page.';]]></add>
 					
 					  
         </operation>
@@ -125,7 +130,7 @@
 												</label>
 												<label for="index-follow-<?php echo $language['language_id']; ?>" class="radio-inline">
 													<input type="radio" value="index,follow" <?php if((isset($product_description[$language['language_id']]['robots']) && $product_description[$language['language_id']]['robots'] == "index,follow") || (!isset($product_description[$language['language_id']]['robots']) || empty($product_description[$language['language_id']]['robots']))){ echo 'checked="checked"'; } ?> name="product_description[<?php echo $language['language_id']; ?>][robots]" id="index-follow-<?php echo $language['language_id']; ?>">
-													index,follow                  
+													index, follow (default)                 
 												</label>
 											</div>
 									    </div>
@@ -265,7 +270,11 @@
 						<div class="tab-content">
 							<div class="tab-pane active" id="tab-general-seo-<?php echo $language['language_id']; ?>">  
 								<div class="form-group ">
-									<label class="col-sm-2 control-label" for="wpseosnippet-<?php echo $language['language_id']; ?>">Snippet Preview</label>
+									<label class="col-sm-2 control-label" for="wpseosnippet-<?php echo $language['language_id']; ?>">
+                                                                            <span data-toggle="tooltip" title="" data-original-title="<?php echo $help_snippet_preview; ?>">
+                                                                                <?php echo $text_snippet_preview; ?></label>
+                                                                            </span>
+                                                                        </label>
 									<div class="col-sm-10">
 									 
 										  <div id="wpseosnippet-<?php echo $language['language_id']; ?>">																															
@@ -383,7 +392,7 @@
 												</label>
 												<label for="index-follow-<?php echo $language['language_id']; ?>" class="radio-inline">
 													<input type="radio" value="index,follow" <?php if((isset($category_description[$language['language_id']]['robots']) && $category_description[$language['language_id']]['robots'] == "index,follow") || (!isset($category_description[$language['language_id']]['robots']) || empty($category_description[$language['language_id']]['robots']))){ echo 'checked="checked"'; } ?> name="category_description[<?php echo $language['language_id']; ?>][robots]" id="index-follow-<?php echo $language['language_id']; ?>">
-													index,follow                  
+													index, follow (default)               
 												</label>
 											</div>
 									    </div>
@@ -523,7 +532,11 @@
 						<div class="tab-content">
 							<div class="tab-pane active" id="tab-general-seo-<?php echo $language['language_id']; ?>">  
 								<div class="form-group ">
-									<label class="col-sm-2 control-label" for="wpseosnippet-<?php echo $language['language_id']; ?>">Snippet Preview</label>
+									<label class="col-sm-2 control-label" for="wpseosnippet-<?php echo $language['language_id']; ?>">
+                                                                             <span data-toggle="tooltip" title="" data-original-title="<?php echo $help_snippet_preview; ?>">
+                                                                                <?php echo $text_snippet_preview; ?></label>
+                                                                            </span>
+                                                                        </label>
 									<div class="col-sm-10">
 									 
 										  <div id="wpseosnippet-<?php echo $language['language_id']; ?>">																															
@@ -752,8 +765,8 @@
         </operation>
 		<operation error="skip" >
             <search position="replace" offset="1" index="4" ><![CDATA[	$output .= '<changefreq>weekly</changefreq>'; ]]></search>
-            <add><![CDATA[$output .= '<changefreq>'.( !empty($result[['changefreq']) ? $result['changefreq'] : ($setting['changefreq'] ? $setting['changefreq'] : 'weekly')).'</changefreq>';
-					$output .= '<priority>'.( !empty($result[['priority']) ? $result['priority'] : ($setting['priority'] ? $setting['priority'] : '0.7')).'</priority>';]]></add>
+            <add><![CDATA[$output .= '<changefreq>'.( !empty($result['changefreq']) ? $result['changefreq'] : ($setting['changefreq'] ? $setting['changefreq'] : 'weekly')).'</changefreq>';
+					$output .= '<priority>'.( !empty($result['priority']) ? $result['priority'] : ($setting['priority'] ? $setting['priority'] : '0.7')).'</priority>';]]></add>
         </operation>
 		<operation error="skip" >
             <search position="replace" offset="8"   ><![CDATA[$products = $this->model_catalog_product->getProducts(array('filter_manufacturer_id' => $manufacturer['manufacturer_id']));]]></search>
@@ -1026,11 +1039,26 @@
             <add><![CDATA[
 /*  DV Code START  */	
                 $this->load->model('setting/setting');
-		if($this->model_setting_setting->getSettingValue('d_seo', 'd_seo_url_type',$this->config->get('config_store_id'))) {
-			if($this->url->link('product/product', 'product_id=' . $this->request->get['product_id']) != $this->url->currentUrl){$this->response->redirect($this->url->link('product/product', 'product_id=' . $this->request->get['product_id'], 'SSL'), '301');}
-
+                if (isset($_SERVER['HTTPS']) && (($_SERVER['HTTPS'] == 'on') || ($_SERVER['HTTPS'] == '1'))) {
+                    if($this->model_setting_setting->getSettingValue('d_seo', 'd_seo_url_type',$this->config->get('config_store_id'))) {
+			if($this->url->link('product/product', 'product_id=' . $this->request->get['product_id'], 'SSL') != $this->url->currentUrl){
+                                $this->response->redirect($this->url->link('product/product', 'product_id=' . $this->request->get['product_id'], 'SSL'), '301');
+                        }
+                    }else{
+                        if($this->url->link('product/product', $url . '&product_id=' . $this->request->get['product_id'], 'SSL') != $this->url->currentUrl){
+                                $this->response->redirect($this->url->link('product/product', $url . '&product_id=' . $this->request->get['product_id'], 'SSL'), '301');
+                        }
+                    }
                 }else{
-                    if($this->url->link('product/product', $url . '&product_id=' . $this->request->get['product_id']) != $this->url->currentUrl){$this->response->redirect($this->url->link('product/product', $url . '&product_id=' . $this->request->get['product_id'], 'SSL'), '301');}
+                    if($this->model_setting_setting->getSettingValue('d_seo', 'd_seo_url_type',$this->config->get('config_store_id'))) {
+			if($this->url->link('product/product', 'product_id=' . $this->request->get['product_id']) != $this->url->currentUrl){
+                                $this->response->redirect($this->url->link('product/product', 'product_id=' . $this->request->get['product_id']), '301');
+                        }
+                    }else{
+                        if($this->url->link('product/product', $url . '&product_id=' . $this->request->get['product_id']) != $this->url->currentUrl){
+                                $this->response->redirect($this->url->link('product/product', $url . '&product_id=' . $this->request->get['product_id']), '301');
+                        }
+                    }
                 }
 /*  DV Code END */
             ]]></add>
@@ -1063,10 +1091,15 @@
 		if(isset($this->request->get['filter'])){
 			$url = $url.'&filter='.$this->request->get['filter'];
 		} 
-
-		if($this->url->link('product/category', 'path=' . $this->request->get['path'].$url) != $this->url->currentUrl){
-			$this->response->redirect($this->url->link('product/category', 'path=' . $this->request->get['path'].$url, 'SSL'), '301');
-		}
+                if (isset($_SERVER['HTTPS']) && (($_SERVER['HTTPS'] == 'on') || ($_SERVER['HTTPS'] == '1'))) {
+                    if($this->url->link('product/category', 'path=' . $this->request->get['path'].$url, 'SSL') != $this->url->currentUrl){
+                            $this->response->redirect($this->url->link('product/category', 'path=' . $this->request->get['path'].$url, 'SSL'), '301');
+                    }
+                }else{
+                    if($this->url->link('product/category', 'path=' . $this->request->get['path'].$url) != $this->url->currentUrl){
+                            $this->response->redirect($this->url->link('product/category', 'path=' . $this->request->get['path'].$url), '301');
+                    }
+                }
 /*  DV Code END */
             ]]></add>
         </operation>				
