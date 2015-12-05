@@ -72,6 +72,12 @@ class ControllerModuleDSeoModule extends Controller {
 		
 		
 		// Shopunity (requred)
+  	$this->document->addScript('view/javascript/shopunity/tinysort/jquery.tinysort.min.js');	
+		$this->document->addScript('view/javascript/shopunity/bootstrap-sortable.js');
+		$this->document->addScript('view/javascript/shopunity/bootstrap-slider/js/bootstrap-slider.js');
+		$this->document->addStyle('view/javascript/shopunity/bootstrap-slider/css/slider.css');
+ 	$this->document->addScript('view/javascript/shopunity/bootstrap-switch/bootstrap-switch.min.js');
+		$this->document->addStyle('view/stylesheet/shopunity/bootstrap-switch/bootstrap-switch.css');
 		$this->document->addStyle('view/stylesheet/shopunity/bootstrap.css');
 		$this->document->addStyle('view/stylesheet/d_quickcheckout.css');
 		$this->document->addStyle('view/stylesheet/shopunity/bootstrap.css');
@@ -152,6 +158,7 @@ class ControllerModuleDSeoModule extends Controller {
                 $data['help_sitemap_priority'] = $this->language->get('help_sitemap_priority');
                 $data['help_snippet_preview'] = $this->language->get('help_snippet_preview');
                 $data['help_separator'] = $this->language->get('help_separator');
+                $data['save_htaccess'] = $this->language->get('success_save_htaccess');
               
 		// Text
 		$data['text_enabled'] = $this->language->get('text_enabled');
@@ -225,7 +232,13 @@ class ControllerModuleDSeoModule extends Controller {
 		$data['backup_files'] = $this->getHtaceessBackups();
 		$data['data_feed'] = HTTP_CATALOG . 'sitemap.xml';
 		$data['sitemap_action'] = HTTP_SERVER.'/index.php?route=feed/google_sitemap&token='; 
-                $data['google_sitemap_status'] =  $this->model_setting_setting->getSetting('google_sitemap',$this->store_id);
+                $data['google_sitemap_status'] =  $this->model_setting_setting->getSettingValue('google_sitemap','google_sitemap_status',$this->store_id);
+                if( !isset($data['d_seo_sitemap']['changefreq'])){
+                    $data['d_seo_sitemap']['changefreq'] = '';
+                }
+                if( !isset($data['d_seo_sitemap']['priority'])){
+                    $data['d_seo_sitemap']['priority'] = '';
+                }
 		$this->load->model('localisation/language');
 		$data['languages'] = $this->model_localisation_language->getLanguages();
    		 
@@ -326,7 +339,7 @@ class ControllerModuleDSeoModule extends Controller {
 			if(!array_key_exists('sitemap', $rows->row )){
 				$this->db->query("ALTER TABLE " . DB_PREFIX . "product_description  ADD sitemap BOOLEAN DEFAULT 1");
 			}
-                        $rows = $this->db->query("SELECT * FROM " . DB_PREFIX . "category_description ");
+    $rows = $this->db->query("SELECT * FROM " . DB_PREFIX . "category_description ");
 			if(!array_key_exists('robots', $rows->row )){
 				$this->db->query("ALTER TABLE " . DB_PREFIX . "category_description  ADD robots TEXT");
 			}
@@ -339,6 +352,33 @@ class ControllerModuleDSeoModule extends Controller {
 			if(!array_key_exists('sitemap', $rows->row )){
 				$this->db->query("ALTER TABLE " . DB_PREFIX . "category_description  ADD sitemap BOOLEAN DEFAULT 1");
 			}
+   $rows = $this->db->query("SELECT * FROM " . DB_PREFIX . "information_description ");
+			if(!array_key_exists('robots', $rows->row )){
+				$this->db->query("ALTER TABLE " . DB_PREFIX . "information_description  ADD robots TEXT");
+			}
+			if(!array_key_exists('changefreq', $rows->row )){
+				$this->db->query("ALTER TABLE " . DB_PREFIX . "information_description  ADD changefreq TEXT");
+			}
+			if(!array_key_exists('priority', $rows->row )){
+				$this->db->query("ALTER TABLE " . DB_PREFIX . "information_description  ADD priority varchar(5)");
+			}
+			if(!array_key_exists('sitemap', $rows->row )){
+				$this->db->query("ALTER TABLE " . DB_PREFIX . "information_description  ADD sitemap BOOLEAN DEFAULT 1");
+			}
+   $rows = $this->db->query("SELECT * FROM " . DB_PREFIX . "manufacturer ");
+			if(!array_key_exists('robots', $rows->row )){
+				$this->db->query("ALTER TABLE " . DB_PREFIX . "manufacturer  ADD robots TEXT");
+			}
+			if(!array_key_exists('changefreq', $rows->row )){
+				$this->db->query("ALTER TABLE " . DB_PREFIX . "manufacturer  ADD changefreq TEXT");
+			}
+			if(!array_key_exists('priority', $rows->row )){
+				$this->db->query("ALTER TABLE " . DB_PREFIX . "manufacturer  ADD priority varchar(5)");
+			}
+			if(!array_key_exists('sitemap', $rows->row )){
+				$this->db->query("ALTER TABLE " . DB_PREFIX . "manufacturer  ADD sitemap BOOLEAN DEFAULT 1");
+			}
+       
                       
                         $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('common/home', '')");
                         $this->db->query("INSERT INTO oc_url_alias (query, keyword) VALUES ('account/wishlist', 'wishlist')");
@@ -553,6 +593,9 @@ class ControllerModuleDSeoModule extends Controller {
                     mkdir($dirname);
                     $this->createNote($file, $backupfile);
             }	
+            $this->load->language($this->route);
+            $json['success'] = $this->language->get('success_create_backup');
+            $this->response->setOutput(json_encode($json));
 
     }
     public function restoreHtaceessBackup($backupname) {
@@ -562,6 +605,9 @@ class ControllerModuleDSeoModule extends Controller {
 	$filename   = DIR_MAIN.".htaccess";
         
         $this->createNote($backupfile, $filename);
+        $this->load->language($this->route);
+        $json['success'] = $this->language->get('success_restore_backup');
+        $this->response->setOutput(json_encode($json));
 		
     }
     

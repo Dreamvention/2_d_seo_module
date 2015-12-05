@@ -12,8 +12,8 @@
         <file>system/mbooth/xml/mbooth_d_seo_module.xml</file>
 
         <file>admin/controller/module/d_seo_module.php</file>
-        <file>admin/model/module/d_seo_module.php</file>
         <file>admin/language/english/module/d_seo_module.php</file>
+        <file>admin/model/module/d_seo_module.php</file>
         <file>admin/view/template/module/d_seo_module.tpl</file>
         
         <file>vqmod/xml/a_vqmod_seo_module.xml</file>
@@ -26,6 +26,7 @@
     <updates>
         <update version="1.0">
             1. Final version
+            2. test at all version
         </update>   
     </updates>
 </extension>

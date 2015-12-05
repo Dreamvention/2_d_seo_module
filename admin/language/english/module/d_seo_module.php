@@ -23,7 +23,7 @@ $_['text_sitemap']                      = 'Sitemap';
 
 $_['text_seo_switch']			= 'Enable / Disable SEO url:';
 $_['text_sitemap_switch']		= 'Enable / Disable Sitemap:';
-$_['text_seo_type']			= 'Rewrite seo url: ';
+$_['text_seo_type']			= 'Category path in SEO url:';
 $_['text_create_backup']		= 'Create .htaccess backup:';
 $_['text_restore_backup']		= 'Restore .htaccess backup:';
 $_['text_modification']			= 'Modification .htaccess :';
@@ -51,12 +51,17 @@ $_['help_sitemap_changefreq']		= 'Set the frequency for the search bots to scan 
 $_['help_sitemap_priority']		= 'The priority of the page among other pages.';
 
 // Error
-$_['error_permission']			= 'Warning: You do not have permission to modify module eBay featured!';
+$_['error_permission']			= 'Warning: You do not have permission to modify module Seo Module!';
 $_['error_image']			= 'Image width &amp; height dimensions required!';
 
+//Success
+$_['success_create_backup']			= 'Success! You have done backup';
+$_['success_restore_backup']			= 'Success! You have restore backup!';
+$_['success_save_htaccess']			= 'Your changes save!';
+
 // Buttons
-$_['button_canonical']			= 'NO';
-$_['button_modified']			= 'YES (recommended)';
+$_['button_canonical']			= 'YES';
+$_['button_modified']			= 'NO(recommended)';
 $_['button_create']                     = 'Create';
 $_['button_restore']                    = 'Restore';
 $_['button_save']                       = 'Save';
