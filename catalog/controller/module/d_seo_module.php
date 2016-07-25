@@ -3,7 +3,7 @@ class ControllerModuleDSEOModule extends Controller {
 	private $id = 'd_seo_module';
 	private $route = 'module/d_seo_module';
 	
-	public function home_before($route, $data) {
+	public function home_before($route, &$data) {
 		$this->load->model($this->route);
 		
 		$seo_extensions = $this->{'model_module_' . $this->id}->getSEOExtensions();
@@ -14,7 +14,7 @@ class ControllerModuleDSEOModule extends Controller {
 		}	
 	}
 			
-	public function home_after($route, $data, $output) {
+	public function home_after($route, $data, &$output) {
 		$this->load->model($this->route);
 	
 		$seo_extensions = $this->{'model_module_' . $this->id}->getSEOExtensions();
@@ -25,7 +25,7 @@ class ControllerModuleDSEOModule extends Controller {
 		}
 	}
 	
-	public function category_before($route, $data) {
+	public function category_before($route, &$data) {
 		$this->load->model($this->route);
 		
 		$seo_extensions = $this->{'model_module_' . $this->id}->getSEOExtensions();
@@ -36,7 +36,7 @@ class ControllerModuleDSEOModule extends Controller {
 		}	
 	}
 			
-	public function category_after($route, $data, $output) {
+	public function category_after($route, $data, &$output) {
 		$this->load->model($this->route);
 	
 		$seo_extensions = $this->{'model_module_' . $this->id}->getSEOExtensions();
@@ -47,7 +47,7 @@ class ControllerModuleDSEOModule extends Controller {
 		}
 	}
 	
-	public function product_before($route, $data) {
+	public function product_before($route, &$data) {
 		$this->load->model($this->route);
 		
 		$seo_extensions = $this->{'model_module_' . $this->id}->getSEOExtensions();
@@ -58,7 +58,7 @@ class ControllerModuleDSEOModule extends Controller {
 		}	
 	}
 			
-	public function product_after($route, $data, $output) {
+	public function product_after($route, $data, &$output) {
 		$this->load->model($this->route);
 	
 		$seo_extensions = $this->{'model_module_' . $this->id}->getSEOExtensions();
@@ -69,7 +69,7 @@ class ControllerModuleDSEOModule extends Controller {
 		}
 	}
 	
-	public function manufacturer_info_before($route, $data) {
+	public function manufacturer_info_before($route, &$data) {
 		$this->load->model($this->route);
 		
 		$seo_extensions = $this->{'model_module_' . $this->id}->getSEOExtensions();
@@ -81,7 +81,7 @@ class ControllerModuleDSEOModule extends Controller {
 		
 	}
 			
-	public function manufacturer_info_after($route, $data, $output) {
+	public function manufacturer_info_after($route, $data, &$output) {
 		$this->load->model($this->route);
 	
 		$seo_extensions = $this->{'model_module_' . $this->id}->getSEOExtensions();
@@ -92,7 +92,7 @@ class ControllerModuleDSEOModule extends Controller {
 		}
 	}
 	
-	public function information_before($route, $data) {
+	public function information_before($route, &$data) {
 		$this->load->model($this->route);
 		
 		$seo_extensions = $this->{'model_module_' . $this->id}->getSEOExtensions();
@@ -103,7 +103,7 @@ class ControllerModuleDSEOModule extends Controller {
 		}	
 	}
 			
-	public function information_after($route, $data, $output) {
+	public function information_after($route, $data, &$output) {
 		$this->load->model($this->route);
 	
 		$seo_extensions = $this->{'model_module_' . $this->id}->getSEOExtensions();
