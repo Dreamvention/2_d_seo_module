@@ -148,7 +148,7 @@ class ControllerModuleDSEOModule extends Controller {
 		$this->response->setOutput(json_encode($data));
 	}
 	
-	public function menu_after($route, $data, $output) {
+	public function menu_after($route, $data, &$output) {
 		$this->load->language($this->route);
 		
 		$this->load->model($this->route);
@@ -184,7 +184,7 @@ class ControllerModuleDSEOModule extends Controller {
 		return $this->load->view($this->route . '/menu.tpl', $data);
 	}
 	
-	public function setting_after($route, $data, $output) {
+	public function setting_after($route, $data, &$output) {
 		$this->load->language($this->route);
 		
 		$this->load->model($this->route);
@@ -264,7 +264,7 @@ class ControllerModuleDSEOModule extends Controller {
 		$output = $html_dom;
 	}
 	
-	public function category_form($route, $data, $output) {
+	public function category_form($route, $data, &$output) {
 		$this->load->language($this->route);
 		
 		$this->load->model($this->route);
@@ -319,7 +319,7 @@ class ControllerModuleDSEOModule extends Controller {
 		$output = $html_dom;
 	}
 	
-	public function category_add($route, $output, $data) {
+	public function category_add($route, $output, &$data) {
 		$this->load->model($this->route);
 		
 		$data['category_id'] = $output;
@@ -331,7 +331,7 @@ class ControllerModuleDSEOModule extends Controller {
 		}
 	}
 	
-	public function category_edit($route, $output, $category_id, $data) {
+	public function category_edit($route, $output, $category_id, &$data) {
 		$this->load->model($this->route);
 		
 		$data['category_id'] = $category_id;
@@ -343,7 +343,7 @@ class ControllerModuleDSEOModule extends Controller {
 		}
 	}
 	
-	public function product_form($route, $data, $output) {
+	public function product_form($route, $data, &$output) {
 		$this->load->language($this->route);
 		
 		$this->load->model($this->route);
@@ -403,7 +403,7 @@ class ControllerModuleDSEOModule extends Controller {
 		$output = $html_dom;
 	}
 	
-	public function product_add($route, $output, $data) {
+	public function product_add($route, $output, &$data) {
 		$this->load->model($this->route);
 		
 		$data['product_id'] = $output;
@@ -415,7 +415,7 @@ class ControllerModuleDSEOModule extends Controller {
 		}
 	}
 	
-	public function product_edit($route, $output, $product_id, $data) {
+	public function product_edit($route, $output, $product_id, &$data) {
 		$this->load->model($this->route);
 		
 		$data['product_id'] = $product_id;
@@ -427,7 +427,7 @@ class ControllerModuleDSEOModule extends Controller {
 		}
 	}
 	
-	public function manufacturer_form($route, $data, $output) {
+	public function manufacturer_form($route, $data, &$output) {
 		$this->load->language($this->route);
 		
 		$this->load->model($this->route);
@@ -503,7 +503,7 @@ class ControllerModuleDSEOModule extends Controller {
 		$output = $html_dom;
 	}
 	
-	public function manufacturer_add($route, $output, $data) {
+	public function manufacturer_add($route, $output, &$data) {
 		$this->load->model($this->route);
 		
 		$data['manufacturer_id'] = $output;
@@ -515,7 +515,7 @@ class ControllerModuleDSEOModule extends Controller {
 		}
 	}
 	
-	public function manufacturer_edit($route, $output, $manufacturer_id, $data) {
+	public function manufacturer_edit($route, $output, $manufacturer_id, &$data) {
 		$this->load->model($this->route);
 		
 		$data['manufacturer_id'] = $manufacturer_id;
@@ -527,7 +527,7 @@ class ControllerModuleDSEOModule extends Controller {
 		}
 	}
 				
-	public function information_form($route, $data, $output) {
+	public function information_form($route, $data, &$output) {
 		$this->load->language($this->route);
 		
 		$this->load->model($this->route);
@@ -582,7 +582,7 @@ class ControllerModuleDSEOModule extends Controller {
 		$output = $html_dom;
 	}
 	
-	public function information_add($route, $output, $data) {
+	public function information_add($route, $output, &$data) {
 		$this->load->model($this->route);
 		
 		$data['information_id'] = $output;
@@ -594,7 +594,7 @@ class ControllerModuleDSEOModule extends Controller {
 		}
 	}
 	
-	public function information_edit($route, $output, $information_id, $data) {
+	public function information_edit($route, $output, $information_id, &$data) {
 		$this->load->model($this->route);
 		
 		$data['information_id'] = $information_id;
