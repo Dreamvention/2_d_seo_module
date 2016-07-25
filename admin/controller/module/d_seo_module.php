@@ -640,7 +640,7 @@ class ControllerModuleDSEOModule extends Controller {
 		$this->model_extension_event->addEvent($this->id, 'admin/view/catalog/information_form/after', 'module/d_seo_module/information_form');
 		$this->model_extension_event->addEvent($this->id, 'admin/model/catalog/information/addInformation/after', 'module/d_seo_module/information_add');
 		$this->model_extension_event->addEvent($this->id, 'admin/model/catalog/information/editInformation/after', 'module/d_seo_module/information_edit');
-		$this->model_extension_event->addEvent($this->id, 'catalog/view/common/home/after', 'module/d_seo_module/home_before');
+		$this->model_extension_event->addEvent($this->id, 'catalog/view/common/home/before', 'module/d_seo_module/home_before');
 		$this->model_extension_event->addEvent($this->id, 'catalog/view/*/template/common/home/after', 'module/d_seo_module/home_after');
 		$this->model_extension_event->addEvent($this->id, 'catalog/view/product/category/before', 'module/d_seo_module/category_before');
 		$this->model_extension_event->addEvent($this->id, 'catalog/view/*/template/product/category/after', 'module/d_seo_module/category_after');
