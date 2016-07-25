@@ -116,7 +116,7 @@ class ControllerModuleDSEOModule extends Controller {
 		} else {
 			$data[$this->id . '_status'] = $this->config->get($this->id . '_status');
 		}
-				
+		
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
@@ -625,7 +625,9 @@ class ControllerModuleDSEOModule extends Controller {
 		$this->{'model_module_' . $this->id}->installModule();
 		$this->{'model_module_' . $this->id}->installDependencies($this->mbooth);
 		
-		$this->model_extension_event->addEvent($this->id, 'admin/view/common/menu/after', 'module/d_seo_module/menu_after');		
+		$this->model_extension_event->addEvent($this->id, 'admin/view/common/menu/after', 'module/d_seo_module/menu_after');	
+		$this->model_extension_event->addEvent($this->id, 'admin/view/setting/setting/after', 'module/d_seo_module/setting_after');		
+		$this->model_extension_event->addEvent($this->id, 'admin/view/setting/store_form/after', 'module/d_seo_module/setting_after');	
 		$this->model_extension_event->addEvent($this->id, 'admin/view/catalog/category_form/after', 'module/d_seo_module/category_form');
 		$this->model_extension_event->addEvent($this->id, 'admin/model/catalog/category/addCategory/after', 'module/d_seo_module/category_add');
 		$this->model_extension_event->addEvent($this->id, 'admin/model/catalog/category/editCategory/after', 'module/d_seo_module/category_edit');
@@ -639,20 +641,16 @@ class ControllerModuleDSEOModule extends Controller {
 		$this->model_extension_event->addEvent($this->id, 'admin/model/catalog/information/addInformation/after', 'module/d_seo_module/information_add');
 		$this->model_extension_event->addEvent($this->id, 'admin/model/catalog/information/editInformation/after', 'module/d_seo_module/information_edit');
 		$this->model_extension_event->addEvent($this->id, 'catalog/view/common/home/after', 'module/d_seo_module/home_before');
+		$this->model_extension_event->addEvent($this->id, 'catalog/view/*/template/common/home/after', 'module/d_seo_module/home_after');
 		$this->model_extension_event->addEvent($this->id, 'catalog/view/product/category/before', 'module/d_seo_module/category_before');
+		$this->model_extension_event->addEvent($this->id, 'catalog/view/*/template/product/category/after', 'module/d_seo_module/category_after');
 		$this->model_extension_event->addEvent($this->id, 'catalog/view/product/product/before', 'module/d_seo_module/product_before');
+		$this->model_extension_event->addEvent($this->id, 'catalog/view/*/template/product/product/after', 'module/d_seo_module/product_after');
 		$this->model_extension_event->addEvent($this->id, 'catalog/view/product/manufacturer_info/before', 'module/d_seo_module/manufacturer_info_before');
+		$this->model_extension_event->addEvent($this->id, 'catalog/view/*/template/product/manufacturer_info/after', 'module/d_seo_module/manufacturer_info_after');
 		$this->model_extension_event->addEvent($this->id, 'catalog/view/information/information/before', 'module/d_seo_module/information_before');
-		
-		$themes = $this->{'model_module_' . $this->id}->getThemes();
-		foreach ($themes as $theme) {
-			$this->model_extension_event->addEvent($this->id, 'catalog/view/' . $theme . 'template/common/home/after', 'module/d_seo_module/home_after');
-			$this->model_extension_event->addEvent($this->id, 'catalog/view/' . $theme . 'template/product/category/after', 'module/d_seo_module/category_after');
-			$this->model_extension_event->addEvent($this->id, 'catalog/view/' . $theme . 'template/product/product/after', 'module/d_seo_module/product_after');
-			$this->model_extension_event->addEvent($this->id, 'catalog/view/' . $theme . 'template/product/manufacturer_info/after', 'module/d_seo_module/manufacturer_info_after');
-			$this->model_extension_event->addEvent($this->id, 'catalog/view/' . $theme . 'template/information/information/after', 'module/d_seo_module/information_after');
-		}
-		
+		$this->model_extension_event->addEvent($this->id, 'catalog/view/*/template/information/information/after', 'module/d_seo_module/information_after');
+				
 		//$this->{'model_module_' . $this->id}->setVqmod('a_vqmod_'.$this->id.'.xml', 1);
 		$this->getUpdate(1);	  
 	}

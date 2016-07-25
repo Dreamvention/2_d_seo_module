@@ -39,29 +39,7 @@ class ModelModuleDSEOModule extends Model {
 		}
 		return $seo_extensions;
 	}
-	
-	/*
-	*	Return list of themes.
-	*/
-	public function getThemes(){
-		$installed_themes = array();
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "extension WHERE type = 'theme' ORDER BY code");
-		foreach ($query->rows as $result) {
-			$installed_themes[] = $result['code'];
-		}		
-		$themes = array();
-		$files = glob(DIR_APPLICATION . 'controller/theme/*.php');
-		if ($files) {
-			foreach ($files as $file) {
-				$theme = basename($file, '.php');
-				if (in_array($theme, $installed_themes)) {
-					$themes[] = $theme;
-				}
-			}
-		}
-		return $themes;
-	}
-	
+		
 	/*
 	*	Return list of languages.
 	*/
