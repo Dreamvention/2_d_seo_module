@@ -153,8 +153,7 @@ class ControllerModuleDSEOModule extends Controller {
 		
 		$this->load->model($this->route);
 		
-		require_once(DIR_SYSTEM . 'library/simple_html_dom.php');
-		$html_dom = new simple_html_dom();
+		$html_dom = new d_simple_html_dom();
 		$html_dom->load($output, $lowercase=true, $stripRN=false, $defaultBRText=DEFAULT_BR_TEXT);
 		
 		$html_menu = '<li id="d_seo"><a class="parent"><i class="fa fa-signal fa-fw"></i> <span>' . $this->language->get('text_seo') . '</span></a><ul>';
@@ -189,8 +188,7 @@ class ControllerModuleDSEOModule extends Controller {
 		
 		$this->load->model($this->route);
 		
-		require_once(DIR_SYSTEM . 'library/simple_html_dom.php');
-		$html_dom = new simple_html_dom();
+		$html_dom = new d_simple_html_dom();
 		$html_dom->load($output, $lowercase=true, $stripRN=false, $defaultBRText=DEFAULT_BR_TEXT);
 		
 		$html_tab_general = '';
@@ -269,8 +267,7 @@ class ControllerModuleDSEOModule extends Controller {
 		
 		$this->load->model($this->route);
 		
-		require_once(DIR_SYSTEM . 'library/simple_html_dom.php');
-		$html_dom = new simple_html_dom();
+		$html_dom = new d_simple_html_dom();
 		$html_dom->load($output, $lowercase=true, $stripRN=false, $defaultBRText=DEFAULT_BR_TEXT);
 		
 		$html_tab_general = '';
@@ -348,8 +345,7 @@ class ControllerModuleDSEOModule extends Controller {
 		
 		$this->load->model($this->route);
 		
-		require_once(DIR_SYSTEM . 'library/simple_html_dom.php');
-		$html_dom = new simple_html_dom();
+		$html_dom = new d_simple_html_dom();
 		$html_dom->load($output, $lowercase=true, $stripRN=false, $defaultBRText=DEFAULT_BR_TEXT);
 		
 		$html_tab_general = '';
@@ -431,9 +427,7 @@ class ControllerModuleDSEOModule extends Controller {
 		$this->load->language($this->route);
 		
 		$this->load->model($this->route);
-		
-		require_once(DIR_SYSTEM . 'library/simple_html_dom.php');
-						
+								
 		$html_tab_general = '';
 		$html_tab_general_language = array();
 		$html_tab_data = '';
@@ -456,7 +450,7 @@ class ControllerModuleDSEOModule extends Controller {
 			$html_script .= $this->load->controller('module/' . $seo_extension . '/manufacturer_form_script');
 		}	
 		
-		$html_dom = new simple_html_dom();
+		$html_dom = new d_simple_html_dom();
 		$html_dom->load($output, $lowercase=true, $stripRN=false, $defaultBRText=DEFAULT_BR_TEXT);
 		$html_manufacturer_name = $html_dom->find('#form-manufacturer .form-group', 0)->outertext;
 		$html_dom->find('#form-manufacturer .form-group', 0)->outertext = '';
@@ -532,8 +526,7 @@ class ControllerModuleDSEOModule extends Controller {
 		
 		$this->load->model($this->route);
 		
-		require_once(DIR_SYSTEM . 'library/simple_html_dom.php');
-		$html_dom = new simple_html_dom();
+		$html_dom = new d_simple_html_dom();
 		$html_dom->load($output, $lowercase=true, $stripRN=false, $defaultBRText=DEFAULT_BR_TEXT);
 		
 		$html_tab_general = '';
@@ -622,9 +615,6 @@ class ControllerModuleDSEOModule extends Controller {
 		$this->load->model($this->route);
 		$this->load->model('extension/event');
 		
-		$this->{'model_module_' . $this->id}->installModule();
-		$this->{'model_module_' . $this->id}->installDependencies($this->mbooth);
-		
 		$this->model_extension_event->addEvent($this->id, 'admin/view/common/menu/after', 'module/d_seo_module/menu_after');	
 		$this->model_extension_event->addEvent($this->id, 'admin/view/setting/setting/after', 'module/d_seo_module/setting_after');		
 		$this->model_extension_event->addEvent($this->id, 'admin/view/setting/store_form/after', 'module/d_seo_module/setting_after');	
@@ -650,6 +640,9 @@ class ControllerModuleDSEOModule extends Controller {
 		$this->model_extension_event->addEvent($this->id, 'catalog/view/*/template/product/manufacturer_info/after', 'module/d_seo_module/manufacturer_info_after');
 		$this->model_extension_event->addEvent($this->id, 'catalog/view/information/information/before', 'module/d_seo_module/information_before');
 		$this->model_extension_event->addEvent($this->id, 'catalog/view/*/template/information/information/after', 'module/d_seo_module/information_after');
+		
+		$this->{'model_module_' . $this->id}->installModule();
+		$this->{'model_module_' . $this->id}->installDependencies($this->mbooth);
 				
 		//$this->{'model_module_' . $this->id}->setVqmod('a_vqmod_'.$this->id.'.xml', 1);
 		$this->getUpdate(1);	  
