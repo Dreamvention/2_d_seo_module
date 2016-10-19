@@ -1,0 +1,18 @@
+<extension>
+    <id>d_simple_html_dom</id>
+    <name>Simple HTML DOM</name>
+    <description>HTML TAG Selector for PHP</description>
+    <type>module</type>
+    <version>1.0.0</version>
+	<opencart_version>2.0.0.0,2.0.1.0,2.0.1.1,2.0.2.0</opencart_version>
+    <mbooth_version>3.2</mbooth_version>
+    <author>Dreamvention (Artem)</author>
+    <files>
+		<file>system/mbooth/xml/mbooth_d_simple_html_dom.xml</file>
+		<file>system/mbooth/extension/d_simple_html_dom.json</file>
+		<file>system/library/d_simple_html_dom.php</file>	
+	</files>
+	<updates>
+        <update version="2.0"></update>
+    </updates>
+</extension>
