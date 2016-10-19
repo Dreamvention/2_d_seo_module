@@ -1,12 +1,12 @@
 <?php
 class ControllerModuleDSEOModule extends Controller {
-	private $id = 'd_seo_module';
+	private $codename = 'd_seo_module';
 	private $route = 'module/d_seo_module';
 	
 	public function home_before($route, &$data) {
 		$this->load->model($this->route);
 		
-		$seo_extensions = $this->{'model_module_' . $this->id}->getSEOExtensions();
+		$seo_extensions = $this->{'model_module_' . $this->codename}->getSEOExtensions();
 		
 		foreach ($seo_extensions as $seo_extension) {
 			$info = $this->load->controller('module/' . $seo_extension . '/home_data', $data);
@@ -17,7 +17,7 @@ class ControllerModuleDSEOModule extends Controller {
 	public function home_after($route, $data, &$output) {
 		$this->load->model($this->route);
 	
-		$seo_extensions = $this->{'model_module_' . $this->id}->getSEOExtensions();
+		$seo_extensions = $this->{'model_module_' . $this->codename}->getSEOExtensions();
 		
 		foreach ($seo_extensions as $seo_extension) {
 			$info = $this->load->controller('module/' . $seo_extension . '/home_html', $output);
@@ -28,7 +28,7 @@ class ControllerModuleDSEOModule extends Controller {
 	public function category_before($route, &$data) {
 		$this->load->model($this->route);
 		
-		$seo_extensions = $this->{'model_module_' . $this->id}->getSEOExtensions();
+		$seo_extensions = $this->{'model_module_' . $this->codename}->getSEOExtensions();
 		
 		foreach ($seo_extensions as $seo_extension) {
 			$info = $this->load->controller('module/' . $seo_extension . '/category_data', $data);
@@ -39,7 +39,7 @@ class ControllerModuleDSEOModule extends Controller {
 	public function category_after($route, $data, &$output) {
 		$this->load->model($this->route);
 	
-		$seo_extensions = $this->{'model_module_' . $this->id}->getSEOExtensions();
+		$seo_extensions = $this->{'model_module_' . $this->codename}->getSEOExtensions();
 		
 		foreach ($seo_extensions as $seo_extension) {
 			$info = $this->load->controller('module/' . $seo_extension . '/category_html', $output);
@@ -50,7 +50,7 @@ class ControllerModuleDSEOModule extends Controller {
 	public function product_before($route, &$data) {
 		$this->load->model($this->route);
 		
-		$seo_extensions = $this->{'model_module_' . $this->id}->getSEOExtensions();
+		$seo_extensions = $this->{'model_module_' . $this->codename}->getSEOExtensions();
 		
 		foreach ($seo_extensions as $seo_extension) {
 			$info = $this->load->controller('module/' . $seo_extension . '/product_data', $data);
@@ -61,7 +61,7 @@ class ControllerModuleDSEOModule extends Controller {
 	public function product_after($route, $data, &$output) {
 		$this->load->model($this->route);
 	
-		$seo_extensions = $this->{'model_module_' . $this->id}->getSEOExtensions();
+		$seo_extensions = $this->{'model_module_' . $this->codename}->getSEOExtensions();
 		
 		foreach ($seo_extensions as $seo_extension) {
 			$info = $this->load->controller('module/' . $seo_extension . '/product_html', $output);
@@ -72,7 +72,7 @@ class ControllerModuleDSEOModule extends Controller {
 	public function manufacturer_info_before($route, &$data) {
 		$this->load->model($this->route);
 		
-		$seo_extensions = $this->{'model_module_' . $this->id}->getSEOExtensions();
+		$seo_extensions = $this->{'model_module_' . $this->codename}->getSEOExtensions();
 		
 		foreach ($seo_extensions as $seo_extension) {
 			$info = $this->load->controller('module/' . $seo_extension . '/manufacturer_info_data', $data);
@@ -84,7 +84,7 @@ class ControllerModuleDSEOModule extends Controller {
 	public function manufacturer_info_after($route, $data, &$output) {
 		$this->load->model($this->route);
 	
-		$seo_extensions = $this->{'model_module_' . $this->id}->getSEOExtensions();
+		$seo_extensions = $this->{'model_module_' . $this->codename}->getSEOExtensions();
 		
 		foreach ($seo_extensions as $seo_extension) {
 			$info = $this->load->controller('module/' . $seo_extension . '/manufacturer_info_html', $output);
@@ -95,7 +95,7 @@ class ControllerModuleDSEOModule extends Controller {
 	public function information_before($route, &$data) {
 		$this->load->model($this->route);
 		
-		$seo_extensions = $this->{'model_module_' . $this->id}->getSEOExtensions();
+		$seo_extensions = $this->{'model_module_' . $this->codename}->getSEOExtensions();
 		
 		foreach ($seo_extensions as $seo_extension) {
 			$info = $this->load->controller('module/' . $seo_extension . '/information_data', $data);
@@ -106,7 +106,7 @@ class ControllerModuleDSEOModule extends Controller {
 	public function information_after($route, $data, &$output) {
 		$this->load->model($this->route);
 	
-		$seo_extensions = $this->{'model_module_' . $this->id}->getSEOExtensions();
+		$seo_extensions = $this->{'model_module_' . $this->codename}->getSEOExtensions();
 		
 		foreach ($seo_extensions as $seo_extension) {
 			$info = $this->load->controller('module/' . $seo_extension . '/information_html', $output);

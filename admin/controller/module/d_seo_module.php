@@ -1,19 +1,31 @@
 <?php
 class ControllerModuleDSEOModule extends Controller {
-	private $id = 'd_seo_module';
+	private $codename = 'd_seo_module';
 	private $route = 'module/d_seo_module';
-	private $mbooth = '';
-	private $config_file = '';
-	private $prefix = '';
-	private $sub_versions = array();
+	private $config_file = 'd_seo_module';
+	private $extension = array();
 	private $error = array(); 
-	
+			
 	public function __construct($registry) {
 		parent::__construct($registry);
-		$this->load->model($this->route);
+		
+		$this->d_shopunity = (file_exists(DIR_SYSTEM . 'mbooth/extension/d_shopunity.json'));
+		$this->extension = json_decode(file_get_contents(DIR_SYSTEM . 'mbooth/extension/' . $this->codename . '.json'), true);
+	}
+	
+	public function required(){
+		$this->load->language($this->route);
 
-		$this->mbooth = $this->{'model_module_' . $this->id}->getMboothFile($this->id, $this->sub_versions);
-		$this->config_file = $this->{'model_module_' . $this->id}->getConfigFile($this->id, $this->sub_versions);
+		$this->document->setTitle($this->language->get('heading_title_main'));
+		$data['heading_title'] = $this->language->get('heading_title_main');
+		$data['text_not_found'] = $this->language->get('text_not_found');
+		$data['breadcrumbs'] = array();
+
+   		$data['header'] = $this->load->controller('common/header');
+   		$data['column_left'] = $this->load->controller('common/column_left');
+   		$data['footer'] = $this->load->controller('common/footer');
+
+   		$this->response->setOutput($this->load->view('error/not_found.tpl', $data));
 	}
 
 	public function index() {
@@ -22,25 +34,35 @@ class ControllerModuleDSEOModule extends Controller {
 		$this->load->model($this->route);
 		$this->load->model('setting/setting');
 		$this->load->model('localisation/language');
+		
+		if (!$this->d_shopunity) {
+			$this->response->redirect($this->url->link($this->route . '/required', 'codename=d_shopunity&token=' . $this->session->data['token'], 'SSL'));
+		}
+		
+		$this->load->model('d_shopunity/mbooth');
+				
+		$this->model_d_shopunity_mbooth->validateDependencies($this->codename);
 
 		// styles and scripts
 		$this->document->addLink('//fonts.googleapis.com/css?family=PT+Sans:400,700,700italic,400italic&subset=latin,cyrillic-ext,latin-ext,cyrillic', "stylesheet");
 		$this->document->addStyle('view/stylesheet/shopunity/bootstrap.css');
+		$this->document->addStyle('view/stylesheet/shopunity/bootstrap-switch/bootstrap-switch.css');
+		$this->document->addScript('view/javascript/shopunity/bootstrap-switch/bootstrap-switch.min.js');
 				
 		// Heading
 		$this->document->setTitle($this->language->get('heading_title_main'));
 		$data['heading_title'] = $this->language->get('heading_title_main');
 		
 		// Variable
-		$data['id'] = $this->id;
+		$data['codename'] = $this->codename;
 		$data['route'] = $this->route;
-		$data['mbooth'] = $this->mbooth;
+		$data['version'] = $this->extension['version'];
 		$data['config'] = $this->config_file;
+		$data['d_shopunity'] = $this->d_shopunity;
 		$data['token'] =  $this->session->data['token'];
-		$data['stores'] = $this->{'model_module_' . $this->id}->getStores();
-		$data['languages'] = $this->{'model_module_' . $this->id}->getLanguages();
-		$data['version'] = $this->{'model_module_' . $this->id}->getVersion($data['mbooth']);
-				
+		$data['stores'] = $this->{'model_module_' . $this->codename}->getStores();
+		$data['languages'] = $this->{'model_module_' . $this->codename}->getLanguages();
+						
 		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
 			$data['server'] = HTTPS_SERVER;
 			$data['catalog'] = HTTPS_CATALOG;
@@ -53,8 +75,6 @@ class ControllerModuleDSEOModule extends Controller {
 		$data['module_link'] = $this->url->link($this->route, 'token=' . $this->session->data['token'], 'SSL');
 		$data['action'] = $this->url->link($this->route . '/save', 'token=' . $this->session->data['token'], 'SSL');
 		$data['cancel'] = $this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL');
-		$data['get_cancel'] = str_replace('&amp;', '&', $this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL'));
-		$data['get_update'] = str_replace('&amp;', '&', $this->url->link($this->route.'/getUpdate', 'token=' . $this->session->data['token'], 'SSL'));
 		
 		// Tab
 		$data['text_settings'] = $this->language->get('text_settings');
@@ -65,10 +85,8 @@ class ControllerModuleDSEOModule extends Controller {
 		$data['button_save'] = $this->language->get('button_save');
 		$data['button_save_and_stay'] = $this->language->get('button_save_and_stay');
 		$data['button_cancel'] = $this->language->get('button_cancel');	
-		$data['button_get_update'] = $this->language->get('button_get_update');
 				
 		// Entry
-		$data['entry_get_update'] = sprintf($this->language->get('entry_get_update'), $data['version']);
 		$data['entry_status'] = $this->language->get('entry_status');
 				
 		// Text
@@ -79,11 +97,9 @@ class ControllerModuleDSEOModule extends Controller {
 		$data['text_disabled'] = $this->language->get('text_disabled');
 		$data['text_module'] = $this->language->get('text_module');
 				
-		// Notification		
-		if (isset($this->error['warning'])) {
-			$data['error_warning'] = $this->error['warning'];
-		} else {
-			$data['error_warning'] = '';
+		// Notification
+		foreach($this->error as $key => $error){
+			$data['error'][$key] = $error;
 		}
 		
 		if (isset($this->session->data['success'])) {
@@ -111,11 +127,11 @@ class ControllerModuleDSEOModule extends Controller {
 			'href' => $this->url->link($this->route, 'token=' . $this->session->data['token'], 'SSL')
 		);
 
-		if (isset($this->request->post[$this->id . '_status'])) {
-			$data[$this->id . '_status'] = $this->request->post[$this->id . '_status'];
-		} else {
-			$data[$this->id . '_status'] = $this->config->get($this->id . '_status');
-		}
+		//setting 		
+		$setting = $this->model_setting_setting->getSetting($this->codename);
+		$status = isset($setting[$this->codename . '_status']) ? $setting[$this->codename . '_status'] : false;
+		
+		$data['status'] = $status;
 		
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
@@ -131,7 +147,7 @@ class ControllerModuleDSEOModule extends Controller {
 		$this->load->model('setting/setting');
 		
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
-			$this->model_setting_setting->editSetting($this->id, $this->request->post);
+			$this->model_setting_setting->editSetting($this->codename, $this->request->post);
 
 			$this->session->data['success'] = $this->language->get('text_success');
 		}
@@ -158,7 +174,7 @@ class ControllerModuleDSEOModule extends Controller {
 		
 		$html_menu = '<li id="d_seo"><a class="parent"><i class="fa fa-signal fa-fw"></i> <span>' . $this->language->get('text_seo') . '</span></a><ul>';
 		
-		$seo_extensions = $this->{'model_module_' . $this->id}->getSEOExtensions();
+		$seo_extensions = $this->{'model_module_' . $this->codename}->getSEOExtensions();
 		
 		foreach ($seo_extensions as $seo_extension) {
 			$html_menu .= $this->load->controller('module/' . $seo_extension . '/menu');
@@ -200,8 +216,8 @@ class ControllerModuleDSEOModule extends Controller {
 		$html_style = '';
 		$html_script = '';
 		
-		$seo_extensions = $this->{'model_module_' . $this->id}->getSEOExtensions();
-		$languages = $this->{'model_module_' . $this->id}->getLanguages();
+		$seo_extensions = $this->{'model_module_' . $this->codename}->getSEOExtensions();
+		$languages = $this->{'model_module_' . $this->codename}->getLanguages();
 		
 		foreach ($seo_extensions as $seo_extension) {
 			$html_tab_general .= $this->load->controller('module/' . $seo_extension . '/setting_tab_general');
@@ -277,8 +293,8 @@ class ControllerModuleDSEOModule extends Controller {
 		$html_style = '';
 		$html_script = '';
 		
-		$seo_extensions = $this->{'model_module_' . $this->id}->getSEOExtensions();
-		$languages = $this->{'model_module_' . $this->id}->getLanguages();
+		$seo_extensions = $this->{'model_module_' . $this->codename}->getSEOExtensions();
+		$languages = $this->{'model_module_' . $this->codename}->getLanguages();
 		
 		foreach ($seo_extensions as $seo_extension) {
 			$html_tab_general .= $this->load->controller('module/' . $seo_extension . '/category_form_tab_general');
@@ -321,7 +337,7 @@ class ControllerModuleDSEOModule extends Controller {
 		
 		$data['category_id'] = $output;
 				
-		$seo_extensions = $this->{'model_module_' . $this->id}->getSEOExtensions();
+		$seo_extensions = $this->{'model_module_' . $this->codename}->getSEOExtensions();
 				
 		foreach ($seo_extensions as $seo_extension) {
 			$this->load->controller('module/' . $seo_extension . '/category_form_save', $data);
@@ -333,7 +349,7 @@ class ControllerModuleDSEOModule extends Controller {
 		
 		$data['category_id'] = $category_id;
 				
-		$seo_extensions = $this->{'model_module_' . $this->id}->getSEOExtensions();
+		$seo_extensions = $this->{'model_module_' . $this->codename}->getSEOExtensions();
 				
 		foreach ($seo_extensions as $seo_extension) {
 			$this->load->controller('module/' . $seo_extension . '/category_form_save', $data);
@@ -356,8 +372,8 @@ class ControllerModuleDSEOModule extends Controller {
 		$html_style = '';
 		$html_script = '';
 		
-		$seo_extensions = $this->{'model_module_' . $this->id}->getSEOExtensions();
-		$languages = $this->{'model_module_' . $this->id}->getLanguages();
+		$seo_extensions = $this->{'model_module_' . $this->codename}->getSEOExtensions();
+		$languages = $this->{'model_module_' . $this->codename}->getLanguages();
 		
 		foreach ($seo_extensions as $seo_extension) {
 			$html_tab_general .= $this->load->controller('module/' . $seo_extension . '/product_form_tab_general');
@@ -404,7 +420,7 @@ class ControllerModuleDSEOModule extends Controller {
 		
 		$data['product_id'] = $output;
 				
-		$seo_extensions = $this->{'model_module_' . $this->id}->getSEOExtensions();
+		$seo_extensions = $this->{'model_module_' . $this->codename}->getSEOExtensions();
 				
 		foreach ($seo_extensions as $seo_extension) {
 			$this->load->controller('module/' . $seo_extension . '/product_form_save', $data);
@@ -416,7 +432,7 @@ class ControllerModuleDSEOModule extends Controller {
 		
 		$data['product_id'] = $product_id;
 				
-		$seo_extensions = $this->{'model_module_' . $this->id}->getSEOExtensions();
+		$seo_extensions = $this->{'model_module_' . $this->codename}->getSEOExtensions();
 				
 		foreach ($seo_extensions as $seo_extension) {
 			$this->load->controller('module/' . $seo_extension . '/product_form_save', $data);
@@ -435,8 +451,8 @@ class ControllerModuleDSEOModule extends Controller {
 		$html_style = '';
 		$html_script = '';
 		
-		$seo_extensions = $this->{'model_module_' . $this->id}->getSEOExtensions();
-		$languages = $this->{'model_module_' . $this->id}->getLanguages();
+		$seo_extensions = $this->{'model_module_' . $this->codename}->getSEOExtensions();
+		$languages = $this->{'model_module_' . $this->codename}->getLanguages();
 				
 		foreach ($seo_extensions as $seo_extension) {
 			$html_tab_general .= $this->load->controller('module/' . $seo_extension . '/manufacturer_form_tab_general');
@@ -502,7 +518,7 @@ class ControllerModuleDSEOModule extends Controller {
 		
 		$data['manufacturer_id'] = $output;
 				
-		$seo_extensions = $this->{'model_module_' . $this->id}->getSEOExtensions();
+		$seo_extensions = $this->{'model_module_' . $this->codename}->getSEOExtensions();
 				
 		foreach ($seo_extensions as $seo_extension) {
 			$this->load->controller('module/' . $seo_extension . '/manufacturer_form_save', $data);
@@ -514,7 +530,7 @@ class ControllerModuleDSEOModule extends Controller {
 		
 		$data['manufacturer_id'] = $manufacturer_id;
 				
-		$seo_extensions = $this->{'model_module_' . $this->id}->getSEOExtensions();
+		$seo_extensions = $this->{'model_module_' . $this->codename}->getSEOExtensions();
 				
 		foreach ($seo_extensions as $seo_extension) {
 			$this->load->controller('module/' . $seo_extension . '/manufacturer_form_save', $data);
@@ -536,8 +552,8 @@ class ControllerModuleDSEOModule extends Controller {
 		$html_style = '';
 		$html_script = '';
 		
-		$seo_extensions = $this->{'model_module_' . $this->id}->getSEOExtensions();
-		$languages = $this->{'model_module_' . $this->id}->getLanguages();
+		$seo_extensions = $this->{'model_module_' . $this->codename}->getSEOExtensions();
+		$languages = $this->{'model_module_' . $this->codename}->getLanguages();
 		
 		foreach ($seo_extensions as $seo_extension) {
 			$html_tab_general .= $this->load->controller('module/' . $seo_extension . '/information_form_tab_general');
@@ -580,7 +596,7 @@ class ControllerModuleDSEOModule extends Controller {
 		
 		$data['information_id'] = $output;
 				
-		$seo_extensions = $this->{'model_module_' . $this->id}->getSEOExtensions();
+		$seo_extensions = $this->{'model_module_' . $this->codename}->getSEOExtensions();
 				
 		foreach ($seo_extensions as $seo_extension) {
 			$this->load->controller('module/' . $seo_extension . '/information_form_save', $data);
@@ -592,115 +608,70 @@ class ControllerModuleDSEOModule extends Controller {
 		
 		$data['information_id'] = $information_id;
 				
-		$seo_extensions = $this->{'model_module_' . $this->id}->getSEOExtensions();
+		$seo_extensions = $this->{'model_module_' . $this->codename}->getSEOExtensions();
 				
 		foreach ($seo_extensions as $seo_extension) {
 			$this->load->controller('module/' . $seo_extension . '/information_form_save', $data);
 		}
 	}
-				
-	private function validate() {
-		if (!$this->user->hasPermission('modify', $this->route)) {
-			$this->error['warning'] = $this->language->get('error_permission');
-		}
-		
-		if (!$this->error) {
-			return true;
-		} else {
-			return false;
-		}	
-	}
-	
+					
 	public function install() {
 		$this->load->model($this->route);
 		$this->load->model('extension/event');
 		
-		$this->model_extension_event->addEvent($this->id, 'admin/view/common/menu/after', 'module/d_seo_module/menu_after');	
-		$this->model_extension_event->addEvent($this->id, 'admin/view/setting/setting/after', 'module/d_seo_module/setting_after');		
-		$this->model_extension_event->addEvent($this->id, 'admin/view/setting/store_form/after', 'module/d_seo_module/setting_after');	
-		$this->model_extension_event->addEvent($this->id, 'admin/view/catalog/category_form/after', 'module/d_seo_module/category_form');
-		$this->model_extension_event->addEvent($this->id, 'admin/model/catalog/category/addCategory/after', 'module/d_seo_module/category_add');
-		$this->model_extension_event->addEvent($this->id, 'admin/model/catalog/category/editCategory/after', 'module/d_seo_module/category_edit');
-		$this->model_extension_event->addEvent($this->id, 'admin/view/catalog/product_form/after', 'module/d_seo_module/product_form');
-		$this->model_extension_event->addEvent($this->id, 'admin/model/catalog/product/addProduct/after', 'module/d_seo_module/product_add');
-		$this->model_extension_event->addEvent($this->id, 'admin/model/catalog/product/editProduct/after', 'module/d_seo_module/product_edit');
-		$this->model_extension_event->addEvent($this->id, 'admin/view/catalog/manufacturer_form/after', 'module/d_seo_module/manufacturer_form');
-		$this->model_extension_event->addEvent($this->id, 'admin/model/catalog/manufacturer/addManufacturer/after', 'module/d_seo_module/manufacturer_add');
-		$this->model_extension_event->addEvent($this->id, 'admin/model/catalog/manufacturer/editManufacturer/after', 'module/d_seo_module/manufacturer_edit');
-		$this->model_extension_event->addEvent($this->id, 'admin/view/catalog/information_form/after', 'module/d_seo_module/information_form');
-		$this->model_extension_event->addEvent($this->id, 'admin/model/catalog/information/addInformation/after', 'module/d_seo_module/information_add');
-		$this->model_extension_event->addEvent($this->id, 'admin/model/catalog/information/editInformation/after', 'module/d_seo_module/information_edit');
-		$this->model_extension_event->addEvent($this->id, 'catalog/view/common/home/before', 'module/d_seo_module/home_before');
-		$this->model_extension_event->addEvent($this->id, 'catalog/view/*/template/common/home/after', 'module/d_seo_module/home_after');
-		$this->model_extension_event->addEvent($this->id, 'catalog/view/product/category/before', 'module/d_seo_module/category_before');
-		$this->model_extension_event->addEvent($this->id, 'catalog/view/*/template/product/category/after', 'module/d_seo_module/category_after');
-		$this->model_extension_event->addEvent($this->id, 'catalog/view/product/product/before', 'module/d_seo_module/product_before');
-		$this->model_extension_event->addEvent($this->id, 'catalog/view/*/template/product/product/after', 'module/d_seo_module/product_after');
-		$this->model_extension_event->addEvent($this->id, 'catalog/view/product/manufacturer_info/before', 'module/d_seo_module/manufacturer_info_before');
-		$this->model_extension_event->addEvent($this->id, 'catalog/view/*/template/product/manufacturer_info/after', 'module/d_seo_module/manufacturer_info_after');
-		$this->model_extension_event->addEvent($this->id, 'catalog/view/information/information/before', 'module/d_seo_module/information_before');
-		$this->model_extension_event->addEvent($this->id, 'catalog/view/*/template/information/information/after', 'module/d_seo_module/information_after');
+		$this->model_extension_event->addEvent($this->codename, 'admin/view/common/menu/after', 'module/d_seo_module/menu_after');	
+		$this->model_extension_event->addEvent($this->codename, 'admin/view/setting/setting/after', 'module/d_seo_module/setting_after');		
+		$this->model_extension_event->addEvent($this->codename, 'admin/view/setting/store_form/after', 'module/d_seo_module/setting_after');	
+		$this->model_extension_event->addEvent($this->codename, 'admin/view/catalog/category_form/after', 'module/d_seo_module/category_form');
+		$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/category/addCategory/after', 'module/d_seo_module/category_add');
+		$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/category/editCategory/after', 'module/d_seo_module/category_edit');
+		$this->model_extension_event->addEvent($this->codename, 'admin/view/catalog/product_form/after', 'module/d_seo_module/product_form');
+		$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/product/addProduct/after', 'module/d_seo_module/product_add');
+		$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/product/editProduct/after', 'module/d_seo_module/product_edit');
+		$this->model_extension_event->addEvent($this->codename, 'admin/view/catalog/manufacturer_form/after', 'module/d_seo_module/manufacturer_form');
+		$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/manufacturer/addManufacturer/after', 'module/d_seo_module/manufacturer_add');
+		$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/manufacturer/editManufacturer/after', 'module/d_seo_module/manufacturer_edit');
+		$this->model_extension_event->addEvent($this->codename, 'admin/view/catalog/information_form/after', 'module/d_seo_module/information_form');
+		$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/information/addInformation/after', 'module/d_seo_module/information_add');
+		$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/information/editInformation/after', 'module/d_seo_module/information_edit');
+		$this->model_extension_event->addEvent($this->codename, 'catalog/view/common/home/before', 'module/d_seo_module/home_before');
+		$this->model_extension_event->addEvent($this->codename, 'catalog/view/*/template/common/home/after', 'module/d_seo_module/home_after');
+		$this->model_extension_event->addEvent($this->codename, 'catalog/view/product/category/before', 'module/d_seo_module/category_before');
+		$this->model_extension_event->addEvent($this->codename, 'catalog/view/*/template/product/category/after', 'module/d_seo_module/category_after');
+		$this->model_extension_event->addEvent($this->codename, 'catalog/view/product/product/before', 'module/d_seo_module/product_before');
+		$this->model_extension_event->addEvent($this->codename, 'catalog/view/*/template/product/product/after', 'module/d_seo_module/product_after');
+		$this->model_extension_event->addEvent($this->codename, 'catalog/view/product/manufacturer_info/before', 'module/d_seo_module/manufacturer_info_before');
+		$this->model_extension_event->addEvent($this->codename, 'catalog/view/*/template/product/manufacturer_info/after', 'module/d_seo_module/manufacturer_info_after');
+		$this->model_extension_event->addEvent($this->codename, 'catalog/view/information/information/before', 'module/d_seo_module/information_before');
+		$this->model_extension_event->addEvent($this->codename, 'catalog/view/*/template/information/information/after', 'module/d_seo_module/information_after');
 		
-		$this->{'model_module_' . $this->id}->installModule();
-		$this->{'model_module_' . $this->id}->installDependencies($this->mbooth);
-				
-		//$this->{'model_module_' . $this->id}->setVqmod('a_vqmod_'.$this->id.'.xml', 1);
-		$this->getUpdate(1);	  
+		$this->{'model_module_' . $this->codename}->installModule();
+		
+		if ($this->d_shopunity) {
+			$this->load->model('d_shopunity/mbooth');
+			$this->model_d_shopunity_mbooth->installDependencies($this->codename);  
+		}	  
 	}
 		 
 	public function uninstall() {
 		$this->load->model($this->route);
 		$this->load->model('extension/event');
 		
-		$this->{'model_module_' . $this->id}->uninstallModule();
+		$this->model_extension_event->deleteEvent($this->codename);
 		
-		$this->model_extension_event->deleteEvent($this->id);
-		//$this->{'model_module_' . $this->id}->setVqmod('a_vqmod_'.$this->id.'.xml', 0);
-		$this->getUpdate(0);	  
+		$this->{'model_module_' . $this->codename}->uninstallModule();
 	}
 	
-	public function getUpdate($status = 1){
-		if($status !== 0){	$status = 1; }
-
-		$json = array();
-
-		$this->load->language($this->route);
-		$this->load->model($this->route);
-
-		$current_version = $this->{'model_module_' . $this->id}->getVersion($this->mbooth);
-		$info = $this->{'model_module_' . $this->id}->getUpdateInfo($this->mbooth, $status);
-		
-		if ($info['code'] == 200) {
-			$data = simplexml_load_string($info['data']);
-
-			if ((string) $data->version == (string) $current_version 
-				|| (string) $data->version <= (string) $current_version) 
-			{
-				$json['success']   = $this->language->get('text_success_no_update') ;
-			} 
-			elseif ((string) $data->version > (string) $current_version) 
-			{
-				$json['warning']   = $this->language->get('text_warning_new_update');
-
-				foreach($data->updates->update as $update)
-				{
-					if((string) $update->attributes()->version > (string)$current_version)
-					{
-						$version = (string)$update->attributes()->version;
-						$json['update'][$version] = (string) $update[0];
-					}
-				}
-			} 
-			else 
-			{
-				$json['error']   = $this->language->get('text_error_update');
-			}
-		} 
-		else 
-		{ 
-			$json['error']   =  $this->language->get('text_error_failed');
+	private function validate($permission = 'modify') {
+		if (isset($this->request->post['config'])) {
+			return false;
 		}
-
-		$this->response->setOutput(json_encode($json));
-	}
+				
+		if (!$this->user->hasPermission($permission, $this->route)) {
+			$this->error['warning'] = $this->language->get('error_permission');
+			return false;
+		}
+		
+		return true;
+	}	
 }

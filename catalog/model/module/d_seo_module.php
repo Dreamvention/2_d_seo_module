@@ -1,7 +1,6 @@
 <?php
 class ModelModuleDSEOModule extends Model {
-	
-	private $id = 'd_seo_module';
+	private $route = 'd_seo_module';
 		
 	/*
 	*	Return list of seo extensions.
@@ -22,6 +21,7 @@ class ModelModuleDSEOModule extends Model {
 				}
 			}
 		}
+		
 		return $seo_extensions;
 	}
 	
