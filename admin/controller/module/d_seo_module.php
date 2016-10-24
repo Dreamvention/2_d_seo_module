@@ -189,16 +189,30 @@ class ControllerModuleDSEOModule extends Controller {
 		$output = $html_dom;
 	}
 	
-	public function menu() {
-		$this->load->language($this->route);
+	public function language_add_after($route, $output, $data) {
+		$this->load->model($this->route);
 		
-		$data['name'] = $this->language->get('heading_title_main');
-		
-		$data['link'] = $this->url->link($this->route, 'token=' . $this->session->data['token'], true);
-		
-		return $this->load->view($this->route . '/menu.tpl', $data);
+		$data['language_id'] = $output;
+				
+		$seo_extensions = $this->{'model_module_' . $this->codename}->getSEOExtensions();
+				
+		foreach ($seo_extensions as $seo_extension) {
+			$this->load->controller('module/' . $seo_extension . '/language_add', $data);
+		}
 	}
 	
+	public function language_delete_after($route, $output, $language_id, $data) {
+		$this->load->model($this->route);
+		
+		$data['language_id'] = $language_id;
+				
+		$seo_extensions = $this->{'model_module_' . $this->codename}->getSEOExtensions();
+				
+		foreach ($seo_extensions as $seo_extension) {
+			$this->load->controller('module/' . $seo_extension . '/language_delete', $data);
+		}
+	}
+		
 	public function setting_after($route, $data, &$output) {
 		$this->load->language($this->route);
 		
@@ -278,7 +292,7 @@ class ControllerModuleDSEOModule extends Controller {
 		$output = $html_dom;
 	}
 	
-	public function category_form($route, $data, &$output) {
+	public function category_form_after($route, $data, &$output) {
 		$this->load->language($this->route);
 		
 		$this->load->model($this->route);
@@ -332,7 +346,7 @@ class ControllerModuleDSEOModule extends Controller {
 		$output = $html_dom;
 	}
 	
-	public function category_add($route, $output, $data) {
+	public function category_add_after($route, $output, $data) {
 		$this->load->model($this->route);
 		
 		$data['category_id'] = $output;
@@ -344,7 +358,7 @@ class ControllerModuleDSEOModule extends Controller {
 		}
 	}
 	
-	public function category_edit($route, $output, $category_id, $data) {
+	public function category_edit_after($route, $output, $category_id, $data) {
 		$this->load->model($this->route);
 		
 		$data['category_id'] = $category_id;
@@ -356,7 +370,7 @@ class ControllerModuleDSEOModule extends Controller {
 		}
 	}
 	
-	public function product_form($route, $data, &$output) {
+	public function product_form_after($route, $data, &$output) {
 		$this->load->language($this->route);
 		
 		$this->load->model($this->route);
@@ -415,7 +429,7 @@ class ControllerModuleDSEOModule extends Controller {
 		$output = $html_dom;
 	}
 	
-	public function product_add($route, $output, $data) {
+	public function product_add_after($route, $output, $data) {
 		$this->load->model($this->route);
 		
 		$data['product_id'] = $output;
@@ -427,7 +441,7 @@ class ControllerModuleDSEOModule extends Controller {
 		}
 	}
 	
-	public function product_edit($route, $output, $product_id, $data) {
+	public function product_edit_after($route, $output, $product_id, $data) {
 		$this->load->model($this->route);
 		
 		$data['product_id'] = $product_id;
@@ -439,7 +453,7 @@ class ControllerModuleDSEOModule extends Controller {
 		}
 	}
 	
-	public function manufacturer_form($route, $data, &$output) {
+	public function manufacturer_form_after($route, $data, &$output) {
 		$this->load->language($this->route);
 		
 		$this->load->model($this->route);
@@ -513,7 +527,7 @@ class ControllerModuleDSEOModule extends Controller {
 		$output = $html_dom;
 	}
 	
-	public function manufacturer_add($route, $output, $data) {
+	public function manufacturer_add_after($route, $output, $data) {
 		$this->load->model($this->route);
 		
 		$data['manufacturer_id'] = $output;
@@ -525,7 +539,7 @@ class ControllerModuleDSEOModule extends Controller {
 		}
 	}
 	
-	public function manufacturer_edit($route, $output, $manufacturer_id, $data) {
+	public function manufacturer_edit_after($route, $output, $manufacturer_id, $data) {
 		$this->load->model($this->route);
 		
 		$data['manufacturer_id'] = $manufacturer_id;
@@ -537,7 +551,7 @@ class ControllerModuleDSEOModule extends Controller {
 		}
 	}
 				
-	public function information_form($route, $data, &$output) {
+	public function information_form_after($route, $data, &$output) {
 		$this->load->language($this->route);
 		
 		$this->load->model($this->route);
@@ -591,7 +605,7 @@ class ControllerModuleDSEOModule extends Controller {
 		$output = $html_dom;
 	}
 	
-	public function information_add($route, $output, $data) {
+	public function information_add_after($route, $output, $data) {
 		$this->load->model($this->route);
 		
 		$data['information_id'] = $output;
@@ -603,7 +617,7 @@ class ControllerModuleDSEOModule extends Controller {
 		}
 	}
 	
-	public function information_edit($route, $output, $information_id, $data) {
+	public function information_edit_after($route, $output, $information_id, $data) {
 		$this->load->model($this->route);
 		
 		$data['information_id'] = $information_id;
@@ -614,6 +628,28 @@ class ControllerModuleDSEOModule extends Controller {
 			$this->load->controller('module/' . $seo_extension . '/information_form_save', $data);
 		}
 	}
+		
+	public function menu() {
+		$this->load->language($this->route);
+		
+		$data['name'] = $this->language->get('heading_title_main');
+		
+		$data['link'] = $this->url->link($this->route, 'token=' . $this->session->data['token'], true);
+		
+		return $this->load->view($this->route . '/menu.tpl', $data);
+	}
+	
+	public function language_add($data) {
+		$this->load->model($this->route);
+		
+		$this->{'model_module_' . $this->codename}->addLanguage($data);
+	}
+	
+	public function language_delete($data) {
+		$this->load->model($this->route);
+		
+		$this->{'model_module_' . $this->codename}->deleteLanguage($data);
+	}
 					
 	public function install() {
 		$this->load->model($this->route);
@@ -621,19 +657,21 @@ class ControllerModuleDSEOModule extends Controller {
 		
 		$this->model_extension_event->addEvent($this->codename, 'admin/view/common/menu/after', 'module/d_seo_module/menu_after');	
 		$this->model_extension_event->addEvent($this->codename, 'admin/view/setting/setting/after', 'module/d_seo_module/setting_after');		
-		$this->model_extension_event->addEvent($this->codename, 'admin/view/setting/store_form/after', 'module/d_seo_module/setting_after');	
-		$this->model_extension_event->addEvent($this->codename, 'admin/view/catalog/category_form/after', 'module/d_seo_module/category_form');
-		$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/category/addCategory/after', 'module/d_seo_module/category_add');
-		$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/category/editCategory/after', 'module/d_seo_module/category_edit');
-		$this->model_extension_event->addEvent($this->codename, 'admin/view/catalog/product_form/after', 'module/d_seo_module/product_form');
-		$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/product/addProduct/after', 'module/d_seo_module/product_add');
-		$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/product/editProduct/after', 'module/d_seo_module/product_edit');
-		$this->model_extension_event->addEvent($this->codename, 'admin/view/catalog/manufacturer_form/after', 'module/d_seo_module/manufacturer_form');
-		$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/manufacturer/addManufacturer/after', 'module/d_seo_module/manufacturer_add');
-		$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/manufacturer/editManufacturer/after', 'module/d_seo_module/manufacturer_edit');
-		$this->model_extension_event->addEvent($this->codename, 'admin/view/catalog/information_form/after', 'module/d_seo_module/information_form');
-		$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/information/addInformation/after', 'module/d_seo_module/information_add');
-		$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/information/editInformation/after', 'module/d_seo_module/information_edit');
+		$this->model_extension_event->addEvent($this->codename, 'admin/view/setting/store_form/after', 'module/d_seo_module/setting_after');
+		$this->model_extension_event->addEvent($this->codename, 'admin/model/localisation/language/addLanguage/after', 'module/d_seo_module/language_add_after');
+		$this->model_extension_event->addEvent($this->codename, 'admin/model/localisation/language/deleteLanguage/after', 'module/d_seo_module/language_delete_after');
+		$this->model_extension_event->addEvent($this->codename, 'admin/view/catalog/category_form/after', 'module/d_seo_module/category_form_after');
+		$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/category/addCategory/after', 'module/d_seo_module/category_add_after');
+		$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/category/editCategory/after', 'module/d_seo_module/category_edit_after');
+		$this->model_extension_event->addEvent($this->codename, 'admin/view/catalog/product_form/after', 'module/d_seo_module/product_form_after');
+		$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/product/addProduct/after', 'module/d_seo_module/product_add_after');
+		$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/product/editProduct/after', 'module/d_seo_module/product_edit_after');
+		$this->model_extension_event->addEvent($this->codename, 'admin/view/catalog/manufacturer_form/after', 'module/d_seo_module/manufacturer_form_after');
+		$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/manufacturer/addManufacturer/after', 'module/d_seo_module/manufacturer_add_after');
+		$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/manufacturer/editManufacturer/after', 'module/d_seo_module/manufacturer_edit_after');
+		$this->model_extension_event->addEvent($this->codename, 'admin/view/catalog/information_form/after', 'module/d_seo_module/information_form_after');
+		$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/information/addInformation/after', 'module/d_seo_module/information_add_after');
+		$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/information/editInformation/after', 'module/d_seo_module/information_edit_after');
 		$this->model_extension_event->addEvent($this->codename, 'catalog/view/common/home/before', 'module/d_seo_module/home_before');
 		$this->model_extension_event->addEvent($this->codename, 'catalog/view/*/template/common/home/after', 'module/d_seo_module/home_after');
 		$this->model_extension_event->addEvent($this->codename, 'catalog/view/product/category/before', 'module/d_seo_module/category_before');
