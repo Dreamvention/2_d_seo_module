@@ -88,7 +88,7 @@ class ModelModuleDSEOModule extends Model {
 		
 		return $result;
 	}
-		
+			
 	/*
 	*	Install.
 	*/		
