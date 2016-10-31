@@ -119,7 +119,7 @@ class ControllerModuleDSEOModule extends Controller {
 
 		$data['breadcrumbs'][] = array(
 			'text' => $this->language->get('text_modules'),
-			'href' => $this->url->link('extension/modules', 'token=' . $this->session->data['token'], 'SSL')
+			'href' => $this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL')
 		);
 
 		$data['breadcrumbs'][] = array(
