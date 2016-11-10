@@ -42,6 +42,7 @@
 		"admin/language/english/module/d_seo_module.php",
 		"admin/language/en-gb/module/d_seo_module.php",
 		"admin/view/template/module/d_seo_module.tpl",
+		"admin/view/stylesheet/d_seo_module.css",
 		
 		"catalog/controller/module/d_seo_module.php",
 		"catalog/model/module/d_seo_module.php"

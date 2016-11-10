@@ -15,6 +15,7 @@
 		<file>admin/language/english/module/d_seo_module.php</file>
 		<file>admin/language/en-gb/module/d_seo_module.php</file>
 		<file>admin/view/template/module/d_seo_module.tpl</file>
+		<file>admin/view/stylesheet/d_seo_module.css</file>
 		
 		<file>catalog/controller/module/d_seo_module.php</file>
 		<file>catalog/model/module/d_seo_module.php</file>		
