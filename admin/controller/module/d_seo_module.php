@@ -42,7 +42,7 @@ class ControllerModuleDSEOModule extends Controller {
 		$this->load->model('d_shopunity/mbooth');
 				
 		$this->model_d_shopunity_mbooth->validateDependencies($this->codename);
-
+		
 		// styles and scripts
 		$this->document->addLink('//fonts.googleapis.com/css?family=PT+Sans:400,700,700italic,400italic&subset=latin,cyrillic-ext,latin-ext,cyrillic', "stylesheet");
 		$this->document->addStyle('view/stylesheet/shopunity/bootstrap.css');
@@ -63,7 +63,10 @@ class ControllerModuleDSEOModule extends Controller {
 		$data['token'] =  $this->session->data['token'];
 		$data['stores'] = $this->{'model_module_' . $this->codename}->getStores();
 		$data['languages'] = $this->{'model_module_' . $this->codename}->getLanguages();
-						
+		
+		$seo_extensions = $this->{'model_module_' . $this->codename}->getSEOExtensions();
+		$data['installed'] = in_array($this->codename, $seo_extensions) ? true : false;
+					
 		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
 			$data['server'] = HTTPS_SERVER;
 			$data['catalog'] = HTTPS_CATALOG;
@@ -76,6 +79,8 @@ class ControllerModuleDSEOModule extends Controller {
 		$data['module_link'] = $this->url->link($this->route, 'token=' . $this->session->data['token'], 'SSL');
 		$data['action'] = $this->url->link($this->route . '/save', 'token=' . $this->session->data['token'], 'SSL');
 		$data['cancel'] = $this->url->link('extension/module', 'token=' . $this->session->data['token'], 'SSL');
+		$data['install'] = $this->url->link($this->route . '/installModule', 'token=' . $this->session->data['token'], 'SSL');
+		$data['uninstall'] = $this->url->link($this->route . '/uninstallModule', 'token=' . $this->session->data['token'], 'SSL');
 		
 		// Tab
 		$data['text_settings'] = $this->language->get('text_settings');
@@ -89,13 +94,17 @@ class ControllerModuleDSEOModule extends Controller {
 		$data['button_save'] = $this->language->get('button_save');
 		$data['button_save_and_stay'] = $this->language->get('button_save_and_stay');
 		$data['button_cancel'] = $this->language->get('button_cancel');	
-				
+		$data['button_install'] = $this->language->get('button_install');
+		$data['button_uninstall'] = $this->language->get('button_uninstall');
+		
 		// Entry
 		$data['entry_status'] = $this->language->get('entry_status');
+		$data['entry_uninstall'] = $this->language->get('entry_uninstall');
 		$data['entry_text'] = $this->language->get('entry_text');
 				
 		// Text
 		$data['text_edit'] = $this->language->get('text_edit');
+		$data['text_install'] = $this->language->get('text_install');
 		$data['text_yes'] = $this->language->get('text_yes');
 		$data['text_no'] = $this->language->get('text_no');
 		$data['text_enabled'] = $this->language->get('text_enabled');
@@ -139,12 +148,16 @@ class ControllerModuleDSEOModule extends Controller {
 		$data['status'] = $status;
 		$data['htaccess'] = $this->{'model_module_' . $this->codename}->getFileData('htaccess');
 		$data['robots'] = $this->{'model_module_' . $this->codename}->getFileData('robots');
-		
+							
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
-
-		$this->response->setOutput($this->load->view($this->route . '.tpl', $data));
+		
+		if ($data['installed']) {
+			$this->response->setOutput($this->load->view($this->route . '.tpl', $data));
+		} else {
+			$this->response->setOutput($this->load->view($this->route . '/install.tpl', $data));
+		}
 	}
 	
 	public function save() {
@@ -178,6 +191,87 @@ class ControllerModuleDSEOModule extends Controller {
 		$this->response->setOutput(json_encode($data));
 	}
 	
+	public function installModule() {
+		$this->load->language($this->route);
+		
+		$this->load->model($this->route);
+		$this->load->model('setting/setting');
+		$this->load->model('extension/event');
+		
+		if ($this->validateInstall()) {
+			$this->model_extension_event->deleteEvent($this->codename);
+			$this->model_extension_event->addEvent($this->codename, 'admin/view/common/menu/after', 'module/d_seo_module/menu_after');	
+			$this->model_extension_event->addEvent($this->codename, 'admin/view/setting/setting/after', 'module/d_seo_module/setting_after');		
+			$this->model_extension_event->addEvent($this->codename, 'admin/view/setting/store_form/after', 'module/d_seo_module/setting_after');
+			$this->model_extension_event->addEvent($this->codename, 'admin/model/localisation/language/addLanguage/after', 'module/d_seo_module/language_add_after');
+			$this->model_extension_event->addEvent($this->codename, 'admin/model/localisation/language/deleteLanguage/after', 'module/d_seo_module/language_delete_after');
+			$this->model_extension_event->addEvent($this->codename, 'admin/view/catalog/category_form/after', 'module/d_seo_module/category_form_after');
+			$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/category/addCategory/after', 'module/d_seo_module/category_add_after');
+			$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/category/editCategory/after', 'module/d_seo_module/category_edit_after');
+			$this->model_extension_event->addEvent($this->codename, 'admin/view/catalog/product_form/after', 'module/d_seo_module/product_form_after');
+			$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/product/addProduct/after', 'module/d_seo_module/product_add_after');
+			$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/product/editProduct/after', 'module/d_seo_module/product_edit_after');
+			$this->model_extension_event->addEvent($this->codename, 'admin/view/catalog/manufacturer_form/after', 'module/d_seo_module/manufacturer_form_after');
+			$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/manufacturer/addManufacturer/after', 'module/d_seo_module/manufacturer_add_after');
+			$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/manufacturer/editManufacturer/after', 'module/d_seo_module/manufacturer_edit_after');
+			$this->model_extension_event->addEvent($this->codename, 'admin/view/catalog/information_form/after', 'module/d_seo_module/information_form_after');
+			$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/information/addInformation/after', 'module/d_seo_module/information_add_after');
+			$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/information/editInformation/after', 'module/d_seo_module/information_edit_after');
+			$this->model_extension_event->addEvent($this->codename, 'catalog/view/common/home/before', 'module/d_seo_module/home_before');
+			$this->model_extension_event->addEvent($this->codename, 'catalog/view/*/template/common/home/after', 'module/d_seo_module/home_after');
+			$this->model_extension_event->addEvent($this->codename, 'catalog/view/product/category/before', 'module/d_seo_module/category_before');
+			$this->model_extension_event->addEvent($this->codename, 'catalog/view/*/template/product/category/after', 'module/d_seo_module/category_after');
+			$this->model_extension_event->addEvent($this->codename, 'catalog/view/product/product/before', 'module/d_seo_module/product_before');
+			$this->model_extension_event->addEvent($this->codename, 'catalog/view/*/template/product/product/after', 'module/d_seo_module/product_after');
+			$this->model_extension_event->addEvent($this->codename, 'catalog/view/product/manufacturer_info/before', 'module/d_seo_module/manufacturer_info_before');
+			$this->model_extension_event->addEvent($this->codename, 'catalog/view/*/template/product/manufacturer_info/after', 'module/d_seo_module/manufacturer_info_after');
+			$this->model_extension_event->addEvent($this->codename, 'catalog/view/information/information/before', 'module/d_seo_module/information_before');
+			$this->model_extension_event->addEvent($this->codename, 'catalog/view/*/template/information/information/after', 'module/d_seo_module/information_after');
+		
+			$this->{'model_module_' . $this->codename}->installModule();
+			
+			$this->session->data['success'] = $this->language->get('text_success_install');
+		}
+		
+		$data['error'] = $this->error;
+		
+		if (isset($this->session->data['success'])) {
+			$data['success'] = $this->session->data['success'];
+			unset($this->session->data['success']);
+		} else {
+			$data['success'] = '';
+		}
+		
+		$this->response->setOutput(json_encode($data));
+	}
+	
+	public function uninstallModule() {
+		$this->load->language($this->route);
+		
+		$this->load->model($this->route);
+		$this->load->model('setting/setting');
+		$this->load->model('extension/event');
+		
+		if ($this->validateUninstall()) {
+			$this->model_extension_event->deleteEvent($this->codename);
+		
+			$this->{'model_module_' . $this->codename}->uninstallModule();
+			
+			$this->session->data['success'] = $this->language->get('text_success_uninstall');
+		}
+						
+		$data['error'] = $this->error;
+		
+		if (isset($this->session->data['success'])) {
+			$data['success'] = $this->session->data['success'];
+			unset($this->session->data['success']);
+		} else {
+			$data['success'] = '';
+		}
+		
+		$this->response->setOutput(json_encode($data));
+	}
+		
 	public function menu_after($route, $data, &$output) {
 		$this->load->language($this->route);
 		
@@ -664,56 +758,20 @@ class ControllerModuleDSEOModule extends Controller {
 		
 		$this->{'model_module_' . $this->codename}->deleteLanguage($data);
 	}
+	
+	public function manufacturer_form_save($data) {
+		$this->load->model($this->route);
+		
+		$this->{'model_module_' . $this->codename}->saveManufacturerDescription($data);
+	}
 					
 	public function install() {
-		$this->load->model($this->route);
-		$this->load->model('extension/event');
-		
-		$this->model_extension_event->addEvent($this->codename, 'admin/view/common/menu/after', 'module/d_seo_module/menu_after');	
-		$this->model_extension_event->addEvent($this->codename, 'admin/view/setting/setting/after', 'module/d_seo_module/setting_after');		
-		$this->model_extension_event->addEvent($this->codename, 'admin/view/setting/store_form/after', 'module/d_seo_module/setting_after');
-		$this->model_extension_event->addEvent($this->codename, 'admin/model/localisation/language/addLanguage/after', 'module/d_seo_module/language_add_after');
-		$this->model_extension_event->addEvent($this->codename, 'admin/model/localisation/language/deleteLanguage/after', 'module/d_seo_module/language_delete_after');
-		$this->model_extension_event->addEvent($this->codename, 'admin/view/catalog/category_form/after', 'module/d_seo_module/category_form_after');
-		$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/category/addCategory/after', 'module/d_seo_module/category_add_after');
-		$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/category/editCategory/after', 'module/d_seo_module/category_edit_after');
-		$this->model_extension_event->addEvent($this->codename, 'admin/view/catalog/product_form/after', 'module/d_seo_module/product_form_after');
-		$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/product/addProduct/after', 'module/d_seo_module/product_add_after');
-		$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/product/editProduct/after', 'module/d_seo_module/product_edit_after');
-		$this->model_extension_event->addEvent($this->codename, 'admin/view/catalog/manufacturer_form/after', 'module/d_seo_module/manufacturer_form_after');
-		$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/manufacturer/addManufacturer/after', 'module/d_seo_module/manufacturer_add_after');
-		$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/manufacturer/editManufacturer/after', 'module/d_seo_module/manufacturer_edit_after');
-		$this->model_extension_event->addEvent($this->codename, 'admin/view/catalog/information_form/after', 'module/d_seo_module/information_form_after');
-		$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/information/addInformation/after', 'module/d_seo_module/information_add_after');
-		$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/information/editInformation/after', 'module/d_seo_module/information_edit_after');
-		$this->model_extension_event->addEvent($this->codename, 'catalog/view/common/home/before', 'module/d_seo_module/home_before');
-		$this->model_extension_event->addEvent($this->codename, 'catalog/view/*/template/common/home/after', 'module/d_seo_module/home_after');
-		$this->model_extension_event->addEvent($this->codename, 'catalog/view/product/category/before', 'module/d_seo_module/category_before');
-		$this->model_extension_event->addEvent($this->codename, 'catalog/view/*/template/product/category/after', 'module/d_seo_module/category_after');
-		$this->model_extension_event->addEvent($this->codename, 'catalog/view/product/product/before', 'module/d_seo_module/product_before');
-		$this->model_extension_event->addEvent($this->codename, 'catalog/view/*/template/product/product/after', 'module/d_seo_module/product_after');
-		$this->model_extension_event->addEvent($this->codename, 'catalog/view/product/manufacturer_info/before', 'module/d_seo_module/manufacturer_info_before');
-		$this->model_extension_event->addEvent($this->codename, 'catalog/view/*/template/product/manufacturer_info/after', 'module/d_seo_module/manufacturer_info_after');
-		$this->model_extension_event->addEvent($this->codename, 'catalog/view/information/information/before', 'module/d_seo_module/information_before');
-		$this->model_extension_event->addEvent($this->codename, 'catalog/view/*/template/information/information/after', 'module/d_seo_module/information_after');
-		
-		$this->{'model_module_' . $this->codename}->installModule();
-		
 		if ($this->d_shopunity) {
 			$this->load->model('d_shopunity/mbooth');
 			$this->model_d_shopunity_mbooth->installDependencies($this->codename);  
 		}	  
 	}
-		 
-	public function uninstall() {
-		$this->load->model($this->route);
-		$this->load->model('extension/event');
-		
-		$this->model_extension_event->deleteEvent($this->codename);
-		
-		$this->{'model_module_' . $this->codename}->uninstallModule();
-	}
-	
+		 	
 	private function validate($permission = 'modify') {
 		if (isset($this->request->post['config'])) {
 			return false;
@@ -724,6 +782,50 @@ class ControllerModuleDSEOModule extends Controller {
 			return false;
 		}
 		
+		return true;
+	}
+
+	private function validateInstall($permission = 'modify') {
+		$this->load->model($this->route);
+		
+		if (isset($this->request->post['config'])) {
+			return false;
+		}
+				
+		if (!$this->user->hasPermission($permission, $this->route)) {
+			$this->error['warning'] = $this->language->get('error_permission');
+			return false;
+		}
+		
+		$seo_extensions = $this->{'model_module_' . $this->codename}->getSEOExtensions();
+		$seo_extensions[] = $this->codename;
+		$this->{'model_module_' . $this->codename}->saveSEOExtensions($seo_extensions);
+						
+		return true;
+	}
+	
+	private function validateUninstall($permission = 'modify') {
+		$this->load->model($this->route);
+		
+		if (isset($this->request->post['config'])) {
+			return false;
+		}
+				
+		if (!$this->user->hasPermission($permission, $this->route)) {
+			$this->error['warning'] = $this->language->get('error_permission');
+			return false;
+		}
+		
+		$seo_extensions = $this->{'model_module_' . $this->codename}->getSEOExtensions();
+		if (count($seo_extensions)>1) {
+			$this->error['warning'] = $this->language->get('error_dependencies');
+			return false;
+		} else {
+			$key = array_search($this->codename, $seo_extensions);
+			if ($key!==false) unset($seo_extensions[$key]);
+		}
+		$this->{'model_module_' . $this->codename}->saveSEOExtensions($seo_extensions);
+
 		return true;
 	}	
 }
