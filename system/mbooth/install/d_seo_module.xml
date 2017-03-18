@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<modification>
+    <name>d_seo_module</name>
+	<code>d_seo_module</code>
+	<description>SEO Engine</description>
+	<version>1.0.0</version>
+	<author>Dreamvention</author>
+	<link>http://dreamvention.com</link>
+	
+	<!-- SEO URL -->
+	<file path="catalog/controller/common/seo_url.php, catalog/controller/startup/seo_url.php">
+		<operation error="skip">
+			<search><![CDATA[if (isset($this->request->get['_route_'])) {]]></search>
+            <add position="before"><![CDATA[				
+				//d_seo_module
+				$this->load->controller('extension/module/d_seo_module/seo_url');
+				
+				if (isset($this->request->get['route'])) return new Action($this->request->get['route']);
+				///d_seo_module
+			]]></add>
+		</operation>
+		<operation error="skip">
+            <search><![CDATA[$url_info = parse_url(str_replace('&amp;', '&', $link));]]></search>
+            <add position="before"><![CDATA[
+				//d_seo_module
+				$link = $this->load->controller('extension/module/d_seo_module/seo_url_rewrite', $link);
+				///d_seo_module
+            ]]></add>
+        </operation>
+		<operation error="skip">
+            <search><![CDATA[$url_info = parse_url(str_replace('&amp;', '&', $link));]]></search>
+            <add position="after"><![CDATA[
+				//d_seo_module
+				if (!isset($url_info['query'])) return $link;
+				//return $link;
+				///d_seo_module
+            ]]></add>
+        </operation>
+	</file>
+	
+	<file path="catalog/controller/common/language.php">
+		<operation error="skip">
+            <search><![CDATA[if (isset($this->request->post['redirect'])) {]]></search>
+            <add position="before"><![CDATA[
+				//d_seo_module
+				$this->load->controller('extension/module/d_seo_module/seo_url_language');
+				///d_seo_module
+			 ]]></add>
+        </operation>
+	</file>
+	
+	<!-- FIX Pagination -->
+	<file path="system/library/pagination.php">
+		<operation error="skip">
+			<search><![CDATA[str_replace('&amp;page={page}', '', $this->url)]]></search>
+            <add position="replace"><![CDATA[str_replace(array('&amp;page={page}', '&page={page}', '?page={page}'), '', $this->url)]]></add>
+		</operation>
+	</file>
+					
+</modification>

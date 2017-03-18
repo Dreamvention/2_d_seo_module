@@ -6,12 +6,12 @@ class ModelModuleDSEOModule extends Model {
 	*	Save File Manager.
 	*/
 	public function saveFileData($file, $data) {
-		$dir =  str_replace("system/", "", DIR_SYSTEM);
-		if ($file=='htaccess') {
+		$dir = str_replace("system/", "", DIR_SYSTEM);
+		if ($file == 'htaccess') {
 			$file_on = $dir . '.htaccess';
 			$file_off = $dir . '.htaccess.txt'; 
 		}
-		if ($file=='robots') {
+		if ($file == 'robots') {
 			$file_on = $dir . 'robots.txt';
 			$file_off = $dir . '_robots.txt'; 
 		}
@@ -33,12 +33,12 @@ class ModelModuleDSEOModule extends Model {
 	*	Return htaccess.
 	*/
 	public function getFileData($file) {
-		$dir =  str_replace("system/", "", DIR_SYSTEM);
-		if ($file=='htaccess') {
+		$dir = str_replace("system/", "", DIR_SYSTEM);
+		if ($file == 'htaccess') {
 			$file_on = $dir . '.htaccess';
 			$file_off = $dir . '.htaccess.txt'; 
 		}
-		if ($file=='robots') {
+		if ($file == 'robots') {
 			$file_on = $dir . 'robots.txt';
 			$file_off = $dir . '_robots.txt'; 
 		}
@@ -65,38 +65,188 @@ class ModelModuleDSEOModule extends Model {
 	}
 	
 	/*
-	*	Add Language.
+	*	Create Default Custom Page.
 	*/
-	public function addLanguage($data) {
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "manufacturer_description WHERE language_id = '" . (int)$this->config->get('config_language_id') . "'");
-
-		foreach ($query->rows as $manufacturer) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "manufacturer_description SET manufacturer_id = '" . (int)$manufacturer['manufacturer_id'] . "', language_id = '" . (int)$data['language_id'] . "'");
-		}
-
-		$this->cache->delete('manufacturer');
-	}
-	
-	/*
-	*	Delete Language.
-	*/
-	public function deleteLanguage($data) {
-		$this->db->query("DELETE FROM " . DB_PREFIX . "manufacturer_description WHERE language_id = '" . (int)$data['language_id'] . "'");
-
-		$this->cache->delete('manufacturer');
-	}
-	
-	/*
-	*	Add Manufacturer Description.
-	*/
-	public function addManufacturerDescription($data) {
-		foreach ($data['manufacturer_description'] as $language_id => $manufacturer_description) {
-			$this->db->query("INSERT INTO " . DB_PREFIX . "manufacturer_description SET manufacturer_id = '" . (int)$data['manufacturer_id'] . "', language_id = '" . (int)$language_id . "'");
+	public function createDefaultCustomPage() {
+		$languages = $this->getLanguages();
+		
+		$this->db->query("DELETE FROM " . DB_PREFIX . "url_target WHERE route LIKE '%/%'");
+		
+		foreach ($languages as $language) {
+			$this->db->query("INSERT INTO " . DB_PREFIX . "url_target (route, language_id, sort_order, keyword) VALUES
+				('common/home', " . $language['language_id'] . ", '1', 'webshop'),
+				('product/manufacturer', " . $language['language_id'] . ", '1', 'brand'),
+				('product/special', " . $language['language_id'] . ", '1', 'special'),
+				('information/contact', " . $language['language_id'] . ", '1', 'contact')
+			");
 		}
 	}
 	
 	/*
-	*	Save seo extensions.
+	*	Save Custom Pages.
+	*/
+	public function saveCustomPages($custom_pages) {
+		$this->db->query("DELETE FROM " . DB_PREFIX . "url_target WHERE route LIKE '%/%'");
+		
+		foreach ($custom_pages as $custom_page) {
+			foreach ($custom_page['target_keyword'] as $language_id => $target_keyword) {
+				preg_match_all('/\[[^]]+\]/', $target_keyword, $keywords);
+				
+				$sort_order = 1;
+				
+				foreach ($keywords[0] as $keyword) {
+					$keyword = substr($keyword, 1, strlen($keyword)-2);
+					$this->db->query("INSERT INTO " . DB_PREFIX . "url_target SET route = '" . $this->db->escape($custom_page['route']) . "', language_id = '" . (int)$language_id . "', sort_order = '" . $sort_order . "', keyword = '" .  $this->db->escape($keyword) . "'");
+					
+					$sort_order++;
+				}
+			}
+		}
+	}
+			
+	/*
+	*	Add Custom Page.
+	*/
+	public function addCustomPage($data) {
+		foreach ($data['target_keyword'] as $language_id => $target_keyword) {
+			preg_match_all('/\[[^]]+\]/', $target_keyword, $keywords);
+				
+			$sort_order = 1;
+				
+			foreach ($keywords[0] as $keyword) {
+				$keyword = substr($keyword, 1, strlen($keyword)-2);
+				$this->db->query("INSERT INTO " . DB_PREFIX . "url_target SET route = '" . $this->db->escape($data['route']) . "', language_id = '" . (int)$language_id . "', sort_order = '" . $sort_order . "', keyword = '" .  $this->db->escape($keyword) . "'");
+					
+				$sort_order++;
+			}
+		}
+	}
+	
+	/*
+	*	Edit Custom Page.
+	*/
+	public function editCustomPage($data) {
+		$this->db->query("DELETE FROM " . DB_PREFIX . "url_target WHERE route = '" . $this->db->escape($data['route']) . "' AND language_id = '" . (int)$data['language_id'] . "'");
+				
+		preg_match_all('/\[[^]]+\]/', $data['target_keyword'], $keywords);
+				
+		$sort_order = 1;
+		
+		foreach ($keywords[0] as $keyword) {
+			$keyword = substr($keyword, 1, strlen($keyword)-2);
+			$this->db->query("INSERT INTO " . DB_PREFIX . "url_target SET route = '" . $this->db->escape($data['route']) . "', language_id = '" . (int)$data['language_id'] . "', sort_order = '" . $sort_order . "', keyword = '" .  $this->db->escape($keyword) . "'");
+					
+			$sort_order++;
+		}
+	}
+	
+	/*
+	*	Delete Custom Page.
+	*/
+	public function deleteCustomPage($route) {
+		$this->db->query("DELETE FROM " . DB_PREFIX . "url_target WHERE route = '" . $this->db->escape($route) . "'");
+	}
+	
+	/*
+	*	Return Custom Pages.
+	*/
+	public function getCustomPages($data = array()) {
+		$custom_pages = array();
+		
+		$languages = $this->getLanguages();
+		
+		$sql = "SELECT * FROM " . DB_PREFIX . "url_target WHERE route LIKE '%/%'";
+		
+		$implode = array();
+		
+		if (!empty($data['filter_route'])) {
+			$implode[] = "route = '" . $this->db->escape($data['filter_route']) . "'";
+		}
+		
+		if (!empty($data['filter_keyword'])) {
+			$implode[] = "keyword = '" . $this->db->escape($data['filter_keyword']) . "'";
+		}
+		
+		if ($implode) {
+			$sql .= " AND " . implode(' AND ', $implode);
+		}
+		
+		$sql .= " ORDER BY route, sort_order";
+		
+		$query = $this->db->query($sql);
+		
+		foreach ($query->rows as $result) {
+			$custom_pages[$result['route']]['route'] = $result['route'];
+			if ($result['language_id'] && $result['sort_order'] && $result['keyword']) {
+				$custom_pages[$result['route']]['target_keyword'][$result['language_id']][$result['sort_order']] = $result['keyword'];
+			}
+		}
+					
+		return $custom_pages;
+	}
+				
+	/*
+	*	Return Target Keywords.
+	*/
+	public function getTargetKeywords($data = array()) {
+		$target_keywords = array();
+		
+		$languages = $this->getLanguages();
+		
+		$sql = "SELECT * FROM " . DB_PREFIX . "url_target";
+		
+		$implode = array();
+		
+		if (!empty($data['filter_route'])) {
+			$implode[] = "route = '" . $this->db->escape($data['filter_route']) . "'";
+		}
+		
+		if (!empty($data['filter_language_id'])) {
+			$implode[] = "language_id = '" . (int)$data['filter_language_id'] . "'";
+		}
+		
+		if (!empty($data['filter_sort_order'])) {
+			$implode[] = "sort_order = '" . (int)$data['filter_sort_order'] . "'";
+		}
+		
+		if (!empty($data['filter_keyword'])) {
+			$implode[] = "keyword = '" . $this->db->escape($data['filter_keyword']) . "'";
+		}
+		
+		if ($implode) {
+			$sql .= " WHERE " . implode(' AND ', $implode);
+		}
+		
+		$sql .= " ORDER BY sort_order";
+				
+		$query = $this->db->query($sql);
+		
+		foreach ($query->rows as $result) {
+			if ($result['language_id'] && $result['sort_order'] && $result['keyword']) {
+				$target_keywords[$result['route']][$result['language_id']][$result['sort_order']] = $result['keyword'];
+			}
+		}
+								
+		return $target_keywords;
+	}
+	
+	/*
+	*	Return Target Keyword.
+	*/
+	public function getTargetKeyword($route) {
+		$target_keyword = array();
+		
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_target WHERE route = '" . $this->db->escape($route) . "' ORDER BY sort_order");
+		
+		foreach($query->rows as $result) {
+			$target_keyword[$result['language_id']][$result['sort_order']] = $result['keyword'];
+		}
+		
+		return $target_keyword;
+	}
+		
+	/*
+	*	Save SEO extensions.
 	*/
 	public function saveSEOExtensions($seo_extensions) {
 		$this->load->model('setting/setting');
@@ -106,13 +256,13 @@ class ModelModuleDSEOModule extends Model {
 	}
 	
 	/*
-	*	Return list of seo extensions.
+	*	Return list of SEO extensions.
 	*/
 	public function getSEOExtensions() {
 		$this->load->model('setting/setting');
 				
 		$installed_extensions = array();
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "extension WHERE type = 'module' ORDER BY code");
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "extension ORDER BY code");
 		foreach ($query->rows as $result) {
 			$installed_extensions[] = $result['code'];
 		}
@@ -121,7 +271,7 @@ class ModelModuleDSEOModule extends Model {
 		$installed_seo_extensions = isset($installed_seo_extensions['d_seo_extension_install']) ? $installed_seo_extensions['d_seo_extension_install'] : array();
 		
 		$seo_extensions = array();
-		$files = glob(DIR_APPLICATION . 'controller/module/' . $this->codename . '*.php');
+		$files = glob(DIR_APPLICATION . 'controller/' . $this->codename . '/*.php');
 		if ($files) {
 			foreach ($files as $file) {
 				$seo_extension = basename($file, '.php');
@@ -177,11 +327,49 @@ class ModelModuleDSEOModule extends Model {
 	}
 			
 	/*
+	*	Return Group ID.
+	*/
+	public function getGroupId() {
+        $user_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "user WHERE user_id = '" . $this->user->getId() . "'");
+        
+		$user_group_id = (int)$user_query->row['user_group_id'];
+        
+        return $user_group_id;
+    }
+	
+	/*
+	*	Sort Array By Column.
+	*/
+	public function sortArrayByColumn($arr, $col, $dir = SORT_ASC) {
+		$sort_col = array();
+		$sort_key = array();
+		
+		foreach ($arr as $key => $row) {
+			$sort_key[$key] = $key;
+			
+			if (isset($row[$col])) {
+				$sort_col[$key] = $row[$col];
+			} else {
+				$sort_col[$key] = '';
+			}
+		}
+		
+		array_multisort($sort_col, $dir, $sort_key, SORT_ASC, $arr);
+		
+		return $arr;
+	}
+				
+	/*
 	*	Install.
 	*/		
 	public function installModule() {
+		$this->db->query("ALTER TABLE " . DB_PREFIX . "setting MODIFY code VARCHAR(64) NOT NULL");
+		
+		$this->db->query("DROP TABLE IF EXISTS " . DB_PREFIX . "url_target");
+		$this->db->query("CREATE TABLE " . DB_PREFIX . "url_target (route VARCHAR(255) NOT NULL, language_id INT(11) NOT NULL, sort_order INT(3) NOT NULL, keyword VARCHAR(255) NOT NULL, PRIMARY KEY (route, language_id, sort_order), KEY keyword (keyword)) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci");
+		
 		$this->db->query("DROP TABLE IF EXISTS " . DB_PREFIX . "manufacturer_description");
-		$this->db->query("CREATE TABLE " . DB_PREFIX . "manufacturer_description (manufacturer_id int(11) NOT NULL, language_id int(11) NOT NULL, PRIMARY KEY (manufacturer_id, language_id)) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci");
+		$this->db->query("CREATE TABLE " . DB_PREFIX . "manufacturer_description (manufacturer_id INT(11) NOT NULL, language_id INT(11) NOT NULL, PRIMARY KEY (manufacturer_id, language_id)) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci");
 		
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "manufacturer");
 		$manufacturers = $query->rows;
@@ -197,6 +385,7 @@ class ModelModuleDSEOModule extends Model {
 	*	Uninstall.
 	*/		
 	public function uninstallModule() {
+		$this->db->query("DROP TABLE IF EXISTS " . DB_PREFIX . "url_target");
 		$this->db->query("DROP TABLE IF EXISTS " . DB_PREFIX . "manufacturer_description");
 	}
 }

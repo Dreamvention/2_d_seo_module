@@ -1,6 +1,66 @@
 <?php
 class ModelModuleDSEOModule extends Model {
 	private $codename = 'd_seo_module';
+	
+	/*
+	*	Return Target Keywords.
+	*/
+	public function getTargetKeywords($data = array()) {
+		$target_keywords = array();
+		
+		$languages = $this->getLanguages();
+		
+		$sql = "SELECT * FROM " . DB_PREFIX . "url_target";
+		
+		$implode = array();
+		
+		if (!empty($data['filter_route'])) {
+			$implode[] = "route = '" . $this->db->escape($data['filter_route']) . "'";
+		}
+		
+		if (!empty($data['filter_language_id'])) {
+			$implode[] = "language_id = '" . (int)$data['filter_language_id'] . "'";
+		}
+		
+		if (!empty($data['filter_sort_order'])) {
+			$implode[] = "sort_order = '" . (int)$data['filter_sort_order'] . "'";
+		}
+		
+		if (!empty($data['filter_keyword'])) {
+			$implode[] = "keyword = '" . $this->db->escape($data['filter_keyword']) . "'";
+		}
+		
+		if ($implode) {
+			$sql .= " WHERE " . implode(' AND ', $implode);
+		}
+		
+		$sql .= " ORDER BY sort_order";
+				
+		$query = $this->db->query($sql);
+		
+		foreach ($query->rows as $result) {
+			if ($result['language_id'] && $result['sort_order'] && $result['keyword']) {
+				$target_keywords[$result['route']][$result['language_id']][$result['sort_order']] = $result['keyword'];
+			}
+		}
+								
+		return $target_keywords;
+	}
+	
+	/*
+	*	Return Target Keyword.
+	*/
+	public function getTargetKeyword($route) {
+		$target_keyword = array();
+		
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "url_target WHERE route = '" . $this->db->escape($route) . "' AND language_id = '" . (int)$this->config->get('config_language_id') . "' ORDER BY sort_order");
+		
+		foreach($query->rows as $result) {
+			$target_keyword[$result['sort_order']] = $result['keyword'];
+		}
+		
+		return $target_keyword;
+	}
 		
 	/*
 	*	Return list of seo extensions.
@@ -9,7 +69,7 @@ class ModelModuleDSEOModule extends Model {
 		$this->load->model('setting/setting');
 				
 		$installed_extensions = array();
-		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "extension WHERE type = 'module' ORDER BY code");
+		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "extension ORDER BY code");
 		foreach ($query->rows as $result) {
 			$installed_extensions[] = $result['code'];
 		}
@@ -18,7 +78,7 @@ class ModelModuleDSEOModule extends Model {
 		$installed_seo_extensions = isset($installed_seo_extensions['d_seo_extension_install']) ? $installed_seo_extensions['d_seo_extension_install'] : array();
 		
 		$seo_extensions = array();
-		$files = glob(DIR_APPLICATION . 'controller/extension/module/' . $this->codename . '*.php');
+		$files = glob(DIR_APPLICATION . 'controller/' . $this->codename . '/*.php');
 		if ($files) {
 			foreach ($files as $file) {
 				$seo_extension = basename($file, '.php');
@@ -31,4 +91,21 @@ class ModelModuleDSEOModule extends Model {
 		return $seo_extensions;
 	}
 	
+	/*
+	*	Return list of languages.
+	*/
+	public function getLanguages() {
+		$this->load->model('localisation/language');
+		
+		$languages = $this->model_localisation_language->getLanguages();
+		foreach ($languages as $key => $language) {
+            if (VERSION >= '2.2.0.0') {
+                $languages[$key]['flag'] = 'language/' . $language['code'] . '/' . $language['code'] . '.png';
+            } else {
+                $languages[$key]['flag'] = 'view/image/flags/' . $language['image'];
+            }
+        }
+		
+		return $languages;
+	}
 }

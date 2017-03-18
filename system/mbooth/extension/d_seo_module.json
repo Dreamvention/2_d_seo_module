@@ -4,13 +4,20 @@
     "name": "SEO Module",
     "description": "SEO module is the core platform, necessary for the installation of other SEO modules.",
 	"index": "module/d_seo_module",
-	
+	"readme": "system/mbooth/readme/d_seo_module.md",
     "author": {
         "name": "Dreamvention",
         "email": "info@dreamvention.com",
         "url": "https://dreamvention.com"
     },
     "opencart_version": [
+        "2.0.0.0",
+        "2.0.1.1",
+        "2.0.1.1",
+        "2.0.2.0",
+        "2.0.3.1",
+        "2.1.0.1",
+        "2.1.0.2",
         "2.2.0.0"
     ],
     "mbooth_version": "^4.0.0",
@@ -30,25 +37,64 @@
         "url": "https:/dreamvention.com/support"
     },
     "required": {
-        "d_simple_html_dom": ">= 1.0.0",
-        "d_shopunity": ">= 3.0.0"
+		"d_shopunity": ">= 3.0.0",
+		"d_bootstrap_switch": ">= 3.3.3",
+		"d_tinysort": ">= 2.3.6",
+		"d_rubaxa_sortable": ">= 1.4.0",
+		"d_phpexcel": ">= 1.0.0",
+        "d_robots_txt_parser": ">= 1.0.0",
+	    "d_simple_html_dom": ">= 1.0.0"
     },
     "files": [
         "system/mbooth/extension/d_seo_module.json",
-		"system/mbooth/xml/mbooth_d_seo_module.xml",
+		"system/mbooth/install/d_seo_module.xml",
+		"system/mbooth/readme/d_seo_module.md",
+		"system/config/d_seo_module.php",
+		"system/config/d_seo_module_url_target.php",
 						
 		"admin/controller/module/d_seo_module.php",
 		"admin/model/module/d_seo_module.php",
 		"admin/language/english/module/d_seo_module.php",
 		"admin/language/en-gb/module/d_seo_module.php",
-		"admin/view/template/module/d_seo_module.tpl",
 		"admin/view/stylesheet/d_seo_module.css",
 		
+		"admin/controller/d_seo_module/d_seo_module.php",
+		"admin/model/d_seo_module/d_seo_module.php",
+		"admin/language/english/d_seo_module/d_seo_module.php",
+		"admin/language/en-gb/d_seo_module/d_seo_module.php",
+		
+		"admin/controller/dashboard/d_seo_module_url_target.php",
+		"admin/model/dashboard/d_seo_module_url_target.php",
+		"admin/language/english/dashboard/d_seo_module_url_target.php",
+		"admin/language/en-gb/dashboard/d_seo_module_url_target.php",
+		"admin/view/template/dashboard/d_seo_module_url_target.tpl",
+				
+		"admin/controller/d_seo_module_url_target/d_seo_module_url_target.php",
+		"admin/model/d_seo_module_url_target/d_seo_module_url_target.php",
+		
+		"admin/controller/d_seo_module_manager/d_seo_module.php",
+		"admin/model/d_seo_module_manager/d_seo_module.php",
+		"admin/language/english/d_seo_module_manager/d_seo_module.php",
+		"admin/language/en-gb/d_seo_module_manager/d_seo_module.php",
+		
+		"admin/controller/d_seo_module_adviser/d_seo_module.php",
+		"admin/model/d_seo_module_adviser/d_seo_module.php",
+		"admin/language/english/d_seo_module_adviser/d_seo_module.php",
+		"admin/language/en-gb/d_seo_module_adviser/d_seo_module.php",
+				
 		"catalog/controller/module/d_seo_module.php",
-		"catalog/model/module/d_seo_module.php"
+		"catalog/model/module/d_seo_module.php",
+		
+		"catalog/controller/d_seo_module/d_seo_module.php",
+		
+		"catalog/controller/d_seo_module_adviser/d_seo_module.php",
+		"catalog/model/d_seo_module_adviser/d_seo_module.php",
+		"catalog/language/english/d_seo_module_adviser/d_seo_module.php",
+		"catalog/language/en-gb/d_seo_module_adviser/d_seo_module.php"
     ],
-    "dirs": [
-        "admin/view/template/module/d_seo_module"
+	"dirs": [
+        "admin/view/template/module/d_seo_module",
+		"admin/view/template/d_seo_module/d_seo_module"
     ],
     "changelog": [
         {
