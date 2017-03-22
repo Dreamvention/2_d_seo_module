@@ -18,6 +18,8 @@ class ModelDSEOModuleDSEOModule extends Model {
 	*	Delete Language.
 	*/
 	public function deleteLanguage($data) {
+		$this->db->query("DELETE FROM " . DB_PREFIX . "url_target WHERE language_id = '" . (int)$data['language_id'] . "'");
+		
 		$this->db->query("DELETE FROM " . DB_PREFIX . "manufacturer_description WHERE language_id = '" . (int)$data['language_id'] . "'");
 
 		$this->cache->delete('manufacturer');
@@ -171,6 +173,7 @@ class ModelDSEOModuleDSEOModule extends Model {
 		$this->load->model('localisation/language');
 		
 		$languages = $this->model_localisation_language->getLanguages();
+		
 		foreach ($languages as $key => $language) {
             if (VERSION >= '2.2.0.0') {
                 $languages[$key]['flag'] = 'language/' . $language['code'] . '/' . $language['code'] . '.png';

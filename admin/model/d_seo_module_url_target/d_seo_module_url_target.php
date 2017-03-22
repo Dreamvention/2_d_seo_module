@@ -13,6 +13,7 @@ class ModelDSEOModuleURLTargetDSEOModuleURLTarget extends Model {
 		
 		foreach ($query->rows as $result) {
 			$targets[$result['route']]['route'] = $result['route'];
+			
 			if ($result['language_id'] && $result['sort_order'] && $result['keyword']) {
 				$targets[$result['route']]['target_keyword'][$result['language_id']][$result['sort_order']] = $result['keyword'];
 			}
@@ -24,13 +25,7 @@ class ModelDSEOModuleURLTargetDSEOModuleURLTarget extends Model {
 			foreach($target['target_keyword'] as $target_keyword) {
 				foreach($target_keyword as $keyword) {
 					if ($keyword) {
-						if (isset($targets[$keyword])) {
-							if (!in_array($target['route'], $routes[$keyword])) {
-								$routes[$keyword][] = $target['route'];
-							}
-						} else {
-							$routes[$keyword][] = $target['route'];			
-						}
+						$routes[$keyword][] = $target['route'];
 					}
 				}
 			}
@@ -41,7 +36,21 @@ class ModelDSEOModuleURLTargetDSEOModuleURLTarget extends Model {
 		foreach ($targets as $target) {
 			foreach($target['target_keyword'] as $language_id => $target_keyword) {
 				foreach($target_keyword as $sort_order => $keyword) {
-					if ((isset($routes[$keyword]) && count($routes[$keyword])>1)) {
+					if (isset($routes[$keyword]) && (count($routes[$keyword]) > 1) && (reset($routes[$keyword]) != end($routes[$keyword]))) {
+						if (!isset($duplicate_targets[$target['route']])) {
+							$duplicate_targets[$target['route']] = $target;						
+						}
+						
+						$duplicate_targets[$target['route']]['target_keyword_duplicate'][$language_id][$sort_order] = 1;
+					}
+				}
+			}
+		}
+		
+		foreach ($targets as $target) {
+			foreach($target['target_keyword'] as $language_id => $target_keyword) {
+				foreach($target_keyword as $sort_order => $keyword) {
+					if (isset($routes[$keyword]) && (count($routes[$keyword]) > 1) && (reset($routes[$keyword]) == end($routes[$keyword]))) {
 						if (!isset($duplicate_targets[$target['route']])) {
 							$duplicate_targets[$target['route']] = $target;						
 						}
@@ -68,9 +77,11 @@ class ModelDSEOModuleURLTargetDSEOModuleURLTarget extends Model {
 		foreach ($query->rows as $result) {
 			$route = 'category_id=' . $result['category_id'];
 			$targets[$route]['route'] = $route;
+			
 			if (!isset($targets[$route]['target_keyword'])) {
 				$targets[$route]['target_keyword'] = array();
 			}
+			
 			if ($result['language_id'] && $result['sort_order'] && $result['keyword']) {
 				$targets[$route]['target_keyword'][$result['language_id']][$result['sort_order']] = $result['keyword'];
 			}
@@ -81,9 +92,11 @@ class ModelDSEOModuleURLTargetDSEOModuleURLTarget extends Model {
 		foreach ($query->rows as $result) {
 			$route = 'product_id=' . $result['product_id'];
 			$targets[$route]['route'] = $route;
+			
 			if (!isset($targets[$route]['target_keyword'])) {
 				$targets[$route]['target_keyword'] = array();
 			}
+			
 			if ($result['language_id'] && $result['sort_order'] && $result['keyword']) {
 				$targets[$route]['target_keyword'][$result['language_id']][$result['sort_order']] = $result['keyword'];
 			}
@@ -94,9 +107,11 @@ class ModelDSEOModuleURLTargetDSEOModuleURLTarget extends Model {
 		foreach ($query->rows as $result) {
 			$route = 'manufacturer_id=' . $result['manufacturer_id'];
 			$targets[$route]['route'] = $route;
+			
 			if (!isset($targets[$route]['target_keyword'])) {
 				$targets[$route]['target_keyword'] = array();
 			}
+			
 			if ($result['language_id'] && $result['sort_order'] && $result['keyword']) {
 				$targets[$route]['target_keyword'][$result['language_id']][$result['sort_order']] = $result['keyword'];
 			}
@@ -107,9 +122,11 @@ class ModelDSEOModuleURLTargetDSEOModuleURLTarget extends Model {
 		foreach ($query->rows as $result) {
 			$route = 'information_id=' . $result['information_id'];
 			$targets[$route]['route'] = $route;
+			
 			if (!isset($targets[$route]['target_keyword'])) {
 				$targets[$route]['target_keyword'] = array();
 			}
+			
 			if ($result['language_id'] && $result['sort_order'] && $result['keyword']) {
 				$targets[$route]['target_keyword'][$result['language_id']][$result['sort_order']] = $result['keyword'];
 			}
@@ -137,6 +154,7 @@ class ModelDSEOModuleURLTargetDSEOModuleURLTarget extends Model {
 		$this->load->model('localisation/language');
 		
 		$languages = $this->model_localisation_language->getLanguages();
+		
 		foreach ($languages as $key => $language) {
             if (VERSION >= '2.2.0.0') {
                 $languages[$key]['flag'] = 'language/' . $language['code'] . '/' . $language['code'] . '.png';

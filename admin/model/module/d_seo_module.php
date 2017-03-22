@@ -7,10 +7,12 @@ class ModelModuleDSEOModule extends Model {
 	*/
 	public function saveFileData($file, $data) {
 		$dir = str_replace("system/", "", DIR_SYSTEM);
+		
 		if ($file == 'htaccess') {
 			$file_on = $dir . '.htaccess';
 			$file_off = $dir . '.htaccess.txt'; 
 		}
+		
 		if ($file == 'robots') {
 			$file_on = $dir . 'robots.txt';
 			$file_off = $dir . '_robots.txt'; 
@@ -34,16 +36,19 @@ class ModelModuleDSEOModule extends Model {
 	*/
 	public function getFileData($file) {
 		$dir = str_replace("system/", "", DIR_SYSTEM);
+		
 		if ($file == 'htaccess') {
 			$file_on = $dir . '.htaccess';
 			$file_off = $dir . '.htaccess.txt'; 
 		}
+		
 		if ($file == 'robots') {
 			$file_on = $dir . 'robots.txt';
 			$file_off = $dir . '_robots.txt'; 
 		}
 		
 		$data = array();
+		
 		if (file_exists($file_on)) { 
 			$data['status'] = true;
 			$fh = fopen($file_on, "r");
@@ -177,6 +182,7 @@ class ModelModuleDSEOModule extends Model {
 		
 		foreach ($query->rows as $result) {
 			$custom_pages[$result['route']]['route'] = $result['route'];
+			
 			if ($result['language_id'] && $result['sort_order'] && $result['keyword']) {
 				$custom_pages[$result['route']]['target_keyword'][$result['language_id']][$result['sort_order']] = $result['keyword'];
 			}
@@ -252,6 +258,7 @@ class ModelModuleDSEOModule extends Model {
 		$this->load->model('setting/setting');
 		
 		$setting['d_seo_extension_install'] = $seo_extensions;
+		
 		$this->model_setting_setting->editSetting('d_seo_extension', $setting);
 	}
 	
@@ -262,7 +269,9 @@ class ModelModuleDSEOModule extends Model {
 		$this->load->model('setting/setting');
 				
 		$installed_extensions = array();
+		
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "extension ORDER BY code");
+		
 		foreach ($query->rows as $result) {
 			$installed_extensions[] = $result['code'];
 		}
@@ -271,10 +280,13 @@ class ModelModuleDSEOModule extends Model {
 		$installed_seo_extensions = isset($installed_seo_extensions['d_seo_extension_install']) ? $installed_seo_extensions['d_seo_extension_install'] : array();
 		
 		$seo_extensions = array();
+		
 		$files = glob(DIR_APPLICATION . 'controller/' . $this->codename . '/*.php');
+		
 		if ($files) {
 			foreach ($files as $file) {
 				$seo_extension = basename($file, '.php');
+				
 				if (in_array($seo_extension, $installed_extensions) && in_array($seo_extension, $installed_seo_extensions)) {
 					$seo_extensions[] = $seo_extension;
 				}
@@ -291,6 +303,7 @@ class ModelModuleDSEOModule extends Model {
 		$this->load->model('localisation/language');
 		
 		$languages = $this->model_localisation_language->getLanguages();
+		
 		foreach ($languages as $key => $language) {
             if (VERSION >= '2.2.0.0') {
                 $languages[$key]['flag'] = 'language/' . $language['code'] . '/' . $language['code'] . '.png';
@@ -308,13 +321,16 @@ class ModelModuleDSEOModule extends Model {
 	public function getStores() {
 		$this->load->model('setting/store');
 		
-		$stores = $this->model_setting_store->getStores();
 		$result = array();
+		
+		$stores = $this->model_setting_store->getStores();
+		
 		if ($stores) {
 			$result[] = array(
 				'store_id' => 0, 
 				'name' => $this->config->get('config_name')
 			);
+			
 			foreach ($stores as $store) {
 				$result[] = array(
 					'store_id' => $store['store_id'],
@@ -372,8 +388,11 @@ class ModelModuleDSEOModule extends Model {
 		$this->db->query("CREATE TABLE " . DB_PREFIX . "manufacturer_description (manufacturer_id INT(11) NOT NULL, language_id INT(11) NOT NULL, PRIMARY KEY (manufacturer_id, language_id)) ENGINE=MyISAM DEFAULT CHARSET=utf8 COLLATE=utf8_general_ci");
 		
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "manufacturer");
+		
 		$manufacturers = $query->rows;
+		
 		$languages = $this->getLanguages();
+		
 		foreach ($manufacturers as $manufacturer) {
 			foreach ($languages as $language) {
 				$this->db->query("INSERT INTO " . DB_PREFIX . "manufacturer_description SET manufacturer_id = '" . (int)$manufacturer['manufacturer_id'] . "', language_id = '" . (int)$language['language_id'] . "'");

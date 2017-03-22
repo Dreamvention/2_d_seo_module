@@ -75,6 +75,7 @@ class ControllerDashboardDSEOModuleURLTarget extends Controller {
 		$data['targets'] = array();
 		
 		$i = 0;
+		
 		foreach ($targets as $target) {
 			$data['targets'][] = $target;
 			$i++;
