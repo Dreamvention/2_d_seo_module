@@ -1021,6 +1021,9 @@ class ControllerModuleDSEOModule extends Controller {
 			
 			$this->model_d_shopunity_ocmod->setOcmod($this->codename . '.xml', 1);
 			$this->model_d_shopunity_ocmod->refreshCache();
+			
+			$this->model_user_user_group->addPermission($this->{'model_module_' . $this->codename}->getGroupId(), 'access', 'dashboard/d_seo_module_url_target');
+			$this->model_user_user_group->addPermission($this->{'model_module_' . $this->codename}->getGroupId(), 'modify', 'dashboard/d_seo_module_url_target');
 						
 			$this->session->data['success'] = $this->language->get('text_success_install');
 		}
@@ -1054,7 +1057,10 @@ class ControllerModuleDSEOModule extends Controller {
 			
 			$this->model_d_shopunity_ocmod->setOcmod($this->codename . '.xml', 0);
 			$this->model_d_shopunity_ocmod->refreshCache();
-						
+			
+			$this->model_user_user_group->removePermission($this->{'model_module_' . $this->codename}->getGroupId(), 'access', 'dashboard/d_seo_module_url_target');
+			$this->model_user_user_group->removePermission($this->{'model_module_' . $this->codename}->getGroupId(), 'modify', 'dashboard/d_seo_module_url_target');
+			
 			$this->session->data['success'] = $this->language->get('text_success_uninstall');
 		}
 
