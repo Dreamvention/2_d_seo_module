@@ -43,7 +43,8 @@
 		"d_rubaxa_sortable": ">= 1.4.0",
 		"d_phpexcel": ">= 1.0.0",
         "d_robots_txt_parser": ">= 1.0.0",
-	    "d_simple_html_dom": ">= 1.0.0"
+	    "d_simple_html_dom": ">= 1.0.0",
+		"d_event_manager": "^1.1.1"
     },
     "files": [
         "system/mbooth/extension/d_seo_module.json",
