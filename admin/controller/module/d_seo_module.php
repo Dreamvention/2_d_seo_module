@@ -971,51 +971,51 @@ class ControllerModuleDSEOModule extends Controller {
 
 		$this->load->model($this->route);
 		$this->load->model('setting/setting');
-		$this->load->model('extension/event');
 		$this->load->model('extension/extension');
 		$this->load->model('user/user_group');
 		$this->load->model('d_shopunity/ocmod');
+		$this->load->model('module/d_event_manager');
 
 		if ($this->validateInstall()) {
-			$this->model_extension_event->deleteEvent($this->codename);
-			$this->model_extension_event->addEvent($this->codename, 'admin/model/localisation/language/addLanguage/after', 'module/d_seo_module/language_add_after');
-			$this->model_extension_event->addEvent($this->codename, 'admin/model/localisation/language/deleteLanguage/after', 'module/d_seo_module/language_delete_after');
-			$this->model_extension_event->addEvent($this->codename, 'admin/view/common/menu/after', 'module/d_seo_module/menu_after');
-			$this->model_extension_event->addEvent($this->codename, 'admin/view/common/dashboard/after', 'module/d_seo_module/dashboard_after');
-			$this->model_extension_event->addEvent($this->codename, 'admin/view/setting/setting/after', 'module/d_seo_module/setting_after');
-			$this->model_extension_event->addEvent($this->codename, 'admin/view/setting/store_form/after', 'module/d_seo_module/setting_after');
-			$this->model_extension_event->addEvent($this->codename, 'admin/view/catalog/category_form/after', 'module/d_seo_module/category_form_after');
-			$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/category/addCategory/after', 'module/d_seo_module/category_add_after');
-			$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/category/editCategory/after', 'module/d_seo_module/category_edit_after');
-			$this->model_extension_event->addEvent($this->codename, 'admin/view/catalog/product_form/after', 'module/d_seo_module/product_form_after');
-			$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/product/addProduct/after', 'module/d_seo_module/product_add_after');
-			$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/product/editProduct/after', 'module/d_seo_module/product_edit_after');
-			$this->model_extension_event->addEvent($this->codename, 'admin/view/catalog/manufacturer_form/after', 'module/d_seo_module/manufacturer_form_after');
-			$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/manufacturer/addManufacturer/after', 'module/d_seo_module/manufacturer_add_after');
-			$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/manufacturer/editManufacturer/after', 'module/d_seo_module/manufacturer_edit_after');
-			$this->model_extension_event->addEvent($this->codename, 'admin/view/catalog/information_form/after', 'module/d_seo_module/information_form_after');
-			$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/information/addInformation/after', 'module/d_seo_module/information_add_after');
-			$this->model_extension_event->addEvent($this->codename, 'admin/model/catalog/information/editInformation/after', 'module/d_seo_module/information_edit_after');
-			$this->model_extension_event->addEvent($this->codename, 'catalog/view/common/header/before', 'module/d_seo_module/header_before');
-			$this->model_extension_event->addEvent($this->codename, 'catalog/view/*/template/common/header/after', 'module/d_seo_module/header_after');
-			$this->model_extension_event->addEvent($this->codename, 'catalog/view/common/footer/before', 'module/d_seo_module/footer_before');
-			$this->model_extension_event->addEvent($this->codename, 'catalog/view/*/template/common/footer/after', 'module/d_seo_module/footer_after');
-			$this->model_extension_event->addEvent($this->codename, 'catalog/view/common/home/before', 'module/d_seo_module/home_before');
-			$this->model_extension_event->addEvent($this->codename, 'catalog/view/*/template/common/home/after', 'module/d_seo_module/home_after');
-			$this->model_extension_event->addEvent($this->codename, 'catalog/view/product/category/before', 'module/d_seo_module/category_before');
-			$this->model_extension_event->addEvent($this->codename, 'catalog/view/*/template/product/category/after', 'module/d_seo_module/category_after');
-			$this->model_extension_event->addEvent($this->codename, 'catalog/view/product/product/before', 'module/d_seo_module/product_before');
-			$this->model_extension_event->addEvent($this->codename, 'catalog/view/*/template/product/product/after', 'module/d_seo_module/product_after');
-			$this->model_extension_event->addEvent($this->codename, 'catalog/view/product/manufacturer_list/before', 'module/d_seo_module/manufacturer_list_before');
-			$this->model_extension_event->addEvent($this->codename, 'catalog/view/*/template/product/manufacturer_list/after', 'module/d_seo_module/manufacturer_list_after');
-			$this->model_extension_event->addEvent($this->codename, 'catalog/view/product/manufacturer_info/before', 'module/d_seo_module/manufacturer_info_before');
-			$this->model_extension_event->addEvent($this->codename, 'catalog/view/*/template/product/manufacturer_info/after', 'module/d_seo_module/manufacturer_info_after');
-			$this->model_extension_event->addEvent($this->codename, 'catalog/view/information/information/before', 'module/d_seo_module/information_before');
-			$this->model_extension_event->addEvent($this->codename, 'catalog/view/*/template/information/information/after', 'module/d_seo_module/information_after');
-			$this->model_extension_event->addEvent($this->codename, 'catalog/view/product/search/before', 'module/d_seo_module/search_before');
-			$this->model_extension_event->addEvent($this->codename, 'catalog/view/*/template/product/search/after', 'module/d_seo_module/search_after');
-			$this->model_extension_event->addEvent($this->codename, 'catalog/view/product/special/before', 'module/d_seo_module/special_before');
-			$this->model_extension_event->addEvent($this->codename, 'catalog/view/*/template/product/special/after', 'module/d_seo_module/special_after');
+			$this->model_module_d_event_manager->deleteEvent($this->codename);
+			$this->model_module_d_event_manager->addEvent($this->codename, 'admin/model/localisation/language/addLanguage/after', 'module/d_seo_module/language_add_after');
+			$this->model_module_d_event_manager->addEvent($this->codename, 'admin/model/localisation/language/deleteLanguage/after', 'module/d_seo_module/language_delete_after');
+			$this->model_module_d_event_manager->addEvent($this->codename, 'admin/view/common/menu/after', 'module/d_seo_module/menu_after');
+			$this->model_module_d_event_manager->addEvent($this->codename, 'admin/view/common/dashboard/after', 'module/d_seo_module/dashboard_after');
+			$this->model_module_d_event_manager->addEvent($this->codename, 'admin/view/setting/setting/after', 'module/d_seo_module/setting_after');
+			$this->model_module_d_event_manager->addEvent($this->codename, 'admin/view/setting/store_form/after', 'module/d_seo_module/setting_after');
+			$this->model_module_d_event_manager->addEvent($this->codename, 'admin/view/catalog/category_form/after', 'module/d_seo_module/category_form_after');
+			$this->model_module_d_event_manager->addEvent($this->codename, 'admin/model/catalog/category/addCategory/after', 'module/d_seo_module/category_add_after');
+			$this->model_module_d_event_manager->addEvent($this->codename, 'admin/model/catalog/category/editCategory/after', 'module/d_seo_module/category_edit_after');
+			$this->model_module_d_event_manager->addEvent($this->codename, 'admin/view/catalog/product_form/after', 'module/d_seo_module/product_form_after');
+			$this->model_module_d_event_manager->addEvent($this->codename, 'admin/model/catalog/product/addProduct/after', 'module/d_seo_module/product_add_after');
+			$this->model_module_d_event_manager->addEvent($this->codename, 'admin/model/catalog/product/editProduct/after', 'module/d_seo_module/product_edit_after');
+			$this->model_module_d_event_manager->addEvent($this->codename, 'admin/view/catalog/manufacturer_form/after', 'module/d_seo_module/manufacturer_form_after');
+			$this->model_module_d_event_manager->addEvent($this->codename, 'admin/model/catalog/manufacturer/addManufacturer/after', 'module/d_seo_module/manufacturer_add_after');
+			$this->model_module_d_event_manager->addEvent($this->codename, 'admin/model/catalog/manufacturer/editManufacturer/after', 'module/d_seo_module/manufacturer_edit_after');
+			$this->model_module_d_event_manager->addEvent($this->codename, 'admin/view/catalog/information_form/after', 'module/d_seo_module/information_form_after');
+			$this->model_module_d_event_manager->addEvent($this->codename, 'admin/model/catalog/information/addInformation/after', 'module/d_seo_module/information_add_after');
+			$this->model_module_d_event_manager->addEvent($this->codename, 'admin/model/catalog/information/editInformation/after', 'module/d_seo_module/information_edit_after');
+			$this->model_module_d_event_manager->addEvent($this->codename, 'catalog/view/common/header/before', 'module/d_seo_module/header_before');
+			$this->model_module_d_event_manager->addEvent($this->codename, 'catalog/view/*/template/common/header/after', 'module/d_seo_module/header_after');
+			$this->model_module_d_event_manager->addEvent($this->codename, 'catalog/view/common/footer/before', 'module/d_seo_module/footer_before');
+			$this->model_module_d_event_manager->addEvent($this->codename, 'catalog/view/*/template/common/footer/after', 'module/d_seo_module/footer_after');
+			$this->model_module_d_event_manager->addEvent($this->codename, 'catalog/view/common/home/before', 'module/d_seo_module/home_before');
+			$this->model_module_d_event_manager->addEvent($this->codename, 'catalog/view/*/template/common/home/after', 'module/d_seo_module/home_after');
+			$this->model_module_d_event_manager->addEvent($this->codename, 'catalog/view/product/category/before', 'module/d_seo_module/category_before');
+			$this->model_module_d_event_manager->addEvent($this->codename, 'catalog/view/*/template/product/category/after', 'module/d_seo_module/category_after');
+			$this->model_module_d_event_manager->addEvent($this->codename, 'catalog/view/product/product/before', 'module/d_seo_module/product_before');
+			$this->model_module_d_event_manager->addEvent($this->codename, 'catalog/view/*/template/product/product/after', 'module/d_seo_module/product_after');
+			$this->model_module_d_event_manager->addEvent($this->codename, 'catalog/view/product/manufacturer_list/before', 'module/d_seo_module/manufacturer_list_before');
+			$this->model_module_d_event_manager->addEvent($this->codename, 'catalog/view/*/template/product/manufacturer_list/after', 'module/d_seo_module/manufacturer_list_after');
+			$this->model_module_d_event_manager->addEvent($this->codename, 'catalog/view/product/manufacturer_info/before', 'module/d_seo_module/manufacturer_info_before');
+			$this->model_module_d_event_manager->addEvent($this->codename, 'catalog/view/*/template/product/manufacturer_info/after', 'module/d_seo_module/manufacturer_info_after');
+			$this->model_module_d_event_manager->addEvent($this->codename, 'catalog/view/information/information/before', 'module/d_seo_module/information_before');
+			$this->model_module_d_event_manager->addEvent($this->codename, 'catalog/view/*/template/information/information/after', 'module/d_seo_module/information_after');
+			$this->model_module_d_event_manager->addEvent($this->codename, 'catalog/view/product/search/before', 'module/d_seo_module/search_before');
+			$this->model_module_d_event_manager->addEvent($this->codename, 'catalog/view/*/template/product/search/after', 'module/d_seo_module/search_after');
+			$this->model_module_d_event_manager->addEvent($this->codename, 'catalog/view/product/special/before', 'module/d_seo_module/special_before');
+			$this->model_module_d_event_manager->addEvent($this->codename, 'catalog/view/*/template/product/special/after', 'module/d_seo_module/special_after');
 
 			$this->{'model_module_' . $this->codename}->installModule();
 			
@@ -1045,13 +1045,13 @@ class ControllerModuleDSEOModule extends Controller {
 
 		$this->load->model($this->route);
 		$this->load->model('setting/setting');
-		$this->load->model('extension/event');
 		$this->load->model('extension/extension');
 		$this->load->model('user/user_group');
 		$this->load->model('d_shopunity/ocmod');
+		$this->load->model('module/d_event_manager');
 
 		if ($this->validateUninstall()) {
-			$this->model_extension_event->deleteEvent($this->codename);
+			$this->model_module_d_event_manager->deleteEvent($this->codename);
 
 			$this->{'model_module_' . $this->codename}->uninstallModule();
 			
