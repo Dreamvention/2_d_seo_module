@@ -1094,7 +1094,14 @@ class ControllerModuleDSEOModule extends Controller {
 		$this->load->model($this->route);
 
 		$data = $data[0];
-		$data['language_id'] = $output;
+		
+		if (VERSION >= '2.0.3.1') {
+			$data['language_id'] = $output;
+		} else {
+			$languages = $this->{'model_module_' . $this->codename}->getLanguages();
+			$language = end($languages);
+			$data['language_id'] = $language['language_id'];
+		}
 
 		$seo_extensions = $this->{'model_module_' . $this->codename}->getSEOExtensions();
 
@@ -1106,8 +1113,7 @@ class ControllerModuleDSEOModule extends Controller {
 	public function language_delete_after($route, $data, $output) {
 		$this->load->model($this->route);
 
-		$language_id = $data[0];
-		$data['language_id'] = $language_id;
+		$data['language_id'] = $data[0];
 
 		$seo_extensions = $this->{'model_module_' . $this->codename}->getSEOExtensions();
 
