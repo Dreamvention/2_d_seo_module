@@ -7,13 +7,15 @@ Opencart version supported 2.2.0 and under (other versions are in developement. 
 1. [Installation & Update](#installation-and-update)
 2. [API](#api)
 	1. [Admin events](#admin-list-of-events-and-their-methods)
-		* [common](#common)
+		* [common](#admin-common)
 		* [setting](#setting)
 		* [localisation](#localisation)
 		* [catalog](#catalog)
 	2. [Catalog events](#catalog-list-of-events-and-their-methods)
 		* [common](#catalog-common)
 		* [product](#product)
+		* [information](#information)
+		* [startup](#startup)
 
 
 Installation and Update
@@ -46,13 +48,14 @@ You can update practically the same way as you have install the module. Only you
 
 API
 ===
-You can extend the SEO Module functionality by using the built-in API. The SEO module will look inside the ```admin/controller/extension/module/``` for ```d_seo_module_*.php``` and if found, will call specially named methods. The result will be used to modify the output using Opencart Event Methods.
+You can extend the SEO Module functionality by using the built-in API. The SEO module will look inside the ```admin/controller/d_seo_module/``` and if your extension was found, will call specially named methods. The result will be used to modify the output using Opencart Event Methods.
 
 ####For the API to work you will need
-1. name your extension controller beginning with ```d_seo_module_```
-2. Add method, that corresponds to the event you want to subscribe to.
+1. Install your extension in Opencart (table `oc_extension`).
+2. Add your extension in the list ```d_seo_extension_install``` in the Opencart table `oc_setting`.
+3. Add method, that corresponds to the event you want to subscribe to.
 
-Here is an example of adding a new item to the SEO module Menu in admin panel:
+Here is an example of adding a new item to the SEO Module Menu in admin panel:
 
 ```php
 private $route = 'extension/module/d_seo_module_myfeature';
@@ -75,7 +78,7 @@ public function menu($menu_data) {
 > ####How to use it?
 > This is how you should understand the following events:
 
->` admin/view/common/column_left/before` is called before the `column_left.tpl` is rendered to the screen.
+>`admin/view/common/column_left/before` is called before the `column_left.tpl` is rendered to the screen.
 
 >To subsribe you will need to add the method `public function menu($menu_data)` to your controller file `admin/controller/extension/module/d_seo_module_myfeature.php` with a parameter `$menu_data`
 
@@ -152,7 +155,7 @@ _You can add html to a language tab, by using the `$language_id`_
 * **parameters:** `$language_id`
 * **output:** `html`
 
-Exemple
+Example
 **admin/controller/extension/module/d_seo_module_myfeature.php**
 ```php
 public function setting_tab_general_language($language_id) {
