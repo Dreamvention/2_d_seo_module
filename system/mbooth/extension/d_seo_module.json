@@ -1,6 +1,6 @@
 {
     "codename": "d_seo_module",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "name": "SEO Module",
     "description": "SEO module is the core platform, necessary for the installation of other SEO modules.",
 	"index": "module/d_seo_module",
@@ -98,6 +98,10 @@
     ],
     "changelog": [
         {
+            "version": "1.0.3",
+            "change": "Quick Install SEO Module"
+        },
+		{
             "version": "1.0.2",
             "change": "Bugs fixed. Simple HTML Dom validation"
         },

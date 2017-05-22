@@ -11,10 +11,8 @@ class ControllerModuleDSEOModule extends Controller {
 		$setting = $this->model_setting_setting->getSetting($this->codename);
 		$status = isset($setting[$this->codename . '_status']) ? $setting[$this->codename . '_status'] : false;
 		
-		unset($this->session->data[$this->codename]);
-		
 		if ($status) {
-			$this->session->data[$this->codename] = true;
+			$this->config->set($this->codename, true);
 			
 			$seo_extensions = $this->{'model_module_' . $this->codename}->getSEOExtensions();
 		
@@ -31,7 +29,7 @@ class ControllerModuleDSEOModule extends Controller {
 	public function seo_url_rewrite($link) {
 		$this->load->model($this->route);
 				
-		if (isset($this->session->data[$this->codename])) {			
+		if ($this->config->get($this->codename)) {			
 			$cache = md5($link);
 			
 			$language_id = $this->config->get('config_language_id');
