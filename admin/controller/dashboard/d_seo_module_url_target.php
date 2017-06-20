@@ -124,6 +124,7 @@ class ControllerDashboardDSEOModuleURLTarget extends Controller {
 				
 		if (!$this->user->hasPermission($permission, $this->route)) {
 			$this->error['warning'] = $this->language->get('error_permission');
+			
 			return false;
 		}
 		
