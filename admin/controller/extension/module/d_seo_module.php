@@ -1396,13 +1396,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 				
 		if ($this->validateInstall()) {
 			$this->{'model_extension_module_' . $this->codename}->installModule();
-			
-			if (file_exists(DIR_APPLICATION . 'model/extension/module/d_twig_manager.php')) {
-				$this->load->model('extension/module/d_twig_manager');
-			
-				$this->model_extension_module_d_twig_manager->installCompatibility();
-			}
-			
+						
 			if (file_exists(DIR_APPLICATION . 'model/extension/module/d_event_manager.php')) {
 				$this->load->model('extension/module/d_event_manager');
 				
@@ -1570,6 +1564,12 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			$this->load->model('extension/d_shopunity/mbooth');
 			
 			$this->model_extension_d_shopunity_mbooth->installDependencies($this->codename);
+		}
+		
+		if (file_exists(DIR_APPLICATION . 'model/extension/module/d_twig_manager.php')) {
+			$this->load->model('extension/module/d_twig_manager');
+			
+			$this->model_extension_module_d_twig_manager->installCompatibility();
 		}
 	}
 		
