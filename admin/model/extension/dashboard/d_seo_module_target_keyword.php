@@ -139,14 +139,14 @@ class ModelExtensionDashboardDSEOModuleTargetKeyword extends Model {
 		
 		$result = array();
 		
+		$result[] = array(
+			'store_id' => 0, 
+			'name' => $this->config->get('config_name')
+		);
+		
 		$stores = $this->model_setting_store->getStores();
 		
 		if ($stores) {
-			$result[] = array(
-				'store_id' => 0, 
-				'name' => $this->config->get('config_name')
-			);
-			
 			foreach ($stores as $store) {
 				$result[] = array(
 					'store_id' => $store['store_id'],
