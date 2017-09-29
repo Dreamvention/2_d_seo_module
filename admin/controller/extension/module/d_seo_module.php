@@ -1824,7 +1824,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 				$html_languages = '<ul class="nav nav-tabs" id="language">';
 				
 				foreach ($languages as $language) {
-					$html_languages .= '<li' . (($language == reset($languages)) ? ' class="active"' : '') . '><a href="#language' . $language['language_id'] . '" data-toggle="tab"><img src="language/' . $language['code'] . '/' . $language['code'] . '.png" title="' . $language['name'] . '" /> ' . $language['name'] . '</a></li>';
+					$html_languages .= '<li' . (($language == reset($languages)) ? ' class="active"' : '') . '><a href="#language' . $language['language_id'] . '" data-toggle="tab"><img src="' . $language['flag'] . '" title="' . $language['name'] . '" /> ' . $language['name'] . '</a></li>';
 				}
 				
 				$html_languages .= '</ul>';
@@ -1941,7 +1941,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 				$html_languages = '<ul class="nav nav-tabs" id="language">';
 				
 				foreach ($languages as $language) {
-					$html_languages .= '<li' . (($language == reset($languages)) ? ' class="active"' : '') . '><a href="#language' . $language['language_id'] . '" data-toggle="tab"><img src="language/' . $language['code'] . '/' . $language['code'] . '.png" title="' . $language['name'] . '" /> ' . $language['name'] . '</a></li>';
+					$html_languages .= '<li' . (($language == reset($languages)) ? ' class="active"' : '') . '><a href="#language' . $language['language_id'] . '" data-toggle="tab"><img src="' . $language['flag'] . '" title="' . $language['name'] . '" /> ' . $language['name'] . '</a></li>';
 				}
 				
 				$html_languages .= '</ul>';
@@ -2127,7 +2127,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 						$html_store_languages = '<ul class="nav nav-tabs" id="store_' . $store['store_id'] . '_language">';
 				
 						foreach ($languages as $language) {
-							$html_store_languages .= '<li' . (($language == reset($languages)) ? ' class="active"' : '') . '><a href="#store_' . $store['store_id'] . '_language_' . $language['language_id'] . '" data-toggle="tab"><img src="language/' . $language['code'] . '/' . $language['code'] . '.png" title="' . $language['name'] . '" /> ' . $language['name'] . '</a></li>';
+							$html_store_languages .= '<li' . (($language == reset($languages)) ? ' class="active"' : '') . '><a href="#store_' . $store['store_id'] . '_language_' . $language['language_id'] . '" data-toggle="tab"><img src="' . $language['flag'] . '" title="' . $language['name'] . '" /> ' . $language['name'] . '</a></li>';
 						}
 				
 						$html_store_languages .= '</ul>';
@@ -2309,7 +2309,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 						$html_store_languages = '<ul class="nav nav-tabs" id="store_' . $store['store_id'] . '_language">';
 				
 						foreach ($languages as $language) {
-							$html_store_languages .= '<li' . (($language == reset($languages)) ? ' class="active"' : '') . '><a href="#store_' . $store['store_id'] . '_language_' . $language['language_id'] . '" data-toggle="tab"><img src="language/' . $language['code'] . '/' . $language['code'] . '.png" title="' . $language['name'] . '" /> ' . $language['name'] . '</a></li>';
+							$html_store_languages .= '<li' . (($language == reset($languages)) ? ' class="active"' : '') . '><a href="#store_' . $store['store_id'] . '_language_' . $language['language_id'] . '" data-toggle="tab"><img src="' . $language['flag'] . '" title="' . $language['name'] . '" /> ' . $language['name'] . '</a></li>';
 						}
 				
 						$html_store_languages .= '</ul>';
@@ -2488,7 +2488,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 				$html_languages = '<ul class="nav nav-tabs" id="language">';
 				
 				foreach ($languages as $language) {
-					$html_languages .= '<li' . (($language == reset($languages)) ? ' class="active"' : '') . '><a href="#language' . $language['language_id'] . '" data-toggle="tab"><img src="language/' . $language['code'] . '/' . $language['code'] . '.png" title="' . $language['name'] . '" /> ' . $language['name'] . '</a></li>';
+					$html_languages .= '<li' . (($language == reset($languages)) ? ' class="active"' : '') . '><a href="#language' . $language['language_id'] . '" data-toggle="tab"><img src="' . $language['flag'] . '" title="' . $language['name'] . '" /> ' . $language['name'] . '</a></li>';
 				}
 				
 				$html_languages .= '</ul>';
@@ -2527,7 +2527,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 						$html_store_languages = '<ul class="nav nav-tabs" id="store_' . $store['store_id'] . '_language">';
 				
 						foreach ($languages as $language) {
-							$html_store_languages .= '<li' . (($language == reset($languages)) ? ' class="active"' : '') . '><a href="#store_' . $store['store_id'] . '_language_' . $language['language_id'] . '" data-toggle="tab"><img src="language/' . $language['code'] . '/' . $language['code'] . '.png" title="' . $language['name'] . '" /> ' . $language['name'] . '</a></li>';
+							$html_store_languages .= '<li' . (($language == reset($languages)) ? ' class="active"' : '') . '><a href="#store_' . $store['store_id'] . '_language_' . $language['language_id'] . '" data-toggle="tab"><img src="' . $language['flag'] . '" title="' . $language['name'] . '" /> ' . $language['name'] . '</a></li>';
 						}
 				
 						$html_store_languages .= '</ul>';
@@ -2707,7 +2707,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 						$html_store_languages = '<ul class="nav nav-tabs" id="store_' . $store['store_id'] . '_language">';
 				
 						foreach ($languages as $language) {
-							$html_store_languages .= '<li' . (($language == reset($languages)) ? ' class="active"' : '') . '><a href="#store_' . $store['store_id'] . '_language_' . $language['language_id'] . '" data-toggle="tab"><img src="language/' . $language['code'] . '/' . $language['code'] . '.png" title="' . $language['name'] . '" /> ' . $language['name'] . '</a></li>';
+							$html_store_languages .= '<li' . (($language == reset($languages)) ? ' class="active"' : '') . '><a href="#store_' . $store['store_id'] . '_language_' . $language['language_id'] . '" data-toggle="tab"><img src="' . $language['flag'] . '" title="' . $language['name'] . '" /> ' . $language['name'] . '</a></li>';
 						}
 				
 						$html_store_languages .= '</ul>';

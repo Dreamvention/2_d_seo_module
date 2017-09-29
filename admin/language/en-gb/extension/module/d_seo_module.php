@@ -269,6 +269,7 @@ Disallow: /*&filter_description=
 Sitemap: %ssitemap.xml
 Host: %s
 </pre>';
+$_['help_target_keyword']						= 'Target Keyword is multilingual field, which is important for SEO and must be unique for each page and language.';
 
 // Error
 $_['error_warning']          					= 'Warning: Please check the form carefully for errors!';
