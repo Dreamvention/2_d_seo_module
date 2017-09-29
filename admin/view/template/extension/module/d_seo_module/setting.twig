@@ -1,0 +1,268 @@
+{{ header }}{{ column_left }}
+<div id="content">
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="form-inline pull-right">
+				{% if (stores|length > 1) %}
+				<select class="form-control" onChange="location='{{ href_setting }}&store_id='+$(this).val()">
+				{% for store in stores %}
+				{% if (store['store_id'] == store_id) %}
+					<option value="{{ store['store_id'] }}" selected="selected">{{ store['name'] }}</option>
+				{% else %}
+					<option value="{{ store['store_id'] }}">{{ store['name'] }}</option>
+				{% endif %}
+				{% endfor %}
+				</select>
+				{% endif %}
+				<button id="save_and_stay" data-toggle="tooltip" title="{{ button_save_and_stay }}" class="btn btn-success"><i class="fa fa-save"></i></button>
+				<button id="save_and_exit" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+				<a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a>
+			</div>
+			<h1>{{ heading_title }} {{ version }}</h1>
+			<ul class="breadcrumb">
+				{% for breadcrumb in breadcrumbs %}
+				<li><a href="{{ breadcrumb['href'] }}">{{ breadcrumb['text'] }}</a></li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+	<div class="container-fluid">
+		{% if error['warning'] %}
+		<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error['warning'] }}
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+		{% endif %}
+		{% if success %}
+		<div class="alert alert-success"><i class="fa fa-exclamation-circle"></i> {{ success }}
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+		{% endif %}
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+			</div>
+			<div class="panel-body">
+				<ul class="nav nav-tabs">
+					<li class="active">
+						<a href="{{ href_setting }}"><span class="fa fa-cog"></span> {{ text_settings }}</a>
+					</li>
+					<li>
+						<a href="{{ href_field_setting }}"><span class="fa fa-cog"></span> {{ text_field_settings }}</a>
+					</li>
+					<li>
+						<a href="{{ href_custom_page }}"><span class="fa fa-user"></span> {{ text_custom_pages }}</a>
+					</li>
+					<li>
+						<a href="{{ href_export_import }}"><span class="fa fa-file-o"></span> {{ text_export_import }}</a>
+					</li>
+					<li>
+						<a href="{{ href_instruction }}"><span class="fa fa-graduation-cap"></span> {{ text_instructions }}</a>
+					</li>
+				</ul>
+				
+				<form action="{{ action }}" method="post" enctype="multipart/form-data" id="form" class="form-horizontal">
+					<div class="row">
+						<div class="col-sm-2">
+							<ul class="nav nav-pills nav-stacked">
+								<li class="active">
+									<a href="#vtab_basic_setting" data-toggle="tab"><span>{{ text_basic_settings }}</span></a>
+								</li>
+								<li>
+									<a href="#vtab_htaccess" data-toggle="tab"><span>{{ text_htaccess }}</span></a>
+								</li>
+								<li>
+									<a href="#vtab_robots" data-toggle="tab"><span>{{ text_robots }}</span></a>
+								</li>
+							</ul>
+						</div>
+						<div class="col-sm-10">
+							<div class="tab-content">
+								<div id="vtab_basic_setting" class="tab-pane active">
+									<div class="page-header">
+										<h3><span>{{ text_basic_settings }}</span></h3>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+										<div class="col-sm-8">
+											<input type="hidden" name="{{ codename }}_status" value="0" />
+											<input type="checkbox" name="{{ codename }}_status" value="1" class="switch" data-label-text="{{ text_enabled }}" {% if status %}checked="checked"{% endif %} />
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label" for="input-list-limit">{{ entry_list_limit }}</label>
+										<div class="col-sm-10">
+											<input type="text" name="{{ codename }}_setting[list_limit]" value="{{ setting['list_limit'] }}" class="form-control"/>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label" for="input-uninstall">{{ entry_uninstall }}</label>
+										<div class="col-sm-8">
+											<a action="{{ uninstall }}" id="button_uninstall" class="btn btn-danger">{{ button_uninstall }}</a>
+										</div>
+									</div>	
+								</div>
+								<div id="vtab_htaccess" class="tab-pane">
+									<div class="page-header">
+										<h3><span>{{ text_htaccess }}</span></h3>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+										<div class="col-sm-10">
+											<input type="hidden" name="htaccess[status]" value="0" />
+											<input type="checkbox" name="htaccess[status]" value="1" class="switch" data-label-text="{{ text_enabled }}" {% if htaccess['status'] %}checked="checked"{% endif %} />
+										</div>
+									</div>
+									<div class="form-group">
+										<div class="col-sm-10 col-sm-offset-2">
+											<p><a href="{{ store_setting }}" class="btn btn-primary"><i class="fa fa-cog fw"></i> {{ button_edit_store_setting }}</a></p>
+											<div class="bs-callout bs-callout-info">{{ help_htaccess_setting }}</div>
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label" for="input-text">{{ entry_text }}</label>
+										<div class="col-sm-10">
+											<p><textarea name="htaccess[text]" class="form-control" rows="20">{{ htaccess['text'] }}</textarea></p>
+											<div class="bs-callout bs-callout-info">{{ help_htaccess_subfolder }}</div>
+										</div>
+									</div>
+								</div>
+								<div id="vtab_robots" class="tab-pane">
+									<div class="page-header">
+										<h3><span>{{ text_robots }}</span></h3>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+										<div class="col-sm-10">
+											<input type="hidden" name="robots[status]" value="0" />
+											<input type="checkbox" name="robots[status]" value="1" class="switch" data-label-text="{{ text_enabled }}" {% if robots['status'] %}checked="checked"{% endif %} />
+										</div>
+									</div>
+									<div class="form-group">
+										<label class="col-sm-2 control-label" for="input-text">{{ entry_text }}</label>
+										<div class="col-sm-10">
+											<p><textarea name="robots[text]" class="form-control" rows="20">{{ robots['text'] }}</textarea></p>
+											<div class="bs-callout bs-callout-info">{{ help_robots }}</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+
+$('.switch').bootstrapSwitch({
+    'onColor': 'success',
+	'labelWidth': '50',
+    'onText': '{{ text_yes }}',
+    'offText': '{{ text_no }}'
+});
+
+function showAlert(json) {
+	$('.alert, .text-danger').remove();
+	$('.form-group').removeClass('has-error');
+						
+	if (json['error']) {
+		if (json['error']['warning']) {
+			$('#content > .container-fluid').prepend('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+		}				
+				
+		for (i in json['error']) {
+			var element = $('#input_' + i);
+					
+			if (element.parent().hasClass('input-group')) {
+                $(element).parent().after('<div class="text-danger">' + json['error'][i] + '</div>');
+			} else {
+				$(element).after('<div class="text-danger">' + json['error'][i] + '</div>');
+			}
+		}				
+				
+		$('.text-danger').parents('.form-group').addClass('has-error');
+	}
+			
+	if (json['success']) {
+		$('#content > .container-fluid').prepend('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success'] + '  <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+	}
+}
+</script> 
+<script type="text/javascript">
+
+$('body').on('click', '#button_uninstall', function(event) {
+	if (confirm("{{ text_uninstall_confirm }}")) {		
+		$.ajax({
+			type: 'post',
+			url: $(this).attr('action'),
+			data: '',
+			dataType: 'json',
+			beforeSend: function() {
+				$('#content').fadeTo('slow', 0.5);
+			},
+			complete: function() {
+				$('#content').fadeTo('slow', 1);   
+			},
+			success: function(json) {
+				showAlert(json);
+				
+				if (json['success']) {
+					location = '{{ module_link|replace({"&amp;" : "&"}) }}';
+				}
+			},
+			error: function(xhr, ajaxOptions, thrownError) {
+				console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+			}
+		});  
+	}
+});
+
+$('body').on('click', '#save_and_stay', function() {
+    $.ajax({
+		type: 'post',
+		url: $('#form').attr('action'),
+		data: $('#form').serialize(),
+		dataType: 'json',
+		beforeSend: function() {
+			$('#content').fadeTo('slow', 0.5);
+		},
+		complete: function() {
+			$('#content').fadeTo('slow', 1);   
+		},
+		success: function(json) {
+			showAlert(json);
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+    });  
+});
+	
+$('body').on('click', '#save_and_exit', function() {
+    $.ajax({
+		type: 'post',
+		url: $('#form').attr('action'),
+		data: $('#form').serialize(),
+		dataType: 'json',
+		beforeSend: function() {
+			$('#content').fadeTo('slow', 0.5);
+		},
+		complete: function() {
+			$('#content').fadeTo('slow', 1);   
+		},
+		success: function(json) {
+			showAlert(json);
+			
+			if (json['success']) {
+				location = '{{ cancel|replace({"&amp;" : "&"}) }}';
+			}
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+    });  
+});
+
+</script>
+{{ footer }}

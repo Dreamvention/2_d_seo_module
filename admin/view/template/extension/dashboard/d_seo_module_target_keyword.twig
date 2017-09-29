@@ -1,0 +1,192 @@
+{{ header }}{{ column_left }}
+<div id="content">
+	<div class="page-header">
+		<div class="container-fluid">
+			<div class="pull-right">
+				<button id="save_and_stay" data-toggle="tooltip" title="{{ button_save_and_stay }}" class="btn btn-success"><i class="fa fa-save"></i></button>
+				<button id="save_and_exit" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+				<a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a>
+			</div>
+			<h1>{{ heading_title }} {{ version }}</h1>
+			<ul class="breadcrumb">
+			{% for breadcrumb in breadcrumbs %}
+				<li><a href="{{ breadcrumb['href'] }}">{{ breadcrumb['text'] }}</a></li>
+				{% endfor %}
+			</ul>
+		</div>
+	</div>
+	<div class="container-fluid">
+		{% if error['warning'] %}
+		<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error['warning'] }}
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+		{% endif %}
+		{% if success %}
+		<div class="alert alert-success"><i class="fa fa-exclamation-circle"></i> {{ success }}
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+		{% endif %}
+		<div class="panel panel-default">
+			<div class="panel-heading">
+				<h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
+			</div>
+			<div class="panel-body">
+				<form action="{{ action }}" method="post" enctype="multipart/form-data" id="form" class="form-horizontal">
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
+						<div class="col-sm-8">
+							<input type="hidden" name="dashboard_{{ codename }}_status" value="0" />
+							<input type="checkbox" name="dashboard_{{ codename }}_status" value="1" class="switch" data-label-text="{{ text_enabled }}" {% if status %}checked="checked"{% endif %} />
+						</div>												
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="input-width">{{ entry_width }}</label>
+						<div class="col-sm-10">
+							<select name="dashboard_{{ codename }}_width" class="form-control">
+							{% for column in columns %}
+							{% if (column == width) %}
+								<option value="{{ column }}" selected="selected">{{ column }}</option>
+							{% else %}
+								<option value="{{ column }}">{{ column }}</option>
+							{% endif %}
+							{% endfor %}
+							</select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="input-sort-order">{{ entry_sort_order }}</label>
+						<div class="col-sm-10">
+							<input type="text" name="dashboard_{{ codename }}_sort_order" value="{{ sort_order }}" placeholder="{{ entry_sort_order }}" class="form-control" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="input-list-limit">{{ entry_list_limit }}</label>
+						<div class="col-sm-10">
+							<input type="text" name="dashboard_{{ codename }}_setting[list_limit]" value="{{ setting['list_limit'] }}" placeholder="{{ entry_list_limit }}" class="form-control" />
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="input-duplicate-status">{{ entry_duplicate_status }}</label>
+						<div class="col-sm-8">
+							<input type="hidden" name="dashboard_{{ codename }}_setting[duplicate_status]" value="0" />
+							<input type="checkbox" name="dashboard_{{ codename }}_setting[duplicate_status]" value="1" class="switch" data-label-text="{{ text_enabled }}" {% if setting['duplicate_status'] %}checked="checked"{% endif %} />
+						</div>												
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="input-empty-status">{{ entry_empty_status }}</label>
+						<div class="col-sm-8">
+							<input type="hidden" name="dashboard_{{ codename }}_setting[empty_status]" value="0" />
+							<input type="checkbox" name="dashboard_{{ codename }}_setting[empty_status]" value="1" class="switch" data-label-text="{{ text_enabled }}" {% if setting['empty_status'] %}checked="checked"{% endif %} />
+						</div>												
+					</div>
+					<div class="form-group">
+						<label class="col-sm-2 control-label" for="input-store">{{ entry_store }}</label>
+						<div class="col-sm-8">
+							<div class="well well-sm" style="height: 150px; overflow: auto;">
+								{% for store in stores %}
+								<div class="checkbox">
+									<label>
+									{% if store['store_id'] in setting['stores_id'] %}
+										<input type="checkbox" name="dashboard_{{ codename }}_setting[stores_id][]" value="{{ store['store_id'] }}" checked="checked" />
+										{{ store['name'] }}
+									{% else %}
+										<input type="checkbox" name="dashboard_{{ codename }}_setting[stores_id][]" value="{{ store['store_id'] }}" />
+										{{ store['name'] }}
+									{% endif %}
+									</label>
+								</div>
+								{% endfor %}
+							</div>
+						</div>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+
+$('.switch').bootstrapSwitch({
+    'onColor': 'success',
+	'labelWidth': '50',
+    'onText': '{{ text_yes }}',
+    'offText': '{{ text_no }}'
+});
+
+function showAlert(json) {
+	$('.alert, .text-danger').remove();
+	$('.form-group').removeClass('has-error');
+
+	if (json['error']) {
+		if (json['error']['warning']) {
+			$('#content > .container-fluid').prepend('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+		}
+
+		for (i in json['error']) {
+			var element = $('#input_' + i);
+
+			if (element.parent().hasClass('input-group')) {
+                $(element).parent().after('<div class="text-danger">' + json['error'][i] + '</div>');
+			} else {
+				$(element).after('<div class="text-danger">' + json['error'][i] + '</div>');
+			}
+		}
+
+		$('.text-danger').parents('.form-group').addClass('has-error');
+	}
+
+	if (json['success']) {
+		$('#content > .container-fluid').prepend('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success'] + '  <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+	}
+}
+</script>
+<script type="text/javascript">
+
+$('body').on('click', '#save_and_stay', function(){
+    $.ajax({
+		type: 'post',
+		url: $('#form').attr('action'),
+		data: $('#form').serialize(),
+		dataType: 'json',
+		beforeSend: function() {
+			$('#content').fadeTo('slow', 0.5);
+		},
+		complete: function() {
+			$('#content').fadeTo('slow', 1);
+		},
+		success: function(json) {
+			showAlert(json);
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+    });
+});
+
+$('body').on('click', '#save_and_exit', function(){
+    $.ajax({
+		type: 'post',
+		url: $('#form').attr('action'),
+		data: $('#form').serialize(),
+		dataType: 'json',
+		beforeSend: function() {
+			$('#content').fadeTo('slow', 0.5);
+		},
+		complete: function() {
+			$('#content').fadeTo('slow', 1);
+		},
+		success: function(json) {
+			showAlert(json);
+			
+			if (json['success']) {
+				location = '{{ cancel|replace({"&amp;" : "&"}) }}';
+			}
+		},
+		error: function(xhr, ajaxOptions, thrownError) {
+			console.log(thrownError + "\r\n" + xhr.statusText + "\r\n" + xhr.responseText);
+		}
+    });
+});
+
+</script>
+{{ footer }}
