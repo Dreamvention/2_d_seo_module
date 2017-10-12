@@ -17,7 +17,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$this->setting();
 	}
 
-	public function setting() {
+	public function setting() {		
 		$this->load->language($this->route);
 
 		$this->load->model($this->route);

@@ -10,10 +10,10 @@ class ModelExtensionDSEOModuleTargetKeywordDSEOModuleTargetKeyword extends Model
 		$custom_page_exception_routes = $this->load->controller('extension/module/d_seo_module/getCustomPageExceptionRoutes');
 		
 		if (isset($data['route']) && isset($data['store_id']) && isset($data['language_id']) && isset($data['target_keyword'])) {
-			if ((strpos($data['route'], 'category_id') !== false) || (strpos($data['route'], 'product_id') !== false) || (strpos($data['route'], 'manufacturer_id') !== false) || (strpos($data['route'], 'information_id') !== false) || (preg_match('/[A-Za-z0-9]+\/[A-Za-z0-9]+/i', $data['route']) && !($custom_page_exception_routes && in_array($data['route'], $custom_page_exception_routes)))) {	
+			if ((strpos($data['route'], 'category_id') === 0) || (strpos($data['route'], 'product_id') === 0) || (strpos($data['route'], 'manufacturer_id') === 0) || (strpos($data['route'], 'information_id') === 0) || (preg_match('/[A-Za-z0-9]+\/[A-Za-z0-9]+/i', $data['route']) && !($custom_page_exception_routes && in_array($data['route'], $custom_page_exception_routes)))) {	
 				$target_keyword_store_id = 0;
 				
-				if (strpos($data['route'], 'category_id') !== false) {
+				if (strpos($data['route'], 'category_id') === 0) {
 					if (isset($field_info['sheet']['category']['field']['target_keyword']['multi_store']) && $field_info['sheet']['category']['field']['target_keyword']['multi_store'] && isset($field_info['sheet']['category']['field']['target_keyword']['multi_store_status']) && $field_info['sheet']['category']['field']['target_keyword']['multi_store_status']) {
 						$target_keyword_store_id = $data['store_id'];
 					} else {
@@ -21,7 +21,7 @@ class ModelExtensionDSEOModuleTargetKeywordDSEOModuleTargetKeyword extends Model
 					}
 				}
 				
-				if (strpos($data['route'], 'product_id') !== false) {
+				if (strpos($data['route'], 'product_id') === 0) {
 					if (isset($field_info['sheet']['product']['field']['target_keyword']['multi_store']) && $field_info['sheet']['product']['field']['target_keyword']['multi_store'] && isset($field_info['sheet']['product']['field']['target_keyword']['multi_store_status']) && $field_info['sheet']['product']['field']['target_keyword']['multi_store_status']) {
 						$target_keyword_store_id = $data['store_id'];
 					} else {
@@ -29,7 +29,7 @@ class ModelExtensionDSEOModuleTargetKeywordDSEOModuleTargetKeyword extends Model
 					}
 				}
 				
-				if (strpos($data['route'], 'manufacturer_id') !== false) {
+				if (strpos($data['route'], 'manufacturer_id') === 0) {
 					if (isset($field_info['sheet']['manufacturer']['field']['target_keyword']['multi_store']) && $field_info['sheet']['manufacturer']['field']['target_keyword']['multi_store'] && isset($field_info['sheet']['manufacturer']['field']['target_keyword']['multi_store_status']) && $field_info['sheet']['manufacturer']['field']['target_keyword']['multi_store_status']) {
 						$target_keyword_store_id = $data['store_id'];
 					} else {
@@ -37,7 +37,7 @@ class ModelExtensionDSEOModuleTargetKeywordDSEOModuleTargetKeyword extends Model
 					}
 				}
 				
-				if (strpos($data['route'], 'information_id') !== false) {
+				if (strpos($data['route'], 'information_id') === 0) {
 					if (isset($field_info['sheet']['information']['field']['target_keyword']['multi_store']) && $field_info['sheet']['information']['field']['target_keyword']['multi_store'] && isset($field_info['sheet']['information']['field']['target_keyword']['multi_store_status']) && $field_info['sheet']['information']['field']['target_keyword']['multi_store_status']) {
 						$target_keyword_store_id = $data['store_id'];
 					} else {

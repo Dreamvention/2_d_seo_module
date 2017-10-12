@@ -63,7 +63,6 @@
 						
 		"admin/controller/extension/module/d_seo_module.php",
 		"admin/model/extension/module/d_seo_module.php",
-		"admin/language/english/module/d_seo_module.php",
 		"admin/language/en-gb/extension/module/d_seo_module.php",
 		"admin/view/stylesheet/d_seo_module.css",
 		

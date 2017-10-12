@@ -20,7 +20,7 @@ function {{ codename }}_update() {
 
 function {{ codename }}_refresh() {
 	var url = 'index.php?route={{ route }}/refresh&{{ url_token }}';
-					
+			
 	$('#{{ codename }}').load(url + ' #{{ codename }} >', function() {
 		{{ codename }}_update();
 	});

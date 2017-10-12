@@ -89,7 +89,7 @@
 				//d_seo_module
 				$route_status = isset($this->request->get['route']);
 				
-				$this->load->controller('module/d_seo_module/seo_url');
+				$this->load->controller('extension/module/d_seo_module/seo_url');
 				
 				if (!$route_status && isset($this->request->get['route'])) return new Action($this->request->get['route']);
 				///d_seo_module
@@ -99,15 +99,9 @@
             <search><![CDATA[$url_info = parse_url(str_replace('&amp;', '&', $link));]]></search>
             <add position="before"><![CDATA[
 				//d_seo_module
-				$link = $this->load->controller('module/d_seo_module/seo_url_rewrite', $link);
-				///d_seo_module
-            ]]></add>
-        </operation>
-		<operation error="skip">
-            <search><![CDATA[$url_info = parse_url(str_replace('&amp;', '&', $link));]]></search>
-            <add position="after"><![CDATA[
-				//d_seo_module
-				if (!isset($url_info['query'])) return $link;
+				$rewrite_data = $this->load->controller('extension/module/d_seo_module/seo_url_rewrite', $link);
+				
+				if ($rewrite_data['status']) return $rewrite_data['url'];
 				///d_seo_module
             ]]></add>
         </operation>
@@ -136,15 +130,9 @@
             <search><![CDATA[$url_info = parse_url(str_replace('&amp;', '&', $link));]]></search>
             <add position="before"><![CDATA[
 				//d_seo_module
-				$link = $this->load->controller('extension/module/d_seo_module/seo_url_rewrite', $link);
-				///d_seo_module
-            ]]></add>
-        </operation>
-		<operation error="skip">
-            <search><![CDATA[$url_info = parse_url(str_replace('&amp;', '&', $link));]]></search>
-            <add position="after"><![CDATA[
-				//d_seo_module
-				if (!isset($url_info['query'])) return $link;
+				$rewrite_data = $this->load->controller('extension/module/d_seo_module/seo_url_rewrite', $link);
+				
+				if ($rewrite_data['status']) return $rewrite_data['url'];
 				///d_seo_module
             ]]></add>
         </operation>

@@ -19,9 +19,9 @@ class ModelExtensionDSEOModuleAdviserDSEOModule extends Model {
 		$custom_page_exception_routes = $this->load->controller('extension/module/d_seo_module/getCustomPageExceptionRoutes');
 						
 		$adviser_elements = array();
-		
-		if ((strpos($route, 'category_id') !== false) || (strpos($route, 'product_id') !== false) || (strpos($route, 'manufacturer_id') !== false) || (strpos($route, 'information_id') !== false) || (preg_match('/[A-Za-z0-9]+\/[A-Za-z0-9]+/i', $route) && !($custom_page_exception_routes && in_array($route, $custom_page_exception_routes)))) {						
-			$file_robots = str_replace("system/", "", DIR_SYSTEM) . 'robots.txt';
+				
+		if ((strpos($route, 'category_id') === 0) || (strpos($route, 'product_id') === 0) || (strpos($route, 'manufacturer_id') === 0) || (strpos($route, 'information_id') === 0) || (preg_match('/[A-Za-z0-9]+\/[A-Za-z0-9]+/i', $route) && !($custom_page_exception_routes && in_array($route, $custom_page_exception_routes)))) {						
+			$file_robots = str_replace('system/', '', DIR_SYSTEM) . 'robots.txt';
 		
 			if (file_exists($file_robots) && file_exists(DIR_SYSTEM . 'library/d_robots_txt_parser.php')) { 
 				$robots_txt_parser = new d_robots_txt_parser(file_get_contents($file_robots));
@@ -70,8 +70,7 @@ class ModelExtensionDSEOModuleAdviserDSEOModule extends Model {
 							}
 						}
 					}
-				
-			
+							
 					$robots_empty_rating = 0;
 			
 					if (isset($robots_txt_parser) && $robots_txt_parser->getRules()) {

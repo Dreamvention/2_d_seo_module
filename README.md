@@ -742,7 +742,7 @@ public function header_before($data) {
 }
 ```
 
-####2. catalog/view/*/template/common/header/after
+####2. catalog/view/common/header/after
 #####header_after()
 _Modify the HTML of the `header.tpl` or `header.twig` before browser renders it._
 
@@ -787,7 +787,7 @@ _Modify the data that will be rendered to the `footer.tpl` or `footer.twig`._
 * **parameters:** `$data = array(...)`
 * **output:** `$data = array(...)`
 
-####4. catalog/view/*/template/common/footer/after
+####4. catalog/view/common/footer/after
 #####footer_after()
 _Modify the HTML of the `footer.tpl` or `footer.twig` before browser renders it._
 
@@ -803,7 +803,7 @@ _Modify the data that will be rendered to the `home.tpl` or `home.twig`._
 * **parameters:** `$data = array(...)`
 * **output:** `$data = array(...)`
 
-####6. catalog/view/*/template/common/home/after
+####6. catalog/view/common/home/after
 #####home_after()
 _Modify the HTML of the `home.tpl` or `home.twig` before browser renders it._
 
@@ -853,9 +853,9 @@ _Here you can preform your own actions after route of the page has been already 
 #####seo_url_rewrite()
 _Modify the link that will be returned function url->link._
 
-* **method:** `public function seo_url_rewrite($link)`
-* **parameters:** `(string) $link`
-* **output:** `(string) $link`
+* **method:** `public function seo_url_rewrite($data)`
+* **parameters:** `$data = array('url' => ..., 'status' => {true|false});`
+* **output:** `$data = array('url' => ..., 'status' => {true|false});`
 
 ---
 
@@ -868,7 +868,7 @@ _Modify the data that will be rendered to the `category.tpl` or `category.twig`.
 * **parameters:** `$data = array(...)`
 * **output:** `$data = array(...)`
 
-####2. catalog/view/*/template/product/category/after
+####2. catalog/view/product/category/after
 #####category_after()
 _Modify the HTML of the `category.tpl` or `category.twig` before browser renders it._
 
@@ -900,7 +900,7 @@ _Modify the data that will be rendered to the `product.tpl` or `product.twig`._
 * **parameters:** `$data = array(...)`
 * **output:** `$data = array(...)`
 
-####6. catalog/view/*/template/product/product/after
+####6. catalog/view/product/product/after
 #####product_after()
 _Modify the HTML of the `product.tpl` or `product.wig` before browser renders it._
 
@@ -932,7 +932,7 @@ _Modify the data that will be rendered to the `manufacturer_list.tpl` or `manufa
 * **parameters:** `$data = array(...)`
 * **output:** `$data = array(...)`
 
-####10. catalog/view/*/template/product/manufacturer_list/after
+####10. catalog/view/product/manufacturer_list/after
 #####manufacturer_list_after()
 _Modify the HTML of the `manufacturer_list.tpl` or `manufacturer_list.twig` before browser renders it._
 
@@ -948,7 +948,7 @@ _Modify the data that will be rendered to the `manufacturer_info.tpl` or `manufa
 * **parameters:** `$data = array(...)`
 * **output:** `$data = array(...)`
 
-####12. catalog/view/*/template/product/manufacturer_info/after
+####12. catalog/view/product/manufacturer_info/after
 #####manufacturer_info_after()
 _Modify the HTML of the `manufacturer_info.tpl` or `manufacturer_info.twig` before browser renders it._
 
@@ -980,7 +980,7 @@ _Modify the data that will be rendered to the `search.tpl` or `search.twig`._
 * **parameters:** `$data = array(...)`
 * **output:** `$data = array(...)`
 
-####16. catalog/view/*/template/product/search/after
+####16. catalog/view/product/search/after
 #####search_after()
 _Modify the HTML of the `search.tpl` or `search.twig` before browser renders it._
 
@@ -996,7 +996,7 @@ _Modify the data that will be rendered to the `special.tpl` or `special.twig`._
 * **parameters:** `$data = array(...)`
 * **output:** `$data = array(...)`
 
-####18. catalog/view/*/template/product/special/after
+####18. catalog/view/product/special/after
 #####special_after()
 _Modify the HTML of the `special.tpl` or `special.twig` before browser renders it._
 
@@ -1015,7 +1015,7 @@ _Modify the data that will be rendered to the `information.tpl` or `information.
 * **parameters:** `$data = array(...)`
 * **output:** `$data = array(...)`
 
-####2. catalog/view/*/template/information/information/after
+####2. catalog/view/information/information/after
 #####information_after()
 _Modify the HTML of the `information.tpl` or `information.twig` before browser renders it._
 

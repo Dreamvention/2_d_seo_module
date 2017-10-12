@@ -380,6 +380,8 @@ class ModelExtensionModuleDSEOModule extends Model {
 	*/		
 	public function uninstallModule() {
 		$this->db->query("DROP TABLE IF EXISTS " . DB_PREFIX . "d_target_keyword");
+		$this->db->query("DROP TABLE IF EXISTS " . DB_PREFIX . "d_meta_data");
+		$this->db->query("DROP TABLE IF EXISTS " . DB_PREFIX . "d_url_keyword");
 	}
 }
 ?>

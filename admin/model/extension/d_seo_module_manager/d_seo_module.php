@@ -11,6 +11,7 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 		if ($data['sheet_code'] == 'category') {
 			$implode = array();
 			$implode[] = "c.category_id";
+			$add = '';
 			
 			foreach ($data['fields'] as $field) {
 				if (isset($field_info['sheet'][$data['sheet_code']]['field'][$field['code']]['multi_store']) && isset($field_info['sheet'][$data['sheet_code']]['field'][$field['code']]['multi_store_status'])) {
@@ -23,12 +24,12 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 							$target_keyword_store_id = 0;
 						}
 						
-						$add = "LEFT JOIN " . DB_PREFIX . "d_target_keyword tk ON (tk.route = CONCAT('category_id=', c.category_id) AND tk.store_id = '" . (int)$target_keyword_store_id . "' AND tk.language_id = '" . (int)$data['language_id'] . "') LEFT JOIN " . DB_PREFIX . "d_target_keyword tk2 ON (tk2.route = CONCAT('category_id=', c.category_id) AND tk2.store_id = '" . (int)$target_keyword_store_id . "')";				
+						$add .= " LEFT JOIN " . DB_PREFIX . "d_target_keyword tk ON (tk.route = CONCAT('category_id=', c.category_id) AND tk.store_id = '" . (int)$target_keyword_store_id . "' AND tk.language_id = '" . (int)$data['language_id'] . "') LEFT JOIN " . DB_PREFIX . "d_target_keyword tk2 ON (tk2.route = CONCAT('category_id=', c.category_id) AND tk2.store_id = '" . (int)$target_keyword_store_id . "')";				
 					}
 				}
 			}		
 			
-			$sql = "SELECT " . implode(', ', $implode) . " FROM " . DB_PREFIX . "category c " . $add;
+			$sql = "SELECT " . implode(', ', $implode) . " FROM " . DB_PREFIX . "category c" . $add;
 						
 			$implode = array();
 			
@@ -60,6 +61,7 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 		if ($data['sheet_code'] == 'product') {
 			$implode = array();
 			$implode[] = "p.product_id";
+			$add = '';
 			
 			foreach ($data['fields'] as $field) {
 				if (isset($field_info['sheet'][$data['sheet_code']]['field'][$field['code']]['multi_store']) && isset($field_info['sheet'][$data['sheet_code']]['field'][$field['code']]['multi_store_status'])) {
@@ -72,12 +74,12 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 							$target_keyword_store_id = 0;
 						}
 						
-						$add = "LEFT JOIN " . DB_PREFIX . "d_target_keyword tk ON (tk.route = CONCAT('product_id=', p.product_id) AND tk.store_id = '" . (int)$target_keyword_store_id . "' AND tk.language_id = '" . (int)$data['language_id'] . "') LEFT JOIN " . DB_PREFIX . "d_target_keyword tk2 ON (tk2.route = CONCAT('product_id=', p.product_id) AND tk2.store_id = '" . (int)$target_keyword_store_id . "')";						
+						$add .= " LEFT JOIN " . DB_PREFIX . "d_target_keyword tk ON (tk.route = CONCAT('product_id=', p.product_id) AND tk.store_id = '" . (int)$target_keyword_store_id . "' AND tk.language_id = '" . (int)$data['language_id'] . "') LEFT JOIN " . DB_PREFIX . "d_target_keyword tk2 ON (tk2.route = CONCAT('product_id=', p.product_id) AND tk2.store_id = '" . (int)$target_keyword_store_id . "')";						
 					}
 				}
 			}		
 			
-			$sql = "SELECT " . implode(', ', $implode) . " FROM " . DB_PREFIX . "product p " . $add;
+			$sql = "SELECT " . implode(', ', $implode) . " FROM " . DB_PREFIX . "product p" . $add;
 						
 			$implode = array();
 			
@@ -158,6 +160,7 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 		if ($data['sheet_code'] == 'information') {
 			$implode = array();
 			$implode[] = "i.information_id";
+			$add = '';
 			
 			foreach ($data['fields'] as $field) {
 				if (isset($field_info['sheet'][$data['sheet_code']]['field'][$field['code']]['multi_store']) && isset($field_info['sheet'][$data['sheet_code']]['field'][$field['code']]['multi_store_status'])) {
@@ -170,12 +173,12 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 							$target_keyword_store_id = 0;
 						}
 						
-						$add = "LEFT JOIN " . DB_PREFIX . "d_target_keyword tk ON (tk.route = CONCAT('information_id=', i.information_id) AND tk.store_id = '" . (int)$target_keyword_store_id . "' AND tk.language_id = '" . (int)$data['language_id'] . "') LEFT JOIN " . DB_PREFIX . "d_target_keyword tk2 ON (tk2.route = CONCAT('information_id=', i.information_id) AND tk2.store_id = '" . (int)$target_keyword_store_id . "')";					
+						$add .= " LEFT JOIN " . DB_PREFIX . "d_target_keyword tk ON (tk.route = CONCAT('information_id=', i.information_id) AND tk.store_id = '" . (int)$target_keyword_store_id . "' AND tk.language_id = '" . (int)$data['language_id'] . "') LEFT JOIN " . DB_PREFIX . "d_target_keyword tk2 ON (tk2.route = CONCAT('information_id=', i.information_id) AND tk2.store_id = '" . (int)$target_keyword_store_id . "')";					
 					}
 				}
 			}		
 			
-			$sql = "SELECT " . implode(', ', $implode) . " FROM " . DB_PREFIX . "information i " . $add;
+			$sql = "SELECT " . implode(', ', $implode) . " FROM " . DB_PREFIX . "information i" . $add;
 						
 			$implode = array();
 			
@@ -333,6 +336,7 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 		if ($data['sheet_code'] == 'category') {
 			$categories = array();
 			$implode = array();
+			$add = '';
 						
 			foreach ($data['fields'] as $field) {
 				if (isset($field_info['sheet'][$data['sheet_code']]['field'][$field['code']]['multi_store']) && isset($field_info['sheet'][$data['sheet_code']]['field'][$field['code']]['multi_store_status'])) {
@@ -345,13 +349,13 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 							$target_keyword_store_id = 0;
 						}
 						
-						$add = "LEFT JOIN " . DB_PREFIX . "d_target_keyword tk ON (tk.route = CONCAT('category_id=', c.category_id) AND tk.store_id = '" . (int)$target_keyword_store_id . "' AND tk.language_id = cd.language_id)";					
+						$add .= " LEFT JOIN " . DB_PREFIX . "d_target_keyword tk ON (tk.route = CONCAT('category_id=', c.category_id) AND tk.store_id = '" . (int)$target_keyword_store_id . "' AND tk.language_id = cd.language_id)";					
 					}
 				}
 			}
 						
 			if ($implode) {
-				$query = $this->db->query("SELECT c.category_id, cd.language_id, " . implode(', ', $implode) . " FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (cd.category_id = c.category_id) " . $add . " GROUP BY c.category_id, cd.language_id");
+				$query = $this->db->query("SELECT c.category_id, cd.language_id, " . implode(', ', $implode) . " FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (cd.category_id = c.category_id)" . $add . " GROUP BY c.category_id, cd.language_id");
 				
 				foreach ($query->rows as $result) {
 					$categories[$result['category_id']]['category_id'] = $result['category_id'];
@@ -370,7 +374,8 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 		if ($data['sheet_code'] == 'product') {
 			$products = array();
 			$implode = array();
-						
+			$add = '';
+			
 			foreach ($data['fields'] as $field) {
 				if (isset($field_info['sheet'][$data['sheet_code']]['field'][$field['code']]['multi_store']) && isset($field_info['sheet'][$data['sheet_code']]['field'][$field['code']]['multi_store_status'])) {
 					if ($field['code'] == 'target_keyword') {
@@ -382,13 +387,13 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 							$target_keyword_store_id = 0;
 						}
 						
-						$add = "LEFT JOIN " . DB_PREFIX . "d_target_keyword tk ON (tk.route = CONCAT('product_id=', p.product_id) AND tk.store_id = '" . (int)$target_keyword_store_id . "' AND tk.language_id = pd.language_id)";
+						$add .= " LEFT JOIN " . DB_PREFIX . "d_target_keyword tk ON (tk.route = CONCAT('product_id=', p.product_id) AND tk.store_id = '" . (int)$target_keyword_store_id . "' AND tk.language_id = pd.language_id)";
 					}
 				}
 			}
 			
 			if ($implode) {
-				$query = $this->db->query("SELECT p.product_id, pd.language_id, " . implode(', ', $implode) . " FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (pd.product_id = p.product_id) " . $add . " GROUP BY p.product_id, pd.language_id");
+				$query = $this->db->query("SELECT p.product_id, pd.language_id, " . implode(', ', $implode) . " FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (pd.product_id = p.product_id)" . $add . " GROUP BY p.product_id, pd.language_id");
 				
 				foreach ($query->rows as $result) {
 					$products[$result['product_id']]['product_id'] = $result['product_id'];
@@ -407,6 +412,7 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 		if ($data['sheet_code'] == 'manufacturer') {
 			$manufacturers = array();
 			$implode = array();
+			$add = '';
 						
 			foreach ($data['fields'] as $field) {
 				if (isset($field_info['sheet'][$data['sheet_code']]['field'][$field['code']]['multi_store']) && isset($field_info['sheet'][$data['sheet_code']]['field'][$field['code']]['multi_store_status'])) {
@@ -419,13 +425,13 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 							$target_keyword_store_id = 0;
 						}
 						
-						$add = "LEFT JOIN " . DB_PREFIX . "d_target_keyword tk ON (tk.route = CONCAT('manufacturer_id=', m.manufacturer_id) AND tk.store_id = '" . (int)$target_keyword_store_id . "' AND tk.language_id = l.language_id)";
+						$add .= " LEFT JOIN " . DB_PREFIX . "d_target_keyword tk ON (tk.route = CONCAT('manufacturer_id=', m.manufacturer_id) AND tk.store_id = '" . (int)$target_keyword_store_id . "' AND tk.language_id = l.language_id)";
 					}
 				}
 			}
 			
 			if ($implode) {
-				$query = $this->db->query("SELECT m.manufacturer_id, l.language_id, " . implode(', ', $implode) . " FROM " . DB_PREFIX . "manufacturer m CROSS JOIN " . DB_PREFIX . "language l " . $add . " GROUP BY m.manufacturer_id, l.language_id");
+				$query = $this->db->query("SELECT m.manufacturer_id, l.language_id, " . implode(', ', $implode) . " FROM " . DB_PREFIX . "manufacturer m CROSS JOIN " . DB_PREFIX . "language l" . $add . " GROUP BY m.manufacturer_id, l.language_id");
 				
 				foreach ($query->rows as $result) {
 					$manufacturers[$result['manufacturer_id']]['manufacturer_id'] = $result['manufacturer_id'];
@@ -444,6 +450,7 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 		if ($data['sheet_code'] == 'information') {
 			$informations = array();
 			$implode = array();
+			$add = '';
 						
 			foreach ($data['fields'] as $field) {
 				if (isset($field_info['sheet'][$data['sheet_code']]['field'][$field['code']]['multi_store']) && isset($field_info['sheet'][$data['sheet_code']]['field'][$field['code']]['multi_store_status'])) {
@@ -456,13 +463,13 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 							$target_keyword_store_id = 0;
 						}
 						
-						$add = "LEFT JOIN " . DB_PREFIX . "d_target_keyword tk ON (tk.route = CONCAT('information_id=', i.information_id) AND tk.store_id = '" . (int)$target_keyword_store_id . "' AND tk.language_id = id.language_id)";
+						$add .= " LEFT JOIN " . DB_PREFIX . "d_target_keyword tk ON (tk.route = CONCAT('information_id=', i.information_id) AND tk.store_id = '" . (int)$target_keyword_store_id . "' AND tk.language_id = id.language_id)";
 					}
 				}
 			}
 			
 			if ($implode) {
-				$query = $this->db->query("SELECT i.information_id, id.language_id, " . implode(', ', $implode) . " FROM " . DB_PREFIX . "information i LEFT JOIN " . DB_PREFIX . "information_description id ON (id.information_id = i.information_id) " . $add . " GROUP BY i.information_id, id.language_id");
+				$query = $this->db->query("SELECT i.information_id, id.language_id, " . implode(', ', $implode) . " FROM " . DB_PREFIX . "information i LEFT JOIN " . DB_PREFIX . "information_description id ON (id.information_id = i.information_id)" . $add . " GROUP BY i.information_id, id.language_id");
 				
 				foreach ($query->rows as $result) {
 					$informations[$result['information_id']]['information_id'] = $result['information_id'];
@@ -494,6 +501,7 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 		if ($data['sheet_code'] == 'category') {
 			$categories = array();
 			$implode = array();
+			$add = '';
 			
 			foreach ($data['fields'] as $field) {
 				if (isset($field_info['sheet'][$data['sheet_code']]['field'][$field['code']]['multi_store']) && isset($field_info['sheet'][$data['sheet_code']]['field'][$field['code']]['multi_store_status'])) {
@@ -506,13 +514,13 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 							$target_keyword_store_id = 0;
 						}
 						
-						$add = "LEFT JOIN " . DB_PREFIX . "d_target_keyword tk ON (tk.route = CONCAT('category_id=', c.category_id) AND tk.store_id = '" . (int)$target_keyword_store_id . "' AND tk.language_id = cd.language_id)";				
+						$add .= " LEFT JOIN " . DB_PREFIX . "d_target_keyword tk ON (tk.route = CONCAT('category_id=', c.category_id) AND tk.store_id = '" . (int)$target_keyword_store_id . "' AND tk.language_id = cd.language_id)";				
 					}
 				}
 			}
 						
 			if ($implode) {
-				$query = $this->db->query("SELECT c.category_id, cd.language_id, " . implode(', ', $implode) . " FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (cd.category_id = c.category_id) " . $add . " GROUP BY c.category_id, cd.language_id");
+				$query = $this->db->query("SELECT c.category_id, cd.language_id, " . implode(', ', $implode) . " FROM " . DB_PREFIX . "category c LEFT JOIN " . DB_PREFIX . "category_description cd ON (cd.category_id = c.category_id)" . $add . " GROUP BY c.category_id, cd.language_id");
 				
 				foreach ($query->rows as $result) {
 					$categories[$result['category_id']]['category_id'] = $result['category_id'];
@@ -532,7 +540,7 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 					foreach ($languages as $language) {
 						if (isset($element['target_keyword'][$language['language_id']])) {
 							if ((isset($category['target_keyword'][$language['language_id']]) && ($element['target_keyword'][$language['language_id']] != $category['target_keyword'][$language['language_id']])) || !isset($category['target_keyword'][$language['language_id']])) {
-								if ($data['store_id'] && $field_info['sheet']['category']['field']['target_keyword']['multi_store'] && $field_info['sheet']['category']['field']['target_keyword']['multi_store_status']) {
+								if ($data['store_id'] && $field_info['sheet'][$data['sheet_code']]['field']['target_keyword']['multi_store'] && $field_info['sheet'][$data['sheet_code']]['field']['target_keyword']['multi_store_status']) {
 									$target_keyword_store_id = $data['store_id'];
 								} else {
 									$target_keyword_store_id = 0;
@@ -561,6 +569,7 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 		if ($data['sheet_code'] == 'product') {
 			$products = array();
 			$implode = array();
+			$add = '';
 						
 			foreach ($data['fields'] as $field) {
 				if (isset($field_info['sheet'][$data['sheet_code']]['field'][$field['code']]['multi_store']) && isset($field_info['sheet'][$data['sheet_code']]['field'][$field['code']]['multi_store_status'])) {
@@ -573,13 +582,13 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 							$target_keyword_store_id = 0;
 						}
 						
-						$add = "LEFT JOIN " . DB_PREFIX . "d_target_keyword tk ON (tk.route = CONCAT('product_id=', p.product_id) AND tk.store_id = '" . (int)$target_keyword_store_id . "' AND tk.language_id = pd.language_id)";
+						$add .= " LEFT JOIN " . DB_PREFIX . "d_target_keyword tk ON (tk.route = CONCAT('product_id=', p.product_id) AND tk.store_id = '" . (int)$target_keyword_store_id . "' AND tk.language_id = pd.language_id)";
 					}
 				}
 			}
 			
 			if ($implode) {
-				$query = $this->db->query("SELECT p.product_id, pd.language_id, " . implode(', ', $implode) . " FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (pd.product_id = p.product_id) " . $add . " GROUP BY p.product_id, pd.language_id");
+				$query = $this->db->query("SELECT p.product_id, pd.language_id, " . implode(', ', $implode) . " FROM " . DB_PREFIX . "product p LEFT JOIN " . DB_PREFIX . "product_description pd ON (pd.product_id = p.product_id)" . $add . " GROUP BY p.product_id, pd.language_id");
 				
 				foreach ($query->rows as $result) {
 					$products[$result['product_id']]['product_id'] = $result['product_id'];
@@ -599,7 +608,7 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 					foreach ($languages as $language) {
 						if (isset($element['target_keyword'][$language['language_id']])) {
 							if ((isset($product['target_keyword'][$language['language_id']]) && ($element['target_keyword'][$language['language_id']] != $product['target_keyword'][$language['language_id']])) || !isset($product['target_keyword'][$language['language_id']])) {
-								if ($data['store_id'] && $field_info['sheet']['product']['field']['target_keyword']['multi_store'] && $field_info['sheet']['product']['field']['target_keyword']['multi_store_status']) {
+								if ($data['store_id'] && $field_info['sheet'][$data['sheet_code']]['field']['target_keyword']['multi_store'] && $field_info['sheet'][$data['sheet_code']]['field']['target_keyword']['multi_store_status']) {
 									$target_keyword_store_id = $data['store_id'];
 								} else {
 									$target_keyword_store_id = 0;
@@ -628,7 +637,8 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 		if ($data['sheet_code'] == 'manufacturer') {
 			$manufacturers = array();
 			$implode = array();
-						
+			$add = '';
+			
 			foreach ($data['fields'] as $field) {
 				if (isset($field_info['sheet'][$data['sheet_code']]['field'][$field['code']]['multi_store']) && isset($field_info['sheet'][$data['sheet_code']]['field'][$field['code']]['multi_store_status'])) {
 					if ($field['code'] == 'target_keyword') {
@@ -640,13 +650,13 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 							$target_keyword_store_id = 0;
 						}
 						
-						$add = "LEFT JOIN " . DB_PREFIX . "d_target_keyword tk ON (tk.route = CONCAT('manufacturer_id=', m.manufacturer_id) AND tk.store_id = '" . (int)$target_keyword_store_id . "' AND tk.language_id = l.language_id)";
+						$add .= " LEFT JOIN " . DB_PREFIX . "d_target_keyword tk ON (tk.route = CONCAT('manufacturer_id=', m.manufacturer_id) AND tk.store_id = '" . (int)$target_keyword_store_id . "' AND tk.language_id = l.language_id)";
 					}
 				}
 			}
 			
 			if ($implode) {
-				$query = $this->db->query("SELECT m.manufacturer_id, l.language_id, " . implode(', ', $implode) . " FROM " . DB_PREFIX . "manufacturer m CROSS JOIN " . DB_PREFIX . "language l " . $add . " GROUP BY m.manufacturer_id, l.language_id");
+				$query = $this->db->query("SELECT m.manufacturer_id, l.language_id, " . implode(', ', $implode) . " FROM " . DB_PREFIX . "manufacturer m CROSS JOIN " . DB_PREFIX . "language l" . $add . " GROUP BY m.manufacturer_id, l.language_id");
 				
 				foreach ($query->rows as $result) {
 					$manufacturers[$result['manufacturer_id']]['manufacturer_id'] = $result['manufacturer_id'];
@@ -666,7 +676,7 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 					foreach ($languages as $language) {
 						if (isset($element['target_keyword'][$language['language_id']])) {
 							if ((isset($manufacturer['target_keyword'][$language['language_id']]) && ($element['target_keyword'][$language['language_id']] != $manufacturer['target_keyword'][$language['language_id']])) || !isset($manufacturer['target_keyword'][$language['language_id']])) {
-								if ($data['store_id'] && $field_info['sheet']['manufacturer']['field']['target_keyword']['multi_store'] && $field_info['sheet']['manufacturer']['field']['target_keyword']['multi_store_status']) {
+								if ($data['store_id'] && $field_info['sheet'][$data['sheet_code']]['field']['target_keyword']['multi_store'] && $field_info['sheet'][$data['sheet_code']]['field']['target_keyword']['multi_store_status']) {
 									$target_keyword_store_id = $data['store_id'];
 								} else {
 									$target_keyword_store_id = 0;
@@ -695,7 +705,8 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 		if ($data['sheet_code'] == 'information') {
 			$informations = array();
 			$implode = array();
-						
+			$add = '';
+			
 			foreach ($data['fields'] as $field) {
 				if (isset($field_info['sheet'][$data['sheet_code']]['field'][$field['code']]['multi_store']) && isset($field_info['sheet'][$data['sheet_code']]['field'][$field['code']]['multi_store_status'])) {
 					if ($field['code'] == 'target_keyword') {
@@ -707,13 +718,13 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 							$target_keyword_store_id = 0;
 						}
 						
-						$add = "LEFT JOIN " . DB_PREFIX . "d_target_keyword tk ON (tk.route = CONCAT('information_id=', i.information_id) AND tk.store_id = '" . (int)$target_keyword_store_id . "' AND tk.language_id = id.language_id)";
+						$add .= " LEFT JOIN " . DB_PREFIX . "d_target_keyword tk ON (tk.route = CONCAT('information_id=', i.information_id) AND tk.store_id = '" . (int)$target_keyword_store_id . "' AND tk.language_id = id.language_id)";
 					}
 				}
 			}
 			
 			if ($implode) {
-				$query = $this->db->query("SELECT i.information_id, id.language_id, " . implode(', ', $implode) . " FROM " . DB_PREFIX . "information i LEFT JOIN " . DB_PREFIX . "information_description id ON (id.information_id = i.information_id) " . $add . " GROUP BY i.information_id, id.language_id");
+				$query = $this->db->query("SELECT i.information_id, id.language_id, " . implode(', ', $implode) . " FROM " . DB_PREFIX . "information i LEFT JOIN " . DB_PREFIX . "information_description id ON (id.information_id = i.information_id)" . $add . " GROUP BY i.information_id, id.language_id");
 				
 				foreach ($query->rows as $result) {
 					$informations[$result['information_id']]['information_id'] = $result['information_id'];
@@ -733,7 +744,7 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 					foreach ($languages as $language) {
 						if (isset($element['target_keyword'][$language['language_id']])) {
 							if ((isset($information['target_keyword'][$language['language_id']]) && ($element['target_keyword'][$language['language_id']] != $information['target_keyword'][$language['language_id']])) || !isset($information['target_keyword'][$language['language_id']])) {
-								if ($data['store_id'] && $field_info['sheet']['information']['field']['target_keyword']['multi_store'] && $field_info['sheet']['information']['field']['target_keyword']['multi_store_status']) {
+								if ($data['store_id'] && $field_info['sheet'][$data['sheet_code']]['field']['target_keyword']['multi_store'] && $field_info['sheet'][$data['sheet_code']]['field']['target_keyword']['multi_store_status']) {
 									$target_keyword_store_id = $data['store_id'];
 								} else {
 									$target_keyword_store_id = 0;

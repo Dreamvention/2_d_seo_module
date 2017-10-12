@@ -521,6 +521,9 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 	}
 	
 	public function product_form_script() {	
+		$_language = new Language();
+		$_language->load($this->route);
+		
 		$url_token = '';
 		
 		if (isset($this->session->data['token'])) {
@@ -533,6 +536,7 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 		
 		$data['route'] = $this->route;
 		$data['url_token'] = $url_token;
+		$data['text_none'] = $_language->get('text_none');
 		
 		return $this->load->view($this->route . '/product_form_script', $data);
 	}

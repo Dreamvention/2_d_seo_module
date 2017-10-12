@@ -22,35 +22,45 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		}
 	}
 	
-	public function seo_url_rewrite($link) {
+	public function seo_url_rewrite($url) {
 		$this->load->model($this->route);
+		
+		$rewrite_data = array(
+			'url' => $url,
+			'status' => false
+		);
 		
 		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
 				
 		if ($status) {			
-			$cache = md5($link);
+			$cache = md5($url);
 			
 			$language_id = (int)$this->config->get('config_language_id');
 		
-			$rewrite_link = false;
+			$rewrite_url = false;
 		
-			$rewrite_link = $this->cache->get('url_rewrite.' . $cache . '.' . $language_id);
+			$rewrite_url = $this->cache->get('url_rewrite.' . $cache . '.' . $language_id);
 		
-			if (!$rewrite_link) {
+			if (!$rewrite_url) {				
 				$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
 		
 				foreach ($seo_extensions as $seo_extension) {
-					$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/seo_url_rewrite', $link);
-					if ($info) $link = $info;
+					$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/seo_url_rewrite', $rewrite_data);
+					if ($info) $rewrite_data = array_replace_recursive($rewrite_data, $info);
 				}
 				
-				$this->cache->set('url_rewrite.' . $cache . '.' . $language_id, $link);
+				if ($rewrite_data['status']) {
+					$this->cache->set('url_rewrite.' . $cache . '.' . $language_id, $rewrite_data['url']);
+				}
 			} else {
-				$link = $rewrite_link;
+				$rewrite_data = array(
+					'url' => $rewrite_url,
+					'status' => true
+				);
 			}
 		}
 				
-		return $link;
+		return $rewrite_data;
 	}
 	
 	public function language_language() {
