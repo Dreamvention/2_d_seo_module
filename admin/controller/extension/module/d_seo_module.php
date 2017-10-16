@@ -30,6 +30,12 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			$this->model_extension_d_shopunity_mbooth->validateDependencies($this->codename);
 		}
 		
+		if (file_exists(DIR_APPLICATION . 'model/extension/module/d_twig_manager.php')) {
+			$this->load->model('extension/module/d_twig_manager');
+			
+			$this->model_extension_module_d_twig_manager->installCompatibility();
+		}
+		
 		if (isset($this->request->get['store_id'])) { 
 			$store_id = $this->request->get['store_id']; 
 		} else {  
@@ -222,6 +228,12 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			$this->load->model('extension/d_shopunity/mbooth');
 				
 			$this->model_extension_d_shopunity_mbooth->validateDependencies($this->codename);
+		}
+		
+		if (file_exists(DIR_APPLICATION . 'model/extension/module/d_twig_manager.php')) {
+			$this->load->model('extension/module/d_twig_manager');
+			
+			$this->model_extension_module_d_twig_manager->installCompatibility();
 		}
 		
 		if (isset($this->request->get['store_id'])) { 
@@ -441,6 +453,12 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			$this->load->model('extension/d_shopunity/mbooth');
 				
 			$this->model_extension_d_shopunity_mbooth->validateDependencies($this->codename);
+		}
+		
+		if (file_exists(DIR_APPLICATION . 'model/extension/module/d_twig_manager.php')) {
+			$this->load->model('extension/module/d_twig_manager');
+			
+			$this->model_extension_module_d_twig_manager->installCompatibility();
 		}
 		
 		if (isset($this->request->get['store_id'])) { 
@@ -684,13 +702,17 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$this->load->model('setting/setting');
 		$this->load->model('localisation/language');
 		
-		if (!$this->d_shopunity) {
-			$this->response->redirect($this->url->link($this->route . '/required', 'codename=d_shopunity&token=' . $this->session->data['token'], true));
+		if ($this->d_shopunity) {		
+			$this->load->model('extension/d_shopunity/mbooth');
+				
+			$this->model_extension_d_shopunity_mbooth->validateDependencies($this->codename);
 		}
 		
-		$this->load->model('extension/d_shopunity/mbooth');
-				
-		$this->model_extension_d_shopunity_mbooth->validateDependencies($this->codename);
+		if (file_exists(DIR_APPLICATION . 'model/extension/module/d_twig_manager.php')) {
+			$this->load->model('extension/module/d_twig_manager');
+			
+			$this->model_extension_module_d_twig_manager->installCompatibility();
+		}
 
 		if (isset($this->request->get['store_id'])) { 
 			$store_id = $this->request->get['store_id']; 
@@ -867,13 +889,17 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$this->load->model('setting/setting');
 		$this->load->model('localisation/language');
 		
-		if (!$this->d_shopunity) {
-			$this->response->redirect($this->url->link($this->route . '/required', 'codename=d_shopunity&token=' . $this->session->data['token'], true));
+		if ($this->d_shopunity) {		
+			$this->load->model('extension/d_shopunity/mbooth');
+				
+			$this->model_extension_d_shopunity_mbooth->validateDependencies($this->codename);
 		}
 		
-		$this->load->model('extension/d_shopunity/mbooth');
-				
-		$this->model_extension_d_shopunity_mbooth->validateDependencies($this->codename);
+		if (file_exists(DIR_APPLICATION . 'model/extension/module/d_twig_manager.php')) {
+			$this->load->model('extension/module/d_twig_manager');
+			
+			$this->model_extension_module_d_twig_manager->installCompatibility();
+		}
 		
 		if (isset($this->request->get['store_id'])) { 
 			$store_id = $this->request->get['store_id']; 
@@ -1564,12 +1590,6 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			$this->load->model('extension/d_shopunity/mbooth');
 			
 			$this->model_extension_d_shopunity_mbooth->installDependencies($this->codename);
-		}
-		
-		if (file_exists(DIR_APPLICATION . 'model/extension/module/d_twig_manager.php')) {
-			$this->load->model('extension/module/d_twig_manager');
-			
-			$this->model_extension_module_d_twig_manager->installCompatibility();
 		}
 	}
 		
