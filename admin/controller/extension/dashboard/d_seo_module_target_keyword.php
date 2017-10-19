@@ -26,6 +26,8 @@ class ControllerExtensionDashboardDSEOModuleTargetKeyword extends Controller {
 			$this->model_extension_d_shopunity_mbooth->validateDependencies($this->main_codename);
 		}
 		
+		$this->load->controller('extension/module/d_seo_module/update');
+		
 		$url_token = '';
 		
 		if (isset($this->session->data['token'])) {
@@ -190,6 +192,8 @@ class ControllerExtensionDashboardDSEOModuleTargetKeyword extends Controller {
 	
 	public function dashboard() {
 		$this->load->language($this->route);
+		
+		$this->load->controller('extension/module/d_seo_module/update');
 				
 		$url_token = '';
 		

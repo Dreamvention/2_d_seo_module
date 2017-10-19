@@ -4,7 +4,7 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 	private $route = 'extension/d_seo_module/d_seo_module';
 	private $config_file = 'd_seo_module';
 	private $error = array();
-		
+			
 	/*
 	*	Functions for SEO Module.
 	*/
@@ -53,11 +53,15 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 	public function language_add_language($data) {
 		$this->load->model($this->route);
 		
+		$this->load->controller('extension/module/d_seo_module/update');
+		
 		$this->{'model_extension_d_seo_module_' . $this->codename}->addLanguage($data);
 	}
 		
 	public function language_delete_language($data) {
 		$this->load->model($this->route);
+		
+		$this->load->controller('extension/module/d_seo_module/update');
 
 		$this->{'model_extension_d_seo_module_' . $this->codename}->deleteLanguage($data);
 	}
@@ -65,8 +69,10 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 	public function setting_tab_general_language() {
 		$this->load->model($this->route);
 		$this->load->model('extension/module/' . $this->codename);
-		
+				
 		$languages = $this->{'model_extension_module_' . $this->codename}->getLanguages();
+		
+		$this->load->controller('extension/module/d_seo_module/update');
 		
 		$field_info = $this->load->controller('extension/module/d_seo_module/getFieldInfo');
 		
@@ -149,6 +155,8 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 		
 		$languages = $this->{'model_extension_module_' . $this->codename}->getLanguages();
 		
+		$this->load->controller('extension/module/d_seo_module/update');
+		
 		$field_info = $this->load->controller('extension/module/d_seo_module/getFieldInfo');
 		
 		if (isset($field_info['sheet']['home']['field'])) {
@@ -228,17 +236,23 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 	public function store_add_store($data) {
 		$this->load->model($this->route);
 		
+		$this->load->controller('extension/module/d_seo_module/update');
+		
 		$this->{'model_extension_d_seo_module_' . $this->codename}->saveHomeTargetKeyword($data);
 	}
 	
 	public function store_edit_store($data) {
 		$this->load->model($this->route);
 		
+		$this->load->controller('extension/module/d_seo_module/update');
+		
 		$this->{'model_extension_d_seo_module_' . $this->codename}->saveHomeTargetKeyword($data);
 	}
 	
 	public function store_delete_store($data) {
 		$this->load->model($this->route);
+		
+		$this->load->controller('extension/module/d_seo_module/update');
 		
 		$this->{'model_extension_d_seo_module_' . $this->codename}->deleteStore($data);
 	}
@@ -248,6 +262,8 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 		$this->load->model('extension/module/' . $this->codename);
 		
 		$languages = $this->{'model_extension_module_' . $this->codename}->getLanguages();
+		
+		$this->load->controller('extension/module/d_seo_module/update');
 		
 		$field_info = $this->load->controller('extension/module/d_seo_module/getFieldInfo');
 						
@@ -306,6 +322,8 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 		
 		$stores = $this->{'model_extension_module_' . $this->codename}->getStores();
 		$languages = $this->{'model_extension_module_' . $this->codename}->getLanguages();
+		
+		$this->load->controller('extension/module/d_seo_module/update');
 				
 		$field_info = $this->load->controller('extension/module/' . $this->codename . '/getFieldInfo');
 		
@@ -405,6 +423,8 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 		
 		$languages = $this->{'model_extension_module_' . $this->codename}->getLanguages();
 		
+		$this->load->controller('extension/module/d_seo_module/update');
+		
 		$field_info = $this->load->controller('extension/module/' . $this->codename . '/getFieldInfo');
 		
 		if (isset($field_info['sheet']['product']['field'])) {
@@ -462,6 +482,8 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 		
 		$stores = $this->{'model_extension_module_' . $this->codename}->getStores();
 		$languages = $this->{'model_extension_module_' . $this->codename}->getLanguages();
+		
+		$this->load->controller('extension/module/d_seo_module/update');
 				
 		$field_info = $this->load->controller('extension/module/' . $this->codename . '/getFieldInfo');
 		
@@ -565,6 +587,8 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 		
 		$languages = $this->{'model_extension_module_' . $this->codename}->getLanguages();
 		
+		$this->load->controller('extension/module/d_seo_module/update');
+		
 		$field_info = $this->load->controller('extension/module/' . $this->codename . '/getFieldInfo');
 		
 		if (isset($field_info['sheet']['manufacturer']['field'])) {
@@ -622,6 +646,8 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 		
 		$stores = $this->{'model_extension_module_' . $this->codename}->getStores();
 		$languages = $this->{'model_extension_module_' . $this->codename}->getLanguages();
+		
+		$this->load->controller('extension/module/d_seo_module/update');
 				
 		$field_info = $this->load->controller('extension/module/' . $this->codename . '/getFieldInfo');
 		
@@ -721,6 +747,8 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 		
 		$languages = $this->{'model_extension_module_' . $this->codename}->getLanguages();
 		
+		$this->load->controller('extension/module/d_seo_module/update');
+		
 		$field_info = $this->load->controller('extension/module/' . $this->codename . '/getFieldInfo');
 		
 		if (isset($field_info['sheet']['information']['field'])) {
@@ -778,6 +806,8 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 		
 		$stores = $this->{'model_extension_module_' . $this->codename}->getStores();
 		$languages = $this->{'model_extension_module_' . $this->codename}->getLanguages();
+		
+		$this->load->controller('extension/module/d_seo_module/update');
 				
 		$field_info = $this->load->controller('extension/module/' . $this->codename . '/getFieldInfo');
 		

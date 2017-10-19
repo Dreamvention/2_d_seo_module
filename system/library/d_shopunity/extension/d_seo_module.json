@@ -1,8 +1,8 @@
 {
     "codename": "d_seo_module",
-    "version": "3.0.0",
+    "version": "3.0.1",
     "name": "SEO Module",
-    "description": "SEO module is the core platform, necessary for the installation of other SEO modules.",
+    "description": "SEO Module is the core platform, necessary for the installation of other SEO modules.",
 	"index": "extension/module/d_seo_module",
 	"readme": "system/mbooth/readme/d_seo_module.md",
     "author": {
@@ -105,6 +105,10 @@
     ],
     "changelog": [
         {
+            "version": "3.0.1",
+            "change": "Update Confirm"
+        },
+		{
             "version": "3.0.0",
             "change": "Opencart 3.0.0 compatibility"
         },

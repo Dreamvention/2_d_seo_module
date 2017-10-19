@@ -36,6 +36,8 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			$this->model_extension_module_d_twig_manager->installCompatibility();
 		}
 		
+		$this->update();
+		
 		if (isset($this->request->get['store_id'])) { 
 			$store_id = $this->request->get['store_id']; 
 		} else {  
@@ -235,6 +237,8 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			
 			$this->model_extension_module_d_twig_manager->installCompatibility();
 		}
+		
+		$this->update();
 		
 		if (isset($this->request->get['store_id'])) { 
 			$store_id = $this->request->get['store_id']; 
@@ -460,6 +464,8 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			
 			$this->model_extension_module_d_twig_manager->installCompatibility();
 		}
+		
+		$this->update();
 		
 		if (isset($this->request->get['store_id'])) { 
 			$store_id = $this->request->get['store_id']; 
@@ -713,6 +719,8 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			
 			$this->model_extension_module_d_twig_manager->installCompatibility();
 		}
+		
+		$this->update();
 
 		if (isset($this->request->get['store_id'])) { 
 			$store_id = $this->request->get['store_id']; 
@@ -900,6 +908,8 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			
 			$this->model_extension_module_d_twig_manager->installCompatibility();
 		}
+		
+		$this->update();
 		
 		if (isset($this->request->get['store_id'])) { 
 			$store_id = $this->request->get['store_id']; 
@@ -1590,6 +1600,19 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			$this->load->model('extension/d_shopunity/mbooth');
 			
 			$this->model_extension_d_shopunity_mbooth->installDependencies($this->codename);
+		}
+		
+		$this->update();
+	}
+	
+	public function update() {
+		$result = $this->db->query("SHOW TABLES LIKE '" . DB_PREFIX . "url_target'");
+		
+		if ($result->rows) {
+			$this->db->query("DROP TABLE IF EXISTS " . DB_PREFIX . "url_target");
+			
+			$this->uninstallModule();
+			$this->installModule();
 		}
 	}
 		
