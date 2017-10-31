@@ -10,14 +10,14 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
 											
 		if ($status) {			
-			$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
 		
-			foreach ($seo_extensions as $seo_extension) {
-				$this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/seo_url');
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/seo_url');
 			}
 			
-			foreach ($seo_extensions as $seo_extension) {
-				$this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/seo_url_check');
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/seo_url_check');
 			}
 		}
 	}
@@ -42,10 +42,10 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			$rewrite_url = $this->cache->get('url_rewrite.' . $cache . '.' . $language_id);
 		
 			if (!$rewrite_url) {				
-				$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
+				$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
 		
-				foreach ($seo_extensions as $seo_extension) {
-					$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/seo_url_rewrite', $rewrite_data);
+				foreach ($installed_seo_extensions as $installed_seo_extension) {
+					$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/seo_url_rewrite', $rewrite_data);
 					if ($info) $rewrite_data = array_replace_recursive($rewrite_data, $info);
 				}
 				
@@ -69,10 +69,10 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
 		
 		if ($status) {
-			$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
 		
-			foreach ($seo_extensions as $seo_extension) {
-				$this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/language_language');
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/language_language');
 			}
 		}
 	}
@@ -83,10 +83,10 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
 		
 		if ($status) {
-			$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
 		
-			foreach ($seo_extensions as $seo_extension) {
-				$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/header_before', $data);
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/header_before', $data);
 				if ($info) $data = $info;
 			}
 		}			
@@ -98,10 +98,10 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
 		
 		if ($status) {
-			$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
 		
-			foreach ($seo_extensions as $seo_extension) {
-				$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/header_after', $output);
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/header_after', $output);
 				if ($info) $output = $info;
 			}
 		}
@@ -113,10 +113,10 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
 		
 		if ($status) {
-			$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
 		
-			foreach ($seo_extensions as $seo_extension) {
-				$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/footer_before', $data);
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/footer_before', $data);
 				if ($info) $data = $info;
 			}
 		}			
@@ -128,10 +128,10 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
 		
 		if ($status) {
-			$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
 		
-			foreach ($seo_extensions as $seo_extension) {
-				$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/footer_after', $output);
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/footer_after', $output);
 				if ($info) $output = $info;
 			}
 		}
@@ -143,10 +143,10 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
 		
 		if ($status) {
-			$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
 		
-			foreach ($seo_extensions as $seo_extension) {
-				$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/home_before', $data);
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/home_before', $data);
 				if ($info) $data = $info;
 			}
 		}			
@@ -158,10 +158,10 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
 		
 		if ($status) {
-			$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
 		
-			foreach ($seo_extensions as $seo_extension) {
-				$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/home_after', $output);
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/home_after', $output);
 				if ($info) $output = $info;
 			}
 		}
@@ -173,10 +173,10 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
 		
 		if ($status) {
-			$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
 		
-			foreach ($seo_extensions as $seo_extension) {
-				$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/category_before', $data);
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/category_before', $data);
 				if ($info) $data = $info;
 			}
 		}
@@ -188,10 +188,10 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
 		
 		if ($status) {
-			$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
 			
-			foreach ($seo_extensions as $seo_extension) {
-				$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/category_after', $output);
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/category_after', $output);
 				if ($info) $output = $info;
 			}
 		}
@@ -203,10 +203,10 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
 		
 		if ($status) {
-			$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
 			
-			foreach ($seo_extensions as $seo_extension) {
-				$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/category_get_category', $output);
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/category_get_category', $output);
 				if ($info) $output = $info;
 			}
 		}
@@ -218,10 +218,10 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
 		
 		if ($status) {
-			$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
 			
-			foreach ($seo_extensions as $seo_extension) {
-				$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/category_get_categories', $output);
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/category_get_categories', $output);
 				if ($info) $output = $info;
 			}
 		}
@@ -233,10 +233,10 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
 		
 		if ($status) {
-			$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
 		
-			foreach ($seo_extensions as $seo_extension) {
-				$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/product_before', $data);
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/product_before', $data);
 				if ($info) $data = $info;
 			}
 		}			
@@ -248,10 +248,10 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
 		
 		if ($status) {
-			$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
 		
-			foreach ($seo_extensions as $seo_extension) {
-				$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/product_after', $output);
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/product_after', $output);
 				if ($info) $output = $info;
 			}
 		}
@@ -263,10 +263,10 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
 		
 		if ($status) {
-			$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
 			
-			foreach ($seo_extensions as $seo_extension) {
-				$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/product_get_product', $output);
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/product_get_product', $output);
 				if ($info) $output = $info;
 			}
 		}
@@ -278,10 +278,10 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
 		
 		if ($status) {
-			$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
 			
-			foreach ($seo_extensions as $seo_extension) {
-				$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/product_get_products', $output);
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/product_get_products', $output);
 				if ($info) $output = $info;
 			}
 		}
@@ -293,10 +293,10 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
 		
 		if ($status) {
-			$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
 			
-			foreach ($seo_extensions as $seo_extension) {
-				$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/manufacturer_list_before', $data);
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/manufacturer_list_before', $data);
 				if ($info) $data = $info;
 			}	
 		}
@@ -308,10 +308,10 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
 		
 		if ($status) {
-			$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
 		
-			foreach ($seo_extensions as $seo_extension) {
-				$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/manufacturer_list_after', $output);
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/manufacturer_list_after', $output);
 				if ($info) $output = $info;
 			}
 		}
@@ -323,10 +323,10 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
 		
 		if ($status) {
-			$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
 			
-			foreach ($seo_extensions as $seo_extension) {
-				$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/manufacturer_info_before', $data);
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/manufacturer_info_before', $data);
 				if ($info) $data = $info;
 			}	
 		}
@@ -338,10 +338,10 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
 		
 		if ($status) {
-			$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
 		
-			foreach ($seo_extensions as $seo_extension) {
-				$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/manufacturer_info_after', $output);
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/manufacturer_info_after', $output);
 				if ($info) $output = $info;
 			}
 		}
@@ -353,10 +353,10 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
 		
 		if ($status) {
-			$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
 			
-			foreach ($seo_extensions as $seo_extension) {
-				$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/manufacturer_get_manufacturer', $output);
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/manufacturer_get_manufacturer', $output);
 				if ($info) $output = $info;
 			}
 		}
@@ -368,10 +368,10 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
 		
 		if ($status) {
-			$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
 			
-			foreach ($seo_extensions as $seo_extension) {
-				$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/manufacturer_get_manufacturers', $output);
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/manufacturer_get_manufacturers', $output);
 				if ($info) $output = $info;
 			}
 		}
@@ -383,10 +383,10 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
 		
 		if ($status) {
-			$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
 		
-			foreach ($seo_extensions as $seo_extension) {
-				$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/information_before', $data);
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/information_before', $data);
 				if ($info) $data = $info;
 			}
 		}
@@ -398,10 +398,10 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
 		
 		if ($status) {
-			$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
 		
-			foreach ($seo_extensions as $seo_extension) {
-				$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/information_after', $output);
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/information_after', $output);
 				if ($info) $output = $info;
 			}
 		}
@@ -413,10 +413,10 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
 		
 		if ($status) {
-			$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
 			
-			foreach ($seo_extensions as $seo_extension) {
-				$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/information_get_information', $output);
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/information_get_information', $output);
 				if ($info) $output = $info;
 			}
 		}
@@ -428,10 +428,10 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
 		
 		if ($status) {
-			$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
 			
-			foreach ($seo_extensions as $seo_extension) {
-				$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/information_get_informations', $output);
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/information_get_informations', $output);
 				if ($info) $output = $info;
 			}
 		}
@@ -443,10 +443,10 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
 		
 		if ($status) {
-			$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
 		
-			foreach ($seo_extensions as $seo_extension) {
-				$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/search_before', $data);
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/search_before', $data);
 				if ($info) $data = $info;
 			}
 		}
@@ -458,10 +458,10 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
 		
 		if ($status) {
-			$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
 		
-			foreach ($seo_extensions as $seo_extension) {
-				$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/search_after', $output);
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/search_after', $output);
 				if ($info) $output = $info;
 			}
 		}
@@ -473,10 +473,10 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
 		
 		if ($status) {
-			$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
 		
-			foreach ($seo_extensions as $seo_extension) {
-				$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/special_before', $data);
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/special_before', $data);
 				if ($info) $data = $info;
 			}
 		}
@@ -488,10 +488,10 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
 		
 		if ($status) {
-			$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
 		
-			foreach ($seo_extensions as $seo_extension) {
-				$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/special_after', $output);
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/special_after', $output);
 				if ($info) $output = $info;
 			}
 		}
@@ -503,27 +503,26 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 	public function getFieldInfo() {	
 		$_language = new Language();
 		$_language->load($this->route);
-		
+				
 		$this->load->model($this->route);
-		
+
 		if ($this->config->get($this->codename . '_field_info')) {
 			return $this->config->get($this->codename . '_field_info');
 		}
-		
-		// Setting
-		$_config = new Config();
-		$_config->load($this->config_file);
-		$config_field_setting = ($_config->get($this->codename . '_field_setting')) ? $_config->get($this->codename . '_field_setting') : array();
-		
-		$field_setting = ($this->config->get($this->codename . '_field_setting')) ? $this->config->get($this->codename . '_field_setting') : array();
-						
-		$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
 				
-		foreach ($seo_extensions as $seo_extension) {
-			$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/field_config', $config_field_setting);
-			if ($info) $config_field_setting = $info;
-		}		
-						
+		// Setting		
+		$config_field_setting = array();
+		
+		$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
+		
+		foreach ($installed_seo_extensions as $installed_seo_extension) {
+			$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/field_config');
+			if ($info) $config_field_setting = array_replace_recursive($config_field_setting, $info);
+		}
+		
+		$setting = $this->model_setting_setting->getSetting($this->codename);
+		$field_setting = isset($setting[$this->codename . '_field_setting']) ? $setting[$this->codename . '_field_setting'] : array();
+					
 		if (!empty($field_setting)) {
 			$config_field_setting = array_replace_recursive($config_field_setting, $field_setting);
 		}
@@ -533,24 +532,12 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$sheets = array();
 		
 		foreach ($field_setting['sheet'] as $sheet) {
-			if (isset($sheet['code']) && isset($sheet['name'])) {
-				if (substr($sheet['name'], 0, strlen('text_')) == 'text_') {
-					$sheet['name'] = $_language->get($sheet['name']);
-				}
-								
+			if (isset($sheet['code']) && isset($sheet['name'])) {				
 				$fields = array();
 				
 				if (isset($sheet['field'])) {
 					foreach ($sheet['field'] as $field) {
-						if (isset($field['code']) && isset($field['name']) && isset($field['description']) && isset($field['type']) && isset($field['multi_store']) && isset($field['multi_store_status']) && isset($field['required'])) {
-							if (substr($field['name'], 0, strlen('text_')) == 'text_') {
-								$field['name'] = $_language->get($field['name']);
-							}
-							
-							if (substr($field['description'], 0, strlen('help_')) == 'help_') {
-								$field['description'] = $_language->get($field['description']);
-							}
-						
+						if (isset($field['code']) && isset($field['name']) && isset($field['description']) && isset($field['type']) && isset($field['multi_language']) && isset($field['multi_store']) && isset($field['required'])) {						
 							$fields[$field['code']] = $field;
 						}
 					}
@@ -567,9 +554,9 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 				$sheets[$sheet['code']] = $sheet;
 			}
 		}
-		
+				
 		$field_setting['sheet'] = $this->{'model_extension_module_' . $this->codename}->sortArrayByColumn($sheets, 'sort_order');
-		
+				
 		$this->config->set($this->codename . '_field_info', $field_setting);
 				
 		return $field_setting;
@@ -584,10 +571,10 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$field_elements = array();
 		
 		if (isset($data['field_code']) && isset($data['filter'])) {
-			$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
 				
-			foreach ($seo_extensions as $seo_extension) {
-				$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/field_elements', $data);
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/field_elements', $data);
 				if ($info != '') $field_elements = array_replace_recursive($field_elements, $info);	
 			}
 		}
@@ -603,10 +590,10 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		
 		$custom_page_exception_routes = array();
 							
-		$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
+		$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
 									
-		foreach ($seo_extensions as $seo_extension) {
-			$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/custom_page_exception_routes');
+		foreach ($installed_seo_extensions as $installed_seo_extension) {
+			$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/custom_page_exception_routes');
 			if ($info) $custom_page_exception_routes = array_merge($custom_page_exception_routes, $info);
 		}
 		

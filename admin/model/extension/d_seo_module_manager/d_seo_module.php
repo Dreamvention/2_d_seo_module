@@ -206,8 +206,6 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 
 			return $informations;	
 		}
-		
-		return false;
 	}
 	
 	/*
@@ -323,8 +321,6 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 				}
 			}
 		}
-		
-		return true;
 	}
 	
 	/*
@@ -484,8 +480,6 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 				
 			return $informations;	
 		}
-		
-		return false;
 	}
 	
 	/*
@@ -769,8 +763,6 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 				}	
 			}
 		}
-		
-		return true;
 	}
 }
 ?>

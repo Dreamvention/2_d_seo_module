@@ -45,6 +45,9 @@
 			<div class="panel-body">
 				<ul class="nav nav-tabs">
 					<li>
+						<a href="{{ href_dashboard }}"><span class="fa fa-dashboard"></span> {{ text_dashboard }}</a>
+					</li>
+					<li>
 						<a href="{{ href_setting }}"><span class="fa fa-cog"></span> {{ text_settings }}</a>
 					</li>
 					<li>
@@ -138,7 +141,7 @@ function update() {
 	$('[name^=\'selected\']:first').trigger('change');
 }
 
-function refreshPage() {
+function refresh() {
 	var url = 'index.php?route={{ route }}/custom_page&{{ url_token }}&store_id={{ store_id }}';
 	
 	var page = '{{ page }}';	
@@ -238,7 +241,7 @@ $('body').on('click', '#button_save', function() {
 				}
 				$(custom_page).children('.text-field').removeClass('hide');
 				$(custom_page).children('.input-field').addClass('hide');
-				refreshPage();
+				refresh();
 			}, 200);
 		},
 		error: function(xhr, ajaxOptions, thrownError) {
@@ -273,7 +276,7 @@ $('body').on('click', '#button_create_default_custom_page', function() {
 				
 				if (json['success']) {
 					$('#modal-dialog').modal('hide');
-					refreshPage();
+					refresh();
 				}
 			},
 			error: function(xhr, ajaxOptions, thrownError) {
@@ -314,7 +317,7 @@ $('body').on('click', '#button_add_custom_page', function() {
 			
 			if (json['success']) {
 				$('#modal-dialog').modal('hide');
-				refreshPage();
+				refresh();
 			}
 		},
 		error: function(xhr, ajaxOptions, thrownError) {
@@ -334,7 +337,7 @@ $('body').on('click', '#button_delete', function() {
 				showAlert(json);
 				
 				if (json['success']) {
-					refreshPage();
+					refresh();
 				}
 			},
 			error: function(xhr, ajaxOptions, thrownError) {

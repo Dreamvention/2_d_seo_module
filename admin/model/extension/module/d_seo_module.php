@@ -6,11 +6,11 @@ class ModelExtensionModuleDSEOModule extends Model {
 	*	Save File Manager.
 	*/
 	public function saveFileData($file, $data) {
-		$dir = str_replace("system/", "", DIR_SYSTEM);
+		$dir = str_replace('system/', '', DIR_SYSTEM);
 		
 		if ($file == 'htaccess') {
 			$file_on = $dir . '.htaccess';
-			$file_off = $dir . '.htaccess.txt'; 
+			$file_off = $dir . '._htaccess'; 
 		}
 		
 		if ($file == 'robots') {
@@ -20,12 +20,12 @@ class ModelExtensionModuleDSEOModule extends Model {
 		
 		if ($data['status']) {
 			if (file_exists($file_off)) unlink($file_off);
-			$fh = fopen($file_on, "w");
+			$fh = fopen($file_on, 'w');
 			fwrite($fh, html_entity_decode($data['text']));
 			fclose($fh);
 		} else {
 			if (file_exists($file_on)) unlink($file_on);
-			$fh = fopen($file_off, "w");
+			$fh = fopen($file_off, 'w');
 			fwrite($fh, html_entity_decode($data['text']));
 			fclose($fh);
 		}
@@ -35,11 +35,11 @@ class ModelExtensionModuleDSEOModule extends Model {
 	*	Return htaccess.
 	*/
 	public function getFileData($file) {
-		$dir = str_replace("system/", "", DIR_SYSTEM);
+		$dir = str_replace('system/', '', DIR_SYSTEM);
 		
 		if ($file == 'htaccess') {
 			$file_on = $dir . '.htaccess';
-			$file_off = $dir . '.htaccess.txt'; 
+			$file_off = $dir . '._htaccess'; 
 		}
 		
 		if ($file == 'robots') {
@@ -51,14 +51,14 @@ class ModelExtensionModuleDSEOModule extends Model {
 		
 		if (file_exists($file_on)) { 
 			$data['status'] = true;
-			$fh = fopen($file_on, "r");
-			$data['text'] = fread($fh, filesize($file_on)+1);
+			$fh = fopen($file_on, 'r');
+			$data['text'] = fread($fh, filesize($file_on) + 1);
 			fclose($fh);
 		} else {
 			if (file_exists($file_off)) {
 				$data['status'] = false;
-				$fh = fopen($file_off, "r");
-				$data['text'] = fread($fh, filesize($file_off)+1);
+				$fh = fopen($file_off, 'r');
+				$data['text'] = fread($fh, filesize($file_off) + 1);
 				fclose($fh);
 			} else {
 				$data['status'] = false;
@@ -226,6 +226,25 @@ class ModelExtensionModuleDSEOModule extends Model {
 	public function getSEOExtensions() {
 		$this->load->model('setting/setting');
 				
+		$seo_extensions = array();
+		
+		$files = glob(DIR_APPLICATION . 'controller/extension/' . $this->codename . '/*.php');
+		
+		if ($files) {
+			foreach ($files as $file) {
+				$seo_extensions[] = basename($file, '.php');
+			}
+		}
+		
+		return $seo_extensions;
+	}
+	
+	/*
+	*	Return list of installed SEO extensions.
+	*/
+	public function getInstalledSEOExtensions() {
+		$this->load->model('setting/setting');
+				
 		$installed_extensions = array();
 		
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "extension ORDER BY code");
@@ -330,16 +349,31 @@ class ModelExtensionModuleDSEOModule extends Model {
 	}
 	
 	/*
-	*	Return Group ID.
-	*/
-	public function getGroupId() {
-        $user_query = $this->db->query("SELECT * FROM " . DB_PREFIX . "user WHERE user_id = '" . $this->user->getId() . "'");
-        
-		$user_group_id = (int)$user_query->row['user_group_id'];
-        
-        return $user_group_id;
-    }
-	
+	*	Return URL Info.
+	*/	
+	public function getURLInfo($url) {						
+		$url_info = parse_url(str_replace('&amp;', '&', $url));
+		
+		$url_info['scheme'] = isset($url_info['scheme']) ? $url_info['scheme'] . '://' : '';
+		$url_info['user'] = isset($url_info['user']) ? $url_info['user'] : '';
+		$url_info['pass'] = isset($url_info['pass']) ? ':' . $url_info['pass']  : '';
+		$url_info['pass'] = ($url_info['user'] || $url_info['pass']) ? $url_info['pass'] . '@' : ''; 
+		$url_info['host'] = isset($url_info['host']) ? $url_info['host'] : '';
+		$url_info['port'] = isset($url_info['port']) ? ':' . $url_info['port'] : '';
+		$url_info['path'] = isset($url_info['path']) ? $url_info['path'] : '';		
+		
+		$url_info['data'] = array();
+		
+		if (isset($url_info['query'])) {
+			parse_str($url_info['query'], $url_info['data']);
+		}
+		
+		$url_info['query'] = isset($url_info['query']) ? '?' . $url_info['query'] : '';
+		$url_info['fragment'] = isset($url_info['fragment']) ? '#' . $url_info['fragment'] : '';
+						
+		return $url_info;
+	}
+		
 	/*
 	*	Sort Array By Column.
 	*/
@@ -365,7 +399,7 @@ class ModelExtensionModuleDSEOModule extends Model {
 	/*
 	*	Install.
 	*/		
-	public function installModule() {
+	public function installExtension() {
 		if (VERSION < '3.0.0.0') {
 			$this->db->query("ALTER TABLE " . DB_PREFIX . "setting MODIFY code VARCHAR(128) NOT NULL");
 		}
@@ -378,7 +412,7 @@ class ModelExtensionModuleDSEOModule extends Model {
 	/*
 	*	Uninstall.
 	*/		
-	public function uninstallModule() {
+	public function uninstallExtension() {
 		$this->db->query("DROP TABLE IF EXISTS " . DB_PREFIX . "d_target_keyword");
 		$this->db->query("DROP TABLE IF EXISTS " . DB_PREFIX . "d_meta_data");
 		$this->db->query("DROP TABLE IF EXISTS " . DB_PREFIX . "d_url_keyword");

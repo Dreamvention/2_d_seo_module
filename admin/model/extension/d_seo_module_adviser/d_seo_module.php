@@ -83,8 +83,8 @@ class ModelExtensionDSEOModuleAdviserDSEOModule extends Model {
 						if (isset($robots_txt_parser) && $robots_txt_parser->isUrlDisallow('/' . $url_keyword[$store['store_id']][$language['language_id']])) {
 							$robots_no_index_rating = 0;
 						}
-					}	
-															
+					}
+														
 					$adviser_elements[$store['store_id']][$language['language_id']][] = array(
 						'module'		=> $this->codename,
 						'code'			=> 'target_keyword_empty',
@@ -120,6 +120,15 @@ class ModelExtensionDSEOModuleAdviserDSEOModule extends Model {
 						'rating'		=> $robots_no_index_rating,
 						'weight'		=> 1
 					);
+					
+					$adviser_elements[$store['store_id']][$language['language_id']][] = array(
+						'module'		=> $this->codename,
+						'code'			=> 'seo_url_disabled',
+						'name'			=> $_language->get('text_seo_url_disabled'),
+						'description'	=> $_language->get('help_seo_url_disabled'),
+						'rating'		=> ($this->config->get('config_seo_url')) ? 1 : 0,
+						'weight'		=> 1
+					);	
 				}
 			}
 		}

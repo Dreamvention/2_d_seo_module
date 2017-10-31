@@ -145,8 +145,17 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 	
 	public function setting_edit_setting($data) {
 		$this->load->model($this->route);
-				
+		$this->load->model('setting/setting');
+		
 		$this->{'model_extension_d_seo_module_' . $this->codename}->saveHomeTargetKeyword($data);
+		
+		if ($data['config_seo_url']) {
+			$setting[$this->codename . '_setting']['control_element']['enable_seo_url']['used'] = 1;
+			
+			$this->model_setting_setting->editSetting($this->codename, $setting);
+			
+			$this->cache->delete('url_rewrite');
+		}
 	}
 	
 	public function store_form_tab_general_language() {		
@@ -899,6 +908,216 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 		$this->load->model($this->route);
 		
 		$this->{'model_extension_d_seo_module_' . $this->codename}->deleteInformationTargetKeyword($data);
+	}
+	
+	public function control_install_extension() {
+		$this->load->controller('extension/module/' . $this->codename . '/installExtension');
+			
+		$json = $this->response->getOutput();
+			
+		if ($json) {
+			$data = json_decode($json, true);
+			
+			return $data;
+		}
+		
+		return false;
+	}
+	
+	public function control_elements($data) {
+		$_language = new Language();
+		$_language->load($this->route);
+		
+		$this->load->model('extension/module/' . $this->codename);
+		$this->load->model('setting/setting');
+		
+		$url_token = '';
+		
+		if (isset($this->session->data['token'])) {
+			$url_token .= 'token=' . $this->session->data['token'];
+		}
+		
+		if (isset($this->session->data['user_token'])) {
+			$url_token .= 'user_token=' . $this->session->data['user_token'];
+		}
+		
+		// Setting 						
+		$setting = $this->model_setting_setting->getSetting($this->codename, $data['store_id']);
+		$status = isset($setting[$this->codename . '_status']) ? $setting[$this->codename . '_status'] : false;
+		$setting = isset($setting[$this->codename . '_setting']) ? $setting[$this->codename . '_setting'] : array();
+				
+		$htaccess = $this->{'model_extension_module_' . $this->codename}->getFileData('htaccess');		
+		$robots = $this->{'model_extension_module_' . $this->codename}->getFileData('robots');
+						
+		$control_elements = array();
+		
+		if (!$status) {
+			$control_elements[] = array(
+				'extension_code' 		=> $this->codename,
+				'extension_name' 		=> $_language->get('heading_title_main'),
+				'element_code'			=> 'enable_status',
+				'name'					=> $_language->get('text_enable_status'),
+				'description'			=> $_language->get('help_enable_status'),
+				'confirm'				=> false,
+				'href'					=> $this->url->link('extension/module/' . $this->codename . '/setting', $url_token, true),
+				'used'					=> isset($setting['control_element']['enable_status']['used']) ? 1 : 0,
+				'weight'				=> 1
+			);
+		}
+		
+		if (!$this->config->get('config_seo_url')) {
+			$control_elements[] = array(
+				'extension_code' 		=> $this->codename,
+				'extension_name' 		=> $_language->get('heading_title_main'),
+				'element_code'			=> 'enable_seo_url',
+				'name'					=> $_language->get('text_enable_seo_url'),
+				'description'			=> $_language->get('help_enable_seo_url'),
+				'confirm'				=> false,
+				'href'					=> $this->url->link('setting/setting', $url_token, true),
+				'used'					=> isset($setting['control_element']['enable_seo_url']['used']) ? 1 : 0,
+				'weight'				=> 0.95
+			);
+		}
+		
+		if (!$htaccess['status']) {
+			$control_elements[] = array(
+				'extension_code' 		=> $this->codename,
+				'extension_name' 		=> $_language->get('heading_title_main'),
+				'element_code'			=> 'enable_htaccess',
+				'name'					=> $_language->get('text_enable_htaccess'),
+				'description'			=> $_language->get('help_enable_htaccess'),
+				'confirm'				=> false,
+				'href'					=> $this->url->link('extension/module/' . $this->codename . '/setting', $url_token, true),
+				'used'					=> isset($setting['control_element']['enable_htaccess']['used']) ? 1 : 0,
+				'weight'				=> 0.95
+			);
+		}
+		
+		if (!$robots['status']) {
+			$control_elements[] = array(
+				'extension_code' 		=> $this->codename,
+				'extension_name' 		=> $_language->get('heading_title_main'),
+				'element_code'			=> 'enable_robots',
+				'name'					=> $_language->get('text_enable_robots'),
+				'description'			=> $_language->get('help_enable_robots'),
+				'confirm'				=> false,
+				'href'					=> $this->url->link('extension/module/' . $this->codename . '/setting', $url_token, true),
+				'used'					=> isset($setting['control_element']['enable_robots']['used']) ? 1 : 0,
+				'weight'				=> 0.6
+			);
+		}
+						
+		return $control_elements;
+	}
+	
+	public function control_execute_element($data) {
+		$this->load->model('extension/module/' . $this->codename);
+		$this->load->model('setting/setting');
+		
+		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
+			$server = HTTPS_SERVER;
+			$catalog = HTTPS_CATALOG;
+		} else {
+			$server = HTTP_SERVER;
+			$catalog = HTTP_CATALOG;
+		}
+		
+		$catalog_url_info = $this->{'model_extension_module_' . $this->codename}->getURLInfo($catalog);
+		
+		// Setting
+		$setting = $this->model_setting_setting->getSetting($this->codename, $data['store_id']);
+										
+		if ($data['element_code'] == 'enable_status') {
+			$setting[$this->codename . '_status'] = 1;
+			$setting[$this->codename . '_setting']['control_element']['enable_status']['used'] = 1;
+			
+			$this->model_setting_setting->editSetting($this->codename, $setting, $data['store_id']);
+		}
+		
+		if ($data['element_code'] == 'enable_seo_url') {
+			$store_setting = $this->model_setting_setting->getSetting('config');
+			$store_setting['config_seo_url'] = 1;
+			
+			$this->model_setting_setting->editSetting('config', $store_setting);
+			
+			$setting[$this->codename . '_setting']['control_element']['enable_seo_url']['used'] = 1;
+			
+			$this->model_setting_setting->editSetting($this->codename, $setting);
+			
+			$this->cache->delete('url_rewrite');
+		}
+		
+		if ($data['element_code'] == 'enable_htaccess') {
+			$this->config->load($this->config_file);
+			$config_setting = ($this->config->get($this->codename . '_setting')) ? $this->config->get($this->codename . '_setting') : array();
+				
+			$htaccess = $this->{'model_extension_module_' . $this->codename}->getFileData('htaccess');		
+			
+			if (!$htaccess['status'] && !trim($htaccess['text'])) {
+				$htaccess['text'] = str_replace('[catalog_url_path]', $catalog_url_info['path'], $config_setting['default_htaccess']);
+			}
+			
+			$htaccess['status'] = 1;
+			
+			$this->{'model_extension_module_' . $this->codename}->saveFileData('htaccess', $htaccess);
+			
+			$setting[$this->codename . '_setting']['control_element']['enable_htaccess']['used'] = 1;
+			
+			$this->model_setting_setting->editSetting($this->codename, $setting, $data['store_id']);
+			
+			$this->cache->delete('url_rewrite');
+		}
+		
+		if ($data['element_code'] == 'enable_robots') {
+			$this->config->load($this->config_file);
+			$config_setting = ($this->config->get($this->codename . '_setting')) ? $this->config->get($this->codename . '_setting') : array();
+				
+			$robots = $this->{'model_extension_module_' . $this->codename}->getFileData('robots');		
+			
+			if (!$robots['status'] && !trim($robots['text'])) {
+				$robots['text'] = str_replace('[catalog_url]', $catalog, $config_setting['default_robots']);
+				$robots['text'] = str_replace('[catalog_url_host]', $catalog_url_info['host'], $robots['text']);
+			}
+			
+			$robots['status'] = 1;
+			
+			$this->{'model_extension_module_' . $this->codename}->saveFileData('robots', $robots);
+			
+			$setting[$this->codename . '_setting']['control_element']['enable_robots']['used'] = 1;
+			
+			$this->model_setting_setting->editSetting($this->codename, $setting, $data['store_id']);
+		}
+				
+		$result['error'] = $this->error;
+		
+		return $result;
+	}
+	
+	public function field_config() {
+		$_language = new Language();
+		$_language->load($this->route);
+		
+		$_config = new Config();
+		$_config->load($this->config_file);
+		$field_setting = ($_config->get($this->codename . '_field_setting')) ? $_config->get($this->codename . '_field_setting') : array();
+
+		foreach ($field_setting['sheet'] as $sheet) {				
+			if (substr($sheet['name'], 0, strlen('text_')) == 'text_') {
+				$field_setting['sheet'][$sheet['code']]['name'] = $_language->get($sheet['name']);
+			}
+			
+			foreach ($sheet['field'] as $field) {
+				if (substr($field['name'], 0, strlen('text_')) == 'text_') {
+					$field_setting['sheet'][$sheet['code']]['field'][$field['code']]['name'] = $_language->get($field['name']);
+				}
+				
+				if (substr($field['description'], 0, strlen('help_')) == 'help_') {
+					$field_setting['sheet'][$sheet['code']]['field'][$field['code']]['description'] = $_language->get($field['description']);
+				}
+			}
+		}
+					
+		return $field_setting;
 	}
 	
 	public function field_elements($filter_data) {

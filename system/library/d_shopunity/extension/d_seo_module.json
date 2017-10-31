@@ -1,6 +1,6 @@
 {
     "codename": "d_seo_module",
-    "version": "3.0.1",
+    "version": "3.0.2",
     "name": "SEO Module",
     "description": "SEO Module is the core platform, necessary for the installation of other SEO modules.",
 	"index": "extension/module/d_seo_module",
@@ -101,10 +101,15 @@
     ],
 	"dirs": [
         "admin/view/template/extension/module/d_seo_module",
-		"admin/view/template/extension/d_seo_module/d_seo_module"
+		"admin/view/template/extension/d_seo_module/d_seo_module",
+		"image/catalog/d_seo_module"
     ],
     "changelog": [
         {
+            "version": "3.0.2",
+            "change": "Add Dashboard"
+        },
+		{
             "version": "3.0.1",
             "change": "Update Confirm"
         },

@@ -3,9 +3,9 @@ class ModelExtensionModuleDSEOModule extends Model {
 	private $codename = 'd_seo_module';
 			
 	/*
-	*	Return list of seo extensions.
+	*	Return list of installed SEO extensions.
 	*/
-	public function getSEOExtensions() {
+	public function getInstalledSEOExtensions() {
 		$this->load->model('setting/setting');
 				
 		$installed_extensions = array();

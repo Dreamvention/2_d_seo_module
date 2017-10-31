@@ -82,9 +82,9 @@ class ModelExtensionDashboardDSEOModuleTargetKeyword extends Model {
 	}
 	
 	/*
-	*	Return list of SEO Target Keyword extensions.
+	*	Return list of installed SEO Target Keyword extensions.
 	*/
-	public function getSEOTargetKeywordExtensions() {
+	public function getInstalledSEOTargetKeywordExtensions() {
 		$this->load->model('setting/setting');
 				
 		$installed_extensions = array();
@@ -95,21 +95,21 @@ class ModelExtensionDashboardDSEOModuleTargetKeyword extends Model {
 			$installed_extensions[] = $result['code'];
 		}
 		
-		$seo_target_keyword_extensions = array();
+		$installed_seo_target_keyword_extensions = array();
 		
 		$files = glob(DIR_APPLICATION . 'controller/extension/' . $this->codename . '/*.php');
 		
 		if ($files) {
 			foreach ($files as $file) {
-				$seo_target_keyword_extension = basename($file, '.php');
+				$installed_seo_target_keyword_extension = basename($file, '.php');
 				
-				if (in_array($seo_target_keyword_extension, $installed_extensions)) {
-					$seo_target_keyword_extensions[] = $seo_target_keyword_extension;
+				if (in_array($installed_seo_target_keyword_extension, $installed_extensions)) {
+					$installed_seo_target_keyword_extensions[] = $installed_seo_target_keyword_extension;
 				}
 			}
 		}
 		
-		return $seo_target_keyword_extensions;
+		return $installed_seo_target_keyword_extensions;
 	}
 	
 	/*

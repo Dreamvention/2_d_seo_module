@@ -28,9 +28,55 @@
 .text-error {
 	color: #F56B6B;
 }
+.buttons {
+	padding: 5px 0px;
+}
 .bootstrap-switch .bootstrap-switch-label {
 	white-space: nowrap;
 }
+.control-extensions {
+	margin-bottom: 40px;
+}
+.control-extension {
+	float: left;
+	display: block;
+	width: 180px;
+}
+.control-extension .image {
+	-webkit-filter: grayscale(100%);
+    filter: grayscale(100%);
+}
+.control-extension.installed .image {
+	-webkit-filter: none;
+    filter: none;
+}
+.control-extension .name {
+	margin-bottom: 10px;
+	font-weight: 600;
+}
+.control-elements {
+	margin-top: 40px;
+}
+.control-element {
+	margin-bottom: 20px;
+}
+.control-element .name {
+	font-weight: bold;
+}
+.control-element .extension-name {
+	float: left;
+	display: block;
+	padding: 5px 5px;
+	background: #eaebea;
+	font-weight: bold;
+}
+.control-element .details {
+	float: left;
+	display: block;
+	padding: 5px 5px;
+	margin-left: 10px;
+}
+
 .clear {
 	clear: both;
 }

@@ -7,28 +7,22 @@ $_['heading_title_main']						= 'SEO Module';
 $_['text_edit']									= 'Edit SEO Module settings';
 $_['text_install']								= 'Install';
 $_['text_modules']								= 'Modules';
+$_['text_dashboard']							= 'Dashboard';
 $_['text_settings']								= 'Settings';
 $_['text_field_settings']						= 'Field Settings';
 $_['text_custom_pages']          				= 'Custom Pages';
 $_['text_export_import']          				= 'Export & Import';
 $_['text_instructions']							= 'Instructions';
+$_['text_seo_extensions'] 						= 'SEO Extensions';
+$_['text_quick_setup'] 							= 'Quick Setup';
+$_['text_activated'] 							= 'Activated';
+$_['text_view'] 								= 'View';
+$_['text_details'] 								= 'Details';
 $_['text_basic_settings'] 						= 'Basic Settings';
 $_['text_htaccess'] 							= '.htaccess';
 $_['text_robots'] 								= 'robots.txt';
-$_['text_category']								= 'Category';
-$_['text_product']								= 'Product';
-$_['text_manufacturer']							= 'Manufacturer';
-$_['text_information']							= 'Information';
-$_['text_target_keyword']						= 'Target Keyword';
 $_['text_export'] 								= 'Export';
 $_['text_import'] 								= 'Import';
-$_['text_success_save']							= 'Success: You have modified SEO Module!';
-$_['text_success_install']						= 'Success: You have installed SEO Module!';
-$_['text_success_uninstall']					= 'Success: You have uninstalled SEO Module!';
-$_['text_success_create_default_custom_pages']  = 'Success: You have successfully created Custom Pages!';
-$_['text_success_add_custom_page']       		= 'Success: You have successfully added Custom Page!';
-$_['text_success_delete_custom_pages']      	= 'Success: You have successfully deleted Custom Pages!';
-$_['text_success_import']        				= 'Success: You have successfully imported your data!';
 $_['text_all_stores']			 				= 'All Stores';
 $_['text_all_languages']						= 'All Languages';
 $_['text_yes'] 									= 'Yes';
@@ -40,9 +34,9 @@ $_['text_add_custom_page']   					= 'Add Custom Page';
 $_['text_general']								= 'General';
 $_['text_data']									= 'Data';
 $_['text_seo']									= 'SEO';
-$_['text_create_default_custom_pages_confirm']	= 'Creation default Custom Pages will delete all old Custom Pages.\nYou sure you want to create default Custom Pages?';
+$_['text_create_default_custom_pages_confirm']	= 'Creation default Custom Pages will delete all old Custom Pages. You sure you want to create default Custom Pages?';
 $_['text_delete_custom_pages_confirm']   		= 'You sure you want to delete selected Custom Pages?';
-$_['text_uninstall_confirm']					= 'After deinstallation is compleate the SEO Module will delete all additional fields in the product, category, manufacturer and information that have been added after installation.\nAre you sure you want to uninstall the SEO Module? ';
+$_['text_uninstall_confirm']					= 'After deinstallation is compleate the SEO Module will delete all additional fields in the product, category, manufacturer and information that have been added after installation. Are you sure you want to uninstall the SEO Module? ';
 $_['text_instructions_full'] 					= '
 <div class="row">
 	<div class="col-sm-2">
@@ -209,7 +203,8 @@ $_['button_save_and_stay'] 						= 'Save and Stay';
 $_['button_cancel'] 							= 'Cancel';
 $_['button_install'] 							= 'Install';
 $_['button_uninstall'] 							= 'Uninstall';
-$_['button_edit_store_setting'] 				= 'Edit store settings';
+$_['button_edit'] 								= 'Edit';
+$_['button_view_store_setting'] 				= 'View store settings';
 $_['button_create_default_custom_page']   		= 'Create Default Custom Pages';
 $_['button_add_custom_page']   					= 'Add Custom Page';
 $_['button_delete_custom_page'] 				= 'Delete Custom Pages';
@@ -232,44 +227,17 @@ $_['help_htaccess_setting']						= '<h4>Important!</h4>
 $_['help_htaccess_subfolder']					= '<h4>If you have a subfolder!</h4>
 <p>You your store is located in a subfolder (ex. http://myshop.com/store/) then you are required to set the RewriteBase (ex. from  <code>RewriteBase /</code> to <code>RewriteBase /store/</code> in the file above)</p>';
 $_['help_robots']								= '<h4>Important!</h4>
-<p>Robots.txt is a recomendation to the Search bot. You can start with the following default settings. Just copy paste into the textarea above:</p>
-<pre>
-## Dreamvention * Seo module * robots.txt
+<p>Robots.txt is a recomendation to the Search bot. You can start with the following default settings.</p>';
 
-User-agent: *
-Disallow: /*route=account/
-Disallow: /*route=affiliate/
-Disallow: /*route=checkout/
-Disallow: /*route=product/search
-Disallow: /index.php?route=product/product*&manufacturer_id=
-Disallow: /admin
-Disallow: /catalog
-Disallow: /system
-Disallow: /*?sort=
-Disallow: /*&sort=
-Disallow: /*?order=
-Disallow: /*&order=
-Disallow: /*?limit=
-Disallow: /*&limit=
-Disallow: /*?format=
-Disallow: /*&format=
-Disallow: /*?tracking=
-Disallow: /*&tracking=
-Disallow: /*?page=
-Disallow: /*&page=
-Disallow: /*?filter=
-Disallow: /*&filter=
-Disallow: /*?filter_name=
-Disallow: /*&filter_name=
-Disallow: /*?filter_sub_category=
-Disallow: /*&filter_sub_category=
-Disallow: /*?filter_description=
-Disallow: /*&filter_description=
-
-Sitemap: %ssitemap.xml
-Host: %s
-</pre>';
-$_['help_target_keyword']						= 'Target Keyword is multilingual field, which is important for SEO and must be unique for each page and language.';
+// Success
+$_['success_save']								= 'Success: You have modified SEO Module!';
+$_['success_install']							= 'Success: You have installed SEO Module!';
+$_['success_uninstall']							= 'Success: You have uninstalled SEO Module!';
+$_['success_execute']							= 'Success: Your task was successfully completed!';
+$_['success_create_default_custom_pages']  		= 'Success: You have successfully created Custom Pages!';
+$_['success_add_custom_page']       			= 'Success: You have successfully added Custom Page!';
+$_['success_delete_custom_pages']      			= 'Success: You have successfully deleted Custom Pages!';
+$_['success_import']        					= 'Success: You have successfully imported your data!';
 
 // Error
 $_['error_warning']          					= 'Warning: Please check the form carefully for errors!';

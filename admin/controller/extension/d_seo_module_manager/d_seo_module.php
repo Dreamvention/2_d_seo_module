@@ -8,27 +8,23 @@ class ControllerExtensionDSEOModuleManagerDSEOModule extends Controller {
 	/*
 	*	Functions for SEO Module Manager.
 	*/
-	public function manager_config($data) {
+	public function manager_config() {
 		$_language = new Language();
 		$_language->load($this->route);
 		
 		$_config = new Config();
 		$_config->load($this->config_file);
-		$config_setting = ($_config->get($this->codename . '_manager')) ? $_config->get($this->codename . '_manager') : array();
+		$manager_setting = ($_config->get($this->codename . '_manager_setting')) ? $_config->get($this->codename . '_manager_setting') : array();
 		
-		foreach ($config_setting['sheet'] as &$sheet) {
-			foreach ($sheet['field'] as &$field) {
+		foreach ($manager_setting['sheet'] as $sheet) {
+			foreach ($sheet['field'] as $field) {
 				if (substr($field['name'], 0, strlen('text_')) == 'text_') {
-					$field['name'] = $_language->get($field['name']);
+					$manager_setting['sheet'][$sheet['code']]['field'][$field['code']]['name'] = $_language->get($field['name']);
 				}
 			}
 		}
-		
-		if (!empty($config_setting['sheet'])) {
-			$data['sheet'] = array_replace_recursive($data['sheet'], $config_setting['sheet']);
-		}
-					
-		return $data;
+							
+		return $manager_setting;
 	}
 	
 	public function manager_list_elements($filter_data) {	

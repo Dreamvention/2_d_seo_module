@@ -138,7 +138,7 @@ class ControllerExtensionDashboardDSEOModuleTargetKeyword extends Controller {
 		
 		// Setting 	
 		$this->config->load($this->config_file);
-		$data['setting'] = ($this->config->get($this->codename)) ? $this->config->get($this->codename) : array();
+		$data['setting'] = ($this->config->get($this->codename . '_setting')) ? $this->config->get($this->codename . '_setting') : array();
 		
 		$setting = $this->model_setting_setting->getSetting('dashboard_' . $this->codename);	
 		$status = isset($setting['dashboard_' . $this->codename . '_status']) ? $setting['dashboard_' . $this->codename . '_status'] : false;
@@ -175,18 +175,11 @@ class ControllerExtensionDashboardDSEOModuleTargetKeyword extends Controller {
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {
 			$this->model_setting_setting->editSetting('dashboard_' . $this->codename, $this->request->post);
 						
-			$this->session->data['success'] = $this->language->get('text_success_save');
+			$data['success'] = $this->language->get('success_save');
 		}
 						
 		$data['error'] = $this->error;
-		
-		if (isset($this->session->data['success'])) {
-			$data['success'] = $this->session->data['success'];
-			unset($this->session->data['success']);
-		} else {
-			$data['success'] = '';
-		}
-		
+				
 		$this->response->setOutput(json_encode($data));
 	}
 	
@@ -242,7 +235,7 @@ class ControllerExtensionDashboardDSEOModuleTargetKeyword extends Controller {
 		
 		// Setting
 		$this->config->load($this->config_file);
-		$config_setting = ($this->config->get($this->codename)) ? $this->config->get($this->codename) : array();
+		$config_setting = ($this->config->get($this->codename . '_setting')) ? $this->config->get($this->codename . '_setting') : array();
 		
 		$setting = $this->model_setting_setting->getSetting('dashboard_' . $this->codename);	
 		$setting = isset($setting['dashboard_' . $this->codename . '_setting']) ? $setting['dashboard_' . $this->codename . '_setting'] : array();
@@ -253,7 +246,7 @@ class ControllerExtensionDashboardDSEOModuleTargetKeyword extends Controller {
 		
 		$setting = $config_setting;
 
-		$seo_target_keyword_extensions = $this->{'model_extension_dashboard_' . $this->codename}->getSEOTargetKeywordExtensions();
+		$installed_seo_target_keyword_extensions = $this->{'model_extension_dashboard_' . $this->codename}->getInstalledSEOTargetKeywordExtensions();
 		
 		$target_elements = array();
 		$store_target_elements = array();
@@ -261,8 +254,8 @@ class ControllerExtensionDashboardDSEOModuleTargetKeyword extends Controller {
 		$store_empty_target_elements = array();
 		
 		if ($setting['duplicate_status'] || $setting['empty_status']) {
-			foreach ($seo_target_keyword_extensions as $seo_target_keyword_extension) {
-				$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_target_keyword_extension . '/target_elements');
+			foreach ($installed_seo_target_keyword_extensions as $installed_seo_target_keyword_extension) {
+				$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_target_keyword_extension . '/target_elements');
 				if ($info) $target_elements = array_replace_recursive($target_elements, $info);
 			}
 		}
@@ -281,8 +274,8 @@ class ControllerExtensionDashboardDSEOModuleTargetKeyword extends Controller {
 			$store_target_elements[$store_id] = array_slice($target_elements, 0, $setting['list_limit']);
 		}
 		
-		foreach ($seo_target_keyword_extensions as $seo_target_keyword_extension) {
-			$store_target_elements_links = $this->load->controller('extension/' . $this->codename . '/' . $seo_target_keyword_extension . '/store_target_elements_links', $store_target_elements);
+		foreach ($installed_seo_target_keyword_extensions as $installed_seo_target_keyword_extension) {
+			$store_target_elements_links = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_target_keyword_extension . '/store_target_elements_links', $store_target_elements);
 			if ($store_target_elements_links) $store_target_elements = $store_target_elements_links;
 		}
 				
@@ -332,10 +325,10 @@ class ControllerExtensionDashboardDSEOModuleTargetKeyword extends Controller {
 				'target_keyword'	=> $this->request->post['target_keyword']
 			);
 		
-			$seo_target_keyword_extensions = $this->{'model_extension_dashboard_' . $this->codename}->getSEOTargetKeywordExtensions();
+			$installed_seo_target_keyword_extensions = $this->{'model_extension_dashboard_' . $this->codename}->getInstalledSEOTargetKeywordExtensions();
 			
-			foreach ($seo_target_keyword_extensions as $seo_target_keyword_extension) {
-				$this->load->controller('extension/' . $this->codename . '/' . $seo_target_keyword_extension . '/edit_target_element', $target_element_data);
+			foreach ($installed_seo_target_keyword_extensions as $installed_seo_target_keyword_extension) {
+				$this->load->controller('extension/' . $this->codename . '/' . $installed_seo_target_keyword_extension . '/edit_target_element', $target_element_data);
 			}
 		}
 			

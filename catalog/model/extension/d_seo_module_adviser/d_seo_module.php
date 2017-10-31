@@ -126,6 +126,15 @@ class ModelExtensionDSEOModuleAdviserDSEOModule extends Model {
 				'rating'		=> $robots_no_index_rating,
 				'weight'		=> 1
 			);
+			
+			$adviser_elements[] = array(
+				'module'		=> $this->codename,
+				'code'			=> 'seo_url_disabled',
+				'name'			=> $_language->get('text_seo_url_disabled'),
+				'description'	=> $_language->get('help_seo_url_disabled'),
+				'rating'		=> ($this->config->get('config_seo_url')) ? 1 : 0,
+				'weight'		=> 1,
+			);
 		}
 					
 		return $adviser_elements;

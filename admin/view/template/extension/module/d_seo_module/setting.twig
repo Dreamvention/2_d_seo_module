@@ -43,6 +43,9 @@
 			</div>
 			<div class="panel-body">
 				<ul class="nav nav-tabs">
+					<li>
+						<a href="{{ href_dashboard }}"><span class="fa fa-dashboard"></span> {{ text_dashboard }}</a>
+					</li>
 					<li class="active">
 						<a href="{{ href_setting }}"><span class="fa fa-cog"></span> {{ text_settings }}</a>
 					</li>
@@ -114,7 +117,7 @@
 									</div>
 									<div class="form-group">
 										<div class="col-sm-10 col-sm-offset-2">
-											<p><a href="{{ store_setting }}" class="btn btn-primary"><i class="fa fa-cog fw"></i> {{ button_edit_store_setting }}</a></p>
+											<p><a href="{{ store_setting }}" target="_blank" class="btn btn-primary"><i class="fa fa-cog fw"></i> {{ button_view_store_setting }}</a></p>
 											<div class="bs-callout bs-callout-info">{{ help_htaccess_setting }}</div>
 										</div>
 									</div>

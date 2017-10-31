@@ -6,7 +6,6 @@ $_['heading_title_main']  						= 'SEO Module Target Keyword';
 // Text
 $_['text_edit']            						= 'Edit SEO Module Target Keyword';
 $_['text_dashboard']               				= 'Dashboard';
-$_['text_success_save']        					= 'Success: You have modified module SEO Module Target Keyword!';
 $_['text_yes'] 									= 'Yes';
 $_['text_no'] 									= 'No';
 $_['text_enabled']          					= 'Enabled';
@@ -36,6 +35,9 @@ $_['entry_store']								= 'Store';
 $_['button_save'] 								= 'Save';
 $_['button_save_and_stay'] 						= 'Save and Stay';
 $_['button_cancel'] 							= 'Cancel';
+
+// Success
+$_['success_save']        						= 'Success: You have modified module SEO Module Target Keyword!';
 
 // Error
 $_['error_permission']    						= 'Warning: You do not have permission to modify module SEO Module Target Keyword!';
