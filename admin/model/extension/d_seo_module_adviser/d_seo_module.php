@@ -86,48 +86,48 @@ class ModelExtensionDSEOModuleAdviserDSEOModule extends Model {
 					}
 														
 					$adviser_elements[$store['store_id']][$language['language_id']][] = array(
-						'module'		=> $this->codename,
-						'code'			=> 'target_keyword_empty',
-						'name'			=> $_language->get('text_target_keyword_empty'),
-						'description'	=> $_language->get('help_target_keyword_empty'),
-						'rating'		=> isset($target_keyword[$store['store_id']][$language['language_id']]) ? 1 : 0,
-						'weight'		=> 1
+						'extension_code'	=> $this->codename,
+						'element_code'		=> 'target_keyword_empty',
+						'name'				=> $_language->get('text_target_keyword_empty'),
+						'description'		=> $_language->get('help_target_keyword_empty'),
+						'rating'			=> isset($target_keyword[$store['store_id']][$language['language_id']]) ? 1 : 0,
+						'weight'			=> 1
 					);
 			
 					$adviser_elements[$store['store_id']][$language['language_id']][] = array(
-						'module'		=> $this->codename,
-						'code'			=> 'target_keyword_duplicate',
-						'name'			=> $_language->get('text_target_keyword_duplicate'),
-						'description'	=> $_language->get('help_target_keyword_duplicate'),
-						'rating'		=> $target_keyword_duplicate ? (1 / ($target_keyword_duplicate + 1)) : 1,
-						'weight'		=> 0.8
+						'extension_code'	=> $this->codename,
+						'element_code'		=> 'target_keyword_duplicate',
+						'name'				=> $_language->get('text_target_keyword_duplicate'),
+						'description'		=> $_language->get('help_target_keyword_duplicate'),
+						'rating'			=> $target_keyword_duplicate ? (1 / ($target_keyword_duplicate + 1)) : 1,
+						'weight'			=> 0.8
 					);
 			
 					$adviser_elements[$store['store_id']][$language['language_id']][] = array(
-						'module'		=> $this->codename,
-						'code'			=> 'robots_empty',
-						'name'			=> $_language->get('text_robots_empty'),
-						'description'	=> $_language->get('help_robots_empty'),
-						'rating'		=> $robots_empty_rating,
-						'weight'		=> 1
+						'extension_code'	=> $this->codename,
+						'element_code'		=> 'robots_empty',
+						'name'				=> $_language->get('text_robots_empty'),
+						'description'		=> $_language->get('help_robots_empty'),
+						'rating'			=> $robots_empty_rating,
+						'weight'			=> 1
 					);
 			
 					$adviser_elements[$store['store_id']][$language['language_id']][] = array(
-						'module'		=> $this->codename,
-						'code'			=> 'robots_no_index',
-						'name'			=> $_language->get('text_robots_no_index'),
-						'description'	=> $_language->get('help_robots_no_index'),
-						'rating'		=> $robots_no_index_rating,
-						'weight'		=> 1
+						'extension_code'	=> $this->codename,
+						'element_code'		=> 'robots_no_index',
+						'name'				=> $_language->get('text_robots_no_index'),
+						'description'		=> $_language->get('help_robots_no_index'),
+						'rating'			=> $robots_no_index_rating,
+						'weight'			=> 1
 					);
 					
 					$adviser_elements[$store['store_id']][$language['language_id']][] = array(
-						'module'		=> $this->codename,
-						'code'			=> 'seo_url_disabled',
-						'name'			=> $_language->get('text_seo_url_disabled'),
-						'description'	=> $_language->get('help_seo_url_disabled'),
-						'rating'		=> ($this->config->get('config_seo_url')) ? 1 : 0,
-						'weight'		=> 1
+						'extension_code'	=> $this->codename,
+						'element_code'		=> 'seo_url_disabled',
+						'name'				=> $_language->get('text_seo_url_disabled'),
+						'description'		=> $_language->get('help_seo_url_disabled'),
+						'rating'			=> ($this->config->get('config_seo_url')) ? 1 : 0,
+						'weight'			=> 1
 					);	
 				}
 			}

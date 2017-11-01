@@ -150,7 +150,7 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 		$this->{'model_extension_d_seo_module_' . $this->codename}->saveHomeTargetKeyword($data);
 		
 		if ($data['config_seo_url']) {
-			$setting[$this->codename . '_setting']['control_element']['enable_seo_url']['used'] = 1;
+			$setting[$this->codename . '_setting']['control_element']['enable_seo_url']['implemented'] = 1;
 			
 			$this->model_setting_setting->editSetting($this->codename, $setting);
 			
@@ -960,7 +960,7 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 				'description'			=> $_language->get('help_enable_status'),
 				'confirm'				=> false,
 				'href'					=> $this->url->link('extension/module/' . $this->codename . '/setting', $url_token, true),
-				'used'					=> isset($setting['control_element']['enable_status']['used']) ? 1 : 0,
+				'implemented'			=> isset($setting['control_element']['enable_status']['implemented']) ? 1 : 0,
 				'weight'				=> 1
 			);
 		}
@@ -974,7 +974,7 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 				'description'			=> $_language->get('help_enable_seo_url'),
 				'confirm'				=> false,
 				'href'					=> $this->url->link('setting/setting', $url_token, true),
-				'used'					=> isset($setting['control_element']['enable_seo_url']['used']) ? 1 : 0,
+				'implemented'			=> isset($setting['control_element']['enable_seo_url']['implemented']) ? 1 : 0,
 				'weight'				=> 0.95
 			);
 		}
@@ -988,7 +988,7 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 				'description'			=> $_language->get('help_enable_htaccess'),
 				'confirm'				=> false,
 				'href'					=> $this->url->link('extension/module/' . $this->codename . '/setting', $url_token, true),
-				'used'					=> isset($setting['control_element']['enable_htaccess']['used']) ? 1 : 0,
+				'implemented'			=> isset($setting['control_element']['enable_htaccess']['implemented']) ? 1 : 0,
 				'weight'				=> 0.95
 			);
 		}
@@ -1002,7 +1002,7 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 				'description'			=> $_language->get('help_enable_robots'),
 				'confirm'				=> false,
 				'href'					=> $this->url->link('extension/module/' . $this->codename . '/setting', $url_token, true),
-				'used'					=> isset($setting['control_element']['enable_robots']['used']) ? 1 : 0,
+				'implemented'			=> isset($setting['control_element']['enable_robots']['implemented']) ? 1 : 0,
 				'weight'				=> 0.6
 			);
 		}
@@ -1029,7 +1029,7 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 										
 		if ($data['element_code'] == 'enable_status') {
 			$setting[$this->codename . '_status'] = 1;
-			$setting[$this->codename . '_setting']['control_element']['enable_status']['used'] = 1;
+			$setting[$this->codename . '_setting']['control_element']['enable_status']['implemented'] = 1;
 			
 			$this->model_setting_setting->editSetting($this->codename, $setting, $data['store_id']);
 		}
@@ -1040,7 +1040,7 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 			
 			$this->model_setting_setting->editSetting('config', $store_setting);
 			
-			$setting[$this->codename . '_setting']['control_element']['enable_seo_url']['used'] = 1;
+			$setting[$this->codename . '_setting']['control_element']['enable_seo_url']['implemented'] = 1;
 			
 			$this->model_setting_setting->editSetting($this->codename, $setting);
 			
@@ -1061,7 +1061,7 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 			
 			$this->{'model_extension_module_' . $this->codename}->saveFileData('htaccess', $htaccess);
 			
-			$setting[$this->codename . '_setting']['control_element']['enable_htaccess']['used'] = 1;
+			$setting[$this->codename . '_setting']['control_element']['enable_htaccess']['implemented'] = 1;
 			
 			$this->model_setting_setting->editSetting($this->codename, $setting, $data['store_id']);
 			
@@ -1083,7 +1083,7 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 			
 			$this->{'model_extension_module_' . $this->codename}->saveFileData('robots', $robots);
 			
-			$setting[$this->codename . '_setting']['control_element']['enable_robots']['used'] = 1;
+			$setting[$this->codename . '_setting']['control_element']['enable_robots']['implemented'] = 1;
 			
 			$this->model_setting_setting->editSetting($this->codename, $setting, $data['store_id']);
 		}

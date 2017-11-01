@@ -15,7 +15,7 @@ $_['text_export_import']          				= 'Export & Import';
 $_['text_instructions']							= 'Instructions';
 $_['text_seo_extensions'] 						= 'SEO Extensions';
 $_['text_quick_setup'] 							= 'Quick Setup';
-$_['text_activated'] 							= 'Activated';
+$_['text_implemented'] 							= 'Implemented';
 $_['text_view'] 								= 'View';
 $_['text_details'] 								= 'Details';
 $_['text_basic_settings'] 						= 'Basic Settings';
@@ -42,6 +42,7 @@ $_['text_instructions_full'] 					= '
 	<div class="col-sm-2">
 		<ul class="nav nav-pills nav-stacked">
 			<li class="active"><a href="#vtab_instruction_install"  data-toggle="tab">Installation and Updating</a></li>
+			<li><a href="#vtab_instruction_dashboard" data-toggle="tab">Dashboard</a></li>
 			<li><a href="#vtab_instruction_setting" data-toggle="tab">Settings</a></li>
 			<li><a href="#vtab_instruction_field_setting" data-toggle="tab">Field Settings</a></li>
 			<li><a href="#vtab_instruction_custom_page" data-toggle="tab">Custom Pages</a></li>
@@ -82,6 +83,16 @@ $_['text_instructions_full'] 					= '
 						<h4>Warning!</h4>
 						<p>If you have made custom corrections to the code, your code will be rewritten and lost once you update the module.</p>
 					</div>
+				</div>
+			</div>
+			<div id="vtab_instruction_dashboard" class="tab-pane">
+				<div class="tab-body">
+					<h3>Dashboard</h3>
+					<p>Here you can:</p>
+					<ol>
+						<li>Install/View each of the SEO Extensions in your store.</li>
+						<li>Setup different processes to optimise the site.</li>
+					</ol>
 				</div>
 			</div>
 			<div id="vtab_instruction_setting" class="tab-pane">
@@ -203,7 +214,8 @@ $_['button_save_and_stay'] 						= 'Save and Stay';
 $_['button_cancel'] 							= 'Cancel';
 $_['button_install'] 							= 'Install';
 $_['button_uninstall'] 							= 'Uninstall';
-$_['button_edit'] 								= 'Edit';
+$_['button_setup'] 								= 'Setup';
+$_['button_resetup'] 							= 'Resetup';
 $_['button_view_store_setting'] 				= 'View store settings';
 $_['button_create_default_custom_page']   		= 'Create Default Custom Pages';
 $_['button_add_custom_page']   					= 'Add Custom Page';

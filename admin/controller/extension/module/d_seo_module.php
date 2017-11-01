@@ -121,14 +121,15 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$data['button_cancel'] = $this->language->get('button_cancel');
 		$data['button_install'] = $this->language->get('button_install');
 		$data['button_view'] = $this->language->get('button_view');
-		$data['button_edit'] = $this->language->get('button_edit');
+		$data['button_setup'] = $this->language->get('button_setup');
+		$data['button_resetup'] = $this->language->get('button_resetup');
 		
 		// Text
 		$data['text_edit'] = $this->language->get('text_edit');
 		$data['text_install'] = $this->language->get('text_install');
 		$data['text_seo_extensions'] = $this->language->get('text_seo_extensions');
 		$data['text_quick_setup'] = $this->language->get('text_quick_setup');
-		$data['text_activated'] = $this->language->get('text_activated');
+		$data['text_implemented'] = $this->language->get('text_implemented');
 		$data['text_details'] = $this->language->get('text_details');
 		
 		// Help
@@ -208,18 +209,18 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		}
 		
 		$data['quick_setup_total'] = 0;
-		$data['activated_total'] = 0;
+		$data['implemented_total'] = 0;
 		$data['control_elements'] = array();
 		
 		foreach ($control_elements as $control_element) {
-			if (isset($control_element['extension_code']) && isset($control_element['element_code']) && isset($control_element['name']) && isset($control_element['description']) && isset($control_element['confirm']) && isset($control_element['used'])) {						
+			if (isset($control_element['extension_code']) && isset($control_element['element_code']) && isset($control_element['name']) && isset($control_element['description']) && isset($control_element['confirm']) && isset($control_element['implemented'])) {						
 				$url_extension_code = 'extension_code=' . $control_element['extension_code'];
 				$url_element_code = 'element_code=' . $control_element['element_code'];
 								
 				$control_element['edit_href'] = $this->url->link('extension/module/' . $this->codename . '/executeControlElement', $url_token . '&' . $url_store . '&' . $url_extension_code . '&' . $url_element_code, true);
 				
-				if ($control_element['used']) {
-					$data['activated_total']++;
+				if ($control_element['implemented']) {
+					$data['implemented_total']++;
 				} else {
 					$data['quick_setup_total']++;
 				}
@@ -1254,14 +1255,14 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			$setting = $this->model_setting_setting->getSetting($this->codename, $store_id);
 			
 			if (isset($this->request->post[$this->codename . '_status']) && $this->request->post[$this->codename . '_status']) {
-				$setting[$this->codename . '_setting'][$this->codename . '_setting']['control_element']['enable_status']['used'] = 1;
+				$setting[$this->codename . '_setting'][$this->codename . '_setting']['control_element']['enable_status']['implemented'] = 1;
 			}
 
 			if (isset($this->request->post['htaccess'])) {
 				$this->{'model_extension_module_' . $this->codename}->saveFileData('htaccess', $this->request->post['htaccess']);
 				
 				if (isset($this->request->post['htaccess']['status']) && $this->request->post['htaccess']['status']) {
-					$setting[$this->codename . '_setting']['control_element']['enable_htaccess']['used'] = 1;
+					$setting[$this->codename . '_setting']['control_element']['enable_htaccess']['implemented'] = 1;
 				}
 			}
 			
@@ -1269,7 +1270,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 				$this->{'model_extension_module_' . $this->codename}->saveFileData('robots', $this->request->post['robots']);
 				
 				if (isset($this->request->post['robots']['status']) && $this->request->post['robots']['status']) {
-					$setting[$this->codename . '_setting']['control_element']['enable_robots']['used'] = 1;
+					$setting[$this->codename . '_setting']['control_element']['enable_robots']['implemented'] = 1;
 				}
 			}			
 			
@@ -1760,7 +1761,9 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 					}
 			
 					$this->model_setting_setting->editSetting('dashboard_d_seo_module_target_keyword', $setting);
-						
+					
+					$this->model_user_user_group->addPermission($user_group_id, 'access', 'extension/dashboard');
+					$this->model_user_user_group->addPermission($user_group_id, 'modify', 'extension/dashboard');					
 					$this->model_user_user_group->addPermission($user_group_id, 'access', 'extension/dashboard/d_seo_module_target_keyword');
 					$this->model_user_user_group->addPermission($user_group_id, 'modify', 'extension/dashboard/d_seo_module_target_keyword');
 				}
@@ -3157,6 +3160,10 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 	public function getCustomPageExceptionRoutes() {
 		$this->load->model($this->route);
 		
+		if ($this->config->get($this->codename . '_custom_page_exception_routes')) {
+			return $this->config->get($this->codename . '_custom_page_exception_routes');
+		}
+		
 		$custom_page_exception_routes = array();
 							
 		$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
@@ -3165,6 +3172,8 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/custom_page_exception_routes');
 			if ($info) $custom_page_exception_routes = array_merge($custom_page_exception_routes, $info);
 		}
+		
+		$this->config->set($this->codename . '_custom_page_exception_routes', $custom_page_exception_routes);
 		
 		return $custom_page_exception_routes;
 	}

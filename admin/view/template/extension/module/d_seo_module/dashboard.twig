@@ -92,14 +92,13 @@
 						</div>
 						<div class="control-elements">
 							{% for control_element in control_elements %}
-							{% if control_element['used'] == 0 %}
+							{% if control_element['implemented'] == 0 %}
 							<div class="control-element row">
 								<div class="col-sm-1">
-									<a action="{{ control_element['edit_href'] }}" confirm="{{ control_element['confirm'] }}" class="button-edit btn btn-success">{{ button_edit }}</a>
+									<a action="{{ control_element['edit_href'] }}" confirm="{{ control_element['confirm'] }}" class="button-edit btn btn-success">{{ button_setup }}</a>
 								</div>
 								<div class="col-sm-11">
-									<h4 class="name">{{ control_element['name'] }}</h4>
-									<p class="description">{{ control_element['description'] }}</p>
+									<h4 class="name"><label class="control-label"><span data-toggle="tooltip" title="{{ control_element['description'] }}">{{ control_element['name'] }}</span></label></h4>
 									<p class="extension-name">{{ control_element['extension_name'] }}</p>
 									<a href="{{ control_element['href'] }}" target="_blank" class="details">{{ text_details }}</a>
 									<br class="clear"/>
@@ -109,20 +108,19 @@
 							{% endfor %}
 						</div>
 						{% endif %}
-						{% if activated_total %}
+						{% if implemented_total %}
 						<div class="page-header">
-							<h3>{{ text_activated }}</h3>
+							<h3>{{ text_implemented }}</h3>
 						</div>
 						<div class="control-elements">
 							{% for control_element in control_elements %}
-							{% if control_element['used'] == 1 %}
+							{% if control_element['implemented'] == 1 %}
 							<div class="control-element row">
 								<div class="col-sm-1">
-									<a action="{{ control_element['edit_href'] }}" confirm="{{ control_element['confirm'] }}" class="button-edit btn btn-info">{{ button_edit }}</a>
+									<a action="{{ control_element['edit_href'] }}" confirm="{{ control_element['confirm'] }}" class="button-edit btn btn-info">{{ button_resetup }}</a>
 								</div>
 								<div class="col-sm-11">
-									<h4 class="name">{{ control_element['name'] }}</h4>
-									<p class="description">{{ control_element['description'] }}</p>
+									<h4 class="name"><label class="control-label"><span data-toggle="tooltip" title="{{ control_element['description'] }}">{{ control_element['name'] }}</span></label></h4>
 									<p class="extension-name">{{ control_element['extension_name'] }}</p>
 									<a href="{{ control_element['href'] }}" target="_blank" class="details">{{ text_details }}</a>
 									<br class="clear"/>

@@ -588,6 +588,10 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 	public function getCustomPageExceptionRoutes() {
 		$this->load->model($this->route);
 		
+		if ($this->config->get($this->codename . '_custom_page_exception_routes')) {
+			return $this->config->get($this->codename . '_custom_page_exception_routes');
+		}
+		
 		$custom_page_exception_routes = array();
 							
 		$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
@@ -596,6 +600,8 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/custom_page_exception_routes');
 			if ($info) $custom_page_exception_routes = array_merge($custom_page_exception_routes, $info);
 		}
+		
+		$this->config->set($this->codename . '_custom_page_exception_routes', $custom_page_exception_routes);
 		
 		return $custom_page_exception_routes;
 	}

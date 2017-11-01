@@ -35,8 +35,6 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 	}
 	
 	public function search_before($data) {
-		$this->load->model('setting/setting');
-		
 		$store_id = (int)$this->config->get('config_store_id');
 				
 		if (isset($this->request->get['tag']) && !$data['search']) {
