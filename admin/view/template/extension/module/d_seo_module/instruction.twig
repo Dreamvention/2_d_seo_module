@@ -37,7 +37,7 @@
 						<a href="{{ href_setting }}"><span class="fa fa-cog"></span> {{ text_settings }}</a>
 					</li>
 					<li>
-						<a href="{{ href_field_setting }}"><span class="fa fa-cog"></span> {{ text_field_settings }}</a>
+						<a href="{{ href_field_setting }}"><span class="fa fa-cog"></span> {{ text_multi_store_field_settings }}</a>
 					</li>
 					<li>
 						<a href="{{ href_custom_page }}"><span class="fa fa-user"></span> {{ text_custom_pages }}</a>
@@ -50,9 +50,18 @@
 					</li>
 				</ul>
 				
-				{{ text_instructions_full }}
+				<div class="instruction">{{ text_instructions_full }}</div>
 			</div>
 		</div>
 	</div>
 </div>
+<script type="text/javascript">
+
+var url = 'https://opencartseomodule.com/seo-module-instruction';
+
+$.getJSON(url + '?format=json&callback=?', function(data) {
+	$('.instruction').html(data['description']);
+});
+		
+</script>
 {{ footer }}

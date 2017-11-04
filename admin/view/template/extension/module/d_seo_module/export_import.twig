@@ -24,7 +24,7 @@
 			<button type="button" class="close" data-dismiss="alert">&times;</button>
 		</div>
 		{% endif %}
-		<div class="panel panel-default">
+		<div class="panel panel-default panel-resizable">
 			<div class="panel-heading">
 				<h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
 			</div>
@@ -37,7 +37,7 @@
 						<a href="{{ href_setting }}"><span class="fa fa-cog"></span> {{ text_settings }}</a>
 					</li>
 					<li>
-						<a href="{{ href_field_setting }}"><span class="fa fa-cog"></span> {{ text_field_settings }}</a>
+						<a href="{{ href_field_setting }}"><span class="fa fa-cog"></span> {{ text_multi_store_field_settings }}</a>
 					</li>
 					<li>
 						<a href="{{ href_custom_page }}"><span class="fa fa-user"></span> {{ text_custom_pages }}</a>
@@ -65,7 +65,7 @@
 						<div class="tab-content">
 							<div id="vtab_export" class="tab-pane active">
 								<div class="page-header">
-									<h3><span>{{ text_export }}</span></h3>
+									<h3>{{ text_export }}</h3>
 								</div>
 								<form action="{{ export }}" method="post" enctype="multipart/form-data" id="form_export" class="form-horizontal">
 									<div class="form-group">
@@ -86,6 +86,7 @@
 										<label class="col-sm-2 control-label" for="input-sheet">{{ entry_sheet }}</label>
 										<div class="col-sm-10">
 											<input type="checkbox" name="sheet_codes[]" value="custom_page" class="switch" data-label-text="{{ text_custom_pages }}" checked="checked"/>
+											&nbsp;<span class="info-window-item" data-href="https://opencartseomodule.com/export-import-for-custom-page-keywords"><i class="fa fa-question-circle"></i></span>
 										</div>
 									</div>	
 									<div class="form-group">
@@ -98,7 +99,7 @@
 							</div>
 							<div id="vtab_import" class="tab-pane">
 								<div class="page-header">
-									<h3><span>{{ text_import }}</span></h3>
+									<h3>{{ text_import }}</h3>
 								</div>
 								<form action="{{ import }}" method="post" enctype="multipart/form-data" id="form_import" class="form-horizontal">
 									<div class="form-group">
@@ -134,9 +135,54 @@
 				</div>
 			</div>
 		</div>
+		<div class="info-window">
+			<div class="info-window-wrap">
+				<div class="info-window-block">
+					<div class="info-window-close"><i class="fa fa-close"></i></div>
+					<div class="info-window-description"></div>
+				</div>
+			</div>
+		</div>
+		<br class="clear"/>
 	</div>
 </div>
 <script type="text/javascript">
+
+var info_window = {
+	'item' : new Array(),
+	'current_url' : ''
+}
+	
+$.each($('.info-window-item'), function(key, value) {
+	var url = $(this).attr('data-href');
+		
+	if (url) {
+		$.getJSON(url + '?format=json&callback=?', function(data) {
+			info_window.item[url] = data['description'];
+		});
+	}
+});
+	
+$('.info-window-item').on('click', function() {
+	var url = $(this).attr('data-href');
+	
+	if (url == info_window.current_url) {
+		info_window.current_url = '';
+		$('.info-window').removeClass('resized');
+		$('.panel-resizable').removeClass('resized');
+	} else {
+		info_window.current_url = url;
+		$('.info-window .info-window-description').html(info_window.item[url]);
+		$('.panel-resizable').addClass('resized');
+		$('.info-window').addClass('resized');
+	}
+});
+	
+$('.info-window .info-window-close').on('click', function() {
+	info_window.current_url = '';
+	$('.info-window').removeClass('resized');
+	$('.panel-resizable').removeClass('resized');
+});
 
 $('.switch').bootstrapSwitch({
     'onColor': 'success',

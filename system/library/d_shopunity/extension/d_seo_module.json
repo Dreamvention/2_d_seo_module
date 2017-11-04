@@ -76,6 +76,7 @@
 		"admin/view/template/extension/dashboard/d_seo_module_target_keyword.twig",
 		"admin/view/template/extension/dashboard/d_seo_module_target_keyword_info.twig",
 		"admin/view/template/extension/dashboard/d_seo_module_target_keyword_refresh.twig",
+		"admin/view/stylesheet/d_seo_module_target_keyword.css",
 				
 		"admin/controller/extension/d_seo_module_target_keyword/d_seo_module_target_keyword.php",
 		"admin/model/extension/d_seo_module_target_keyword/d_seo_module_target_keyword.php",

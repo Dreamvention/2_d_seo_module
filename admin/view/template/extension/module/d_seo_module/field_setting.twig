@@ -26,7 +26,7 @@
 			<button type="button" class="close" data-dismiss="alert">&times;</button>
 		</div>
 		{% endif %}
-		<div class="panel panel-default">
+		<div class="panel panel-default panel-resizable">
 			<div class="panel-heading">
 				<h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
 			</div>
@@ -39,7 +39,7 @@
 						<a href="{{ href_setting }}"><span class="fa fa-cog"></span> {{ text_settings }}</a>
 					</li>
 					<li class="active">
-						<a href="{{ href_field_setting }}"><span class="fa fa-cog"></span> {{ text_field_settings }}</a>
+						<a href="{{ href_field_setting }}"><span class="fa fa-cog"></span> {{ text_multi_store_field_settings }}</a>
 					</li>
 					<li>
 						<a href="{{ href_custom_page }}"><span class="fa fa-user"></span> {{ text_custom_pages }}</a>
@@ -68,14 +68,14 @@
 								{% for sheet in field_setting['sheet'] %}
 								<div id="vtab_{{ sheet['code'] }}" class="tab-pane {% if (sheet == field_setting['sheet']|first) %}active{% endif %}">
 									<div class="page-header">
-										<h3><span>{{ sheet['name'] }}</span></h3>
+										<h3>{{ sheet['name'] }}</h3>
 									</div>
 									<div class="table-responsive">
 										<table class="table table-bordered table-hover">
 											<thead>
 												<tr>
 													<th class="text-center">{{ column_field }}</th>
-													<th class="text-center">{{ column_multi_store_status }}</th>
+													<th class="text-center">{{ column_multi_store_status }} <span class="info-window-item" data-href="https://opencartseomodule.com/multistore-seo-support"><i class="fa fa-question-circle"></i></span></th>
 												</tr>
 											</thead>
 											<tbody>
@@ -101,9 +101,54 @@
 				</form>
 			</div>
 		</div>
+		<div class="info-window">
+			<div class="info-window-wrap">
+				<div class="info-window-block">
+					<div class="info-window-close"><i class="fa fa-close"></i></div>
+					<div class="info-window-description"></div>
+				</div>
+			</div>
+		</div>
+		<br class="clear"/>
 	</div>
 </div>
 <script type="text/javascript">
+
+var info_window = {
+	'item' : new Array(),
+	'current_url' : ''
+}
+	
+$.each($('.info-window-item'), function(key, value) {
+	var url = $(this).attr('data-href');
+		
+	if (url) {
+		$.getJSON(url + '?format=json&callback=?', function(data) {
+			info_window.item[url] = data['description'];
+		});
+	}
+});
+	
+$('.info-window-item').on('click', function() {
+	var url = $(this).attr('data-href');
+	
+	if (url == info_window.current_url) {
+		info_window.current_url = '';
+		$('.info-window').removeClass('resized');
+		$('.panel-resizable').removeClass('resized');
+	} else {
+		info_window.current_url = url;
+		$('.info-window .info-window-description').html(info_window.item[url]);
+		$('.panel-resizable').addClass('resized');
+		$('.info-window').addClass('resized');
+	}
+});
+	
+$('.info-window .info-window-close').on('click', function() {
+	info_window.current_url = '';
+	$('.info-window').removeClass('resized');
+	$('.panel-resizable').removeClass('resized');
+});
 
 $('.switch').bootstrapSwitch({
     'onColor': 'success',

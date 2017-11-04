@@ -112,7 +112,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		// Tab
 		$data['text_dashboard'] = $this->language->get('text_dashboard');
 		$data['text_settings'] = $this->language->get('text_settings');
-		$data['text_field_settings'] = $this->language->get('text_field_settings');
+		$data['text_multi_store_field_settings'] = $this->language->get('text_multi_store_field_settings');
 		$data['text_custom_pages'] = $this->language->get('text_custom_pages');
 		$data['text_export_import'] = $this->language->get('text_export_import');
 		$data['text_instructions'] = $this->language->get('text_instructions');
@@ -339,7 +339,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		// Tab
 		$data['text_dashboard'] = $this->language->get('text_dashboard');
 		$data['text_settings'] = $this->language->get('text_settings');
-		$data['text_field_settings'] = $this->language->get('text_field_settings');
+		$data['text_multi_store_field_settings'] = $this->language->get('text_multi_store_field_settings');
 		$data['text_custom_pages'] = $this->language->get('text_custom_pages');
 		$data['text_export_import'] = $this->language->get('text_export_import');
 		$data['text_instructions'] = $this->language->get('text_instructions');
@@ -547,7 +547,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		// Tab
 		$data['text_dashboard'] = $this->language->get('text_dashboard');
 		$data['text_settings'] = $this->language->get('text_settings');
-		$data['text_field_settings'] = $this->language->get('text_field_settings');
+		$data['text_multi_store_field_settings'] = $this->language->get('text_multi_store_field_settings');
 		$data['text_custom_pages'] = $this->language->get('text_custom_pages');
 		$data['text_export_import'] = $this->language->get('text_export_import');
 		$data['text_instructions'] = $this->language->get('text_instructions');
@@ -728,10 +728,11 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		// Tab
 		$data['text_dashboard'] = $this->language->get('text_dashboard');
 		$data['text_settings'] = $this->language->get('text_settings');
-		$data['text_field_settings'] = $this->language->get('text_field_settings');
+		$data['text_multi_store_field_settings'] = $this->language->get('text_multi_store_field_settings');
 		$data['text_custom_pages'] = $this->language->get('text_custom_pages');
 		$data['text_export_import'] = $this->language->get('text_export_import');
 		$data['text_instructions'] = $this->language->get('text_instructions');
+		$data['text_custom_pages_target_keywords'] = $this->language->get('text_custom_pages_target_keywords');
 						
 		// Button
 		$data['button_save'] = $this->language->get('button_save');
@@ -978,7 +979,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		// Tab
 		$data['text_dashboard'] = $this->language->get('text_dashboard');
 		$data['text_settings'] = $this->language->get('text_settings');
-		$data['text_field_settings'] = $this->language->get('text_field_settings');
+		$data['text_multi_store_field_settings'] = $this->language->get('text_multi_store_field_settings');
 		$data['text_custom_pages'] = $this->language->get('text_custom_pages');
 		$data['text_export_import'] = $this->language->get('text_export_import');
 		$data['text_instructions'] = $this->language->get('text_instructions');
@@ -1165,7 +1166,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		// Tab
 		$data['text_dashboard'] = $this->language->get('text_dashboard');
 		$data['text_settings'] = $this->language->get('text_settings');
-		$data['text_field_settings'] = $this->language->get('text_field_settings');
+		$data['text_multi_store_field_settings'] = $this->language->get('text_multi_store_field_settings');
 		$data['text_custom_pages'] = $this->language->get('text_custom_pages');
 		$data['text_export_import'] = $this->language->get('text_export_import');
 		$data['text_instructions'] = $this->language->get('text_instructions');

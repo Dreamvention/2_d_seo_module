@@ -26,7 +26,7 @@
 			<button type="button" class="close" data-dismiss="alert">&times;</button>
 		</div>
 		{% endif %}
-		<div class="panel panel-default">
+		<div class="panel panel-default panel-resizable">
 			<div class="panel-heading">
 				<h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
 			</div>
@@ -70,6 +70,7 @@
 						<div class="col-sm-8">
 							<input type="hidden" name="dashboard_{{ codename }}_setting[duplicate_status]" value="0" />
 							<input type="checkbox" name="dashboard_{{ codename }}_setting[duplicate_status]" value="1" class="switch" data-label-text="{{ text_enabled }}" {% if setting['duplicate_status'] %}checked="checked"{% endif %} />
+							&nbsp;<span class="info-window-item" data-href="https://opencartseomodule.com/dashboard-widget-for-duplicate-target-keywords"><i class="fa fa-question-circle"></i></span>
 						</div>												
 					</div>
 					<div class="form-group">
@@ -102,9 +103,54 @@
 				</form>
 			</div>
 		</div>
+		<div class="info-window">
+			<div class="info-window-wrap">
+				<div class="info-window-block">
+					<div class="info-window-close"><i class="fa fa-close"></i></div>
+					<div class="info-window-description"></div>
+				</div>
+			</div>
+		</div>
+		<br class="clear"/>
 	</div>
 </div>
 <script type="text/javascript">
+
+var info_window = {
+	'item' : new Array(),
+	'current_url' : ''
+}
+	
+$.each($('.info-window-item'), function(key, value) {
+	var url = $(this).attr('data-href');
+		
+	if (url) {
+		$.getJSON(url + '?format=json&callback=?', function(data) {
+			info_window.item[url] = data['description'];
+		});
+	}
+});
+	
+$('.info-window-item').on('click', function() {
+	var url = $(this).attr('data-href');
+	
+	if (url == info_window.current_url) {
+		info_window.current_url = '';
+		$('.info-window').removeClass('resized');
+		$('.panel-resizable').removeClass('resized');
+	} else {
+		info_window.current_url = url;
+		$('.info-window .info-window-description').html(info_window.item[url]);
+		$('.panel-resizable').addClass('resized');
+		$('.info-window').addClass('resized');
+	}
+});
+	
+$('.info-window .info-window-close').on('click', function() {
+	info_window.current_url = '';
+	$('.info-window').removeClass('resized');
+	$('.panel-resizable').removeClass('resized');
+});
 
 $('.switch').bootstrapSwitch({
     'onColor': 'success',
