@@ -99,6 +99,7 @@
 	display: block;
 	padding: 40px 20px;
 	overflow: hidden;
+	background: #fff;
 	border: 1px solid #e8e8e8;
 	border-left: 2px solid #bfbfbf;
 }
@@ -112,6 +113,11 @@
 }
 .info-window-item {
 	cursor: pointer;
+}
+@media only screen and (max-width: 767px) {
+	.info-window-item {
+		display: none;
+	}
 }
 .panel-resizable {
 	position: relative;
