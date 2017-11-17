@@ -48,7 +48,7 @@
 		"d_bootstrap_switch": ">= 3.3.5",
 		"d_tinysort": ">= 2.3.7",
 		"d_rubaxa_sortable": ">= 1.4.1",
-		"d_phpexcel": ">= 2.0.0",
+		"d_excel_reader_writer": ">= 1.0.0",
         "d_robots_txt_parser": ">= 2.0.0",
 	    "d_simple_html_dom": ">= 2.0.0",
 		"d_twig_manager": ">= 1.5.4",
@@ -108,7 +108,7 @@
     "changelog": [
         {
             "version": "3.0.3",
-            "change": "JSON Instruction"
+            "change": "Add Excel Reader Writer"
         },
 		{
             "version": "3.0.2",

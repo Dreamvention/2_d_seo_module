@@ -1464,62 +1464,35 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$store = $this->{'model_extension_module_' . $this->codename}->getStore($store_id);
 		$languages = $this->{'model_extension_module_' . $this->codename}->getLanguages();
 		
-		if (file_exists(DIR_SYSTEM . 'library/d_phpexcel.php')) {
-			require_once(DIR_SYSTEM . 'library/d_phpexcel.php');
+		if (file_exists(DIR_SYSTEM . 'library/d_excel_reader_writer.php')) {
+			$d_excel_reader_writer = new d_excel_reader_writer();
 					
-			// create a new workbook
-			$workbook = new PHPExcel();
-
-			// set some default styles
-			$workbook->getDefaultStyle()->getFont()->setName('Arial');
-			$workbook->getDefaultStyle()->getFont()->setSize(10);
-			$workbook->getDefaultStyle()->getAlignment()->setHorizontal(PHPExcel_Style_Alignment::HORIZONTAL_LEFT);
-			$workbook->getDefaultStyle()->getAlignment()->setVertical(PHPExcel_Style_Alignment::VERTICAL_CENTER);
-			$workbook->getDefaultStyle()->getNumberFormat()->setFormatCode(PHPExcel_Style_NumberFormat::FORMAT_TEXT);
-		
-			$worksheet_index = 0;
-			
-			foreach ($sheet_codes as $sheet_code) {
-				if ($worksheet_index > 0) $workbook->createSheet();
-				$workbook->setActiveSheetIndex($worksheet_index);
-				$worksheet = $workbook->getActiveSheet();
-			
+			foreach ($sheet_codes as $sheet_code) {			
 				if ($sheet_code == 'custom_page') {
-					$worksheet->setTitle($sheet_code);
-				
-					// Set the column widths
-					$j = 0;
-					$worksheet->getColumnDimensionByColumn($j++)->setWidth(max(strlen('route')+4,30)+1);
+					// Set the column widths				
+					$column_widths = array(max(strlen('route') + 4, 30) + 1);
 					
 					foreach ($languages as $language) {
-						$worksheet->getColumnDimensionByColumn($j++)->setWidth(max(strlen('target_keyword')+4,30)+1);
+						$column_widths[] = max(strlen('target_keyword') + 4, 30) + 1;
 					}
+					
+					$d_excel_reader_writer->setColumnWidths($column_widths);
 		
-					// The heading row and column styles
-					$data = array();
-					$i = 1;
-					$j = 0;
-				
-					$data[$j++] = 'route';
+					// The heading row and column styles									
+					$header = array('route' => 'string');
 					
 					foreach ($languages as $language) {
-						$data[$j++] = 'target_keyword' . '(' . $language['code'] . ')';
+						$header['target_keyword' . '(' . $language['code'] . ')'] = 'string';
 					}
 					
-					$worksheet->getRowDimension($i)->setRowHeight(30);
-					$worksheet->fromArray($data, null, 'A' . $i, true);
-						
-					// The actual custom pages data
-					$i += 1;
-					$j = 0;
-				
+					$d_excel_reader_writer->writeSheetHeader($sheet_code, $header);
+											
+					// The actual custom pages data				
 					$custom_pages = $this->{'model_extension_module_' . $this->codename}->getCustomPages(array('filter_store_id' => $store_id));
 				
 					foreach ($custom_pages as $custom_page) {
-						$worksheet->getRowDimension($i)->setRowHeight(26);
-						$data = array();
-						$data[$j++] = html_entity_decode($custom_page['route'], ENT_QUOTES,'UTF-8');
-						
+						$data = array(html_entity_decode($custom_page['route'], ENT_QUOTES,'UTF-8'));
+												
 						foreach ($languages as $language) {
 							if (isset($custom_page['target_keyword'][$store_id][$language['language_id']])) {
 								$target_keyword_text = '';
@@ -1528,34 +1501,24 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 									$target_keyword_text .= '[' . $keyword . ']';
 								}
 								
-								$data[$j++] = html_entity_decode($target_keyword_text, ENT_QUOTES,'UTF-8');
+								$data[] = html_entity_decode($target_keyword_text, ENT_QUOTES,'UTF-8');
 							} else {
-								$data[$j++] = '';
+								$data[] = '';
 							}
 						}	
 						
-						$worksheet->fromArray($data, null, 'A' . $i, true);
-						$i += 1;
-						$j = 0;
+						$d_excel_reader_writer->writeSheetRow($sheet_code, $data);
 					}
-				
-					$worksheet->freezePaneByColumnAndRow(1, 2);
-				
-					$worksheet_index++;
 				}
 			}
-			
-			$workbook->setActiveSheetIndex(0);
-			
+						
 			$filename = $this->codename . ' ' . $store['name'] . ' ' . date('Y-m-d') . '.xlsx';
 					
-			header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
-			header('Content-Disposition: attachment;filename="' . $filename . '"');
-			header('Cache-Control: max-age=0');
+			$this->response->addHeader('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+			$this->response->addHeader('Content-Disposition: attachment;filename="' . $filename . '"');
+			$this->response->addHeader('Cache-Control: max-age=0');
 			
-			$objWriter = PHPExcel_IOFactory::createWriter($workbook, 'Excel2007');
-			$objWriter->setPreCalculateFormulas(false);
-			$objWriter->save('php://output');
+			$this->response->setOutput($d_excel_reader_writer->writeToString());
 		}
 	}
 	
@@ -1575,64 +1538,62 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$languages = $this->{'model_extension_module_' . $this->codename}->getLanguages();
 		
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && ($this->validateImport())) {
-			if ((isset($this->request->files['upload'])) && (is_uploaded_file($this->request->files['upload']['tmp_name'])) && file_exists(DIR_SYSTEM . 'library/d_phpexcel.php')) {
-				$filename = $this->request->files['upload']['tmp_name'];
+			if ((isset($this->request->files['upload'])) && (is_uploaded_file($this->request->files['upload']['tmp_name'])) && file_exists(DIR_SYSTEM . 'library/d_excel_reader_writer.php')) {
+				$filepath = $this->request->files['upload']['tmp_name'];
+				$filename = $this->request->files['upload']['name'];
+				$mimetype = $this->request->files['upload']['type'];
 				
-				require_once(DIR_SYSTEM . 'library/d_phpexcel.php');
+				$d_excel_reader_writer = new d_excel_reader_writer();
 				
 				// parse uploaded spreadsheet file
-				$inputFileType = PHPExcel_IOFactory::identify($filename);
-				$objReader = PHPExcel_IOFactory::createReader($inputFileType);
-				$objReader->setReadDataOnly(true);
-				$reader = $objReader->load($filename);
-				
+				$reader = $d_excel_reader_writer->readFromFile($filepath, $filename, $mimetype);
+								
 				// get worksheet if there
-				$worksheet = $reader->getSheetByName('custom_page');
+				$sheet_codes = $reader->Sheets();
 				
-				if ($worksheet != null) {
-					$elements = array();
-					$first_row = array();
-					$i = 0;
-					$max_row = $worksheet->getHighestRow();
-					$max_col = PHPExcel_Cell::columnIndexFromString($worksheet->getHighestColumn());
+				foreach ($sheet_codes as $sheet_index => $sheet_code) {
+					if ($sheet_code == 'custom_page') {				
+						$reader->ChangeSheet($sheet_index);
 						
-					for ($i = 0; $i < $max_row; $i++) {
-						if ($i == 0) {
-							for ($j = 1; $j <= $max_col; $j++) {
-								$first_row[] = ($worksheet->cellExistsByColumnAndRow($j-1, $i+1)) ? $worksheet->getCellByColumnAndRow($j-1, $i+1)->getValue() : '';
+						$elements = array();
+						$header = array();
+						
+						foreach ($reader as $row => $row_data) {
+							if (!$header) {
+								$header = $row_data;
+																							
+								continue;
 							}
 							
-							continue;
-						}
-						
-						for ($j = 1; $j <= $max_col; $j++) {
-							$cell = ($worksheet->cellExistsByColumnAndRow($j-1, $i+1)) ?  $worksheet->getCellByColumnAndRow($j-1, $i+1)->getValue() : '';
-							$elements[$i][$first_row[$j-1]] = htmlspecialchars($cell);
-						}
-					}
-					
-					$custom_pages = array();
-					
-					foreach ($elements as $element) {
-						$custom_page = array();
-						
-						if (isset($element['route']) && $element['route']) {
-							$custom_page['route'] = $element['route'];
-						} else {
-							continue;
-						}
-						
-						$custom_page['target_keyword'] = array();
-						
-						foreach ($languages as $language) {
-							if (isset($element['target_keyword' . '(' . $language['code'] . ')'])) {
-								$custom_page['target_keyword'][$language['language_id']] = $element['target_keyword' . '(' . $language['code'] . ')'];
+							foreach ($header as $col => $col_data) {
+								$cell = isset($row_data[$col]) ? $row_data[$col] : '';
+								$elements[$row][$header[$col]] = htmlspecialchars($cell);
 							}
 						}
 						
-						$custom_pages[] = $custom_page;
+						$custom_pages = array();
+					
+						foreach ($elements as $element) {
+							$custom_page = array();
+						
+							if (isset($element['route']) && $element['route']) {
+								$custom_page['route'] = $element['route'];
+							} else {
+								continue;
+							}
+						
+							$custom_page['target_keyword'] = array();
+						
+							foreach ($languages as $language) {
+								if (isset($element['target_keyword' . '(' . $language['code'] . ')'])) {
+									$custom_page['target_keyword'][$language['language_id']] = $element['target_keyword' . '(' . $language['code'] . ')'];
+								}
+							}
+						
+							$custom_pages[] = $custom_page;
 										
-						$this->{'model_extension_module_' . $this->codename}->saveCustomPages($custom_pages, $store_id);
+							$this->{'model_extension_module_' . $this->codename}->saveCustomPages($custom_pages, $store_id);
+						}
 					}
 				}
 			}
