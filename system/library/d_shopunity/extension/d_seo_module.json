@@ -1,6 +1,6 @@
 {
     "codename": "d_seo_module",
-    "version": "3.0.2",
+    "version": "3.0.3",
     "name": "SEO Module",
     "description": "SEO Module is the core platform, necessary for the installation of other SEO modules.",
 	"index": "extension/module/d_seo_module",
@@ -107,6 +107,10 @@
     ],
     "changelog": [
         {
+            "version": "3.0.3",
+            "change": "JSON Instruction"
+        },
+		{
             "version": "3.0.2",
             "change": "Add Dashboard"
         },
