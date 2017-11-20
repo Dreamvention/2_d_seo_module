@@ -18,6 +18,7 @@ $_['text_quick_setup'] 							= 'Quick Setup';
 $_['text_implemented'] 							= 'Implemented';
 $_['text_view'] 								= 'View';
 $_['text_details'] 								= 'Details';
+$_['text_no_control_elements'] 					= 'All options have been enabled.';
 $_['text_basic_settings'] 						= 'Basic Settings';
 $_['text_htaccess'] 							= '.htaccess';
 $_['text_robots'] 								= 'robots.txt';
@@ -251,6 +252,9 @@ $_['success_create_default_custom_pages']  		= 'Success: You have successfully c
 $_['success_add_custom_page']       			= 'Success: You have successfully added Custom Page!';
 $_['success_delete_custom_pages']      			= 'Success: You have successfully deleted Custom Pages!';
 $_['success_import']        					= 'Success: You have successfully imported your data!';
+
+// Warning
+$_['warning_d_seo_module_pack']					= 'You can also buy <a href="https://opencartseomodule.com/seo-module-complete" target="_blank"><strong>SEO Module Pro</strong></a> which contains the complete package of SEO modules.';
 
 // Error
 $_['error_warning']          					= 'Warning: Please check the form carefully for errors!';

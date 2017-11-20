@@ -131,10 +131,11 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$data['text_quick_setup'] = $this->language->get('text_quick_setup');
 		$data['text_implemented'] = $this->language->get('text_implemented');
 		$data['text_details'] = $this->language->get('text_details');
+		$data['text_no_control_elements'] = $this->language->get('text_no_control_elements');
 		
 		// Help
 		$data['help_install'] = $this->language->get('help_install');
-				
+						
 		// Notification
 		foreach ($this->error as $key => $error) {
 			$data['error'][$key] = $error;
@@ -145,6 +146,10 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			unset($this->session->data['success']);
 		} else {
 			$data['success'] = '';
+		}
+		
+		if (!file_exists(DIR_SYSTEM . '/library/d_shopunity/extension/d_seo_module_pack.json')) {
+			$data['warning'] = $this->language->get('warning_d_seo_module_pack');
 		}
 
 		// Breadcrumbs

@@ -35,6 +35,11 @@
 			<button type="button" class="close" data-dismiss="alert">&times;</button>
 		</div>
 		{% endif %}
+		{% if warning %}
+		<div class="alert alert-warning"><i class="fa fa-exclamation-circle"></i> {{ warning }}
+			<button type="button" class="close" data-dismiss="alert">&times;</button>
+		</div>
+		{% endif %}
 		<div class="panel panel-default panel-resizable">
 			<div class="panel-heading">
 				<h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
@@ -86,10 +91,10 @@
 							<br class="clear"/>
 						</div>
 						{% endif %}
-						{% if quick_setup_total %}
 						<div class="page-header">
 							<h3>{{ text_quick_setup }} <span class="info-window-item" data-href="https://opencartseomodule.com/quick-setup"><i class="fa fa-question-circle"></i></span></h3>
 						</div>
+						{% if quick_setup_total %}
 						<div class="control-elements">
 							{% for control_element in control_elements %}
 							{% if control_element['implemented'] == 0 %}
@@ -107,11 +112,13 @@
 							{% endif %}
 							{% endfor %}
 						</div>
+						{% else %}
+						<p>{{ text_no_control_elements }}</p>
 						{% endif %}
-						{% if implemented_total %}
 						<div class="page-header">
 							<h3>{{ text_implemented }}</h3>
 						</div>
+						{% if implemented_total %}
 						<div class="control-elements">
 							{% for control_element in control_elements %}
 							{% if control_element['implemented'] == 1 %}
@@ -129,6 +136,8 @@
 							{% endif %}
 							{% endfor %}
 						</div>
+						{% else %}
+						<p>{{ text_no_control_elements }}</p>
 						{% endif %}
 					</div>
 				</form>
