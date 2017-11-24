@@ -39,7 +39,7 @@ $_['text_seo']									= 'SEO';
 $_['text_create_default_custom_pages_confirm']	= 'Creation default Custom Pages will delete all old Custom Pages. You sure you want to create default Custom Pages?';
 $_['text_delete_custom_pages_confirm']   		= 'You sure you want to delete selected Custom Pages?';
 $_['text_uninstall_confirm']					= 'After deinstallation is compleate the SEO Module will delete all additional fields in the product, category, manufacturer and information that have been added after installation. Are you sure you want to uninstall the SEO Module? ';
-$_['text_instructions_full'] 					= '
+$_['text_instructions_full'] 										= '
 <div class="row">
 	<div class="col-sm-2">
 		<ul class="nav nav-pills nav-stacked">
@@ -191,6 +191,18 @@ $_['text_not_found'] = '
 	<p><a class="btn btn-primary btn-lg" href="https://shopunity.net/download" target="_blank">Download</a></p>
 </div>';
 
+// Features
+$_['text_dashboard_widget_for_duplicate_and_empty_target_keywords']	= 'Dashboard widget for duplicate and empty Target Keywords';
+$_['text_opencart_tag_search_fix']									= 'Opencart tag search fix';
+$_['text_opencart_first_load_of_comments_fix']						= 'Opencart first load of comments fix';
+$_['text_target_keyword_planner']									= 'Target Keyword Planner';
+$_['text_seo_module_api']											= 'SEO Module API';
+$_['text_export_import_target_keywords_for_custom_pages']			= 'Export & Import Target Keywords for Custom Pages';
+$_['text_robots_txt_editor']										= 'robots.txt Editor';
+$_['text_htaccess_editor']											= '.htaccess Editor';
+$_['text_seo_module_multi_store_support']							= 'SEO Module Multi Store support';
+$_['text_seo_module_quick_setup']									= 'SEO Module Quick Setup';
+
 // Column
 $_['column_field']								= 'Field';
 $_['column_multi_store_status']					= 'Multi Store Status';	
@@ -226,16 +238,11 @@ $_['button_export'] 							= 'Export';
 $_['button_import'] 							= 'Import';
 
 // Help
-$_['help_install']								= '
-<div class="row">
-	<div class="col-md-6 col-md-offset-3 text-center">
-	<br/>
-	<h1>Install SEO Module now</h1>
-	<br/>
-	<p>You are one step away from installing the best SEO extension on the market. SEO module is just the begining. It will set ground features and an API for ther SEO modules that you can install. they will improve your Store search ranking and help you mamange your SEO like a pro. Click install! </p>
-	<br/>
-	</div>
-</div>';
+$_['help_install']								= '<br/>
+<h1>Install SEO Module now</h1>
+<br/>
+<p>You are one step away from installing the best SEO extension on the market. SEO module is just the begining. It will set ground features and an API for ther SEO modules that you can install. they will improve your Store search ranking and help you mamange your SEO like a pro. Click install! </p>
+<br/>';
 $_['help_htaccess_setting']						= '<h4>Important!</h4>
 <p>Turning this option on  will uncomment the file .htaccess on apache server. But for the SEO urls to start working, you must visit Opencart Store Settings / tab Server and activate "Use SEO URLs"</p>';
 $_['help_htaccess_subfolder']					= '<h4>If you have a subfolder!</h4>

@@ -135,7 +135,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		
 		// Help
 		$data['help_install'] = $this->language->get('help_install');
-						
+								
 		// Notification
 		foreach ($this->error as $key => $error) {
 			$data['error'][$key] = $error;
@@ -181,68 +181,82 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			'text' => $this->language->get('heading_title_main'),
 			'href' => $this->url->link($this->route, $url_token . '&' . $url_store, true)
 		);
-			
-		$control_extensions = array();
 		
-		$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
-		
-		foreach ($seo_extensions as $seo_extension) {
-			$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/control_extensions');
-			if ($info) $control_extensions = array_merge($control_extensions, $info);
-		}
-		
-		$control_extensions = $this->{'model_extension_module_' . $this->codename}->sortArrayByColumn($control_extensions, 'sort_order');
-		
-		$data['control_extensions'] = array();
-		
-		foreach ($control_extensions as $control_extension) {
-			if (isset($control_extension['code']) && isset($control_extension['name']) && isset($control_extension['image']) && isset($control_extension['href'])) {				
-				$url_extension_code = 'extension_code=' . $control_extension['code'];
-								
-				$control_extension['install_href'] = $this->url->link('extension/module/' . $this->codename . '/installControlExtension', $url_token . '&' . $url_extension_code, true);
-				$control_extension['installed'] = in_array($control_extension['code'], $installed_seo_extensions) ? true : false;
-										
-				$data['control_extensions'][] = $control_extension;
-			}
-		}
-		
-		$control_elements = array();
-		
-		foreach ($installed_seo_extensions as $installed_seo_extension) {
-			$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/control_elements', array('store_id' => $store_id));
-			if ($info) $control_elements = array_merge($control_elements, $info);
-		}
-		
-		$data['quick_setup_total'] = 0;
-		$data['implemented_total'] = 0;
-		$data['control_elements'] = array();
-		
-		foreach ($control_elements as $control_element) {
-			if (isset($control_element['extension_code']) && isset($control_element['element_code']) && isset($control_element['name']) && isset($control_element['description']) && isset($control_element['confirm']) && isset($control_element['implemented'])) {						
-				$url_extension_code = 'extension_code=' . $control_element['extension_code'];
-				$url_element_code = 'element_code=' . $control_element['element_code'];
-								
-				$control_element['edit_href'] = $this->url->link('extension/module/' . $this->codename . '/executeControlElement', $url_token . '&' . $url_store . '&' . $url_extension_code . '&' . $url_element_code, true);
-				
-				if ($control_element['implemented']) {
-					$data['implemented_total']++;
-				} else {
-					$data['quick_setup_total']++;
-				}
-				
-				$data['control_elements'][] = $control_element;
-			}
-		}
-		
-		$data['control_elements'] = $this->{'model_extension_module_' . $this->codename}->sortArrayByColumn($data['control_elements'], 'weight', SORT_DESC);
-				
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
-
+				
 		if ($data['installed']) {
+			$control_extensions = array();
+		
+			$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
+		
+			foreach ($seo_extensions as $seo_extension) {
+				$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/control_extensions');
+				if ($info) $control_extensions = array_merge($control_extensions, $info);
+			}
+		
+			$control_extensions = $this->{'model_extension_module_' . $this->codename}->sortArrayByColumn($control_extensions, 'sort_order');
+		
+			$data['control_extensions'] = array();
+		
+			foreach ($control_extensions as $control_extension) {
+				if (isset($control_extension['code']) && isset($control_extension['name']) && isset($control_extension['image']) && isset($control_extension['href'])) {				
+					$url_extension_code = 'extension_code=' . $control_extension['code'];
+								
+					$control_extension['install_href'] = $this->url->link('extension/module/' . $this->codename . '/installControlExtension', $url_token . '&' . $url_extension_code, true);
+					$control_extension['installed'] = in_array($control_extension['code'], $installed_seo_extensions) ? true : false;
+										
+					$data['control_extensions'][] = $control_extension;
+				}
+			}
+		
+			$control_elements = array();
+		
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/control_elements', array('store_id' => $store_id));
+				if ($info) $control_elements = array_merge($control_elements, $info);
+			}
+		
+			$data['quick_setup_total'] = 0;
+			$data['implemented_total'] = 0;
+			$data['control_elements'] = array();
+		
+			foreach ($control_elements as $control_element) {
+				if (isset($control_element['extension_code']) && isset($control_element['element_code']) && isset($control_element['name']) && isset($control_element['description']) && isset($control_element['confirm']) && isset($control_element['implemented'])) {						
+					$url_extension_code = 'extension_code=' . $control_element['extension_code'];
+					$url_element_code = 'element_code=' . $control_element['element_code'];
+								
+					$control_element['edit_href'] = $this->url->link('extension/module/' . $this->codename . '/executeControlElement', $url_token . '&' . $url_store . '&' . $url_extension_code . '&' . $url_element_code, true);
+				
+					if ($control_element['implemented']) {
+						$data['implemented_total']++;
+					} else {
+						$data['quick_setup_total']++;
+					}
+				
+					$data['control_elements'][] = $control_element;
+				}
+			}
+		
+			$data['control_elements'] = $this->{'model_extension_module_' . $this->codename}->sortArrayByColumn($data['control_elements'], 'weight', SORT_DESC);
+			
 			$this->response->setOutput($this->load->view($this->route . '/dashboard', $data));
 		} else {
+			// Setting
+			$this->config->load($this->config_file);
+			$config_feature_setting = ($this->config->get($this->codename . '_feature_setting')) ? $this->config->get($this->codename . '_feature_setting') : array();
+		
+			$data['features'] = array();
+		
+			foreach ($config_feature_setting as $feature) {
+				if (substr($feature['name'], 0, strlen('text_')) == 'text_') {
+					$feature['name'] = $this->language->get($feature['name']);
+				}
+						
+				$data['features'][] = $feature;
+			}
+			
 			$this->response->setOutput($this->load->view($this->route . '/install', $data));
 		}
 	}
@@ -423,39 +437,53 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			'href' => $this->url->link($this->route, $url_token . '&' . $url_store, true)
 		);
 		
-		// Setting
-		$this->config->load($this->config_file);
-		$data['setting'] = ($this->config->get($this->codename . '_setting')) ? $this->config->get($this->codename . '_setting') : array();
-				
-		$setting = $this->model_setting_setting->getSetting($this->codename, $store_id);
-		$status = isset($setting[$this->codename . '_status']) ? $setting[$this->codename . '_status'] : false;
-		$setting = isset($setting[$this->codename . '_setting']) ? $setting[$this->codename . '_setting'] : array();
-		
-		$data['status'] = $status;
-		
-		if (!empty($setting)) {
-			$data['setting'] = array_replace_recursive($data['setting'], $setting);
-		}
-						
-		$data['htaccess'] = $this->{'model_extension_module_' . $this->codename}->getFileData('htaccess');		
-		$data['robots'] = $this->{'model_extension_module_' . $this->codename}->getFileData('robots');
-		
-		if (!$data['htaccess']['status'] && !trim($data['htaccess']['text'])) {
-			$data['htaccess']['text'] = str_replace('[catalog_url_path]', $data['catalog_url_info']['path'], $data['setting']['default_htaccess']);
-		}
-		
-		if (!$data['robots']['status'] && !trim($data['robots']['text'])) {
-			$data['robots']['text'] = str_replace('[catalog_url]', $data['catalog'], $data['setting']['default_robots']);
-			$data['robots']['text'] = str_replace('[catalog_url_host]', $data['catalog_url_info']['host'], $data['robots']['text']);
-		}
-		
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
-
+		
 		if ($data['installed']) {
+			// Setting
+			$this->config->load($this->config_file);
+			$data['setting'] = ($this->config->get($this->codename . '_setting')) ? $this->config->get($this->codename . '_setting') : array();
+				
+			$setting = $this->model_setting_setting->getSetting($this->codename, $store_id);
+			$status = isset($setting[$this->codename . '_status']) ? $setting[$this->codename . '_status'] : false;
+			$setting = isset($setting[$this->codename . '_setting']) ? $setting[$this->codename . '_setting'] : array();
+		
+			$data['status'] = $status;
+		
+			if (!empty($setting)) {
+				$data['setting'] = array_replace_recursive($data['setting'], $setting);
+			}
+						
+			$data['htaccess'] = $this->{'model_extension_module_' . $this->codename}->getFileData('htaccess');		
+			$data['robots'] = $this->{'model_extension_module_' . $this->codename}->getFileData('robots');
+		
+			if (!$data['htaccess']['status'] && !trim($data['htaccess']['text'])) {
+				$data['htaccess']['text'] = str_replace('[catalog_url_path]', $data['catalog_url_info']['path'], $data['setting']['default_htaccess']);
+			}
+		
+			if (!$data['robots']['status'] && !trim($data['robots']['text'])) {
+				$data['robots']['text'] = str_replace('[catalog_url]', $data['catalog'], $data['setting']['default_robots']);
+				$data['robots']['text'] = str_replace('[catalog_url_host]', $data['catalog_url_info']['host'], $data['robots']['text']);
+			}
+			
 			$this->response->setOutput($this->load->view($this->route . '/setting', $data));
 		} else {
+			// Setting
+			$this->config->load($this->config_file);
+			$config_feature_setting = ($this->config->get($this->codename . '_feature_setting')) ? $this->config->get($this->codename . '_feature_setting') : array();
+		
+			$data['features'] = array();
+		
+			foreach ($config_feature_setting as $feature) {
+				if (substr($feature['name'], 0, strlen('text_')) == 'text_') {
+					$feature['name'] = $this->language->get($feature['name']);
+				}
+						
+				$data['features'][] = $feature;
+			}
+			
 			$this->response->setOutput($this->load->view($this->route . '/install', $data));
 		}
 	}
@@ -620,15 +648,29 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			'href' => $this->url->link($this->route, $url_token . '&' . $url_store, true)
 		);
 		
-		$data['field_setting'] = $this->getFieldInfo();
-		
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
-
+		
 		if ($data['installed']) {
+			$data['field_setting'] = $this->getFieldInfo();
+			
 			$this->response->setOutput($this->load->view($this->route . '/field_setting', $data));
 		} else {
+			// Setting
+			$this->config->load($this->config_file);
+			$config_feature_setting = ($this->config->get($this->codename . '_feature_setting')) ? $this->config->get($this->codename . '_feature_setting') : array();
+		
+			$data['features'] = array();
+		
+			foreach ($config_feature_setting as $feature) {
+				if (substr($feature['name'], 0, strlen('text_')) == 'text_') {
+					$feature['name'] = $this->language->get($feature['name']);
+				}
+						
+				$data['features'][] = $feature;
+			}
+			
 			$this->response->setOutput($this->load->view($this->route . '/install', $data));
 		}
 	}
@@ -819,74 +861,88 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			'text' => $this->language->get('heading_title_main'),
 			'href' => $this->url->link($this->route, $url_token . '&' . $url_store, true)
 		);
-				
-		// Setting 	
-		$this->config->load($this->config_file);
-		$data['setting'] = ($this->config->get($this->codename . '_setting')) ? $this->config->get($this->codename . '_setting') : array();
 		
-		$setting = $this->model_setting_setting->getSetting($this->codename, $store_id);
-		$setting = isset($setting[$this->codename . '_setting']) ? $setting[$this->codename . '_setting'] : array();
+		$data['header'] = $this->load->controller('common/header');
+		$data['column_left'] = $this->load->controller('common/column_left');
+		$data['footer'] = $this->load->controller('common/footer');
+		
+		if ($data['installed']) {		
+			// Setting 	
+			$this->config->load($this->config_file);
+			$data['setting'] = ($this->config->get($this->codename . '_setting')) ? $this->config->get($this->codename . '_setting') : array();
+		
+			$setting = $this->model_setting_setting->getSetting($this->codename, $store_id);
+			$setting = isset($setting[$this->codename . '_setting']) ? $setting[$this->codename . '_setting'] : array();
 										
-		if (!empty($setting)) {
-			$data['setting'] = array_replace_recursive($data['setting'], $setting);
-		}
+			if (!empty($setting)) {
+				$data['setting'] = array_replace_recursive($data['setting'], $setting);
+			}
 		
-		$custom_pages = $this->{'model_extension_module_' . $this->codename}->getCustomPages(array('filter_store_id' => $store_id));
+			$custom_pages = $this->{'model_extension_module_' . $this->codename}->getCustomPages(array('filter_store_id' => $store_id));
 		
-		$data['custom_pages'] = array();
+			$data['custom_pages'] = array();
 		
-		$i = 0;
+			$i = 0;
 		
-		foreach ($custom_pages as $custom_page) {
-			if (isset($custom_page['target_keyword'])) {
-				foreach ($custom_page['target_keyword'] as $store_id => $language_target_keyword) {
-					foreach ($language_target_keyword as $language_id => $target_keyword) {
-						foreach ($target_keyword as $sort_order => $keyword) {
-							$field_data = array(
-								'field_code' => 'target_keyword',
-								'filter' => array(
-									'store_id' => $store_id,
-									'keyword' => $keyword
-								)
-							);
+			foreach ($custom_pages as $custom_page) {
+				if (isset($custom_page['target_keyword'])) {
+					foreach ($custom_page['target_keyword'] as $store_id => $language_target_keyword) {
+						foreach ($language_target_keyword as $language_id => $target_keyword) {
+							foreach ($target_keyword as $sort_order => $keyword) {
+								$field_data = array(
+									'field_code' => 'target_keyword',
+									'filter' => array(
+										'store_id' => $store_id,
+										'keyword' => $keyword
+									)
+								);
 			
-							$target_keywords = $this->getFieldElements($field_data);
-							$store_target_keywords = reset($target_keywords);
+								$target_keywords = $this->getFieldElements($field_data);
+								$store_target_keywords = reset($target_keywords);
 							
-							if ((count($target_keywords) > 1) || (count(reset($store_target_keywords)) > 1)) {
-								$custom_page['target_keyword_duplicate'][$store_id][$language_id][$sort_order] = 1;
+								if ((count($target_keywords) > 1) || (count(reset($store_target_keywords)) > 1)) {
+									$custom_page['target_keyword_duplicate'][$store_id][$language_id][$sort_order] = 1;
+								}
 							}
 						}
 					}
 				}
+			
+				if (($i >= (($page - 1) * $data['setting']['list_limit'])) && ($i < ((($page-1) * $data['setting']['list_limit']) + $data['setting']['list_limit']))) {
+					$data['custom_pages'][] = $custom_page;
+				}
+			
+				$i++;
+			
+				if ($i == ((($page - 1) * $data['setting']['list_limit']) + $data['setting']['list_limit'])) break;
 			}
-			
-			if (($i >= (($page - 1) * $data['setting']['list_limit'])) && ($i < ((($page-1) * $data['setting']['list_limit']) + $data['setting']['list_limit']))) {
-				$data['custom_pages'][] = $custom_page;
-			}
-			
-			$i++;
-			
-			if ($i == ((($page - 1) * $data['setting']['list_limit']) + $data['setting']['list_limit'])) break;
-		}
 				
-		$pagination = new Pagination();
-		$pagination->total = count($custom_pages);
-		$pagination->page = $page;
-		$pagination->limit = $data['setting']['list_limit'];
-		$pagination->url = $this->url->link($this->route . '/custom_page', $url_token . '&' . $url_store . '&page={page}', true);
+			$pagination = new Pagination();
+			$pagination->total = count($custom_pages);
+			$pagination->page = $page;
+			$pagination->limit = $data['setting']['list_limit'];
+			$pagination->url = $this->url->link($this->route . '/custom_page', $url_token . '&' . $url_store . '&page={page}', true);
 
-		$data['pagination'] = $pagination->render();
+			$data['pagination'] = $pagination->render();
 
-		$data['results'] = sprintf($this->language->get('text_pagination'), (count($custom_pages)) ? (($page - 1) * $data['setting']['list_limit']) + 1 : 0, ((($page - 1) * $data['setting']['list_limit']) > (count($custom_pages) - $data['setting']['list_limit'])) ? count($custom_pages) : ((($page - 1) * $data['setting']['list_limit']) + $data['setting']['list_limit']), count($custom_pages), ceil(count($custom_pages) / $data['setting']['list_limit']));
-								
-		$data['header'] = $this->load->controller('common/header');
-		$data['column_left'] = $this->load->controller('common/column_left');
-		$data['footer'] = $this->load->controller('common/footer');
+			$data['results'] = sprintf($this->language->get('text_pagination'), (count($custom_pages)) ? (($page - 1) * $data['setting']['list_limit']) + 1 : 0, ((($page - 1) * $data['setting']['list_limit']) > (count($custom_pages) - $data['setting']['list_limit'])) ? count($custom_pages) : ((($page - 1) * $data['setting']['list_limit']) + $data['setting']['list_limit']), count($custom_pages), ceil(count($custom_pages) / $data['setting']['list_limit']));
 
-		if ($data['installed']) {
 			$this->response->setOutput($this->load->view($this->route . '/custom_page', $data));
 		} else {
+			// Setting
+			$this->config->load($this->config_file);
+			$config_feature_setting = ($this->config->get($this->codename . '_feature_setting')) ? $this->config->get($this->codename . '_feature_setting') : array();
+		
+			$data['features'] = array();
+		
+			foreach ($config_feature_setting as $feature) {
+				if (substr($feature['name'], 0, strlen('text_')) == 'text_') {
+					$feature['name'] = $this->language->get($feature['name']);
+				}
+						
+				$data['features'][] = $feature;
+			}
+			
 			$this->response->setOutput($this->load->view($this->route . '/install', $data));
 		}
 	}
@@ -1059,25 +1115,39 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			'text' => $this->language->get('heading_title_main'),
 			'href' => $this->url->link($this->route, $url_token . '&' . $url_store, true)
 		);
-				
-		// Setting 		
-		$this->config->load($this->config_file);
-		$data['setting'] = ($this->config->get($this->codename)) ? $this->config->get($this->codename) : array();
 		
-		$setting = $this->model_setting_setting->getSetting($this->codename, $store_id);
-		$setting = isset($setting[$this->codename . '_setting']) ? $setting[$this->codename . '_setting'] : array();
-		
-		if (!empty($setting)) {
-			$data['setting'] = array_replace_recursive($data['setting'], $setting);
-		}
-						
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
-
+		
 		if ($data['installed']) {
+			// Setting 		
+			$this->config->load($this->config_file);
+			$data['setting'] = ($this->config->get($this->codename)) ? $this->config->get($this->codename) : array();
+		
+			$setting = $this->model_setting_setting->getSetting($this->codename, $store_id);
+			$setting = isset($setting[$this->codename . '_setting']) ? $setting[$this->codename . '_setting'] : array();
+		
+			if (!empty($setting)) {
+				$data['setting'] = array_replace_recursive($data['setting'], $setting);
+			}
+			
 			$this->response->setOutput($this->load->view($this->route . '/export_import', $data));
 		} else {
+			// Setting
+			$this->config->load($this->config_file);
+			$config_feature_setting = ($this->config->get($this->codename . '_feature_setting')) ? $this->config->get($this->codename . '_feature_setting') : array();
+		
+			$data['features'] = array();
+		
+			foreach ($config_feature_setting as $feature) {
+				if (substr($feature['name'], 0, strlen('text_')) == 'text_') {
+					$feature['name'] = $this->language->get($feature['name']);
+				}
+						
+				$data['features'][] = $feature;
+			}
+			
 			$this->response->setOutput($this->load->view($this->route . '/install', $data));
 		}
 	}
@@ -1233,14 +1303,28 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			'text' => $this->language->get('heading_title_main'),
 			'href' => $this->url->link($this->route, $url_token . '&' . $url_store, true)
 		);
-								
+		
 		$data['header'] = $this->load->controller('common/header');
 		$data['column_left'] = $this->load->controller('common/column_left');
 		$data['footer'] = $this->load->controller('common/footer');
-
+		
 		if ($data['installed']) {
 			$this->response->setOutput($this->load->view($this->route . '/instruction', $data));
 		} else {
+			// Setting
+			$this->config->load($this->config_file);
+			$config_feature_setting = ($this->config->get($this->codename . '_feature_setting')) ? $this->config->get($this->codename . '_feature_setting') : array();
+		
+			$data['features'] = array();
+		
+			foreach ($config_feature_setting as $feature) {
+				if (substr($feature['name'], 0, strlen('text_')) == 'text_') {
+					$feature['name'] = $this->language->get($feature['name']);
+				}
+						
+				$data['features'][] = $feature;
+			}
+			
 			$this->response->setOutput($this->load->view($this->route . '/install', $data));
 		}
 	}
