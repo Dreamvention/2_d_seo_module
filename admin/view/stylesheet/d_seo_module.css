@@ -46,7 +46,7 @@
 	-webkit-filter: grayscale(100%);
     filter: grayscale(100%);
 }
-.control-extension.panel-installed .image {
+.control-extension.installed .image {
 	-webkit-filter: none;
     filter: none;
 }
