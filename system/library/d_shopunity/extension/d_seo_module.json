@@ -108,7 +108,7 @@
     "changelog": [
         {
             "version": "3.0.4",
-            "change": "Add Install Features"
+            "change": "Fix Opencart Language for old versions"
         },
 		{
             "version": "3.0.3",

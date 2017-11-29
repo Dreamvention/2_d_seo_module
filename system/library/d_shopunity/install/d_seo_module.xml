@@ -149,6 +149,14 @@
         </operation>
 	</file>
 	
+	<!-- FIX Language -->
+	<file path="catalog/controller/common/language.php">
+		<operation error="skip">
+            <search><![CDATA[unset($url_data['_route_']);]]></search>
+            <add position="replace"><![CDATA[]]></add>
+        </operation>
+	</file>
+	
 	<!-- FIX Startup -->
 	<file path="catalog/controller/startup/startup.php">
 		<operation error="skip">
