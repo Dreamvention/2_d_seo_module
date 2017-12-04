@@ -150,9 +150,10 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 		$this->{'model_extension_d_seo_module_' . $this->codename}->saveHomeTargetKeyword($data);
 		
 		if ($data['config_seo_url']) {
-			$setting[$this->codename . '_setting']['control_element']['enable_seo_url']['implemented'] = 1;
+			$setting = $this->model_setting_setting->getSetting('module_' . $this->codename);
+			$setting['module_' . $this->codename . '_setting']['control_element']['enable_seo_url']['implemented'] = 1;
 			
-			$this->model_setting_setting->editSetting($this->codename, $setting);
+			$this->model_setting_setting->editSetting('module_' . $this->codename, $setting);
 			
 			$this->cache->delete('url_rewrite');
 		}
@@ -942,9 +943,9 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 		}
 		
 		// Setting 						
-		$setting = $this->model_setting_setting->getSetting($this->codename, $data['store_id']);
-		$status = isset($setting[$this->codename . '_status']) ? $setting[$this->codename . '_status'] : false;
-		$setting = isset($setting[$this->codename . '_setting']) ? $setting[$this->codename . '_setting'] : array();
+		$setting = $this->model_setting_setting->getSetting('module_' . $this->codename, $data['store_id']);
+		$status = isset($setting['module_' . $this->codename . '_status']) ? $setting['module_' . $this->codename . '_status'] : false;
+		$setting = isset($setting['module_' . $this->codename . '_setting']) ? $setting['module_' . $this->codename . '_setting'] : array();
 				
 		$htaccess = $this->{'model_extension_module_' . $this->codename}->getFileData('htaccess');		
 		$robots = $this->{'model_extension_module_' . $this->codename}->getFileData('robots');
@@ -1025,13 +1026,13 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 		$catalog_url_info = $this->{'model_extension_module_' . $this->codename}->getURLInfo($catalog);
 		
 		// Setting
-		$setting = $this->model_setting_setting->getSetting($this->codename, $data['store_id']);
+		$setting = $this->model_setting_setting->getSetting('module_' . $this->codename, $data['store_id']);
 										
 		if ($data['element_code'] == 'enable_status') {
-			$setting[$this->codename . '_status'] = 1;
-			$setting[$this->codename . '_setting']['control_element']['enable_status']['implemented'] = 1;
+			$setting['module_' . $this->codename . '_status'] = 1;
+			$setting['module_' . $this->codename . '_setting']['control_element']['enable_status']['implemented'] = 1;
 			
-			$this->model_setting_setting->editSetting($this->codename, $setting, $data['store_id']);
+			$this->model_setting_setting->editSetting('module_' . $this->codename, $setting, $data['store_id']);
 		}
 		
 		if ($data['element_code'] == 'enable_seo_url') {
@@ -1040,9 +1041,9 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 			
 			$this->model_setting_setting->editSetting('config', $store_setting);
 			
-			$setting[$this->codename . '_setting']['control_element']['enable_seo_url']['implemented'] = 1;
+			$setting['module_' . $this->codename . '_setting']['control_element']['enable_seo_url']['implemented'] = 1;
 			
-			$this->model_setting_setting->editSetting($this->codename, $setting);
+			$this->model_setting_setting->editSetting('module_' . $this->codename, $setting);
 			
 			$this->cache->delete('url_rewrite');
 		}
@@ -1061,9 +1062,9 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 			
 			$this->{'model_extension_module_' . $this->codename}->saveFileData('htaccess', $htaccess);
 			
-			$setting[$this->codename . '_setting']['control_element']['enable_htaccess']['implemented'] = 1;
+			$setting['module_' . $this->codename . '_setting']['control_element']['enable_htaccess']['implemented'] = 1;
 			
-			$this->model_setting_setting->editSetting($this->codename, $setting, $data['store_id']);
+			$this->model_setting_setting->editSetting('module_' . $this->codename, $setting, $data['store_id']);
 			
 			$this->cache->delete('url_rewrite');
 		}
@@ -1083,9 +1084,9 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 			
 			$this->{'model_extension_module_' . $this->codename}->saveFileData('robots', $robots);
 			
-			$setting[$this->codename . '_setting']['control_element']['enable_robots']['implemented'] = 1;
+			$setting['module_' . $this->codename . '_setting']['control_element']['enable_robots']['implemented'] = 1;
 			
-			$this->model_setting_setting->editSetting($this->codename, $setting, $data['store_id']);
+			$this->model_setting_setting->editSetting('module_' . $this->codename, $setting, $data['store_id']);
 		}
 				
 		$result['error'] = $this->error;

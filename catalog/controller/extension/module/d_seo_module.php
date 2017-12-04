@@ -7,7 +7,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 	public function seo_url() {
 		$this->load->model($this->route);
 					
-		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
+		$status = ($this->config->get('module_' . $this->codename . '_status')) ? $this->config->get('module_' . $this->codename . '_status') : false;
 											
 		if ($status) {			
 			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
@@ -30,7 +30,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			'status' => false
 		);
 		
-		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
+		$status = ($this->config->get('module_' . $this->codename . '_status')) ? $this->config->get('module_' . $this->codename . '_status') : false;
 				
 		if ($status) {			
 			$cache = md5($url);
@@ -66,7 +66,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 	public function language_language() {
 		$this->load->model($this->route);
 				
-		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
+		$status = ($this->config->get('module_' . $this->codename . '_status')) ? $this->config->get('module_' . $this->codename . '_status') : false;
 		
 		if ($status) {
 			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
@@ -80,7 +80,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 	public function header_before($route, &$data) {
 		$this->load->model($this->route);
 				
-		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
+		$status = ($this->config->get('module_' . $this->codename . '_status')) ? $this->config->get('module_' . $this->codename . '_status') : false;
 		
 		if ($status) {
 			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
@@ -95,7 +95,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 	public function header_after($route, $data, &$output) {
 		$this->load->model($this->route);
 				
-		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
+		$status = ($this->config->get('module_' . $this->codename . '_status')) ? $this->config->get('module_' . $this->codename . '_status') : false;
 		
 		if ($status) {
 			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
@@ -110,7 +110,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 	public function footer_before($route, &$data) {
 		$this->load->model($this->route);
 		
-		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
+		$status = ($this->config->get('module_' . $this->codename . '_status')) ? $this->config->get('module_' . $this->codename . '_status') : false;
 		
 		if ($status) {
 			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
@@ -125,7 +125,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 	public function footer_after($route, $data, &$output) {
 		$this->load->model($this->route);
 		
-		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
+		$status = ($this->config->get('module_' . $this->codename . '_status')) ? $this->config->get('module_' . $this->codename . '_status') : false;
 		
 		if ($status) {
 			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
@@ -140,7 +140,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 	public function home_before($route, &$data) {
 		$this->load->model($this->route);
 		
-		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
+		$status = ($this->config->get('module_' . $this->codename . '_status')) ? $this->config->get('module_' . $this->codename . '_status') : false;
 		
 		if ($status) {
 			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
@@ -155,7 +155,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 	public function home_after($route, $data, &$output) {
 		$this->load->model($this->route);
 		
-		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
+		$status = ($this->config->get('module_' . $this->codename . '_status')) ? $this->config->get('module_' . $this->codename . '_status') : false;
 		
 		if ($status) {
 			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
@@ -170,7 +170,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 	public function category_before($route, &$data) {
 		$this->load->model($this->route);
 		
-		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
+		$status = ($this->config->get('module_' . $this->codename . '_status')) ? $this->config->get('module_' . $this->codename . '_status') : false;
 		
 		if ($status) {
 			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
@@ -185,7 +185,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 	public function category_after($route, $data, &$output) {
 		$this->load->model($this->route);
 		
-		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
+		$status = ($this->config->get('module_' . $this->codename . '_status')) ? $this->config->get('module_' . $this->codename . '_status') : false;
 		
 		if ($status) {
 			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
@@ -200,7 +200,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 	public function category_get_category_after($route, $data, &$output) {
 		$this->load->model($this->route);
 		
-		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
+		$status = ($this->config->get('module_' . $this->codename . '_status')) ? $this->config->get('module_' . $this->codename . '_status') : false;
 		
 		if ($status) {
 			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
@@ -215,7 +215,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 	public function category_get_categories_after($route, $data, &$output) {
 		$this->load->model($this->route);
 		
-		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
+		$status = ($this->config->get('module_' . $this->codename . '_status')) ? $this->config->get('module_' . $this->codename . '_status') : false;
 		
 		if ($status) {
 			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
@@ -230,7 +230,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 	public function product_before($route, &$data) {
 		$this->load->model($this->route);
 		
-		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
+		$status = ($this->config->get('module_' . $this->codename . '_status')) ? $this->config->get('module_' . $this->codename . '_status') : false;
 		
 		if ($status) {
 			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
@@ -245,7 +245,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 	public function product_after($route, $data, &$output) {
 		$this->load->model($this->route);
 		
-		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
+		$status = ($this->config->get('module_' . $this->codename . '_status')) ? $this->config->get('module_' . $this->codename . '_status') : false;
 		
 		if ($status) {
 			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
@@ -260,7 +260,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 	public function product_get_product_after($route, $data, &$output) {
 		$this->load->model($this->route);
 		
-		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
+		$status = ($this->config->get('module_' . $this->codename . '_status')) ? $this->config->get('module_' . $this->codename . '_status') : false;
 		
 		if ($status) {
 			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
@@ -275,7 +275,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 	public function product_get_products_after($route, $data, &$output) {
 		$this->load->model($this->route);
 		
-		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
+		$status = ($this->config->get('module_' . $this->codename . '_status')) ? $this->config->get('module_' . $this->codename . '_status') : false;
 		
 		if ($status) {
 			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
@@ -290,7 +290,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 	public function manufacturer_list_before($route, &$data) {
 		$this->load->model($this->route);
 		
-		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
+		$status = ($this->config->get('module_' . $this->codename . '_status')) ? $this->config->get('module_' . $this->codename . '_status') : false;
 		
 		if ($status) {
 			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
@@ -305,7 +305,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 	public function manufacturer_list_after($route, $data, &$output) {
 		$this->load->model($this->route);
 		
-		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
+		$status = ($this->config->get('module_' . $this->codename . '_status')) ? $this->config->get('module_' . $this->codename . '_status') : false;
 		
 		if ($status) {
 			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
@@ -320,7 +320,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 	public function manufacturer_info_before($route, &$data) {
 		$this->load->model($this->route);
 		
-		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
+		$status = ($this->config->get('module_' . $this->codename . '_status')) ? $this->config->get('module_' . $this->codename . '_status') : false;
 		
 		if ($status) {
 			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
@@ -335,7 +335,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 	public function manufacturer_info_after($route, $data, &$output) {
 		$this->load->model($this->route);
 		
-		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
+		$status = ($this->config->get('module_' . $this->codename . '_status')) ? $this->config->get('module_' . $this->codename . '_status') : false;
 		
 		if ($status) {
 			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
@@ -350,7 +350,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 	public function manufacturer_get_manufacturer_after($route, $data, &$output) {
 		$this->load->model($this->route);
 		
-		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
+		$status = ($this->config->get('module_' . $this->codename . '_status')) ? $this->config->get('module_' . $this->codename . '_status') : false;
 		
 		if ($status) {
 			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
@@ -365,7 +365,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 	public function manufacturer_get_manufacturers_after($route, $data, &$output) {
 		$this->load->model($this->route);
 		
-		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
+		$status = ($this->config->get('module_' . $this->codename . '_status')) ? $this->config->get('module_' . $this->codename . '_status') : false;
 		
 		if ($status) {
 			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
@@ -380,7 +380,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 	public function information_before($route, &$data) {
 		$this->load->model($this->route);
 		
-		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
+		$status = ($this->config->get('module_' . $this->codename . '_status')) ? $this->config->get('module_' . $this->codename . '_status') : false;
 		
 		if ($status) {
 			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
@@ -395,7 +395,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 	public function information_after($route, $data, &$output) {
 		$this->load->model($this->route);
 		
-		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
+		$status = ($this->config->get('module_' . $this->codename . '_status')) ? $this->config->get('module_' . $this->codename . '_status') : false;
 		
 		if ($status) {
 			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
@@ -410,7 +410,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 	public function information_get_information_after($route, $data, &$output) {
 		$this->load->model($this->route);
 		
-		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
+		$status = ($this->config->get('module_' . $this->codename . '_status')) ? $this->config->get('module_' . $this->codename . '_status') : false;
 		
 		if ($status) {
 			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
@@ -425,7 +425,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 	public function information_get_informations_after($route, $data, &$output) {
 		$this->load->model($this->route);
 		
-		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
+		$status = ($this->config->get('module_' . $this->codename . '_status')) ? $this->config->get('module_' . $this->codename . '_status') : false;
 		
 		if ($status) {
 			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
@@ -440,7 +440,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 	public function search_before($route, &$data) {
 		$this->load->model($this->route);
 		
-		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
+		$status = ($this->config->get('module_' . $this->codename . '_status')) ? $this->config->get('module_' . $this->codename . '_status') : false;
 		
 		if ($status) {
 			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
@@ -455,7 +455,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 	public function search_after($route, $data, &$output) {
 		$this->load->model($this->route);
 		
-		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
+		$status = ($this->config->get('module_' . $this->codename . '_status')) ? $this->config->get('module_' . $this->codename . '_status') : false;
 		
 		if ($status) {
 			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
@@ -470,7 +470,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 	public function special_before($route, &$data) {
 		$this->load->model($this->route);
 		
-		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
+		$status = ($this->config->get('module_' . $this->codename . '_status')) ? $this->config->get('module_' . $this->codename . '_status') : false;
 		
 		if ($status) {
 			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
@@ -485,7 +485,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 	public function special_after($route, $data, &$output) {
 		$this->load->model($this->route);
 		
-		$status = ($this->config->get($this->codename . '_status')) ? $this->config->get($this->codename . '_status') : false;
+		$status = ($this->config->get('module_' . $this->codename . '_status')) ? $this->config->get('module_' . $this->codename . '_status') : false;
 		
 		if ($status) {
 			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();

@@ -446,9 +446,9 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			$this->config->load($this->config_file);
 			$data['setting'] = ($this->config->get($this->codename . '_setting')) ? $this->config->get($this->codename . '_setting') : array();
 				
-			$setting = $this->model_setting_setting->getSetting($this->codename, $store_id);
-			$status = isset($setting[$this->codename . '_status']) ? $setting[$this->codename . '_status'] : false;
-			$setting = isset($setting[$this->codename . '_setting']) ? $setting[$this->codename . '_setting'] : array();
+			$setting = $this->model_setting_setting->getSetting('module_' . $this->codename, $store_id);
+			$status = isset($setting['module_' . $this->codename . '_status']) ? $setting['module_' . $this->codename . '_status'] : false;
+			$setting = isset($setting['module_' . $this->codename . '_setting']) ? $setting['module_' . $this->codename . '_setting'] : array();
 		
 			$data['status'] = $status;
 		
@@ -870,8 +870,8 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			$this->config->load($this->config_file);
 			$data['setting'] = ($this->config->get($this->codename . '_setting')) ? $this->config->get($this->codename . '_setting') : array();
 		
-			$setting = $this->model_setting_setting->getSetting($this->codename, $store_id);
-			$setting = isset($setting[$this->codename . '_setting']) ? $setting[$this->codename . '_setting'] : array();
+			$setting = $this->model_setting_setting->getSetting('module_' . $this->codename, $store_id);
+			$setting = isset($setting['module_' . $this->codename . '_setting']) ? $setting['module_' . $this->codename . '_setting'] : array();
 										
 			if (!empty($setting)) {
 				$data['setting'] = array_replace_recursive($data['setting'], $setting);
@@ -1124,8 +1124,8 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			$this->config->load($this->config_file);
 			$data['setting'] = ($this->config->get($this->codename)) ? $this->config->get($this->codename) : array();
 		
-			$setting = $this->model_setting_setting->getSetting($this->codename, $store_id);
-			$setting = isset($setting[$this->codename . '_setting']) ? $setting[$this->codename . '_setting'] : array();
+			$setting = $this->model_setting_setting->getSetting('module_' . $this->codename, $store_id);
+			$setting = isset($setting['module_' . $this->codename . '_setting']) ? $setting['module_' . $this->codename . '_setting'] : array();
 		
 			if (!empty($setting)) {
 				$data['setting'] = array_replace_recursive($data['setting'], $setting);
@@ -1341,17 +1341,17 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		}
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {			
-			$setting = $this->model_setting_setting->getSetting($this->codename, $store_id);
+			$setting = $this->model_setting_setting->getSetting('module_' . $this->codename, $store_id);
 			
-			if (isset($this->request->post[$this->codename . '_status']) && $this->request->post[$this->codename . '_status']) {
-				$setting[$this->codename . '_setting'][$this->codename . '_setting']['control_element']['enable_status']['implemented'] = 1;
+			if (isset($this->request->post['module_' . $this->codename . '_status']) && $this->request->post['module_' . $this->codename . '_status']) {
+				$setting['module_' . $this->codename . '_setting']['control_element']['enable_status']['implemented'] = 1;
 			}
 
 			if (isset($this->request->post['htaccess'])) {
 				$this->{'model_extension_module_' . $this->codename}->saveFileData('htaccess', $this->request->post['htaccess']);
 				
 				if (isset($this->request->post['htaccess']['status']) && $this->request->post['htaccess']['status']) {
-					$setting[$this->codename . '_setting']['control_element']['enable_htaccess']['implemented'] = 1;
+					$setting['module_' . $this->codename . '_setting']['control_element']['enable_htaccess']['implemented'] = 1;
 				}
 			}
 			
@@ -1359,13 +1359,13 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 				$this->{'model_extension_module_' . $this->codename}->saveFileData('robots', $this->request->post['robots']);
 				
 				if (isset($this->request->post['robots']['status']) && $this->request->post['robots']['status']) {
-					$setting[$this->codename . '_setting']['control_element']['enable_robots']['implemented'] = 1;
+					$setting['module_' . $this->codename . '_setting']['control_element']['enable_robots']['implemented'] = 1;
 				}
 			}			
 			
 			$setting = array_replace_recursive($setting, $this->request->post);
 			
-			$this->model_setting_setting->editSetting($this->codename, $setting, $store_id);
+			$this->model_setting_setting->editSetting('module_' . $this->codename, $setting, $store_id);
 			
 			$this->cache->delete('url_rewrite');
 
@@ -3142,8 +3142,8 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			if ($info) $config_field_setting = array_replace_recursive($config_field_setting, $info);
 		}
 		
-		$setting = $this->model_setting_setting->getSetting($this->codename);
-		$field_setting = isset($setting[$this->codename . '_field_setting']) ? $setting[$this->codename . '_field_setting'] : array();
+		$setting = $this->model_setting_setting->getSetting('module_' . $this->codename);
+		$field_setting = isset($setting['module_' . $this->codename . '_field_setting']) ? $setting['module_' . $this->codename . '_field_setting'] : array();
 					
 		if (!empty($field_setting)) {
 			$config_field_setting = array_replace_recursive($config_field_setting, $field_setting);

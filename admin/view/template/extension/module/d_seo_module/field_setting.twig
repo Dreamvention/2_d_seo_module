@@ -84,8 +84,8 @@
 												<tr>
 													<td class="text-left"><label class="control-label label-top">{{ field['name'] }}</label></td>
 													<td class="text-center">
-														<input type="hidden" name="{{ codename }}_field_setting[sheet][{{ sheet['code'] }}][field][{{ field['code'] }}][multi_store_status]" value="0" />
-														<input type="checkbox" name="{{ codename }}_field_setting[sheet][{{ sheet['code'] }}][field][{{ field['code'] }}][multi_store_status]" value="1" class="switch" data-label-text="{{ text_enabled }}" {% if field['multi_store_status'] %}checked="checked"{% endif %} />
+														<input type="hidden" name="module_{{ codename }}_field_setting[sheet][{{ sheet['code'] }}][field][{{ field['code'] }}][multi_store_status]" value="0" />
+														<input type="checkbox" name="module_{{ codename }}_field_setting[sheet][{{ sheet['code'] }}][field][{{ field['code'] }}][multi_store_status]" value="1" class="switch" data-label-text="{{ text_enabled }}" {% if field['multi_store_status'] %}checked="checked"{% endif %} />
 													</td>
 												</tr>
 												{% endif %}
