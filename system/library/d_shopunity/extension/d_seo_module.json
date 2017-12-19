@@ -1,6 +1,6 @@
 {
     "codename": "d_seo_module",
-    "version": "3.0.5",
+    "version": "3.0.6",
     "name": "SEO Module",
     "description": "SEO Module is the core platform, necessary for the installation of other SEO modules.",
 	"index": "extension/module/d_seo_module",
@@ -76,8 +76,7 @@
 		"admin/view/template/extension/dashboard/d_seo_module_target_keyword.twig",
 		"admin/view/template/extension/dashboard/d_seo_module_target_keyword_info.twig",
 		"admin/view/template/extension/dashboard/d_seo_module_target_keyword_refresh.twig",
-		"admin/view/stylesheet/d_seo_module_target_keyword.css",
-				
+						
 		"admin/controller/extension/d_seo_module_target_keyword/d_seo_module_target_keyword.php",
 		"admin/model/extension/d_seo_module_target_keyword/d_seo_module_target_keyword.php",
 		
@@ -107,6 +106,10 @@
     ],
     "changelog": [
         {
+            "version": "3.0.6",
+            "change": "New Design"
+        },
+		{
             "version": "3.0.5",
             "change": "Opencart 3.0.2 compatibility"
         },

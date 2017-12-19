@@ -6,9 +6,23 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 	
 	public function seo_url() {
 		$this->load->model($this->route);
-					
+		
+		// Setting
+		$_config = new Config();
+		$_config->load($this->config_file);
+		$config_setting = ($_config->get($this->codename . '_setting')) ? $_config->get($this->codename . '_setting') : array();
+				
 		$status = ($this->config->get('module_' . $this->codename . '_status')) ? $this->config->get('module_' . $this->codename . '_status') : false;
-											
+		$setting = ($this->config->get('module_' . $this->codename . '_setting')) ? $this->config->get('module_' . $this->codename . '_setting') : array();
+		
+		if (!empty($setting)) {
+			$config_setting = array_replace_recursive($config_setting, $setting);
+		}
+		
+		$setting = $config_setting;
+		
+		$this->config->set('module_' . $this->codename . '_setting', $setting);
+		
 		if ($status) {			
 			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
 		
@@ -31,14 +45,15 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		);
 		
 		$status = ($this->config->get('module_' . $this->codename . '_status')) ? $this->config->get('module_' . $this->codename . '_status') : false;
-				
+		$setting = ($this->config->get('module_' . $this->codename . '_setting')) ? $this->config->get('module_' . $this->codename . '_setting') : array();
+		
 		if ($status) {			
 			$cache = md5($url);
 			
 			$language_id = (int)$this->config->get('config_language_id');
 		
 			$rewrite_url = false;
-		
+			
 			$rewrite_url = $this->cache->get('url_rewrite.' . $cache . '.' . $language_id);
 		
 			if (!$rewrite_url) {				
@@ -50,7 +65,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 				}
 				
 				if ($rewrite_data['status']) {
-					$this->cache->set('url_rewrite.' . $cache . '.' . $language_id, $rewrite_data['url']);
+					$this->cache->set('url_rewrite.' . $cache . '.' . $language_id, $rewrite_data['url'], $setting['cache_expire']);
 				}
 			} else {
 				$rewrite_data = array(

@@ -148,7 +148,7 @@
 			 ]]></add>
         </operation>
 	</file>
-	
+		
 	<!-- FIX Language -->
 	<file path="catalog/controller/common/language.php">
 		<operation error="skip">
@@ -177,6 +177,29 @@
 			<search><![CDATA[str_replace(array('&amp;page={page}', '&page={page}'), '', $this->url)]]></search>
             <add position="replace"><![CDATA[str_replace(array('&amp;page={page}', '&page={page}', '?page={page}'), '', $this->url)]]></add>
 		</operation>
+	</file>
+	
+	<!-- FIX Cache -->
+	<file path="system/library/cache.php">
+		<operation error="skip">
+            <search><![CDATA[function set($key, $value)]]></search>
+            <add position="replace"><![CDATA[function set($key, $value, $expire = 0)]]></add>
+        </operation>
+		<operation error="skip">
+            <search><![CDATA[$this->adaptor->set($key, $value)]]></search>
+            <add position="replace"><![CDATA[$this->adaptor->set($key, $value, $expire)]]></add>
+        </operation>
+	</file>
+	
+	<file path="system/library/cache/file.php">
+		<operation error="skip">
+            <search><![CDATA[function set($key, $value)]]></search>
+            <add position="replace"><![CDATA[function set($key, $value, $expire = 0)]]></add>
+        </operation>
+		<operation error="skip">
+            <search><![CDATA[time() + $this->expire]]></search>
+            <add position="replace"><![CDATA[time() + ($expire ? $expire : $this->expire)]]></add>
+        </operation>
 	</file>
 					
 </modification>

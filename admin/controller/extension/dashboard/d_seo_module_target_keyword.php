@@ -42,7 +42,7 @@ class ControllerExtensionDashboardDSEOModuleTargetKeyword extends Controller {
 		$this->document->addStyle('view/stylesheet/d_bootstrap_extra/bootstrap.css');
 		$this->document->addScript('view/javascript/d_bootstrap_switch/js/bootstrap-switch.min.js');
         $this->document->addStyle('view/javascript/d_bootstrap_switch/css/bootstrap-switch.css');        
-		$this->document->addStyle('view/stylesheet/' . $this->codename . '.css');
+		$this->document->addStyle('view/stylesheet/d_seo_module.css');
 		
 		// Heading
 		$this->document->setTitle($this->language->get('heading_title_main'));

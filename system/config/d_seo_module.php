@@ -1,6 +1,7 @@
 <?php 
 $_['d_seo_module_setting'] = array(
 	'list_limit' => '20',
+	'cache_expire' => '2592000',
 	'default_custom_pages' => array(
 		'common/home' => array('webshop'),
 		'product/manufacturer' => array('brand'),
@@ -105,6 +106,7 @@ $_['d_seo_module_field_setting'] = array(
 	'sheet' => array(
 		'home' => array(
 			'code' => 'home',
+			'icon' => 'fa-home',
 			'name' => 'text_home',
 			'sort_order' => '1',
 			'field' => array(
@@ -122,6 +124,7 @@ $_['d_seo_module_field_setting'] = array(
 		),
 		'category' => array(
 			'code' => 'category',
+			'icon' => 'fa-navicon',
 			'name' => 'text_category',
 			'sort_order' => '2',
 			'field' => array(
@@ -140,6 +143,7 @@ $_['d_seo_module_field_setting'] = array(
 		),
 		'product' => array(
 			'code' => 'product',
+			'icon' => 'fa-shopping-cart',
 			'name' => 'text_product',
 			'sort_order' => '3',
 			'field' => array(
@@ -158,6 +162,7 @@ $_['d_seo_module_field_setting'] = array(
 		),
 		'manufacturer' => array(
 			'code' => 'manufacturer',
+			'icon' => 'fa-tag',
 			'name' => 'text_manufacturer',
 			'sort_order' => '4',
 			'field' => array(
@@ -176,6 +181,7 @@ $_['d_seo_module_field_setting'] = array(
 		),
 		'information' => array(
 			'code' => 'information',
+			'icon' => 'fa-info-circle',
 			'name' => 'text_information',
 			'sort_order' => '5',
 			'field' => array(
