@@ -544,9 +544,10 @@
 	display: block;
 	padding: 40px 20px;
 	overflow: hidden;
-	background: #fff;
-	border: 1px solid #e8e8e8;
-	border-left: 2px solid #bfbfbf;
+	background: #f8f9fc;
+	color: #000;
+	border: 1px solid #dbdfef;
+	border-radius: 3px;
 }
 .info-window .info-window-close {
 	position: absolute;
@@ -595,15 +596,15 @@
 	color: #62a975;
 }
 .alert-info {
-	background-color: #e7e9f2;
-	border-color: #cfd7e7;
-	color: #777fa2;
+	background-color: #e5f4e9;
+	border-color: #c1e6cb;
+	color: #62a975;
 }
 .alert-info hr {
-    border-top-color: #cfd7e7;
+    border-top-color: #c1e6cb;
 }
 .alert-info .alert-link {
-    color: #777fa2;
+    color: #62a975;
 }
 .alert-warning {
 	background-color: #fcf0d6;
