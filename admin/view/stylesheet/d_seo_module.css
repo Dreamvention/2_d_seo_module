@@ -21,7 +21,7 @@
 	color: #000;
 }
 .panel-default .panel-body h3 {
-	font-size: 21px;
+	font-size: 18px;
 }
 .panel-default .panel-body h4 {
 	font-size: 16px;
@@ -74,7 +74,7 @@
 	border-bottom: 2px solid #DBDFEF;
 }
 .panel-default .panel-body .nav-tabs > li > a {
-	font-size: 18px;
+	font-size: 16px;
 	font-weight: bold;
 	color: #000;
 	border: none;
@@ -103,23 +103,22 @@
 /* Pills */
 .panel-default .panel-body .nav-pills {
 	display: inline-block;
-	border: 2px solid #DBDFEF;
-	border-radius: 3px;
+	padding-left: 2px;
+	padding-top: 2px;
 }
 .panel-default .panel-body .nav-pills > li + li {
     margin: 0px 0px;
 }
 .panel-default .panel-body .nav-pills > li > a {
 	padding: 15px 30px;
+	margin-left: -2px;
+	margin-top: -2px;
 	font-size: 14px;
 	font-weight: bold;
 	background: none;
 	color: #000;
-	border: none;
-	border-radius: 0px;
-}
-.panel-default .panel-body .nav-pills > li + li > a {
-	border-left: 2px solid #DBDFEF;
+	border: 2px solid #DBDFEF;
+	border-radius: 2px;
 }
 .panel-default .panel-body .nav-pills > li > a:hover {
 	background: #e9ebf4;
@@ -136,14 +135,13 @@
 }
 .panel-default .panel-body .nav-pills.nav-stacked {
 	width: 100%;
-	height: 100%;
 	border: none;
 	border-right: 2px solid #DBDFEF;
 	border-radius: 0px;
 }
 .panel-default .panel-body .nav-pills.nav-stacked > li > a {
 	padding: 30px 15px;
-	font-size: 18px;
+	font-size: 16px;
 	border: none;
 }
 .panel-default .panel-body .nav-pills.nav-stacked > li + li > a {
@@ -323,24 +321,21 @@
 
 /* Pagination */
 .panel-default .panel-body .pagination {
+	padding: 2px 2px;
 	margin: 0px 0px;
-	border: 2px solid #cfd7e7;
-	border-radius: 3px;
 }
 .panel-default .panel-body .pagination li > a, .panel-default .panel-body .pagination li > span {
 	width: 50px;
 	height: 50px;
 	padding: 13px 0px;
-	margin: 0px 0px;
+	margin-left: -2px;
+	margin-top: -2px;
 	text-align: center;
 	font-size: 15px;
     background-color: #fff;
 	color: #111;
-	border: none;
-	border-radius: 0px;
-}
-.panel-default .panel-body .pagination li + li > a, .panel-default .panel-body .pagination li + li > span {
-	border-left: 2px solid #cfd7e7;
+	border: 2px solid #cfd7e7;
+	border-radius: 2px;
 }
 .panel-default .panel-body .pagination li > a:hover, .panel-default .panel-body .pagination li > span:hover {
     background-color: #dde4f2;
@@ -349,7 +344,7 @@
 .panel-default .panel-body .pagination li.active > a, .panel-default .panel-body .pagination li.active > span {
     background-color: #dde4f2;
     color: #111;
-	border: none;
+	border: 2px solid #cfd7e7;
 }
 
 /* Table */
@@ -379,13 +374,13 @@
 }
 .panel-default .panel-body .form-horizontal .control-label,
 .modal-dialog .form-horizontal .control-label {
-	padding-top: 8px;
-	font-size: 16px;
+	padding-top: 9px;
+	font-size: 15px;
 }
 .panel-default .panel-body .form-control,
 .modal-dialog .form-control {
 	height: 40px;
-	font-size: 16px;
+	font-size: 15px;
 	border: 2px solid #DBDFEF;
 	box-shadow: none;
 }
@@ -525,6 +520,10 @@
 	color: #8a94bb;
 	border-radius: 12px;
 }
+.panel-resizable .panel-body .form-horizontal .bootstrap-switch + .info-window-item .fa {
+	margin-top: -9px;
+}
+
 
 /* Info Window */
 .info-window {
@@ -541,7 +540,7 @@
 	width: 30%;
 }
 .info-window .info-window-wrap {
-	padding-left: 30px;
+	padding-left: 20px;
 }
 .info-window .info-window-block {
 	display: block;

@@ -110,8 +110,16 @@ class ModelExtensionDSEOModuleDSEOModule extends Model {
 				}
 					
 				if (preg_match('/[A-Za-z0-9]+\/[A-Za-z0-9]+/i', $result['route']) && !($custom_page_exception_routes && in_array($result['route'], $custom_page_exception_routes))) {
-					if ((isset($data['filter']['store_id']) && ($result['store_id'] == $data['filter']['store_id'])) || !isset($data['filter']['store_id'])) {
-						$field_elements[$result['route']][$result['store_id']][$result['language_id']][$result['sort_order']] = $result['keyword'];
+					if (isset($field_info['sheet']['custom_page']['field']['target_keyword']['multi_store']) && $field_info['sheet']['custom_page']['field']['target_keyword']['multi_store'] && isset($field_info['sheet']['custom_page']['field']['target_keyword']['multi_store_status']) && $field_info['sheet']['custom_page']['field']['target_keyword']['multi_store_status']) {
+						if ((isset($data['filter']['store_id']) && ($result['store_id'] == $data['filter']['store_id'])) || !isset($data['filter']['store_id'])) {
+							$field_elements[$result['route']][$result['store_id']][$result['language_id']][$result['sort_order']] = $result['keyword'];
+						}
+					} elseif ($result['store_id'] == 0) {
+						foreach ($stores as $store) {
+							if ((isset($data['filter']['store_id']) && ($store['store_id'] == $data['filter']['store_id'])) || !isset($data['filter']['store_id'])) {
+								$field_elements[$result['route']][$store['store_id']][$result['language_id']][$result['sort_order']] = $result['keyword'];
+							}
+						}
 					}
 				}
 			}
@@ -130,9 +138,9 @@ class ModelExtensionDSEOModuleDSEOModule extends Model {
 			
 			if (!(isset($field_info['sheet']['category']['field']['url_keyword']['multi_store']) && $field_info['sheet']['category']['field']['url_keyword']['multi_store'] && isset($field_info['sheet']['product']['field']['url_keyword']['multi_store']) && $field_info['sheet']['product']['field']['url_keyword']['multi_store']) && isset($field_info['sheet']['manufacturer']['field']['url_keyword']['multi_store']) && $field_info['sheet']['manufacturer']['field']['url_keyword']['multi_store'] && isset($field_info['sheet']['information']['field']['url_keyword']['multi_store']) && $field_info['sheet']['information']['field']['url_keyword']['multi_store']) {
 				if (VERSION >= '3.0.0.0') {
-					$sql = "SELECT * FROM " . DB_PREFIX . "seo_url";
+					$sql = "SELECT query as route, store_id, language_id, keyword FROM " . DB_PREFIX . "seo_url";
 				} else {
-					$sql = "SELECT * FROM " . DB_PREFIX . "url_alias";
+					$sql = "SELECT query as route, keyword FROM " . DB_PREFIX . "url_alias";
 				}
 				
 				$implode = array();
@@ -166,8 +174,6 @@ class ModelExtensionDSEOModuleDSEOModule extends Model {
 				$query = $this->db->query($sql);
 										
 				foreach ($query->rows as $result) {
-					$result['route'] = $result['query'];
-				
 					if ((strpos($result['route'], 'category_id') === 0) || (strpos($result['route'], 'product_id') === 0) || (strpos($result['route'], 'manufacturer_id') === 0) || (strpos($result['route'], 'information_id') === 0) || (preg_match('/[A-Za-z0-9]+\/[A-Za-z0-9]+/i', $result['route']) && !($custom_page_exception_routes && in_array($result['route'], $custom_page_exception_routes)))) {	
 						if (VERSION >= '3.0.0.0') {	
 							if ((isset($data['filter']['store_id']) && ($result['store_id'] == $data['filter']['store_id'])) || !isset($data['filter']['store_id'])) {
@@ -201,7 +207,7 @@ class ModelExtensionDSEOModuleDSEOModule extends Model {
 			
 			$field_elements = array();
 			
-			if (!(isset($field_info['sheet']['category']['field']['meta_title']['multi_store']) && $field_info['sheet']['category']['field']['meta_title']['multi_store'] && isset($field_info['sheet']['product']['field']['meta_title']['multi_store']) && $field_info['sheet']['product']['field']['meta_title']['multi_store']) && isset($field_info['sheet']['manufacturer']['field']['meta_title']['multi_store']) && $field_info['sheet']['manufacturer']['field']['meta_title']['multi_store'] && isset($field_info['sheet']['information']['field']['meta_title']['multi_store']) && $field_info['sheet']['information']['field']['meta_title']['multi_store']) {
+			if (!(isset($field_info['sheet']['category']['field']['meta_title']['multi_store']) && $field_info['sheet']['category']['field']['meta_title']['multi_store'] && isset($field_info['sheet']['product']['field']['meta_title']['multi_store']) && $field_info['sheet']['product']['field']['meta_title']['multi_store'] && isset($field_info['sheet']['manufacturer']['field']['meta_title']['multi_store']) && $field_info['sheet']['manufacturer']['field']['meta_title']['multi_store'] && isset($field_info['sheet']['information']['field']['meta_title']['multi_store']) && $field_info['sheet']['information']['field']['meta_title']['multi_store'])) {
 				if ((isset($data['filter']['route']) && (strpos($data['filter']['route'], 'category_id') === 0)) || !isset($data['filter']['route'])) {
 					$sql = "SELECT * FROM " . DB_PREFIX . "category_description";
 			
@@ -437,7 +443,7 @@ class ModelExtensionDSEOModuleDSEOModule extends Model {
 					}	
 				}
 			
-				if (($data['filter']['route'] == 'common/home') || !isset($data['filter']['route'])) {
+				if ((isset($data['filter']['route']) && ($data['filter']['route'] == 'common/home')) || !isset($data['filter']['route'])) {
 					$route = 'common/home';
 					
 					foreach ($stores as $store) {

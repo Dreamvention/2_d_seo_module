@@ -33,15 +33,15 @@
 			<div class="panel-body">
 				<form action="{{ action }}" method="post" enctype="multipart/form-data" id="form" class="form-horizontal">
 					<div class="form-group">
-						<label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
-						<div class="col-sm-8">
+						<label class="col-sm-3 control-label" for="input-status">{{ entry_status }}</label>
+						<div class="col-sm-9">
 							<input type="hidden" name="dashboard_{{ codename }}_status" value="0" />
 							<input type="checkbox" name="dashboard_{{ codename }}_status" value="1" class="switch" data-label-text="{{ text_enabled }}" {% if status %}checked="checked"{% endif %} />
 						</div>												
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label" for="input-width">{{ entry_width }}</label>
-						<div class="col-sm-10">
+						<label class="col-sm-3 control-label" for="input-width">{{ entry_width }}</label>
+						<div class="col-sm-9">
 							<select name="dashboard_{{ codename }}_width" class="form-control">
 							{% for column in columns %}
 							{% if (column == width) %}
@@ -54,35 +54,35 @@
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label" for="input-sort-order">{{ entry_sort_order }}</label>
-						<div class="col-sm-10">
+						<label class="col-sm-3 control-label" for="input-sort-order">{{ entry_sort_order }}</label>
+						<div class="col-sm-9">
 							<input type="text" name="dashboard_{{ codename }}_sort_order" value="{{ sort_order }}" placeholder="{{ entry_sort_order }}" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label" for="input-list-limit">{{ entry_list_limit }}</label>
-						<div class="col-sm-10">
+						<label class="col-sm-3 control-label" for="input-list-limit">{{ entry_list_limit }}</label>
+						<div class="col-sm-9">
 							<input type="text" name="dashboard_{{ codename }}_setting[list_limit]" value="{{ setting['list_limit'] }}" placeholder="{{ entry_list_limit }}" class="form-control" />
 						</div>
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label" for="input-duplicate-status">{{ entry_duplicate_status }}</label>
-						<div class="col-sm-8">
+						<label class="col-sm-3 control-label" for="input-duplicate-status">{{ entry_duplicate_status }}</label>
+						<div class="col-sm-9">
 							<input type="hidden" name="dashboard_{{ codename }}_setting[duplicate_status]" value="0" />
 							<input type="checkbox" name="dashboard_{{ codename }}_setting[duplicate_status]" value="1" class="switch" data-label-text="{{ text_enabled }}" {% if setting['duplicate_status'] %}checked="checked"{% endif %} />
 							&nbsp;<span class="info-window-item" data-href="https://opencartseomodule.com/dashboard-widget-for-duplicate-target-keywords"><i class="fa fa-question"></i></span>
 						</div>												
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label" for="input-empty-status">{{ entry_empty_status }}</label>
-						<div class="col-sm-8">
+						<label class="col-sm-3 control-label" for="input-empty-status">{{ entry_empty_status }}</label>
+						<div class="col-sm-9">
 							<input type="hidden" name="dashboard_{{ codename }}_setting[empty_status]" value="0" />
 							<input type="checkbox" name="dashboard_{{ codename }}_setting[empty_status]" value="1" class="switch" data-label-text="{{ text_enabled }}" {% if setting['empty_status'] %}checked="checked"{% endif %} />
 						</div>												
 					</div>
 					<div class="form-group">
-						<label class="col-sm-2 control-label" for="input-store">{{ entry_store }}</label>
-						<div class="col-sm-8">
+						<label class="col-sm-3 control-label" for="input-store">{{ entry_store }}</label>
+						<div class="col-sm-9">
 							<div class="well well-sm" style="height: 150px; overflow: auto;">
 								{% for store in stores %}
 								<div class="checkbox">

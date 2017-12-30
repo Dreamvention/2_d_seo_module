@@ -92,8 +92,8 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		// Action
 		$data['href_dashboard'] = $this->url->link($this->route . '/dashboard', $url_token . '&' . $url_store, true);
 		$data['href_setting'] = $this->url->link($this->route . '/setting', $url_token . '&' . $url_store, true);
-		$data['href_field_setting'] = $this->url->link($this->route . '/field_setting', $url_token . '&' . $url_store, true);
-		$data['href_custom_page'] = $this->url->link($this->route . '/custom_page', $url_token . '&' . $url_store, true);
+		$data['href_multi_store_field'] = $this->url->link($this->route . '/multi_store_field', $url_token . '&' . $url_store, true);
+		$data['href_target_keyword'] = $this->url->link($this->route . '/target_keyword', $url_token . '&' . $url_store, true);
 		$data['href_export_import'] = $this->url->link($this->route . '/export_import', $url_token . '&' . $url_store, true);
 		$data['href_instruction'] = $this->url->link($this->route . '/instruction', $url_token . '&' . $url_store, true);
 			
@@ -112,8 +112,8 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		// Tab
 		$data['text_dashboard'] = $this->language->get('text_dashboard');
 		$data['text_settings'] = $this->language->get('text_settings');
-		$data['text_multi_store_field_settings'] = $this->language->get('text_multi_store_field_settings');
-		$data['text_custom_pages_target_keywords'] = $this->language->get('text_custom_pages_target_keywords');
+		$data['text_multi_store_fields'] = $this->language->get('text_multi_store_fields');
+		$data['text_target_keywords'] = $this->language->get('text_target_keywords');
 		$data['text_export_import'] = $this->language->get('text_export_import');
 		$data['text_instructions'] = $this->language->get('text_instructions');
 		
@@ -336,8 +336,8 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		// Action
 		$data['href_dashboard'] = $this->url->link($this->route . '/dashboard', $url_token . '&' . $url_store, true);
 		$data['href_setting'] = $this->url->link($this->route . '/setting', $url_token . '&' . $url_store, true);
-		$data['href_field_setting'] = $this->url->link($this->route . '/field_setting', $url_token . '&' . $url_store, true);
-		$data['href_custom_page'] = $this->url->link($this->route . '/custom_page', $url_token . '&' . $url_store, true);
+		$data['href_multi_store_field'] = $this->url->link($this->route . '/multi_store_field', $url_token . '&' . $url_store, true);
+		$data['href_target_keyword'] = $this->url->link($this->route . '/target_keyword', $url_token . '&' . $url_store, true);
 		$data['href_export_import'] = $this->url->link($this->route . '/export_import', $url_token . '&' . $url_store, true);
 		$data['href_instruction'] = $this->url->link($this->route . '/instruction', $url_token . '&' . $url_store, true);
 			
@@ -358,8 +358,8 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		// Tab
 		$data['text_dashboard'] = $this->language->get('text_dashboard');
 		$data['text_settings'] = $this->language->get('text_settings');
-		$data['text_multi_store_field_settings'] = $this->language->get('text_multi_store_field_settings');
-		$data['text_custom_pages_target_keywords'] = $this->language->get('text_custom_pages_target_keywords');
+		$data['text_multi_store_fields'] = $this->language->get('text_multi_store_fields');
+		$data['text_target_keywords'] = $this->language->get('text_target_keywords');
 		$data['text_export_import'] = $this->language->get('text_export_import');
 		$data['text_instructions'] = $this->language->get('text_instructions');
 		$data['text_basic_settings'] = $this->language->get('text_basic_settings');
@@ -488,7 +488,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		}
 	}
 	
-	public function field_setting() {
+	public function multi_store_field() {
 		$this->load->language($this->route);
 
 		$this->load->model($this->route);
@@ -561,8 +561,8 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		// Action
 		$data['href_dashboard'] = $this->url->link($this->route . '/dashboard', $url_token . '&' . $url_store, true);
 		$data['href_setting'] = $this->url->link($this->route . '/setting', $url_token . '&' . $url_store, true);
-		$data['href_field_setting'] = $this->url->link($this->route . '/field_setting', $url_token . '&' . $url_store, true);
-		$data['href_custom_page'] = $this->url->link($this->route . '/custom_page', $url_token . '&' . $url_store, true);
+		$data['href_multi_store_field'] = $this->url->link($this->route . '/multi_store_field', $url_token . '&' . $url_store, true);
+		$data['href_target_keyword'] = $this->url->link($this->route . '/target_keyword', $url_token . '&' . $url_store, true);
 		$data['href_export_import'] = $this->url->link($this->route . '/export_import', $url_token . '&' . $url_store, true);
 		$data['href_instruction'] = $this->url->link($this->route . '/instruction', $url_token . '&' . $url_store, true);
 			
@@ -580,8 +580,8 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		// Tab
 		$data['text_dashboard'] = $this->language->get('text_dashboard');
 		$data['text_settings'] = $this->language->get('text_settings');
-		$data['text_multi_store_field_settings'] = $this->language->get('text_multi_store_field_settings');
-		$data['text_custom_pages_target_keywords'] = $this->language->get('text_custom_pages_target_keywords');
+		$data['text_multi_store_fields'] = $this->language->get('text_multi_store_fields');
+		$data['text_target_keywords'] = $this->language->get('text_target_keywords');
 		$data['text_export_import'] = $this->language->get('text_export_import');
 		$data['text_instructions'] = $this->language->get('text_instructions');
 		
@@ -655,7 +655,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		if ($data['installed']) {
 			$data['field_setting'] = $this->getFieldInfo();
 			
-			$this->response->setOutput($this->load->view($this->route . '/field_setting', $data));
+			$this->response->setOutput($this->load->view($this->route . '/multi_store_field', $data));
 		} else {
 			// Setting
 			$this->config->load($this->config_file);
@@ -675,7 +675,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		}
 	}
 	
-	public function custom_page() {
+	public function target_keyword() {
 		$this->load->language($this->route);
 		
 		$this->load->model($this->route);
@@ -702,6 +702,12 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			$store_id = 0;
 		}
 		
+		if (isset($this->request->get['sheet_code'])) { 
+			$sheet_code = $this->request->get['sheet_code']; 
+		} else {  
+			$sheet_code = 'category';
+		}
+		
 		if (isset($this->request->get['page'])) {
 			$page = $this->request->get['page'];
 		} else {
@@ -719,7 +725,9 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		}
 		
 		$url_store = 'store_id=' . $store_id;
-		
+		$url_sheet = 'sheet_code=' . $sheet_code;
+		$url_page = 'page=' . $page;
+				
 		// Styles and Scripts
 		$this->document->addStyle('view/stylesheet/d_bootstrap_extra/bootstrap.css');
 		$this->document->addScript('view/javascript/d_bootstrap_switch/js/bootstrap-switch.min.js');
@@ -737,6 +745,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$data['config'] = $this->config_file;
 		$data['d_shopunity'] = $this->d_shopunity;
 		$data['store_id'] = $store_id;
+		$data['sheet_code'] = $sheet_code;
 		$data['page'] = $page;
 		$data['url_token'] = $url_token;
 		$data['stores'] = $this->{'model_extension_module_' . $this->codename}->getStores();
@@ -756,12 +765,13 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		// Action
 		$data['href_dashboard'] = $this->url->link($this->route . '/dashboard', $url_token . '&' . $url_store, true);
 		$data['href_setting'] = $this->url->link($this->route . '/setting', $url_token . '&' . $url_store, true);
-		$data['href_field_setting'] = $this->url->link($this->route . '/field_setting', $url_token . '&' . $url_store, true);
-		$data['href_custom_page'] = $this->url->link($this->route . '/custom_page', $url_token . '&' . $url_store, true);
+		$data['href_multi_store_field'] = $this->url->link($this->route . '/multi_store_field', $url_token . '&' . $url_store, true);
+		$data['href_target_keyword'] = $this->url->link($this->route . '/target_keyword', $url_token . '&' . $url_store, true);
 		$data['href_export_import'] = $this->url->link($this->route . '/export_import', $url_token . '&' . $url_store, true);
 		$data['href_instruction'] = $this->url->link($this->route . '/instruction', $url_token . '&' . $url_store, true);
 		
 		$data['module_link'] = $this->url->link($this->route, $url_token . '&' . $url_store, true);
+		$data['store_url'] = $this->url->link($this->route . '/target_keyword', $url_token . '&' . $url_sheet, true);
 		$data['install'] = $this->url->link($this->route . '/installExtension', $url_token, true);
 		
 		if (VERSION >= '3.0.0.0') {
@@ -775,8 +785,8 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		// Tab
 		$data['text_dashboard'] = $this->language->get('text_dashboard');
 		$data['text_settings'] = $this->language->get('text_settings');
-		$data['text_multi_store_field_settings'] = $this->language->get('text_multi_store_field_settings');
-		$data['text_custom_pages_target_keywords'] = $this->language->get('text_custom_pages_target_keywords');
+		$data['text_multi_store_fields'] = $this->language->get('text_multi_store_fields');
+		$data['text_target_keywords'] = $this->language->get('text_target_keywords');
 		$data['text_export_import'] = $this->language->get('text_export_import');
 		$data['text_instructions'] = $this->language->get('text_instructions');
 								
@@ -785,9 +795,11 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$data['button_save_and_stay'] = $this->language->get('button_save_and_stay');
 		$data['button_cancel'] = $this->language->get('button_cancel');	
 		$data['button_install'] = $this->language->get('button_install');
-		$data['button_create_default_custom_page'] = $this->language->get('button_create_default_custom_page');
-		$data['button_add_custom_page'] = $this->language->get('button_add_custom_page');
-		$data['button_delete_custom_page'] = $this->language->get('button_delete_custom_page');	
+		$data['button_filter'] = $this->language->get('button_filter');
+		$data['button_clear_filter'] = $this->language->get('button_clear_filter');
+		$data['button_create_default_target_keywords'] = $this->language->get('button_create_default_target_keywords');
+		$data['button_add_target_keyword'] = $this->language->get('button_add_target_keyword');
+		$data['button_delete_target_keywords'] = $this->language->get('button_delete_target_keywords');	
 						
 		// Column
 		$data['column_route'] = $this->language->get('column_route');
@@ -806,9 +818,9 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$data['text_disabled'] = $this->language->get('text_disabled');
 		
 		$data['text_no_results'] = $this->language->get('text_no_results');
-		$data['text_add_custom_page'] = $this->language->get('text_add_custom_page');
-		$data['text_delete_custom_pages_confirm'] = $this->language->get('text_delete_custom_pages_confirm');
-		$data['text_create_default_custom_pages_confirm'] = $this->language->get('text_create_default_custom_pages_confirm');
+		$data['text_add_target_keyword'] = $this->language->get('text_add_target_keyword');
+		$data['text_delete_target_keywords_confirm'] = $this->language->get('text_delete_target_keywords_confirm');
+		$data['text_create_default_target_keywords_confirm'] = $this->language->get('text_create_default_target_keywords_confirm');
 		
 		// Help
 		$data['help_install'] = $this->language->get('help_install');
@@ -829,6 +841,34 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			$data['selected'] = (array)$this->request->post['selected'];
 		} else {
 			$data['selected'] = array();
+		}
+		
+		if (isset($this->request->post['clear_filter'])) {
+			if ($this->request->post['clear_filter']) {	
+				unset($this->request->post['filter']);
+				unset($this->session->data[$this->codename . '_filter_' . $sheet_code]);
+			}
+		}
+		
+		if (isset($this->request->post['filter'])) {
+			$filter = $this->request->post['filter'];
+			$i = 0;
+			
+			foreach($filter as $value) {
+				if ($value) $i++;
+			}
+			
+			if ($i > 0) {
+				$this->session->data[$this->codename . '_filter_' . $sheet_code] = $filter;
+			} else {
+				$filter = array();
+				unset($this->session->data[$this->codename . '_filter_' . $sheet_code]);
+			}
+		} elseif (isset($this->session->data[$this->codename . '_filter_' . $sheet_code])) {
+			$filter = $this->session->data[$this->codename . '_filter_' . $sheet_code];
+		} else {
+			$filter = array();
+			unset($this->session->data[$this->codename . '_filter_' . $sheet_code]);
 		}
 		
 		// Breadcrumbs
@@ -866,67 +906,104 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$data['footer'] = $this->load->controller('common/footer');
 		
 		if ($data['installed']) {		
-			// Setting 	
+			// Setting 		
 			$this->config->load($this->config_file);
 			$data['setting'] = ($this->config->get($this->codename . '_setting')) ? $this->config->get($this->codename . '_setting') : array();
-		
+			
 			$setting = $this->model_setting_setting->getSetting('module_' . $this->codename, $store_id);
 			$setting = isset($setting['module_' . $this->codename . '_setting']) ? $setting['module_' . $this->codename . '_setting'] : array();
 										
 			if (!empty($setting)) {
 				$data['setting'] = array_replace_recursive($data['setting'], $setting);
 			}
+
+			$target_setting = array();
 		
-			$custom_pages = $this->{'model_extension_module_' . $this->codename}->getCustomPages(array('filter_store_id' => $store_id));
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
 		
-			$data['custom_pages'] = array();
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/target_config');
+				if ($info) $target_setting = array_replace_recursive($target_setting, $info);
+			}
+		
+			$sheets = array();
+		
+			foreach ($target_setting['sheet'] as $sheet) {
+				if (isset($sheet['code']) && isset($sheet['icon']) && isset($sheet['name']) && isset($sheet['sort_order'])) {								
+					$sheets[] = array(
+						'code'			=> $sheet['code'],
+						'icon'			=> $sheet['icon'],
+						'name'			=> $sheet['name'],
+						'sort_order'	=> $sheet['sort_order'],
+						'url'			=> $this->url->link($this->route . '/target_keyword', $url_token . '&' . $url_store . '&sheet_code=' . $sheet['code'], true)
+					);
+				}
+			}
+						
+			$sheets = $this->{'model_extension_module_' . $this->codename}->sortArrayByColumn($sheets, 'sort_order');
+			
+			$filter_data = array(
+				'store_id'			=> $store_id,
+				'sheet_code'		=> $sheet_code,
+				'filter'	  	  	=> $filter
+			);
+			
+			$target_elements = array();
+						
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/target_elements', $filter_data);
+				if ($info) $target_elements = array_replace_recursive($target_elements, $info);
+			}
+				
+			$data['target_elements'] = array();
 		
 			$i = 0;
-		
-			foreach ($custom_pages as $custom_page) {
-				if (isset($custom_page['target_keyword'])) {
-					foreach ($custom_page['target_keyword'] as $store_id => $language_target_keyword) {
-						foreach ($language_target_keyword as $language_id => $target_keyword) {
-							foreach ($target_keyword as $sort_order => $keyword) {
-								$field_data = array(
-									'field_code' => 'target_keyword',
-									'filter' => array(
-										'store_id' => $store_id,
-										'keyword' => $keyword
-									)
-								);
 			
-								$target_keywords = $this->getFieldElements($field_data);
-								$store_target_keywords = reset($target_keywords);
+			foreach ($target_elements as $target_element) {
+				if (isset($target_element['target_keyword'])) {
+					foreach ($target_element['target_keyword'] as $language_id => $target_keyword) {
+						foreach ($target_keyword as $sort_order => $keyword) {
+							$field_data = array(
+								'field_code' => 'target_keyword',
+								'filter' => array(
+									'store_id' => $store_id,
+									'keyword' => $keyword
+								)
+							);
+			
+							$target_keywords = $this->getFieldElements($field_data);
+							$store_target_keywords = reset($target_keywords);
 							
-								if ((count($target_keywords) > 1) || (count(reset($store_target_keywords)) > 1)) {
-									$custom_page['target_keyword_duplicate'][$store_id][$language_id][$sort_order] = 1;
-								}
+							if ((count($target_keywords) > 1) || (count(reset($store_target_keywords)) > 1)) {
+								$target_element['target_keyword_duplicate'][$language_id][$sort_order] = 1;
 							}
 						}
 					}
 				}
-			
-				if (($i >= (($page - 1) * $data['setting']['list_limit'])) && ($i < ((($page-1) * $data['setting']['list_limit']) + $data['setting']['list_limit']))) {
-					$data['custom_pages'][] = $custom_page;
+				
+				if (($i >= (($page - 1) * $data['setting']['list_limit'])) && ($i < ((($page - 1) * $data['setting']['list_limit']) + $data['setting']['list_limit']))) {
+					$data['target_elements'][] = $target_element;
 				}
 			
 				$i++;
 			
 				if ($i == ((($page - 1) * $data['setting']['list_limit']) + $data['setting']['list_limit'])) break;
 			}
-				
+							
 			$pagination = new Pagination();
-			$pagination->total = count($custom_pages);
+			$pagination->total = count($target_elements);
 			$pagination->page = $page;
 			$pagination->limit = $data['setting']['list_limit'];
-			$pagination->url = $this->url->link($this->route . '/custom_page', $url_token . '&' . $url_store . '&page={page}', true);
+			$pagination->url = $this->url->link($this->route . '/target_keyword', $url_token . '&' . $url_store . '&' . $url_sheet . '&page={page}', true);
 
 			$data['pagination'] = $pagination->render();
 
-			$data['results'] = sprintf($this->language->get('text_pagination'), (count($custom_pages)) ? (($page - 1) * $data['setting']['list_limit']) + 1 : 0, ((($page - 1) * $data['setting']['list_limit']) > (count($custom_pages) - $data['setting']['list_limit'])) ? count($custom_pages) : ((($page - 1) * $data['setting']['list_limit']) + $data['setting']['list_limit']), count($custom_pages), ceil(count($custom_pages) / $data['setting']['list_limit']));
+			$data['results'] = sprintf($this->language->get('text_pagination'), (count($target_elements)) ? (($page - 1) * $data['setting']['list_limit']) + 1 : 0, ((($page - 1) * $data['setting']['list_limit']) > (count($target_elements) - $data['setting']['list_limit'])) ? count($target_elements) : ((($page - 1) * $data['setting']['list_limit']) + $data['setting']['list_limit']), count($target_elements), ceil(count($target_elements) / $data['setting']['list_limit']));
+			
+			$data['sheets'] = $sheets;
+			$data['filter'] = $filter;
 
-			$this->response->setOutput($this->load->view($this->route . '/custom_page', $data));
+			$this->response->setOutput($this->load->view($this->route . '/target_keyword', $data));
 		} else {
 			// Setting
 			$this->config->load($this->config_file);
@@ -1018,8 +1095,8 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		// Action
 		$data['href_dashboard'] = $this->url->link($this->route . '/dashboard', $url_token . '&' . $url_store, true);
 		$data['href_setting'] = $this->url->link($this->route . '/setting', $url_token . '&' . $url_store, true);
-		$data['href_field_setting'] = $this->url->link($this->route . '/field_setting', $url_token . '&' . $url_store, true);
-		$data['href_custom_page'] = $this->url->link($this->route . '/custom_page', $url_token . '&' . $url_store, true);
+		$data['href_multi_store_field'] = $this->url->link($this->route . '/multi_store_field', $url_token . '&' . $url_store, true);
+		$data['href_target_keyword'] = $this->url->link($this->route . '/target_keyword', $url_token . '&' . $url_store, true);
 		$data['href_export_import'] = $this->url->link($this->route . '/export_import', $url_token . '&' . $url_store, true);
 		$data['href_instruction'] = $this->url->link($this->route . '/instruction', $url_token . '&' . $url_store, true);
 		
@@ -1039,8 +1116,8 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		// Tab
 		$data['text_dashboard'] = $this->language->get('text_dashboard');
 		$data['text_settings'] = $this->language->get('text_settings');
-		$data['text_multi_store_field_settings'] = $this->language->get('text_multi_store_field_settings');
-		$data['text_custom_pages_target_keywords'] = $this->language->get('text_custom_pages_target_keywords');
+		$data['text_multi_store_fields'] = $this->language->get('text_multi_store_fields');
+		$data['text_target_keywords'] = $this->language->get('text_target_keywords');
 		$data['text_export_import'] = $this->language->get('text_export_import');
 		$data['text_instructions'] = $this->language->get('text_instructions');
 		
@@ -1067,9 +1144,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$data['text_no'] = $this->language->get('text_no');
 		$data['text_enabled'] = $this->language->get('text_enabled');
 		$data['text_disabled'] = $this->language->get('text_disabled');
-		
-		$data['text_custom_pages'] = $this->language->get('text_custom_pages');
-		
+				
 		// Help
 		$data['help_install'] = $this->language->get('help_install');
 		
@@ -1222,8 +1297,8 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		// Action
 		$data['href_dashboard'] = $this->url->link($this->route . '/dashboard', $url_token . '&' . $url_store, true);
 		$data['href_setting'] = $this->url->link($this->route . '/setting', $url_token . '&' . $url_store, true);
-		$data['href_field_setting'] = $this->url->link($this->route . '/field_setting', $url_token . '&' . $url_store, true);
-		$data['href_custom_page'] = $this->url->link($this->route . '/custom_page', $url_token . '&' . $url_store, true);
+		$data['href_multi_store_field'] = $this->url->link($this->route . '/multi_store_field', $url_token . '&' . $url_store, true);
+		$data['href_target_keyword'] = $this->url->link($this->route . '/target_keyword', $url_token . '&' . $url_store, true);
 		$data['href_export_import'] = $this->url->link($this->route . '/export_import', $url_token . '&' . $url_store, true);
 		$data['href_instruction'] = $this->url->link($this->route . '/instruction', $url_token . '&' . $url_store, true);
 		
@@ -1240,8 +1315,8 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		// Tab
 		$data['text_dashboard'] = $this->language->get('text_dashboard');
 		$data['text_settings'] = $this->language->get('text_settings');
-		$data['text_multi_store_field_settings'] = $this->language->get('text_multi_store_field_settings');
-		$data['text_custom_pages_target_keywords'] = $this->language->get('text_custom_pages_target_keywords');
+		$data['text_multi_store_fields'] = $this->language->get('text_multi_store_fields');
+		$data['text_target_keywords'] = $this->language->get('text_target_keywords');
 		$data['text_export_import'] = $this->language->get('text_export_import');
 		$data['text_instructions'] = $this->language->get('text_instructions');
 						
@@ -1433,7 +1508,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$this->response->setOutput(json_encode($data));
 	}
 	
-	public function createDefaultCustomPages() {
+	public function createDefaultTargetElements() {
 		$this->load->language($this->route);
 		
 		$this->load->model($this->route);
@@ -1448,9 +1523,9 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$config_setting = ($this->config->get($this->codename . '_setting')) ? $this->config->get($this->codename . '_setting') : array();
 								
 		if ($this->validate()) {
-			$this->{'model_extension_module_' . $this->codename}->createDefaultCustomPages($config_setting['default_custom_pages'], $store_id);
+			$this->{'model_extension_module_' . $this->codename}->createDefaultTargetElements($config_setting['default_target_keywords'], $store_id);
 						
-			$data['success'] = $this->language->get('success_create_default_custom_pages');
+			$data['success'] = $this->language->get('success_create_default_target_keywords');
 		}
 		
 		$data['error'] = $this->error;
@@ -1458,7 +1533,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$this->response->setOutput(json_encode($data));
 	}
 	
-	public function addCustomPage() {
+	public function addTargetElement() {
 		$this->load->language($this->route);
 		
 		$this->load->model($this->route);
@@ -1469,10 +1544,17 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			$store_id = 0;
 		}
 				
-		if (isset($this->request->post['custom_page']) && $this->validateAddCustomPage()) {
-			$this->{'model_extension_module_' . $this->codename}->addCustomPage($this->request->post['custom_page'], $store_id);
+		if (isset($this->request->post['target_element']) && $this->validateAddTargetElement()) {			
+			$target_element_data = $this->request->post['target_element'];
+			$target_element_data['store_id'] = $store_id;
 						
-			$data['success'] = $this->language->get('success_add_custom_page');
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
+			
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/add_target_element', $target_element_data);
+			}
+									
+			$data['success'] = $this->language->get('success_add_target_keyword');
 		}
 		
 		$data['error'] = $this->error;
@@ -1480,7 +1562,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$this->response->setOutput(json_encode($data));
 	}
 	
-	public function editCustomPage() {
+	public function editTargetElement() {
 		$this->load->language($this->route);
 		
 		$this->load->model($this->route);
@@ -1491,22 +1573,27 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			$store_id = 0;
 		}
 		
-		if (isset($this->request->post['route']) && isset($this->request->post['language_id']) && isset($this->request->post['target_keyword']) && $this->validateEditCustomPage()) {
-			$custom_page_data = array(
+		if (isset($this->request->post['route']) && isset($this->request->post['language_id']) && isset($this->request->post['target_keyword']) && $this->validateEditTargetElement()) {
+			$target_element_data = array(
 				'route'				=> $this->request->post['route'],
+				'store_id'			=> $store_id,
 				'language_id'		=> $this->request->post['language_id'],
 				'target_keyword'	=> $this->request->post['target_keyword']
 			);
 		
-			$this->{'model_extension_module_' . $this->codename}->editCustomPage($custom_page_data, $store_id);
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
+			
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/edit_target_element', $target_element_data);
+			}
 		}
 			
 		$data['error'] = $this->error;
 		
 		$this->response->setOutput(json_encode($data));
 	}
-	
-	public function deleteCustomPage() {
+		
+	public function deleteTargetElements() {
 		$this->load->language($this->route);
 		
 		$this->load->model($this->route);
@@ -1518,11 +1605,20 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		}
 				
 		if (isset($this->request->post['selected']) && $this->validate()) {
-			foreach ($this->request->post['selected'] as $route) {
-				$this->{'model_extension_module_' . $this->codename}->deleteCustomPage($route, $store_id);
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
+			
+			foreach ($this->request->post['selected'] as $route) {			
+				$target_element_data = array(
+					'route'				=> $route,
+					'store_id'			=> $store_id
+				);
+			
+				foreach ($installed_seo_extensions as $installed_seo_extension) {
+					$this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/delete_target_element', $target_element_data);
+				}
 			}
 			
-			$data['success'] = $this->language->get('success_delete_custom_pages');
+			$data['success'] = $this->language->get('success_delete_target_keywords');
 		}
 		
 		$data['error'] = $this->error;
@@ -1549,6 +1645,18 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			$sheet_codes = array();
 		}
 		
+		// Setting
+		$target_setting = array();
+		
+		$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
+		
+		foreach ($installed_seo_extensions as $installed_seo_extension) {
+			$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/target_config');
+			if ($info) $target_setting = array_replace_recursive($target_setting, $info);
+		}
+								
+		$sheets = $this->{'model_extension_module_' . $this->codename}->sortArrayByColumn($target_setting['sheet'], 'sort_order');
+		
 		$store = $this->{'model_extension_module_' . $this->codename}->getStore($store_id);
 		$languages = $this->{'model_extension_module_' . $this->codename}->getLanguages();
 		
@@ -1556,7 +1664,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			$d_excel_reader_writer = new d_excel_reader_writer();
 					
 			foreach ($sheet_codes as $sheet_code) {			
-				if ($sheet_code == 'custom_page') {
+				if ($sheet_code == 'target_keyword') {
 					// Set the column widths				
 					$column_widths = array(max(strlen('route') + 4, 30) + 1);
 					
@@ -1576,26 +1684,32 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 					$d_excel_reader_writer->writeSheetHeader($sheet_code, $header);
 											
 					// The actual custom pages data				
-					$custom_pages = $this->{'model_extension_module_' . $this->codename}->getCustomPages(array('filter_store_id' => $store_id));
-				
-					foreach ($custom_pages as $custom_page) {
-						$data = array(html_entity_decode($custom_page['route'], ENT_QUOTES,'UTF-8'));
-												
-						foreach ($languages as $language) {
-							if (isset($custom_page['target_keyword'][$store_id][$language['language_id']])) {
-								$target_keyword_text = '';
-								
-								foreach ($custom_page['target_keyword'][$store_id][$language['language_id']] as $sort_order => $keyword) {
-									$target_keyword_text .= '[' . $keyword . ']';
-								}
-								
-								$data[] = html_entity_decode($target_keyword_text, ENT_QUOTES,'UTF-8');
-							} else {
-								$data[] = '';
-							}
-						}	
+					foreach ($sheets as $sheet) {
+						$export_data = array(
+							'store_id'			=> $store_id,
+							'sheet_code'		=> $sheet['code']
+						);
+			
+						$target_elements = array();
 						
-						$d_excel_reader_writer->writeSheetRow($sheet_code, $data);
+						foreach ($installed_seo_extensions as $installed_seo_extension) {
+							$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/export_target_elements', $export_data);
+							if ($info) $target_elements = array_replace_recursive($target_elements, $info);
+						}
+						
+						foreach ($target_elements as $route => $target_element) {
+							$data = array(html_entity_decode($target_element['route'], ENT_QUOTES,'UTF-8'));
+							
+							foreach ($languages as $language) {
+								if (isset($target_element['target_keyword'][$language['language_id']])) {
+									$data[] = html_entity_decode($target_element['target_keyword'][$language['language_id']], ENT_QUOTES, 'UTF-8');
+								} else {
+									$data[] = '';
+								}
+							}
+							
+							$d_excel_reader_writer->writeSheetRow($sheet_code, $data);
+						}
 					}
 				}
 			}
@@ -1623,6 +1737,18 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			$store_id = 0;
 		}
 		
+		// Setting
+		$target_setting = array();
+		
+		$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
+		
+		foreach ($installed_seo_extensions as $installed_seo_extension) {
+			$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/target_config');
+			if ($info) $target_setting = array_replace_recursive($target_setting, $info);
+		}
+								
+		$sheets = $this->{'model_extension_module_' . $this->codename}->sortArrayByColumn($target_setting['sheet'], 'sort_order');
+		
 		$languages = $this->{'model_extension_module_' . $this->codename}->getLanguages();
 		
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && ($this->validateImport())) {
@@ -1639,8 +1765,9 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 				// get worksheet if there
 				$sheet_codes = $reader->Sheets();
 				
+				// get worksheet if there				
 				foreach ($sheet_codes as $sheet_index => $sheet_code) {
-					if ($sheet_code == 'custom_page') {				
+					if ($sheet_code == 'target_keyword') {				
 						$reader->ChangeSheet($sheet_index);
 						
 						$elements = array();
@@ -1658,29 +1785,40 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 								$elements[$row][$header[$col]] = htmlspecialchars($cell);
 							}
 						}
-						
-						$custom_pages = array();
+								
+						$target_elements = array();
 					
 						foreach ($elements as $element) {
-							$custom_page = array();
+							$target_element = array();
 						
 							if (isset($element['route']) && $element['route']) {
-								$custom_page['route'] = $element['route'];
+								$target_element['route'] = $element['route'];
 							} else {
 								continue;
 							}
 						
-							$custom_page['target_keyword'] = array();
+							$target_element['target_keyword'] = array();
 						
 							foreach ($languages as $language) {
 								if (isset($element['target_keyword' . '(' . $language['code'] . ')'])) {
-									$custom_page['target_keyword'][$language['language_id']] = $element['target_keyword' . '(' . $language['code'] . ')'];
+									$target_element['target_keyword'][$language['language_id']] = $element['target_keyword' . '(' . $language['code'] . ')'];
 								}
 							}
 						
-							$custom_pages[] = $custom_page;
+							$target_elements[] = $target_element;
+						}
+						
+						$import_data = array(
+							'store_id'			=> $store_id,
+							'target_elements'	=> $target_elements
+						);
 										
-							$this->{'model_extension_module_' . $this->codename}->saveCustomPages($custom_pages, $store_id);
+						foreach ($installed_seo_extensions as $installed_seo_extension) {
+							$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/import_target_elements', $import_data);
+							
+							if (isset($info['error'])) {
+								$this->error = array_replace_recursive($this->error, $info['error']);
+							}
 						}
 					}
 				}
@@ -3180,7 +3318,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$field_setting['sheet'] = $this->{'model_extension_module_' . $this->codename}->sortArrayByColumn($sheets, 'sort_order');
 				
 		$this->config->set($this->codename . '_field_info', $field_setting);
-				
+			
 		return $field_setting;
 	}
 	
@@ -3277,14 +3415,14 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		return true;
 	}
 	
-	private function validateAddCustomPage($permission = 'modify') {						
+	private function validateAddTargetElement($permission = 'modify') {						
 		if (!$this->user->hasPermission($permission, $this->route)) {
 			$this->error['warning'] = $this->language->get('error_permission');
 			
 			return false;
 		}
 		
-		if (!preg_match('/[A-Za-z0-9]+\/[A-Za-z0-9]+/i', $this->request->post['custom_page']['route'])) {
+		if (!preg_match('/[A-Za-z0-9]+\/[A-Za-z0-9]+/i', $this->request->post['target_element']['route']) && !preg_match('/[A-Za-z0-9]+\=[0-9]+/i', $this->request->post['target_element']['route'])) {
 			$this->error['warning'] = $this->language->get('error_route');
 			
 			return false;
@@ -3293,7 +3431,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$field_data = array(
 			'field_code' => 'target_keyword',
 			'filter' => array(
-				'route' => $this->request->post['custom_page']['route'],
+				'route' => $this->request->post['target_element']['route'],
 				'store_id' => $this->request->get['store_id']
 			)
 		);
@@ -3301,12 +3439,12 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$target_keywords = $this->getFieldElements($field_data);
 								
 		if ($target_keywords) {
-			$this->error['warning'] = sprintf($this->language->get('error_route_exists'), $this->request->post['custom_page']['route']);
+			$this->error['warning'] = sprintf($this->language->get('error_route_exists'), $this->request->post['target_element']['route']);
 			
 			return false;
 		}
 		
-		foreach ($this->request->post['custom_page']['target_keyword'] as $language_id => $target_keyword) {
+		foreach ($this->request->post['target_element']['target_keyword'] as $language_id => $target_keyword) {
 			preg_match_all('/\[[^]]+\]/', $target_keyword, $keywords);
 				
 			if (!$keywords[0]) {
@@ -3319,7 +3457,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		return true;
 	}
 	
-	private function validateEditCustomPage($permission = 'modify') {				
+	private function validateEditTargetElement($permission = 'modify') {				
 		if (!$this->user->hasPermission($permission, $this->route)) {
 			$this->error['warning'] = $this->language->get('error_permission');
 			

@@ -9,6 +9,7 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 		$field_info = $this->load->controller('extension/module/d_seo_module/getFieldInfo');
 				
 		if ($data['sheet_code'] == 'category') {
+			$categories = array();
 			$implode = array();
 			$implode[] = "c.category_id";
 			$add = '';
@@ -36,7 +37,7 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 			foreach ($data['filter'] as $field_code => $filter) {
 				if (!empty($filter)) {
 					if ($field_code == 'target_keyword') {
-						$implode[] = "ut2.keyword LIKE '%" . $this->db->escape($filter) . "%'";
+						$implode[] = "tk2.keyword LIKE '%" . $this->db->escape($filter) . "%'";
 					}
 				}
 			}
@@ -48,9 +49,7 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 			$sql .= " GROUP BY c.category_id";
 			
 			$query = $this->db->query($sql);
-			
-			$categories = array();
-			
+						
 			foreach ($query->rows as $result) {
 				$categories[$result['category_id']] = $result;
 			}
@@ -59,6 +58,7 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 		}
 		
 		if ($data['sheet_code'] == 'product') {
+			$products = array();
 			$implode = array();
 			$implode[] = "p.product_id";
 			$add = '';
@@ -86,7 +86,7 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 			foreach ($data['filter'] as $field_code => $filter) {
 				if (!empty($filter)) {
 					if ($field_code == 'target_keyword') {
-						$implode[] = "ut2.keyword LIKE '%" . $this->db->escape($filter) . "%'";
+						$implode[] = "tk2.keyword LIKE '%" . $this->db->escape($filter) . "%'";
 					}
 				}
 			}
@@ -98,9 +98,7 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 			$sql .= " GROUP BY p.product_id";
 			
 			$query = $this->db->query($sql);
-			
-			$products = array();
-			
+						
 			foreach ($query->rows as $result) {
 				$products[$result['product_id']] = $result;
 			}
@@ -109,6 +107,7 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 		}
 		
 		if ($data['sheet_code'] == 'manufacturer') {
+			$manufacturers = array();
 			$implode = array();
 			$implode[] = "m.manufacturer_id";
 			
@@ -135,7 +134,7 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 			foreach ($data['filter'] as $field_code => $filter) {
 				if (!empty($filter)) {
 					if ($field_code == 'target_keyword') {
-						$implode[] = "ut2.keyword LIKE '%" . $this->db->escape($filter) . "%'";
+						$implode[] = "tk2.keyword LIKE '%" . $this->db->escape($filter) . "%'";
 					}
 				}
 			}
@@ -147,9 +146,7 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 			$sql .= " GROUP BY m.manufacturer_id";
 			
 			$query = $this->db->query($sql);
-			
-			$manufacturers = array();
-			
+						
 			foreach ($query->rows as $result) {
 				$manufacturers[$result['manufacturer_id']] = $result;
 			}
@@ -158,6 +155,7 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 		}
 		
 		if ($data['sheet_code'] == 'information') {
+			$informations = array();
 			$implode = array();
 			$implode[] = "i.information_id";
 			$add = '';
@@ -185,7 +183,7 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 			foreach ($data['filter'] as $field_code => $filter) {
 				if (!empty($filter)) {
 					if ($field_code == 'target_keyword') {
-						$implode[] = "ut2.keyword LIKE '%" . $this->db->escape($filter) . "%'";
+						$implode[] = "tk2.keyword LIKE '%" . $this->db->escape($filter) . "%'";
 					}
 				}
 			}
@@ -197,9 +195,7 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 			$sql .= " GROUP BY i.information_id";
 			
 			$query = $this->db->query($sql);
-			
-			$informations = array();
-			
+						
 			foreach ($query->rows as $result) {
 				$informations[$result['information_id']] = $result;
 			}
@@ -209,9 +205,9 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 	}
 	
 	/*
-	*	Save Element Field for Manager.
+	*	Edit Element Field for Manager.
 	*/
-	public function saveElementField($element) {				
+	public function editElementField($element) {				
 		$field_info = $this->load->controller('extension/module/d_seo_module/getFieldInfo');
 				
 		if ($element['sheet_code'] == 'category') {

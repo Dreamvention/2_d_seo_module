@@ -50,10 +50,10 @@
 						<a href="{{ href_setting }}"><span class="fa fa-cog"></span> {{ text_settings }}</a>
 					</li>
 					<li>
-						<a href="{{ href_field_setting }}"><span class="fa fa-list-alt"></span> {{ text_multi_store_field_settings }}</a>
+						<a href="{{ href_multi_store_field }}"><span class="fa fa-list-alt"></span> {{ text_multi_store_fields }}</a>
 					</li>
 					<li>
-						<a href="{{ href_custom_page }}"><span class="fa fa-key"></span> {{ text_custom_pages_target_keywords }}</a>
+						<a href="{{ href_target_keyword }}"><span class="fa fa-key"></span> {{ text_target_keywords }}</a>
 					</li>
 					<li>
 						<a href="{{ href_export_import }}"><span class="fa fa-exchange"></span> {{ text_export_import }}</a>
@@ -65,7 +65,7 @@
 				
 				<form action="{{ action }}" method="post" enctype="multipart/form-data" id="form" class="form-horizontal">
 					<div class="flex row">
-						<div class="col-sm-2">
+						<div class="flex col-sm-3">
 							<ul class="nav nav-pills nav-stacked">
 								<li class="active">
 									<a href="#vtab_basic_setting" data-toggle="tab"><span class="fa fa-cog"></span> {{ text_basic_settings }}</a>
@@ -78,28 +78,28 @@
 								</li>
 							</ul>
 						</div>
-						<div class="col-sm-10">
+						<div class="col-sm-9">
 							<div class="tab-content">
 								<div id="vtab_basic_setting" class="tab-pane active">
 									<div class="page-header">
 										<h3>{{ text_basic_settings }}</h3>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
-										<div class="col-sm-8">
+										<label class="col-sm-3 control-label" for="input-status">{{ entry_status }}</label>
+										<div class="col-sm-9">
 											<input type="hidden" name="module_{{ codename }}_status" value="0" />
 											<input type="checkbox" name="module_{{ codename }}_status" value="1" class="switch" data-label-text="{{ text_enabled }}" {% if status %}checked="checked"{% endif %} />
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-2 control-label" for="input-list-limit">{{ entry_list_limit }}</label>
-										<div class="col-sm-10">
+										<label class="col-sm-3 control-label" for="input-list-limit">{{ entry_list_limit }}</label>
+										<div class="col-sm-9">
 											<input type="text" name="module_{{ codename }}_setting[list_limit]" value="{{ setting['list_limit'] }}" class="form-control"/>
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-2 control-label" for="input-uninstall">{{ entry_uninstall }}</label>
-										<div class="col-sm-8">
+										<label class="col-sm-3 control-label" for="input-uninstall">{{ entry_uninstall }}</label>
+										<div class="col-sm-9">
 											<a action="{{ uninstall }}" id="button_uninstall" class="btn btn-danger">{{ button_uninstall }}</a>
 										</div>
 									</div>	
@@ -109,21 +109,21 @@
 										<h3>{{ text_htaccess }} <span class="info-window-item" data-href="https://opencartseomodule.com/opencart-htaccess-editor"><i class="fa fa-question"></i></span></h3>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
-										<div class="col-sm-10">
+										<label class="col-sm-3 control-label" for="input-status">{{ entry_status }}</label>
+										<div class="col-sm-9">
 											<input type="hidden" name="htaccess[status]" value="0" />
 											<input type="checkbox" name="htaccess[status]" value="1" class="switch" data-label-text="{{ text_enabled }}" {% if htaccess['status'] %}checked="checked"{% endif %} />
 										</div>
 									</div>
 									<div class="form-group">
-										<div class="col-sm-10 col-sm-offset-2">
+										<div class="col-sm-9 col-sm-offset-3">
 											<p><a href="{{ store_setting }}" target="_blank" class="btn btn-primary"><i class="fa fa-cog fw"></i> {{ button_view_store_setting }}</a></p>
 											<div class="bs-callout bs-callout-info">{{ help_htaccess_setting }}</div>
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-2 control-label" for="input-text">{{ entry_text }}</label>
-										<div class="col-sm-10">
+										<label class="col-sm-3 control-label" for="input-text">{{ entry_text }}</label>
+										<div class="col-sm-9">
 											<p><textarea name="htaccess[text]" class="form-control" rows="20">{{ htaccess['text'] }}</textarea></p>
 											<div class="bs-callout bs-callout-info">{{ help_htaccess_subfolder }}</div>
 										</div>
@@ -134,15 +134,15 @@
 										<h3>{{ text_robots }} <span class="info-window-item" data-href="https://opencartseomodule.com/robots-txt-editor"><i class="fa fa-question"></i></span></h3>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-2 control-label" for="input-status">{{ entry_status }}</label>
-										<div class="col-sm-10">
+										<label class="col-sm-3 control-label" for="input-status">{{ entry_status }}</label>
+										<div class="col-sm-9">
 											<input type="hidden" name="robots[status]" value="0" />
 											<input type="checkbox" name="robots[status]" value="1" class="switch" data-label-text="{{ text_enabled }}" {% if robots['status'] %}checked="checked"{% endif %} />
 										</div>
 									</div>
 									<div class="form-group">
-										<label class="col-sm-2 control-label" for="input-text">{{ entry_text }}</label>
-										<div class="col-sm-10">
+										<label class="col-sm-3 control-label" for="input-text">{{ entry_text }}</label>
+										<div class="col-sm-9">
 											<p><textarea name="robots[text]" class="form-control" rows="20">{{ robots['text'] }}</textarea></p>
 											<div class="bs-callout bs-callout-info">{{ help_robots }}</div>
 										</div>

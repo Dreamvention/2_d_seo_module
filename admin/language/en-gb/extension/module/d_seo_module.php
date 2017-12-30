@@ -1,45 +1,44 @@
 <?php
 // Heading
-$_['heading_title']								= '<span style="color:#449DD0; font-weight:bold">SEO Module</span><span style="font-size:0.9em; color:#999"> by <a href="http://www.opencart.com/index.php?route=extension/extension&filter_username=Dreamvention" style="font-size:1em; color:#999" target="_blank">Dreamvention</a></span>';
-$_['heading_title_main']						= 'SEO Module';
+$_['heading_title']									= '<span style="color:#449DD0; font-weight:bold">SEO Module</span><span style="font-size:0.9em; color:#999"> by <a href="http://www.opencart.com/index.php?route=extension/extension&filter_username=Dreamvention" style="font-size:1em; color:#999" target="_blank">Dreamvention</a></span>';
+$_['heading_title_main']							= 'SEO Module';
 
 // Text
-$_['text_edit']									= 'Edit SEO Module settings';
-$_['text_install']								= 'Install';
-$_['text_modules']								= 'Modules';
-$_['text_dashboard']							= 'Dashboard';
-$_['text_settings']								= 'Settings';
-$_['text_multi_store_field_settings']			= 'Multi Store Field Settings';
-$_['text_custom_pages']          				= 'Custom Pages';
-$_['text_custom_pages_target_keywords']         = 'Target Keywords for Custom Pages';
-$_['text_export_import']          				= 'Export & Import';
-$_['text_instructions']							= 'Instructions';
-$_['text_seo_extensions'] 						= 'SEO Extensions';
-$_['text_quick_setup'] 							= 'Quick Setup';
-$_['text_implemented'] 							= 'Implemented';
-$_['text_view'] 								= 'View';
-$_['text_details'] 								= 'Details';
-$_['text_no_control_elements'] 					= 'All options have been enabled.';
-$_['text_basic_settings'] 						= 'Basic Settings';
-$_['text_htaccess'] 							= '.htaccess';
-$_['text_robots'] 								= 'robots.txt';
-$_['text_export'] 								= 'Export';
-$_['text_import'] 								= 'Import';
-$_['text_all_stores']			 				= 'All Stores';
-$_['text_all_languages']						= 'All Languages';
-$_['text_yes'] 									= 'Yes';
-$_['text_no'] 									= 'No';
-$_['text_enabled']								= 'Enabled';
-$_['text_disabled']								= 'Disabled';
-$_['text_custom_page']          				= 'Custom Page';
-$_['text_add_custom_page']   					= 'Add Custom Page';
-$_['text_general']								= 'General';
-$_['text_data']									= 'Data';
-$_['text_seo']									= 'SEO';
-$_['text_create_default_custom_pages_confirm']	= 'Creation default Custom Pages will delete all old Custom Pages. You sure you want to create default Custom Pages?';
-$_['text_delete_custom_pages_confirm']   		= 'You sure you want to delete selected Custom Pages?';
-$_['text_uninstall_confirm']					= 'After deinstallation is compleate the SEO Module will delete all additional fields in the product, category, manufacturer and information that have been added after installation. Are you sure you want to uninstall the SEO Module? ';
-$_['text_instructions_full'] 										= '
+$_['text_edit']										= 'Edit SEO Module settings';
+$_['text_install']									= 'Install';
+$_['text_modules']									= 'Modules';
+$_['text_dashboard']								= 'Dashboard';
+$_['text_settings']									= 'Settings';
+$_['text_multi_store_fields']						= 'Multi Store Fields';
+$_['text_target_keywords']         					= 'Target Keywords';
+$_['text_export_import']          					= 'Export & Import';
+$_['text_instructions']								= 'Instructions';
+$_['text_seo_extensions'] 							= 'SEO Extensions';
+$_['text_quick_setup'] 								= 'Quick Setup';
+$_['text_implemented'] 								= 'Implemented';
+$_['text_view'] 									= 'View';
+$_['text_details'] 									= 'Details';
+$_['text_no_control_elements'] 						= 'All options have been enabled.';
+$_['text_basic_settings'] 							= 'Basic Settings';
+$_['text_htaccess'] 								= '.htaccess';
+$_['text_robots'] 									= 'robots.txt';
+$_['text_export'] 									= 'Export';
+$_['text_import'] 									= 'Import';
+$_['text_all_stores']			 					= 'All Stores';
+$_['text_all_languages']							= 'All Languages';
+$_['text_yes'] 										= 'Yes';
+$_['text_no'] 										= 'No';
+$_['text_enabled']									= 'Enabled';
+$_['text_disabled']									= 'Disabled';
+$_['text_target_keyword']          					= 'Target Keyword';
+$_['text_add_target_keyword']   					= 'Add Target Keyword';
+$_['text_general']									= 'General';
+$_['text_data']										= 'Data';
+$_['text_seo']										= 'SEO';
+$_['text_create_default_target_keywords_confirm']	= 'Creation default Target Keywords for Custom Pages will delete all old Target Keywords for Custom Pages. You sure you want to create default Target Keywords for Custom Pages?';
+$_['text_delete_target_keywords_confirm']   		= 'You sure you want to delete selected Target Keywords?';
+$_['text_uninstall_confirm']						= 'After deinstallation is compleate the SEO Module will delete all additional fields in the product, category, manufacturer and information that have been added after installation. Are you sure you want to uninstall the SEO Module? ';
+$_['text_instructions_full'] 						= '
 <div class="row">
 	<div class="col-sm-2">
 		<ul class="nav nav-pills nav-stacked">
@@ -204,72 +203,75 @@ $_['text_seo_module_multi_store_support']							= 'SEO Module Multi Store suppor
 $_['text_seo_module_quick_setup']									= 'SEO Module Quick Setup';
 
 // Column
-$_['column_field']								= 'Field';
-$_['column_multi_store_status']					= 'Multi Store Status';	
-$_['column_route']								= 'Route';
-$_['column_target_keyword']						= 'Target Keyword';
+$_['column_field']									= 'Field';
+$_['column_multi_store_status']						= 'Multi Store Status';	
+$_['column_route']									= 'Route';
+$_['column_target_keyword']							= 'Target Keyword';
 
 // Entry
-$_['entry_status']								= 'Status';
-$_['entry_list_limit']        					= 'List Items Per Page';
-$_['entry_uninstall']							= 'Uninstall Module';
-$_['entry_text']								= 'Text';
-$_['entry_route']								= 'Route';
-$_['entry_target_keyword']						= 'Target Keyword';
-$_['entry_store']        						= 'Choose Store';
-$_['entry_sheet']        						= 'Choose Sheets';
-$_['entry_export']        						= 'Export to File';
-$_['entry_upload']        						= 'Upload File';
-$_['entry_import']        						= 'Import from File';
+$_['entry_status']									= 'Status';
+$_['entry_list_limit']        						= 'List Items Per Page';
+$_['entry_uninstall']								= 'Uninstall Module';
+$_['entry_text']									= 'Text';
+$_['entry_route']									= 'Route';
+$_['entry_target_keyword']							= 'Target Keyword';
+$_['entry_store']        							= 'Choose Store';
+$_['entry_sheet']        							= 'Choose Sheets';
+$_['entry_export']        							= 'Export to File';
+$_['entry_upload']        							= 'Upload File';
+$_['entry_import']        							= 'Import from File';
 
 // Button
-$_['button_save'] 								= 'Save';
-$_['button_save_and_stay'] 						= 'Save and Stay';
-$_['button_cancel'] 							= 'Cancel';
-$_['button_install'] 							= 'Install';
-$_['button_uninstall'] 							= 'Uninstall';
-$_['button_setup'] 								= 'Setup';
-$_['button_resetup'] 							= 'Resetup';
-$_['button_view_store_setting'] 				= 'View store settings';
-$_['button_create_default_custom_page']   		= 'Create Default Custom Pages';
-$_['button_add_custom_page']   					= 'Add Custom Page';
-$_['button_delete_custom_page'] 				= 'Delete Custom Pages';
-$_['button_export'] 							= 'Export';
-$_['button_import'] 							= 'Import';
+$_['button_save'] 									= 'Save';
+$_['button_save_and_stay'] 							= 'Save and Stay';
+$_['button_cancel'] 								= 'Cancel';
+$_['button_install'] 								= 'Install';
+$_['button_uninstall'] 								= 'Uninstall';
+$_['button_setup'] 									= 'Setup';
+$_['button_resetup'] 								= 'Resetup';
+$_['button_view_store_setting'] 					= 'View store settings';
+$_['button_filter'] 								= 'Filter';
+$_['button_clear'] 									= 'Clear';
+$_['button_clear_filter'] 							= 'Clear filter';
+$_['button_create_default_target_keywords']   		= 'Create Default Target Keywords for Custom Pages';
+$_['button_add_target_keyword']   					= 'Add Target Keyword';
+$_['button_delete_target_keywords']					= 'Delete Target Keywords';
+$_['button_export'] 								= 'Export';
+$_['button_import'] 								= 'Import';
 
 // Help
-$_['help_install']								= '<br/>
+$_['help_install']									= '<br/>
 <h1>Install SEO Module now</h1>
 <br/>
 <p>You are one step away from installing the best SEO extension on the market. SEO module is just the begining. It will set ground features and an API for ther SEO modules that you can install. they will improve your Store search ranking and help you mamange your SEO like a pro. Click install! </p>
 <br/>';
-$_['help_htaccess_setting']						= '<h4>Important!</h4>
+$_['help_htaccess_setting']							= '<h4>Important!</h4>
 <p>Turning this option on  will uncomment the file .htaccess on apache server. But for the SEO urls to start working, you must visit Opencart Store Settings / tab Server and activate "Use SEO URLs"</p>';
-$_['help_htaccess_subfolder']					= '<h4>If you have a subfolder!</h4>
+$_['help_htaccess_subfolder']						= '<h4>If you have a subfolder!</h4>
 <p>You your store is located in a subfolder (ex. http://myshop.com/store/) then you are required to set the RewriteBase (ex. from  <code>RewriteBase /</code> to <code>RewriteBase /store/</code> in the file above)</p>';
-$_['help_robots']								= '<h4>Important!</h4>
+$_['help_robots']									= '<h4>Important!</h4>
 <p>Robots.txt is a recomendation to the Search bot. You can start with the following default settings.</p>';
-$_['help_d_seo_module_pack']					= 'You can also buy <a href="https://opencartseomodule.com/seo-module-complete" target="_blank" class="alert-link"><strong>SEO Module Pro</strong></a> which contains the complete package of SEO modules.';
+$_['help_d_seo_module_pack']						= 'You can also buy <a href="https://opencartseomodule.com/seo-module-complete" target="_blank" class="alert-link"><strong>SEO Module Pro</strong></a> which contains the complete package of SEO modules.';
 
 // Success
-$_['success_save']								= 'Success: You have modified SEO Module!';
-$_['success_install']							= 'Success: You have installed SEO Module!';
-$_['success_uninstall']							= 'Success: You have uninstalled SEO Module!';
-$_['success_execute']							= 'Success: Your task was successfully completed!';
-$_['success_create_default_custom_pages']  		= 'Success: You have successfully created Custom Pages!';
-$_['success_add_custom_page']       			= 'Success: You have successfully added Custom Page!';
-$_['success_delete_custom_pages']      			= 'Success: You have successfully deleted Custom Pages!';
-$_['success_import']        					= 'Success: You have successfully imported your data!';
+$_['success_save']									= 'Success: You have modified SEO Module!';
+$_['success_install']								= 'Success: You have installed SEO Module!';
+$_['success_uninstall']								= 'Success: You have uninstalled SEO Module!';
+$_['success_execute']								= 'Success: Your task was successfully completed!';
+$_['success_create_default_target_keywords']		= 'Success: You have successfully created Target Keywords for Custom Pages!';
+$_['success_add_target_keyword']       				= 'Success: You have successfully added Target Keyword!';
+$_['success_delete_target_keywords']      			= 'Success: You have successfully deleted Target Keywords!';
+$_['success_import']        						= 'Success: You have successfully imported your data!';
 
 // Error
-$_['error_warning']          					= 'Warning: Please check the form carefully for errors!';
-$_['error_permission']    						= 'Warning: You do not have permission to modify module SEO Module!';
-$_['error_installed']							= 'Warning: You can not install this module because it is already installed!';
-$_['error_dependencies']    					= 'Warning: You can not uninstall this module until you uninstall dependencies modules!';
-$_['error_route']								= 'Warning: Route does not appear to be valid!';
-$_['error_route_exists']						= 'Warning: Route %s is already exists!';
-$_['error_target_keyword']						= 'Warning: Target Keyword does not appear to be valid!';
-$_['error_upload_name']							= 'Warning: Missing file name for upload!';
-$_['error_upload_ext']							= 'Warning: Uploaded file has not one of the \'.xls\', \'.xlsx\' or \'.ods\' file name extensions, it might not be a spreadsheet file!';
+$_['error_warning']          						= 'Warning: Please check the form carefully for errors!';
+$_['error_permission']    							= 'Warning: You do not have permission to modify module SEO Module!';
+$_['error_installed']								= 'Warning: You can not install this module because it is already installed!';
+$_['error_dependencies']    						= 'Warning: You can not uninstall this module until you uninstall dependencies modules!';
+$_['error_route']									= 'Warning: Route does not appear to be valid!';
+$_['error_route_exists']							= 'Warning: Route %s is already exists!';
+$_['error_target_keyword']							= 'Warning: Target Keyword does not appear to be valid!';
+$_['error_upload_name']								= 'Warning: Missing file name for upload!';
+$_['error_upload_ext']								= 'Warning: Uploaded file has not one of the \'.xls\', \'.xlsx\' or \'.ods\' file name extensions, it might not be a spreadsheet file!';
 
 ?>

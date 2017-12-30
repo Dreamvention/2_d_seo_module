@@ -1094,6 +1094,59 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 		return $result;
 	}
 	
+	public function target_config() {
+		$_language = new Language();
+		$_language->load($this->route);
+		
+		$_config = new Config();
+		$_config->load($this->config_file);
+		$target_setting = ($_config->get($this->codename . '_target_setting')) ? $_config->get($this->codename . '_target_setting') : array();
+		
+		foreach ($target_setting['sheet'] as $sheet) {
+			if (substr($sheet['name'], 0, strlen('text_')) == 'text_') {
+				$target_setting['sheet'][$sheet['code']]['name'] = $_language->get($sheet['name']);
+			}
+		}
+					
+		return $target_setting;
+	}
+		
+	public function target_elements($filter_data) {	
+		$this->load->model($this->route);
+		
+		return $this->{'model_extension_d_seo_module_' . $this->codename}->getTargetElements($filter_data);
+	}
+		
+	public function add_target_element($target_element_data) {
+		$this->load->model($this->route);
+		
+		return $this->{'model_extension_d_seo_module_' . $this->codename}->addTargetElement($target_element_data);
+	}
+	
+	public function edit_target_element($target_element_data) {
+		$this->load->model($this->route);
+		
+		return $this->{'model_extension_d_seo_module_' . $this->codename}->editTargetElement($target_element_data);
+	}
+	
+	public function delete_target_element($target_element_data) {
+		$this->load->model($this->route);
+		
+		return $this->{'model_extension_d_seo_module_' . $this->codename}->deleteTargetElement($target_element_data);
+	}
+		
+	public function export_target_elements($export_data) {	
+		$this->load->model($this->route);
+		
+		return $this->{'model_extension_d_seo_module_' . $this->codename}->getExportTargetElements($export_data);
+	}
+	
+	public function import_target_elements($import_data) {	
+		$this->load->model($this->route);
+		
+		return $this->{'model_extension_d_seo_module_' . $this->codename}->saveImportTargetElements($import_data);
+	}
+	
 	public function field_config() {
 		$_language = new Language();
 		$_language->load($this->route);

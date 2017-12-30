@@ -2,7 +2,7 @@
 $_['d_seo_module_setting'] = array(
 	'list_limit' => '20',
 	'cache_expire' => '2592000',
-	'default_custom_pages' => array(
+	'default_target_keywords' => array(
 		'common/home' => array('webshop'),
 		'product/manufacturer' => array('brand'),
 		'product/special' => array('special'),
@@ -104,29 +104,11 @@ TEXT
 );
 $_['d_seo_module_field_setting'] = array(
 	'sheet' => array(
-		'home' => array(
-			'code' => 'home',
-			'icon' => 'fa-home',
-			'name' => 'text_home',
-			'sort_order' => '1',
-			'field' => array(
-				'target_keyword' => array(
-					'code' => 'target_keyword',
-					'name' => 'text_target_keyword',
-					'description' => 'help_target_keyword',
-					'type' => 'textarea',
-					'sort_order' => '20',
-					'multi_store' => true,
-					'multi_language' => true,
-					'required' => false
-				)
-			)
-		),
 		'category' => array(
 			'code' => 'category',
 			'icon' => 'fa-navicon',
 			'name' => 'text_category',
-			'sort_order' => '2',
+			'sort_order' => '1',
 			'field' => array(
 				'target_keyword' => array(
 					'code' => 'target_keyword',
@@ -145,7 +127,7 @@ $_['d_seo_module_field_setting'] = array(
 			'code' => 'product',
 			'icon' => 'fa-shopping-cart',
 			'name' => 'text_product',
-			'sort_order' => '3',
+			'sort_order' => '2',
 			'field' => array(
 				'target_keyword' => array(
 					'code' => 'target_keyword',
@@ -164,7 +146,7 @@ $_['d_seo_module_field_setting'] = array(
 			'code' => 'manufacturer',
 			'icon' => 'fa-tag',
 			'name' => 'text_manufacturer',
-			'sort_order' => '4',
+			'sort_order' => '3',
 			'field' => array(
 				'target_keyword' => array(
 					'code' => 'target_keyword',
@@ -183,7 +165,7 @@ $_['d_seo_module_field_setting'] = array(
 			'code' => 'information',
 			'icon' => 'fa-info-circle',
 			'name' => 'text_information',
-			'sort_order' => '5',
+			'sort_order' => '4',
 			'field' => array(
 				'target_keyword' => array(
 					'code' => 'target_keyword',
@@ -197,6 +179,59 @@ $_['d_seo_module_field_setting'] = array(
 					'required' => false
 				)
 			)
+		),
+		'custom_page' => array(
+			'code' => 'custom_page',
+			'icon' => 'fa-file-o',
+			'name' => 'text_custom_page',
+			'sort_order' => '50',
+			'field' => array(
+				'target_keyword' => array(
+					'code' => 'target_keyword',
+					'name' => 'text_target_keyword',
+					'description' => 'help_target_keyword',
+					'type' => 'textarea',
+					'sort_order' => '20',
+					'multi_store' => true,
+					'multi_language' => true,
+					'multi_store_status' => false,
+					'required' => false
+				)
+			)
+		)
+	)
+);
+$_['d_seo_module_target_setting'] = array(
+	'sheet' => array(
+		'category' => array(
+			'code' => 'category',
+			'icon' => 'fa-navicon',
+			'name' => 'text_category',
+			'sort_order' => '1'
+		),
+		'product' => array(
+			'code' => 'product',
+			'icon' => 'fa-shopping-cart',
+			'name' => 'text_product',
+			'sort_order' => '2'
+		),
+		'manufacturer' => array(
+			'code' => 'manufacturer',
+			'icon' => 'fa-tag',
+			'name' => 'text_manufacturer',
+			'sort_order' => '3'
+		),
+		'information' => array(
+			'code' => 'information',
+			'icon' => 'fa-info-circle',
+			'name' => 'text_information',
+			'sort_order' => '4'
+		),
+		'custom_page' => array(
+			'code' => 'custom_page',
+			'icon' => 'fa-file-o',
+			'name' => 'text_custom_page',
+			'sort_order' => '50'
 		)
 	)
 );

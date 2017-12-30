@@ -44,11 +44,15 @@ class ModelExtensionDSEOModuleTargetKeywordDSEOModuleTargetKeyword extends Model
 						$target_keyword_store_id = 0;
 					}
 				}
-				
+								
 				if (preg_match('/[A-Za-z0-9]+\/[A-Za-z0-9]+/i', $data['route'])) {
-					$target_keyword_store_id = $data['store_id'];
+					if (isset($field_info['sheet']['custom_page']['field']['target_keyword']['multi_store']) && $field_info['sheet']['custom_page']['field']['target_keyword']['multi_store'] && isset($field_info['sheet']['custom_page']['field']['target_keyword']['multi_store_status']) && $field_info['sheet']['custom_page']['field']['target_keyword']['multi_store_status']) {
+						$target_keyword_store_id = $data['store_id'];
+					} else {
+						$target_keyword_store_id = 0;
+					}
 				}
-		
+				
 				$this->db->query("DELETE FROM " . DB_PREFIX . "d_target_keyword WHERE route = '" . $this->db->escape($data['route']) . "' AND store_id = '" . (int)$target_keyword_store_id . "' AND language_id = '" . (int)$data['language_id'] . "'");
 				
 				if ($data['target_keyword']) {
@@ -161,7 +165,14 @@ class ModelExtensionDSEOModuleTargetKeywordDSEOModuleTargetKeyword extends Model
 		foreach ($query->rows as $result) {
 			if (!($custom_page_exception_routes && in_array($result['route'], $custom_page_exception_routes))) {
 				$target_elements[$result['route']]['route'] = $result['route'];
-				$target_elements[$result['route']]['target_keyword'][$result['store_id']][$result['language_id']][$result['sort_order']] = $result['keyword'];
+				
+				if ((isset($field_info['sheet']['custom_page']['field']['target_keyword']['multi_store']) && $field_info['sheet']['custom_page']['field']['target_keyword']['multi_store'] && isset($field_info['sheet']['custom_page']['field']['target_keyword']['multi_store_status']) && $field_info['sheet']['custom_page']['field']['target_keyword']['multi_store_status'])) {
+					$target_elements[$route]['target_keyword'][$result['store_id']][$result['language_id']][$result['sort_order']] = $result['keyword'];
+				} elseif ($result['store_id'] == 0) {
+					foreach ($stores as $store) {
+						$target_elements[$route]['target_keyword'][$store['store_id']][$result['language_id']][$result['sort_order']] = $result['keyword'];
+					}
+				}
 			}
 		}
 						

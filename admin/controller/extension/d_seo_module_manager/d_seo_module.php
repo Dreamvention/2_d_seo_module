@@ -33,10 +33,10 @@ class ControllerExtensionDSEOModuleManagerDSEOModule extends Controller {
 		return $this->{'model_extension_d_seo_module_manager_' . $this->codename}->getListElements($filter_data);
 	}
 	
-	public function manager_save_element_field($element_data) {	
+	public function manager_edit_element_field($element_data) {	
 		$this->load->model($this->route);
 		
-		return $this->{'model_extension_d_seo_module_manager_' . $this->codename}->saveElementField($element_data);
+		return $this->{'model_extension_d_seo_module_manager_' . $this->codename}->editElementField($element_data);
 	}
 	
 	public function manager_export_elements($export_data) {	

@@ -3,11 +3,11 @@
 $_['heading_title_main']						= 'SEO Module';
 
 // Text
-$_['text_home']									= 'Home';
 $_['text_category']								= 'Category';
 $_['text_product']								= 'Product';
 $_['text_manufacturer']							= 'Manufacturer';
 $_['text_information']							= 'Information';
+$_['text_custom_page']							= 'Custom Page';
 $_['text_target_keyword']						= 'Target Keyword';
 $_['text_enable_status']						= 'Enable Status of SEO Module';
 $_['text_enable_seo_url']						= 'Enable SEO URLs';

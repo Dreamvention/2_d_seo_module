@@ -4,7 +4,7 @@
 		<div class="container-fluid">
 			<div class="form-inline pull-right">
 				{% if (stores|length > 1) %}
-				<select class="form-control" onChange="location='{{ href_custom_page }}&store_id='+$(this).val()">
+				<select class="form-control" onChange="location='{{ store_url }}&store_id='+$(this).val()">
 				{% for store in stores %}
 				{% if (store['store_id'] == store_id) %}
 					<option value="{{ store['store_id'] }}" selected="selected">{{ store['name'] }}</option>
@@ -14,9 +14,11 @@
 				{% endfor %}
 				</select>
 				{% endif %}
-				<button id="button_create_default_custom_page" data-toggle="tooltip" title="{{ button_create_default_custom_page }}" class="btn btn-success"><i class="fa fa-cogs"></i></button>
-				<button id="button_add" type="button" data-toggle="tooltip" title="{{ button_add_custom_page }}" class="btn btn-primary"><i class="fa fa-plus"></i></button>
-				<button id="button_delete" type="button" data-toggle="tooltip" title="{{ button_delete_custom_page }}" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
+				{% if (sheet_code == 'custom_page') %}
+				<button id="button_create_default_target_elements" data-toggle="tooltip" title="{{ button_create_default_target_keywords }}" class="btn btn-success"><i class="fa fa-cogs"></i></button>
+				{% endif %}
+				<button id="button_add" type="button" data-toggle="tooltip" title="{{ button_add_target_keyword }}" class="btn btn-primary"><i class="fa fa-plus"></i></button>
+				<button id="button_delete" type="button" data-toggle="tooltip" title="{{ button_delete_target_keywords }}" class="btn btn-danger"><i class="fa fa-trash-o"></i></button>
 				<a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a>
 			</div>
 			<h1>{{ heading_title }} {{ version }}</h1>
@@ -51,10 +53,10 @@
 						<a href="{{ href_setting }}"><span class="fa fa-cog"></span> {{ text_settings }}</a>
 					</li>
 					<li>
-						<a href="{{ href_field_setting }}"><span class="fa fa-list-alt"></span> {{ text_multi_store_field_settings }}</a>
+						<a href="{{ href_multi_store_field }}"><span class="fa fa-list-alt"></span> {{ text_multi_store_fields }}</a>
 					</li>
 					<li class="active">
-						<a href="{{ href_custom_page }}"><span class="fa fa-key"></span> {{ text_custom_pages_target_keywords }}</a>
+						<a href="{{ href_target_keyword }}"><span class="fa fa-key"></span> {{ text_target_keywords }}</a>
 					</li>
 					<li>
 						<a href="{{ href_export_import }}"><span class="fa fa-exchange"></span> {{ text_export_import }}</a>
@@ -63,11 +65,29 @@
 						<a href="{{ href_instruction }}"><span class="fa fa-graduation-cap"></span> {{ text_instructions }}</a>
 					</li>
 				</ul>
+				
+				<div class="page-header">
+					<h3>{{ text_target_keywords }} <span class="info-window-item" data-href="https://opencartseomodule.com/target-keyword-planner"><i class="fa fa-question"></i></span></h3>
+				</div>
+							
+				<ul class="nav nav-pills">
+				{% for sheet in sheets %} 
+					<li {% if (sheet['code'] == sheet_code) %} class="active" {% endif %}>
+						<a href="{{ sheet['url'] }}"><span class="fa {{ sheet['icon'] }}"></span> {{ sheet['name'] }}</a>
+					</li>
+				{% endfor %}
+				</ul>
+				
+				<div class="page-header">
+					<a id="button_filter" class="btn btn-primary pull-right"><i class="fa fa-search"></i> {{ button_filter }}</a>
+					{% if filter %}
+					<a id="button_clear_filter" class="btn btn-danger pull-right m-r-sm"><i class="fa fa-remove"></i> {{ button_clear_filter }}</a>
+					{% endif %}
+					<br class="clear"/>
+				</div>
 								
 				<form method="post" enctype="multipart/form-data" id="form" class="form-horizontal">
-					<div class="page-header">
-						<h3>{{ text_custom_pages_target_keywords }} <span class="info-window-item" data-href="https://opencartseomodule.com/target-keyword-planner"><i class="fa fa-question"></i></span></h3>
-					</div>
+					<input type="hidden" name="clear_filter" value="" id="clear_filter"/>
 					<div class="table-responsive">
 						<table class="table table-bordered table-hover">
 							<thead>
@@ -80,38 +100,47 @@
 								<tr>
 							</thead>
 							<tbody>
-								{% if custom_pages %}
-								{% set custom_page_row = 0 %}
-								{% for custom_page in custom_pages %}
 								<tr>
-									<td class="custom-page-cell text-left">
-									{% if (custom_page['route'] in selected) %}
-										<input type="checkbox" name="selected[]" value="{{ custom_page['route'] }}" checked="checked" />
+									<td></td>
+									<td class="text-center"><input type="text" name="filter[route]" value="{{ filter['route'] }}" class="form-control"/></td>
+									{% for language in languages %}
+									<td class="text-center"><input type="text" name="filter[target_keyword][{{ language['language_id'] }}]" value="{{ filter['target_keyword'][language['language_id']] }}" class="form-control"/></td>
+									{% endfor %}
+								</tr>
+								{% if target_elements %}
+								{% set target_element_row = 0 %}
+								{% for target_element in target_elements %}
+								<tr>
+									<td class="target-element-cell text-left">
+									{% if (target_element['route'] in selected) %}
+										<input type="checkbox" name="selected[]" value="{{ target_element['route'] }}" checked="checked" />
 									{% else %}
-										<input type="checkbox" name="selected[]" value="{{ custom_page['route']}}" />
+										<input type="checkbox" name="selected[]" value="{{ target_element['route']}}" />
 									{% endif %}
 									</td>
-									<td class="custom-page-cell text-left">
-										<div id="custom_page_route" class="custom-page-field">
-											<span class="text-field">{{ custom_page['route'] }}</span>
+									<td class="target-element-cell text-left">
+										<div class="target-field">
+											{% if target_element['link'] %}
+											<a href="{{ target_element['link'] }}" target="_blank"><span class="text-field">{{ target_element['route'] }}</span></a>
+										{% else %}
+											<span class="text-field">{{ target_element['route'] }}</span>
+										{% endif %}
 										</div>
 									</td>
 									{% for language in languages %}
-									<td class="custom-page-cell text-left">
-										<div id="custom_page_{{ custom_page_row }}_target_keyword_{{ language['language_id'] }}" class="custom-page-field" route="{{ custom_page['route'] }}" language_id="{{ language['language_id'] }}">
-											<span class="text-field">{% for sort_order, keyword in custom_page['target_keyword'][store_id][language['language_id']] %}{% if (custom_page['target_keyword_duplicate'][store_id][language['language_id']][sort_order]) %}<span class="text-danger">[{{ keyword }}]</span>{% else %}<span>[{{ keyword }}]</span>{% endif %}{% endfor %}</span>
-											<textarea class="input-field form-control hide">{% for sort_order, keyword in custom_page['target_keyword'][store_id][language['language_id']] %}[{{ keyword }}]{% endfor %}</textarea>
+									<td class="target-element-cell text-left">
+										<div id="target_element_{{ target_element_row }}_target_keyword_{{ language['language_id'] }}" class="target-element-field" route="{{ target_element['route'] }}" language_id="{{ language['language_id'] }}">
+											<span class="text-field">{% for sort_order, keyword in target_element['target_keyword'][language['language_id']] %}{% if target_element['target_keyword_duplicate'][language['language_id']][sort_order] %}<span class="text-danger">[{{ keyword }}]</span>{% else %}<span>[{{ keyword }}]</span>{% endif %}{% endfor %}</span>
+											<textarea class="input-field form-control hide">{% for sort_order, keyword in target_element['target_keyword'][language['language_id']] %}[{{ keyword }}]{% endfor %}</textarea>
 										</div>
-									</td>	
+									</td>
 									{% endfor %}							
 								</tr>
-								{% set custom_page_row = custom_page_row + 1 %}
+								{% set target_element_row = target_element_row + 1 %}
 								{% endfor %}
 								{% else %}
 								<tr>
-									<td class="text-center" colspan="{{ languages|length + 2 }}">
-										<span class="btn btn-success" onclick="$('#button_create_default_custom_page').trigger('click');"><i class="fa fa-cogs"></i> {{ button_create_default_custom_page }}</span>
-									</td>
+									<td class="text-center" colspan="{{ languages|length + 2 }}">{{ text_no_results }}</td>
 								</tr>
 								{% endif %}
 							</tbody>
@@ -190,7 +219,13 @@ function update() {
 }
 
 function refresh() {
-	var url = 'index.php?route={{ route }}/custom_page&{{ url_token }}&store_id={{ store_id }}';
+	var url = 'index.php?route={{ route }}/target_keyword&{{ url_token }}&store_id={{ store_id }}';
+	
+	var sheet_code = '{{ sheet_code }}';	
+	
+	if (sheet_code) {
+		url += '&sheet_code=' + encodeURIComponent(sheet_code);
+	}
 	
 	var page = '{{ page }}';	
 	
@@ -204,7 +239,7 @@ function refresh() {
 }
 
 function showAlert(json) {
-	$('.alert, .text-danger').remove();
+	$('.alert').remove();
 	$('.form-group').removeClass('has-error');
 						
 	if (json['error']) {
@@ -236,10 +271,19 @@ function showAlert(json) {
 </script> 
 <script type="text/javascript">
 
-$('body').on('click', '.custom-page-cell', function() {
-	var custom_page = $(this).children('.custom-page-field');
+$('body').on('click', '#button_filter', function() {
+	$('#form').submit();
+});
+
+$('body').on('click', '#button_clear_filter', function() {
+	$('#clear_filter').val('1');
+	$('#form').submit();
+});
+
+$('body').on('click', '.target-element-cell', function() {
+	var target_element = $(this).children('.target-element-field');
 		
-	if ($(custom_page).children('.input-field').hasClass('hide') && ($(custom_page).children('.input-field').attr('type') != 'hidden')) {
+	if ($(target_element).children('.input-field').hasClass('hide') && ($(target_element).children('.input-field').attr('type') != 'hidden')) {
 		$('.popover').popover('hide', function() {
 			$('.popover').remove();
 		});
@@ -247,49 +291,50 @@ $('body').on('click', '.custom-page-cell', function() {
 		$('.text-field').removeClass('hide');
 		$('.input-field').addClass('hide');
 
-		$(custom_page).popover({
+		$(target_element).popover({
 			html: true,
 			placement: 'top',
 			trigger: 'manual',
 			content: function() {
-				return '<button type="button" id="button_save" class="btn btn-primary" custom_page_field_id="' + custom_page.attr('id') + '"><i class="fa fa-save"></i></button> <button type="button" id="button_cancel" class="btn btn-danger" custom_page_field_id="' + custom_page.attr('id') + '"><i class="fa fa-remove"></i></button>';
+				return '<button type="button" id="button_save" class="btn btn-primary" target_element_field_id="' + target_element.attr('id') + '"><i class="fa fa-save"></i></button> <button type="button" id="button_cancel" class="btn btn-danger" target_element_field_id="' + target_element.attr('id') + '"><i class="fa fa-remove"></i></button>';
 			}
 		});
 
-		$(custom_page).popover('show');
+		$(target_element).popover('show');
 	
-		$(custom_page).children('.text-field').addClass('hide');
-		$(custom_page).children('.input-field').removeClass('hide');
+		$(target_element).children('.text-field').addClass('hide');
+		$(target_element).children('.input-field').removeClass('hide');
 	}
 });
 
 $('body').on('click', '#button_save', function() {
-	var custom_page = $('#' + $(this).attr('custom_page_field_id'));
-	var route = $(custom_page).attr('route');
-	var language_id = $(custom_page).attr('language_id');
-	var target_keyword = $(custom_page).children('.input-field').val();
+	var target_element = $('#' + $(this).attr('target_element_field_id'));
+	var route = $(target_element).attr('route');
+	var language_id = $(target_element).attr('language_id');
+	var target_keyword = $(target_element).children('.input-field').val();
 		
 	$.ajax({
-		url: 'index.php?route={{ route }}/editCustomPage&{{ url_token }}&store_id={{ store_id }}',
+		url: 'index.php?route={{ route }}/editTargetElement&{{ url_token }}&store_id={{ store_id }}',
 		type: 'post',
 		data: 'route=' + route + '&language_id=' + language_id + '&target_keyword=' + encodeURIComponent(target_keyword),
 		dataType: 'json',
 		success: function(json) {
 			showAlert(json);
-			
-			$(custom_page).popover('hide', function() {
+						
+			$(target_element).popover('hide', function() {
 				$('.popover').remove();
 			});
 			
 			setTimeout(function() {
 				if (json['error'].length == 0) {
-					$(custom_page).children('.text-field').text($(custom_page).children('.input-field').val());
+					$(target_element).children('.text-field').text($(target_element).children('.input-field').val());
+					refresh();
 				} else {
-					$(custom_page).children('.input-field').val($(custom_page).children('.text-field').text());
+					$(target_element).children('.input-field').val($(target_element).children('.text-field').text().replace(/<.*?>/g, ''));
 				}
-				$(custom_page).children('.text-field').removeClass('hide');
-				$(custom_page).children('.input-field').addClass('hide');
-				refresh();
+				
+				$(target_element).children('.text-field').removeClass('hide');
+				$(target_element).children('.input-field').addClass('hide');
 			}, 200);
 		},
 		error: function(xhr, ajaxOptions, thrownError) {
@@ -299,23 +344,23 @@ $('body').on('click', '#button_save', function() {
 });
 		
 $('body').on('click', '#button_cancel', function() {
-	var custom_page = $('#' + $(this).attr('custom_page_field_id'));
+	var target_element = $('#' + $(this).attr('target_element_field_id'));
 		
-	$(custom_page).popover('hide', function() {
+	$(target_element).popover('hide', function() {
 		$('.popover').remove();
 	});
 			
 	setTimeout(function() {
-		$(custom_page).children('.input-field').val($(custom_page).children('.text-field').text());
-		$(custom_page).children('.text-field').removeClass('hide');
-		$(custom_page).children('.input-field').addClass('hide');
+		$(target_element).children('.input-field').val($(target_element).children('.text-field').text().replace(/<.*?>/g, ''));
+		$(target_element).children('.text-field').removeClass('hide');
+		$(target_element).children('.input-field').addClass('hide');
 	}, 200);
 });
 
-$('body').on('click', '#button_create_default_custom_page', function() {
-	if (confirm("{{ text_create_default_custom_pages_confirm }}")) {	
+$('body').on('click', '#button_create_default_target_elements', function() {
+	if (confirm("{{ text_create_default_target_keywords_confirm }}")) {	
 		$.ajax({
-			url: 'index.php?route={{ route }}/createDefaultCustomPages&{{ url_token }}&store_id={{ store_id }}',
+			url: 'index.php?route={{ route }}/createDefaultTargetElements&{{ url_token }}&store_id={{ store_id }}',
 			type: 'post',
 			data: '',
 			dataType: 'json',
@@ -335,16 +380,16 @@ $('body').on('click', '#button_create_default_custom_page', function() {
 });
 
 $('body').on('click', '#button_add', function() {
-	modal_html  = '<div id="modal-dialog" class="modal"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button><h4 class="modal-title">{{ text_add_custom_page }}</h4></div>';
+	modal_html  = '<div id="modal-dialog" class="modal"><div class="modal-dialog modal-lg"><div class="modal-content"><div class="modal-header"><button type="button" class="close" data-dismiss="modal" aria-hidden="true">X</button><h4 class="modal-title">{{ text_add_target_keyword }}</h4></div>';
 	modal_html += '<div class="modal-body"><div class="form-horizontal">';
-	modal_html += '<div class="row"><label class="col-sm-3 control-label" for="input-custom-page-route">{{ entry_route }}</label><div class="col-sm-9"><input type="text" name="custom_page[route]" value="" id="input_custom_page_route" class="form-control"/></div></div><br/>';
+	modal_html += '<div class="row"><label class="col-sm-3 control-label" for="input-custom-page-route">{{ entry_route }}</label><div class="col-sm-9"><input type="text" name="target_element[route]" value="" id="input_target_element_route" class="form-control"/></div></div><br/>';
 	modal_html += '<div class="row"><label class="col-sm-3 control-label" for="input-custom-page-seo-keyword">{{ entry_target_keyword }}</label><div class="col-sm-9">';
 	{% for language in languages %}
-	modal_html += '<div class="input-group"><span class="input-group-addon"><img src="{{ language.flag }}" title="{{ language.name }}"></span><textarea name="custom_page[target_keyword][{{ language.language_id }}]" id="input_custom_page_target_keyword_{{ language.language_id }}" class="form-control"></textarea></div>';
+	modal_html += '<div class="input-group"><span class="input-group-addon"><img src="{{ language['flag'] }}" title="{{ language['name'] }}"></span><textarea name="target_element[target_keyword][{{ language['language_id'] }}]" id="input_target_element_target_keyword_{{ language['language_id'] }}" class="form-control"></textarea></div>';
 	{% endfor %}
 	modal_html += '</div></div>';		
 	modal_html += '</div></div>';		
-	modal_html += '<div class="modal-footer"><button type="button" data-toggle="tooltip" title="{{ button_add_custom_page }}"  id="button_add_custom_page" class="btn btn-primary">{{ button_add_custom_page }}</button></div>';		
+	modal_html += '<div class="modal-footer"><button type="button" data-toggle="tooltip" title="{{ button_add_target_keyword }}"  id="button_add_target_element" class="btn btn-primary">{{ button_add_target_keyword }}</button></div>';		
 	modal_html += '</div></div></div>';
 		
 	$('#modal-dialog').remove();
@@ -354,11 +399,11 @@ $('body').on('click', '#button_add', function() {
 	$('#modal-dialog').modal('show');
 });
 
-$('body').on('click', '#button_add_custom_page', function() {
+$('body').on('click', '#button_add_target_element', function() {
 	$.ajax({
 		type: 'post',
-		url: 'index.php?route={{ route }}/addCustomPage&{{ url_token }}&store_id={{ store_id }}',
-		data: $('[name^="custom_page"]'),
+		url: 'index.php?route={{ route }}/addTargetElement&{{ url_token }}&store_id={{ store_id }}',
+		data: $('[name^="target_element"]'),
 		dataType: 'json',
 		success: function(json) {
 			showAlert(json);
@@ -375,10 +420,10 @@ $('body').on('click', '#button_add_custom_page', function() {
 });
 
 $('body').on('click', '#button_delete', function() {
-	if (confirm('{{ text_delete_custom_pages_confirm }}')) {
+	if (confirm('{{ text_delete_target_keywords_confirm }}')) {
 		$.ajax({
 			type: 'post',
-			url: 'index.php?route={{ route }}/deleteCustomPage&{{ url_token }}&store_id={{ store_id }}',
+			url: 'index.php?route={{ route }}/deleteTargetElements&{{ url_token }}&store_id={{ store_id }}',
 			data: $('#form').serialize(),
 			dataType: 'json',
 			success: function(json) {
