@@ -38,7 +38,7 @@
 	font-weight: bold;
 }
 .panel-default .panel-body .instruction {
-	padding: 30px 0px;
+	padding: 15px;
 }
 
 /* Modal Dialog */
@@ -72,7 +72,7 @@
 	padding-bottom: 25px;
 	margin-bottom: 0px;
 	border: none;
-	border-bottom: 2px solid #DBDFEF;
+	border-bottom: 2px solid #dbdfef;
 }
 .panel-default .panel-body .nav-tabs > li > a {
 	font-size: 16px;
@@ -116,9 +116,9 @@
 	margin-top: -2px;
 	font-size: 14px;
 	font-weight: bold;
-	background: none;
+	background: #f7f8fe;
 	color: #000;
-	border: 2px solid #DBDFEF;
+	border: 2px solid #dbdfef;
 	border-radius: 2px;
 }
 .panel-default .panel-body .nav-pills > li > a:hover {
@@ -128,7 +128,7 @@
 	margin-right: 5px;
 }
 .panel-default .panel-body .nav-pills > li.active > a {
-	background: none;
+	background: #f7f8fe;
 	color: #3674ee;
 }
 .panel-default .panel-body .nav-pills > li.active > a:hover {
@@ -137,16 +137,17 @@
 .panel-default .panel-body .nav-pills.nav-stacked {
 	width: 100%;
 	border: none;
-	border-right: 2px solid #DBDFEF;
+	border-right: 2px solid #dbdfef;
 	border-radius: 0px;
 }
 .panel-default .panel-body .nav-pills.nav-stacked > li > a {
-	padding: 30px 15px;
+	padding: 15px;
 	font-size: 16px;
 	border: none;
+	border-radius: 0px;
 }
 .panel-default .panel-body .nav-pills.nav-stacked > li + li > a {
-	border-top: 2px solid #DBDFEF;
+	border-top: 2px solid #dbdfef;
 }
 
 /* Button */
@@ -382,7 +383,7 @@
 .modal-dialog .form-control {
 	height: 40px;
 	font-size: 15px;
-	border: 2px solid #DBDFEF;
+	border: 2px solid #dbdfef;
 	box-shadow: none;
 }
 .panel-default .panel-body textarea.form-control,
@@ -396,10 +397,31 @@
 .panel-default .panel-body .form-horizontal .bootstrap-switch,
 .modal-dialog .form-horizontal .bootstrap-switch {
 	margin-top: 3px;
+	border: 2px solid #dbdfef;
+	border-radius: 3px;
 }
 .panel-default .panel-body .form-horizontal .bootstrap-switch .bootstrap-switch-label,
 .modal-dialog .form-horizontal .bootstrap-switch .bootstrap-switch-label {
+	color: #000;
 	white-space: nowrap;
+}
+.panel-default .panel-body .form-horizontal .bootstrap-switch .bootstrap-switch-handle-on,
+.modal-dialog .form-horizontal .bootstrap-switch .bootstrap-switch-handle-on {
+    border-bottom-left-radius: 2px;
+    border-top-left-radius: 2px;
+}
+.panel-default .panel-body .form-horizontal .bootstrap-switch .bootstrap-switch-handle-off,
+.modal-dialog .form-horizontal .bootstrap-switch .bootstrap-switch-handle-off {
+    border-bottom-right-radius: 2px;
+    border-top-right-radius: 2px;
+}
+.panel-default .panel-body .form-horizontal .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-success,
+.panel-default .panel-body .form-horizontal .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-success {
+	background: #86ce99;
+}
+.panel-default .panel-body .form-horizontal .bootstrap-switch .bootstrap-switch-handle-on.bootstrap-switch-default,
+.panel-default .panel-body .form-horizontal .bootstrap-switch .bootstrap-switch-handle-off.bootstrap-switch-default {
+	background-color: #e9ebf4;
 }
 .panel-default .panel-body .form-horizontal .form-group,
 .modal-dialog .form-horizontal .form-group {
@@ -408,7 +430,7 @@
 .panel-default .panel-body .form-horizontal .input-group-addon,
 .modal-dialog .modal-body .form-horizontal .input-group-addon {
 	background: #f8f9fc;
-	border: 2px solid #DBDFEF;
+	border: 2px solid #dbdfef;
 }
 .panel-default .panel-body .form-horizontal .input-group-addon:first-child,
 .modal-dialog .modal-body .form-horizontal .input-group-addon:first-child {
