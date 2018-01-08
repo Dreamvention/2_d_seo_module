@@ -3,7 +3,7 @@ class ModelExtensionModuleDSEOModule extends Model {
 	private $codename = 'd_seo_module';
 	
 	/*
-	*	Save File Manager.
+	*	Save File Data.
 	*/
 	public function saveFileData($file, $data) {
 		$dir = str_replace('system/', '', DIR_SYSTEM);
@@ -32,7 +32,7 @@ class ModelExtensionModuleDSEOModule extends Model {
 	}
 	
 	/*
-	*	Return htaccess.
+	*	Return File Data.
 	*/
 	public function getFileData($file) {
 		$dir = str_replace('system/', '', DIR_SYSTEM);

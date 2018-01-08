@@ -243,7 +243,7 @@ $_['button_import'] 								= 'Import';
 $_['help_install']									= '<br/>
 <h1>Install SEO Module now</h1>
 <br/>
-<p>You are one step away from installing the best SEO extension on the market. SEO module is just the begining. It will set ground features and an API for ther SEO modules that you can install. they will improve your Store search ranking and help you mamange your SEO like a pro. Click install! </p>
+<p>You are one step away from installing the best SEO extension on the market. SEO module is just the begining. It will set ground features and an API for ther SEO modules that you can install. They will improve your Store search ranking and help you mamange your SEO like a pro. Click install! </p>
 <br/>';
 $_['help_htaccess_setting']							= '<h4>Important!</h4>
 <p>Turning this option on  will uncomment the file .htaccess on apache server. But for the SEO urls to start working, you must visit Opencart Store Settings / tab Server and activate "Use SEO URLs"</p>';
