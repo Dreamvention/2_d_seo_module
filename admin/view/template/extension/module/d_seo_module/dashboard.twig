@@ -36,9 +36,7 @@
 		</div>
 		{% endif %}
 		{% if info %}
-		<div class="alert alert-info text-center">{{ info }}
-			<button type="button" class="close" data-dismiss="alert">&times;</button>
-		</div>
+		{{ info }}
 		{% endif %}
 		<div class="panel panel-default panel-resizable">
 			<div class="panel-heading">
@@ -256,7 +254,7 @@ function showAlert(json) {
 </script>
 <script type="text/javascript">
 
-$('body').on('click', '.button-install', function(){
+$('body').on('click', '.button-install', function() {
 	$.ajax({
 		type: 'post',
 		url: $(this).attr('action'),
@@ -281,7 +279,7 @@ $('body').on('click', '.button-install', function(){
     });
 });
 
-$('body').on('click', '.button-edit', function(){
+$('body').on('click', '.button-edit', function() {
 	var validate = false;
 	
 	if ($(this).attr('confirm')) {

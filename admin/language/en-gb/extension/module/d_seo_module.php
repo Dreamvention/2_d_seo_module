@@ -251,7 +251,7 @@ $_['help_htaccess_subfolder']						= '<h4>If you have a subfolder!</h4>
 <p>You your store is located in a subfolder (ex. http://myshop.com/store/) then you are required to set the RewriteBase (ex. from  <code>RewriteBase /</code> to <code>RewriteBase /store/</code> in the file above)</p>';
 $_['help_robots']									= '<h4>Important!</h4>
 <p>Robots.txt is a recomendation to the Search bot. You can start with the following default settings.</p>';
-$_['help_d_seo_module_pack']						= 'You can also buy <a href="https://opencartseomodule.com/seo-module-complete" target="_blank" class="alert-link"><strong>SEO Module Pro</strong></a> which contains the complete package of SEO modules.';
+$_['help_d_seo_module_pack']						= '<div class="alert alert-info text-center" style="cursor: pointer" onclick="window.open(\'http://opencartseomodule.com/seo-module-complete\', \'_blank\')">You can also buy <strong>SEO Module Pro</strong> which contains the complete package of SEO modules.</div>';
 
 // Success
 $_['success_save']									= 'Success: You have modified SEO Module!';
