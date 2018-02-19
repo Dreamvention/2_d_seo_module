@@ -4,8 +4,8 @@ $_['heading_title']									= '<span style="color:#449DD0; font-weight:bold">SEO
 $_['heading_title_main']							= 'SEO Module';
 
 // Text
-$_['text_edit']										= 'Edit SEO Module settings';
-$_['text_install']									= 'Install';
+$_['text_edit']										= 'Edit SEO Module';
+$_['text_install']									= 'Install SEO Module';
 $_['text_modules']									= 'Modules';
 $_['text_dashboard']								= 'Dashboard';
 $_['text_settings']									= 'Settings';
