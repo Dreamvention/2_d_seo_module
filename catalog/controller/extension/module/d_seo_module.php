@@ -535,9 +535,8 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			if ($info) $config_field_setting = array_replace_recursive($config_field_setting, $info);
 		}
 		
-		$setting = $this->model_setting_setting->getSetting($this->codename);
-		$field_setting = isset($setting[$this->codename . '_field_setting']) ? $setting[$this->codename . '_field_setting'] : array();
-					
+		$field_setting = ($this->config->get('module_' . $this->codename . '_field_setting')) ? $this->config->get('module_' . $this->codename . '_field_setting') : array();
+			
 		if (!empty($field_setting)) {
 			$config_field_setting = array_replace_recursive($config_field_setting, $field_setting);
 		}
