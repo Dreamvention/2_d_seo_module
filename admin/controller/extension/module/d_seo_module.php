@@ -1416,17 +1416,19 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		}
 
 		if (($this->request->server['REQUEST_METHOD'] == 'POST') && $this->validate()) {			
-			$setting = $this->model_setting_setting->getSetting('module_' . $this->codename, $store_id);
+			$old_setting = $this->model_setting_setting->getSetting('module_' . $this->codename, $store_id);
 			
+			$new_setting = array_replace_recursive($old_setting, $this->request->post);
+						
 			if (isset($this->request->post['module_' . $this->codename . '_status']) && $this->request->post['module_' . $this->codename . '_status']) {
-				$setting['module_' . $this->codename . '_setting']['control_element']['enable_status']['implemented'] = 1;
+				$new_setting['module_' . $this->codename . '_setting']['control_element']['enable_status']['implemented'] = 1;
 			}
 
 			if (isset($this->request->post['htaccess'])) {
 				$this->{'model_extension_module_' . $this->codename}->saveFileData('htaccess', $this->request->post['htaccess']);
 				
 				if (isset($this->request->post['htaccess']['status']) && $this->request->post['htaccess']['status']) {
-					$setting['module_' . $this->codename . '_setting']['control_element']['enable_htaccess']['implemented'] = 1;
+					$new_setting['module_' . $this->codename . '_setting']['control_element']['enable_htaccess']['implemented'] = 1;
 				}
 			}
 			
@@ -1434,16 +1436,24 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 				$this->{'model_extension_module_' . $this->codename}->saveFileData('robots', $this->request->post['robots']);
 				
 				if (isset($this->request->post['robots']['status']) && $this->request->post['robots']['status']) {
-					$setting['module_' . $this->codename . '_setting']['control_element']['enable_robots']['implemented'] = 1;
+					$new_setting['module_' . $this->codename . '_setting']['control_element']['enable_robots']['implemented'] = 1;
 				}
+			}
+
+			$this->model_setting_setting->editSetting('module_' . $this->codename, $new_setting, $store_id);
+			
+			$save_data = array(
+				'old_setting'		=> $old_setting,
+				'new_setting'		=> $new_setting,
+				'store_id'			=> $store_id
+			);			
+
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
+		
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/save', $save_data);
 			}			
 			
-			$setting = array_replace_recursive($setting, $this->request->post);
-			
-			$this->model_setting_setting->editSetting('module_' . $this->codename, $setting, $store_id);
-			
-			$this->cache->delete('url_rewrite');
-
 			$data['success'] = $this->language->get('success_save');
 		}
 
@@ -2030,6 +2040,18 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			
 			$this->uninstallExtension();
 			$this->installExtension();
+		}
+		
+		if (file_exists(DIR_APPLICATION . 'model/extension/d_opencart_patch/modification.php')) {
+			$this->load->model('extension/d_opencart_patch/modification');
+			
+			$result = $this->model_extension_d_opencart_patch_modification->getModificationByCode('d_seo_module');
+			
+			if ($result && (strpos($result['xml'], '$url_info = parse_url(str_replace') !== false)) {
+				$this->model_extension_d_opencart_patch_modification->setModification($this->codename . '.xml', 0);
+				$this->model_extension_d_opencart_patch_modification->setModification($this->codename . '.xml', 1);
+				$this->model_extension_d_opencart_patch_modification->refreshCache();
+			}
 		}
 	}
 		

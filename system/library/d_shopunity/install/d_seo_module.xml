@@ -84,38 +84,48 @@
 	<!-- SEO URL -->
 	<file path="catalog/controller/common/seo_url.php">
 		<operation error="skip">
-			<search><![CDATA[if (isset($this->request->get['_route_'])) {]]></search>
+			<search><![CDATA[if ($this->config->get('config_seo_url')) {]]></search>
             <add position="before"><![CDATA[				
 				//d_seo_module
 				$route_status = isset($this->request->get['route']);
 				
 				$this->load->controller('extension/module/d_seo_module/seo_url');
-				
+				///d_seo_module
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[if (isset($this->request->get['_route_'])) {]]></search>
+            <add position="before"><![CDATA[				
+				//d_seo_module
 				if (!$route_status && isset($this->request->get['route'])) return new Action($this->request->get['route']);
 				///d_seo_module
 			]]></add>
 		</operation>
 		<operation error="skip">
-            <search><![CDATA[$url_info = parse_url(str_replace('&amp;', '&', $link));]]></search>
-            <add position="before"><![CDATA[
+			<search><![CDATA[parse_str($url_info['query'], $data);]]></search>
+            <add position="replace"><![CDATA[				
 				//d_seo_module
-				$rewrite_data = $this->load->controller('extension/module/d_seo_module/seo_url_rewrite', $link);
-				
-				if ($rewrite_data['status']) return $rewrite_data['url'];
+				if (isset($url_info['query'])) parse_str($url_info['query'], $data);
 				///d_seo_module
-            ]]></add>
-        </operation>
+			]]></add>
+		</operation>
 	</file>
 	
 	<file path="catalog/controller/startup/seo_url.php">
 		<operation error="skip">
-			<search><![CDATA[if (isset($this->request->get['_route_'])) {]]></search>
+			<search><![CDATA[if ($this->config->get('config_seo_url')) {]]></search>
             <add position="before"><![CDATA[				
 				//d_seo_module
 				$route_status = isset($this->request->get['route']);
 				
 				$this->load->controller('extension/module/d_seo_module/seo_url');
-				
+				///d_seo_module
+			]]></add>
+		</operation>
+		<operation error="skip">
+			<search><![CDATA[if (isset($this->request->get['_route_'])) {]]></search>
+            <add position="before"><![CDATA[				
+				//d_seo_module
 				if (!$route_status && isset($this->request->get['route'])) {
 					if (VERSION >= '2.3.0.0') {
 						return true;
@@ -127,15 +137,13 @@
 			]]></add>
 		</operation>
 		<operation error="skip">
-            <search><![CDATA[$url_info = parse_url(str_replace('&amp;', '&', $link));]]></search>
-            <add position="before"><![CDATA[
+			<search><![CDATA[parse_str($url_info['query'], $data);]]></search>
+            <add position="replace"><![CDATA[				
 				//d_seo_module
-				$rewrite_data = $this->load->controller('extension/module/d_seo_module/seo_url_rewrite', $link);
-				
-				if ($rewrite_data['status']) return $rewrite_data['url'];
+				if (isset($url_info['query'])) parse_str($url_info['query'], $data);
 				///d_seo_module
-            ]]></add>
-        </operation>
+			]]></add>
+		</operation>
 	</file>
 	
 	<file path="catalog/controller/common/language.php">

@@ -10,7 +10,7 @@ class ModelExtensionDSEOModuleTargetKeywordDSEOModuleTargetKeyword extends Model
 		$custom_page_exception_routes = $this->load->controller('extension/module/d_seo_module/getCustomPageExceptionRoutes');
 		
 		if (isset($data['route']) && isset($data['store_id']) && isset($data['language_id']) && isset($data['target_keyword'])) {
-			if ((strpos($data['route'], 'category_id') === 0) || (strpos($data['route'], 'product_id') === 0) || (strpos($data['route'], 'manufacturer_id') === 0) || (strpos($data['route'], 'information_id') === 0) || (preg_match('/[A-Za-z0-9]+\/[A-Za-z0-9]+/i', $data['route']) && !($custom_page_exception_routes && in_array($data['route'], $custom_page_exception_routes)))) {	
+			if ((strpos($data['route'], 'category_id') === 0) || (strpos($data['route'], 'product_id') === 0) || (strpos($data['route'], 'manufacturer_id') === 0) || (strpos($data['route'], 'information_id') === 0) || (preg_match('/[A-Za-z0-9]+\/[A-Za-z0-9]+/i', $data['route']) && !in_array($data['route'], $custom_page_exception_routes))) {	
 				$target_keyword_store_id = 0;
 				
 				if (strpos($data['route'], 'category_id') === 0) {
@@ -163,7 +163,7 @@ class ModelExtensionDSEOModuleTargetKeywordDSEOModuleTargetKeyword extends Model
 		$query = $this->db->query("SELECT * FROM " . DB_PREFIX . "d_target_keyword WHERE route LIKE '%/%'");
 		
 		foreach ($query->rows as $result) {
-			if (!($custom_page_exception_routes && in_array($result['route'], $custom_page_exception_routes))) {
+			if (!in_array($result['route'], $custom_page_exception_routes)) {
 				$target_elements[$result['route']]['route'] = $result['route'];
 				
 				if ((isset($field_info['sheet']['custom_page']['field']['target_keyword']['multi_store']) && $field_info['sheet']['custom_page']['field']['target_keyword']['multi_store'] && isset($field_info['sheet']['custom_page']['field']['target_keyword']['multi_store_status']) && $field_info['sheet']['custom_page']['field']['target_keyword']['multi_store_status'])) {

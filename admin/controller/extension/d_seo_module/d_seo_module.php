@@ -154,8 +154,6 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 			$setting['module_' . $this->codename . '_setting']['control_element']['enable_seo_url']['implemented'] = 1;
 			
 			$this->model_setting_setting->editSetting('module_' . $this->codename, $setting);
-			
-			$this->cache->delete('url_rewrite');
 		}
 	}
 	
@@ -1044,8 +1042,6 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 			$setting['module_' . $this->codename . '_setting']['control_element']['enable_seo_url']['implemented'] = 1;
 			
 			$this->model_setting_setting->editSetting('module_' . $this->codename, $setting);
-			
-			$this->cache->delete('url_rewrite');
 		}
 		
 		if ($data['element_code'] == 'enable_htaccess') {
@@ -1065,8 +1061,6 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 			$setting['module_' . $this->codename . '_setting']['control_element']['enable_htaccess']['implemented'] = 1;
 			
 			$this->model_setting_setting->editSetting('module_' . $this->codename, $setting, $data['store_id']);
-			
-			$this->cache->delete('url_rewrite');
 		}
 		
 		if ($data['element_code'] == 'enable_robots') {

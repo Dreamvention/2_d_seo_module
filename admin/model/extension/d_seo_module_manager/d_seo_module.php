@@ -227,7 +227,8 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 					$this->request->post['value'] = '';
 				
 					foreach ($keywords[0] as $keyword) {
-						$keyword = substr($keyword, 1, strlen($keyword)-2);
+						$keyword = substr($keyword, 1, strlen($keyword) - 2);
+						
 						$this->db->query("INSERT INTO " . DB_PREFIX . "d_target_keyword SET route = 'category_id=" . (int)$element['element_id'] . "', store_id='" . (int)$target_keyword_store_id . "', language_id = '" . (int)$element['language_id'] . "', sort_order = '" . $sort_order . "', keyword = '" .  $this->db->escape($keyword) . "'");
 					
 						$sort_order++;
@@ -254,8 +255,9 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 					$this->request->post['value'] = '';
 				
 					foreach ($keywords[0] as $keyword) {
-						$keyword = substr($keyword, 1, strlen($keyword)-2);
-					$this->db->query("INSERT INTO " . DB_PREFIX . "d_target_keyword SET route = 'product_id=" . (int)$element['element_id'] . "', 	store_id='" . (int)$target_keyword_store_id . "', language_id = '" . (int)$element['language_id'] . "', sort_order = '" . $sort_order . "', keyword = '" .  $this->db->escape($keyword) . "'");
+						$keyword = substr($keyword, 1, strlen($keyword) - 2);
+						
+						$this->db->query("INSERT INTO " . DB_PREFIX . "d_target_keyword SET route = 'product_id=" . (int)$element['element_id'] . "', 	store_id='" . (int)$target_keyword_store_id . "', language_id = '" . (int)$element['language_id'] . "', sort_order = '" . $sort_order . "', keyword = '" .  $this->db->escape($keyword) . "'");
 					
 						$sort_order++;
 						$this->request->post['value'] .= '[' . $keyword . ']';
@@ -281,7 +283,8 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 					$this->request->post['value'] = '';
 				
 					foreach ($keywords[0] as $keyword) {
-						$keyword = substr($keyword, 1, strlen($keyword)-2);
+						$keyword = substr($keyword, 1, strlen($keyword) - 2);
+						
 						$this->db->query("INSERT INTO " . DB_PREFIX . "d_target_keyword SET route = 'manufacturer_id=" . (int)$element['element_id'] . "', store_id='" . (int)$target_keyword_store_id . "', language_id = '" . (int)$element['language_id'] . "', sort_order = '" . $sort_order . "', keyword = '" .  $this->db->escape($keyword) . "'");
 					
 						$sort_order++;
@@ -308,7 +311,8 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 					$this->request->post['value'] = '';
 				
 					foreach ($keywords[0] as $keyword) {
-						$keyword = substr($keyword, 1, strlen($keyword)-2);
+						$keyword = substr($keyword, 1, strlen($keyword) - 2);
+						
 						$this->db->query("INSERT INTO " . DB_PREFIX . "d_target_keyword SET route = 'information_id=" . (int)$element['element_id'] . "', store_id='" . (int)$target_keyword_store_id . "', language_id = '" . (int)$element['language_id'] . "', sort_order = '" . $sort_order . "', keyword = '" .  $this->db->escape($keyword) . "'");
 					
 						$sort_order++;
@@ -544,8 +548,10 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 									$sort_order = 1;
 									
 									foreach ($keywords[0] as $keyword) {
-										$keyword = substr($keyword, 1, strlen($keyword)-2);
+										$keyword = substr($keyword, 1, strlen($keyword) - 2);
+										
 										$this->db->query("INSERT INTO " . DB_PREFIX . "d_target_keyword SET route = 'category_id=" . (int)$category['category_id'] . "', store_id = '" . (int)$target_keyword_store_id . "', language_id = '" . (int)$language['language_id'] . "', sort_order = '" . $sort_order . "', keyword = '" .  $this->db->escape($keyword) . "'");
+										
 										$sort_order++;
 									}
 								}
@@ -612,8 +618,10 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 									$sort_order = 1;
 									
 									foreach ($keywords[0] as $keyword) {
-										$keyword = substr($keyword, 1, strlen($keyword)-2);
+										$keyword = substr($keyword, 1, strlen($keyword) - 2);
+										
 										$this->db->query("INSERT INTO " . DB_PREFIX . "d_target_keyword SET route = 'product_id=" . (int)$product['product_id'] . "', store_id = '" . (int)$target_keyword_store_id . "', language_id = '" . (int)$language['language_id'] . "', sort_order = '" . $sort_order . "', keyword = '" .  $this->db->escape($keyword) . "'");
+										
 										$sort_order++;
 									}
 								}
@@ -680,8 +688,10 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 									$sort_order = 1;
 									
 									foreach ($keywords[0] as $keyword) {
-										$keyword = substr($keyword, 1, strlen($keyword)-2);
+										$keyword = substr($keyword, 1, strlen($keyword) - 2);
+										
 										$this->db->query("INSERT INTO " . DB_PREFIX . "d_target_keyword SET route = 'manufacturer_id=" . (int)$manufacturer['manufacturer_id'] . "', store_id = '" . (int)$target_keyword_store_id . "', language_id = '" . (int)$language['language_id'] . "', sort_order = '" . $sort_order . "', keyword = '" .  $this->db->escape($keyword) . "'");
+										
 										$sort_order++;
 									}
 								}
@@ -748,8 +758,10 @@ class ModelExtensionDSEOModuleManagerDSEOModule extends Model {
 									$sort_order = 1;
 									
 									foreach ($keywords[0] as $keyword) {
-										$keyword = substr($keyword, 1, strlen($keyword)-2);
+										$keyword = substr($keyword, 1, strlen($keyword) - 2);
+										
 										$this->db->query("INSERT INTO " . DB_PREFIX . "d_target_keyword SET route = 'information_id=" . (int)$information['information_id'] . "', store_id = '" . (int)$target_keyword_store_id . "', language_id = '" . (int)$language['language_id'] . "', sort_order = '" . $sort_order . "', keyword = '" .  $this->db->escape($keyword) . "'");
+										
 										$sort_order++;
 									}
 								}

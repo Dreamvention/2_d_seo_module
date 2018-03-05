@@ -288,7 +288,7 @@ class ModelExtensionDSEOModuleDSEOModule extends Model {
 				$target_keyword_store_id = 0;
 			}
 						
-			$sql = "SELECT tk.route, tk.language_id, tk.sort_order, tk.keyword, c.category_id FROM " . DB_PREFIX . "d_target_keyword tk LEFT JOIN " . DB_PREFIX . "category c ON (CONCAT('category_id=', c.category_id) = tk.route) LEFT JOIN " . DB_PREFIX . "d_target_keyword tk2 ON (tk2.route = tk.route AND tk2.store_id = '" . (int)$target_keyword_store_id . "') WHERE tk2.route LIKE 'category_id=%'";
+			$sql = "SELECT tk.route, tk.language_id, tk.sort_order, tk.keyword, c.category_id FROM " . DB_PREFIX . "d_target_keyword tk LEFT JOIN " . DB_PREFIX . "category c ON (CONCAT('category_id=', c.category_id) = tk.route) LEFT JOIN " . DB_PREFIX . "d_target_keyword tk2 ON (tk2.route = tk.route AND tk2.store_id = '" . (int)$target_keyword_store_id . "') WHERE tk.route LIKE 'category_id=%' AND tk.store_id = '" . (int)$target_keyword_store_id . "'";
 			
 			$implode = array();
 			$implode_language = array();
@@ -340,7 +340,7 @@ class ModelExtensionDSEOModuleDSEOModule extends Model {
 				$target_keyword_store_id = 0;
 			}
 						
-			$sql = "SELECT tk.route, tk.language_id, tk.sort_order, tk.keyword, p.product_id FROM " . DB_PREFIX . "d_target_keyword tk LEFT JOIN " . DB_PREFIX . "product p ON (CONCAT('product_id=', p.product_id) = tk.route) LEFT JOIN " . DB_PREFIX . "d_target_keyword tk2 ON (tk2.route = tk.route AND tk2.store_id = '" . (int)$target_keyword_store_id . "') WHERE tk2.route LIKE 'product_id=%'";
+			$sql = "SELECT tk.route, tk.language_id, tk.sort_order, tk.keyword, p.product_id FROM " . DB_PREFIX . "d_target_keyword tk LEFT JOIN " . DB_PREFIX . "product p ON (CONCAT('product_id=', p.product_id) = tk.route) LEFT JOIN " . DB_PREFIX . "d_target_keyword tk2 ON (tk2.route = tk.route AND tk2.store_id = '" . (int)$target_keyword_store_id . "') WHERE tk.route LIKE 'product_id=%' AND tk.store_id = '" . (int)$target_keyword_store_id . "'";
 			
 			$implode = array();
 			$implode_language = array();
@@ -392,7 +392,7 @@ class ModelExtensionDSEOModuleDSEOModule extends Model {
 				$target_keyword_store_id = 0;
 			}
 						
-			$sql = "SELECT tk.route, tk.language_id, tk.sort_order, tk.keyword, m.manufacturer_id FROM " . DB_PREFIX . "d_target_keyword tk LEFT JOIN " . DB_PREFIX . "manufacturer m ON (CONCAT('manufacturer_id=', m.manufacturer_id) = tk.route) LEFT JOIN " . DB_PREFIX . "d_target_keyword tk2 ON (tk2.route = tk.route AND tk2.store_id = '" . (int)$target_keyword_store_id . "') WHERE tk2.route LIKE 'manufacturer_id=%'";
+			$sql = "SELECT tk.route, tk.language_id, tk.sort_order, tk.keyword, m.manufacturer_id FROM " . DB_PREFIX . "d_target_keyword tk LEFT JOIN " . DB_PREFIX . "manufacturer m ON (CONCAT('manufacturer_id=', m.manufacturer_id) = tk.route) LEFT JOIN " . DB_PREFIX . "d_target_keyword tk2 ON (tk2.route = tk.route AND tk2.store_id = '" . (int)$target_keyword_store_id . "') WHERE tk.route LIKE 'manufacturer_id=%' AND tk.store_id = '" . (int)$target_keyword_store_id . "'";
 			
 			$implode = array();
 			$implode_language = array();
@@ -444,7 +444,7 @@ class ModelExtensionDSEOModuleDSEOModule extends Model {
 				$target_keyword_store_id = 0;
 			}
 						
-			$sql = "SELECT tk.route, tk.language_id, tk.sort_order, tk.keyword, i.information_id FROM " . DB_PREFIX . "d_target_keyword tk LEFT JOIN " . DB_PREFIX . "information i ON (CONCAT('information_id=', i.information_id) = tk.route) LEFT JOIN " . DB_PREFIX . "d_target_keyword tk2 ON (tk2.route = tk.route AND tk2.store_id = '" . (int)$target_keyword_store_id . "') WHERE tk2.route LIKE 'information_id=%'";
+			$sql = "SELECT tk.route, tk.language_id, tk.sort_order, tk.keyword, i.information_id FROM " . DB_PREFIX . "d_target_keyword tk LEFT JOIN " . DB_PREFIX . "information i ON (CONCAT('information_id=', i.information_id) = tk.route) LEFT JOIN " . DB_PREFIX . "d_target_keyword tk2 ON (tk2.route = tk.route AND tk2.store_id = '" . (int)$target_keyword_store_id . "') WHERE tk.route LIKE 'information_id=%' AND tk.store_id = '" . (int)$target_keyword_store_id . "'";
 			
 			$implode = array();
 			$implode_language = array();
@@ -496,7 +496,7 @@ class ModelExtensionDSEOModuleDSEOModule extends Model {
 				$target_keyword_store_id = 0;
 			}
 			
-			$sql = "SELECT tk.route, tk.language_id, tk.sort_order, tk.keyword FROM " . DB_PREFIX . "d_target_keyword tk LEFT JOIN " . DB_PREFIX . "d_target_keyword tk2 ON (tk2.route = tk.route AND tk2.store_id = '" . (int)$target_keyword_store_id . "') WHERE tk2.route LIKE '%/%'";
+			$sql = "SELECT tk.route, tk.language_id, tk.sort_order, tk.keyword FROM " . DB_PREFIX . "d_target_keyword tk LEFT JOIN " . DB_PREFIX . "d_target_keyword tk2 ON (tk2.route = tk.route AND tk2.store_id = '" . (int)$target_keyword_store_id . "') WHERE tk.route LIKE '%/%' AND tk.store_id = '" . (int)$target_keyword_store_id . "'";
 			
 			$implode = array();
 			$implode_language = array();
@@ -530,7 +530,7 @@ class ModelExtensionDSEOModuleDSEOModule extends Model {
 			$query = $this->db->query($sql);
 						
 			foreach ($query->rows as $result) {
-				if (!($custom_page_exception_routes && in_array($result['route'], $custom_page_exception_routes))) {
+				if (!in_array($result['route'], $custom_page_exception_routes)) {
 					$target_elements[$result['route']]['route'] = $result['route'];
 					$target_elements[$result['route']]['target_keyword'][$result['language_id']][$result['sort_order']] = $result['keyword'];
 				}
@@ -548,7 +548,7 @@ class ModelExtensionDSEOModuleDSEOModule extends Model {
 		$custom_page_exception_routes = $this->load->controller('extension/module/d_seo_module/getCustomPageExceptionRoutes');
 		
 		if (isset($data['route']) && isset($data['store_id']) && isset($data['target_keyword'])) {
-			if ((strpos($data['route'], 'category_id') === 0) || (strpos($data['route'], 'product_id') === 0) || (strpos($data['route'], 'manufacturer_id') === 0) || (strpos($data['route'], 'information_id') === 0) || (preg_match('/[A-Za-z0-9]+\/[A-Za-z0-9]+/i', $data['route']) && !($custom_page_exception_routes && in_array($data['route'], $custom_page_exception_routes)))) {	
+			if ((strpos($data['route'], 'category_id') === 0) || (strpos($data['route'], 'product_id') === 0) || (strpos($data['route'], 'manufacturer_id') === 0) || (strpos($data['route'], 'information_id') === 0) || (preg_match('/[A-Za-z0-9]+\/[A-Za-z0-9]+/i', $data['route']) && !in_array($data['route'], $custom_page_exception_routes))) {	
 				$target_keyword_store_id = 0;
 				
 				if (strpos($data['route'], 'category_id') === 0) {
@@ -615,7 +615,7 @@ class ModelExtensionDSEOModuleDSEOModule extends Model {
 		$custom_page_exception_routes = $this->load->controller('extension/module/d_seo_module/getCustomPageExceptionRoutes');
 		
 		if (isset($data['route']) && isset($data['store_id']) && isset($data['language_id']) && isset($data['target_keyword'])) {
-			if ((strpos($data['route'], 'category_id') === 0) || (strpos($data['route'], 'product_id') === 0) || (strpos($data['route'], 'manufacturer_id') === 0) || (strpos($data['route'], 'information_id') === 0) || (preg_match('/[A-Za-z0-9]+\/[A-Za-z0-9]+/i', $data['route']) && !($custom_page_exception_routes && in_array($data['route'], $custom_page_exception_routes)))) {	
+			if ((strpos($data['route'], 'category_id') === 0) || (strpos($data['route'], 'product_id') === 0) || (strpos($data['route'], 'manufacturer_id') === 0) || (strpos($data['route'], 'information_id') === 0) || (preg_match('/[A-Za-z0-9]+\/[A-Za-z0-9]+/i', $data['route']) && !in_array($data['route'], $custom_page_exception_routes))) {	
 				$target_keyword_store_id = 0;
 				
 				if (strpos($data['route'], 'category_id') === 0) {
@@ -684,7 +684,7 @@ class ModelExtensionDSEOModuleDSEOModule extends Model {
 		$custom_page_exception_routes = $this->load->controller('extension/module/d_seo_module/getCustomPageExceptionRoutes');
 		
 		if (isset($data['route']) && isset($data['store_id'])) {
-			if ((strpos($data['route'], 'category_id') === 0) || (strpos($data['route'], 'product_id') === 0) || (strpos($data['route'], 'manufacturer_id') === 0) || (strpos($data['route'], 'information_id') === 0) || (preg_match('/[A-Za-z0-9]+\/[A-Za-z0-9]+/i', $data['route']) && !($custom_page_exception_routes && in_array($data['route'], $custom_page_exception_routes)))) {	
+			if ((strpos($data['route'], 'category_id') === 0) || (strpos($data['route'], 'product_id') === 0) || (strpos($data['route'], 'manufacturer_id') === 0) || (strpos($data['route'], 'information_id') === 0) || (preg_match('/[A-Za-z0-9]+\/[A-Za-z0-9]+/i', $data['route']) && !in_array($data['route'], $custom_page_exception_routes))) {	
 				$target_keyword_store_id = 0;
 				
 				if (strpos($data['route'], 'category_id') === 0) {
@@ -819,7 +819,7 @@ class ModelExtensionDSEOModuleDSEOModule extends Model {
 			$query = $this->db->query("SELECT route, language_id, CONCAT('[', GROUP_CONCAT(DISTINCT keyword ORDER BY sort_order SEPARATOR ']['), ']') as target_keyword FROM " . DB_PREFIX . "d_target_keyword WHERE route LIKE '%/%' AND store_id = '" . (int)$target_keyword_store_id . "' GROUP BY route, language_id");
 									
 			foreach ($query->rows as $result) {
-				if (!($custom_page_exception_routes && in_array($result['route'], $custom_page_exception_routes))) {
+				if (!in_array($result['route'], $custom_page_exception_routes)) {
 					$target_elements[$result['route']]['route'] = $result['route'];
 					$target_elements[$result['route']]['target_keyword'][$result['language_id']] = $result['target_keyword'];
 				}
@@ -903,7 +903,7 @@ class ModelExtensionDSEOModuleDSEOModule extends Model {
 		$query = $this->db->query("SELECT route, language_id, CONCAT('[', GROUP_CONCAT(DISTINCT keyword ORDER BY sort_order SEPARATOR ']['), ']') as target_keyword FROM " . DB_PREFIX . "d_target_keyword WHERE route LIKE '%/%' AND store_id = '" . (int)$target_keyword_store_id . "' GROUP BY route, language_id");
 									
 		foreach ($query->rows as $result) {
-			if (!($custom_page_exception_routes && in_array($result['route'], $custom_page_exception_routes))) {
+			if (!in_array($result['route'], $custom_page_exception_routes)) {
 				$target_elements[$result['route']]['route'] = $result['route'];
 				$target_elements[$result['route']]['target_keyword'][$result['language_id']] = $result['target_keyword'];
 			}
@@ -936,8 +936,10 @@ class ModelExtensionDSEOModuleDSEOModule extends Model {
 								$sort_order = 1;
 									
 								foreach ($keywords[0] as $keyword) {
-									$keyword = substr($keyword, 1, strlen($keyword)-2);
+									$keyword = substr($keyword, 1, strlen($keyword) - 2);
+									
 									$this->db->query("INSERT INTO " . DB_PREFIX . "d_target_keyword SET route = '" . $this->db->escape($target_element['route']) . "', store_id = '" . (int)$target_keyword_store_id . "', language_id = '" . (int)$language['language_id'] . "', sort_order = '" . $sort_order . "', keyword = '" .  $this->db->escape($keyword) . "'");
+									
 									$sort_order++;
 								}
 							}

@@ -81,7 +81,7 @@ class ModelExtensionModuleDSEOModule extends Model {
 		
 		return $result;
 	}
-	
+		
 	/*
 	*	Sort Array By Column.
 	*/

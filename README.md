@@ -1,7 +1,6 @@
 Seo Module
 ==========
-The first professional SEO extension for opencart 2
-Opencart version supported 2.3.0 and under (other versions are in developement. Comming soon...)
+The first professional SEO extension for opencart 2 and 3
 
 ##### Table of content
 1. [Installation & Update](#installation-and-update)
@@ -848,14 +847,6 @@ _Here you can preform your own actions after route of the page has been already 
 * **method:** `public function seo_url_check()`
 * **parameters:** `none`
 * **output:** `html`
-
-####9. catalog/controller/common/seo_url/rewrite or catalog/controller/startup/seo_url/rewrite
-#####seo_url_rewrite()
-_Modify the link that will be returned function url->link._
-
-* **method:** `public function seo_url_rewrite($data)`
-* **parameters:** `$data = array('url' => ..., 'status' => {true|false});`
-* **output:** `$data = array('url' => ..., 'status' => {true|false});`
 
 ---
 
