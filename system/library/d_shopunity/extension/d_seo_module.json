@@ -1,6 +1,6 @@
 {
     "codename": "d_seo_module",
-    "version": "3.0.8",
+    "version": "3.0.9",
     "name": "SEO Module",
     "description": "SEO Module is the core platform, necessary for the installation of other SEO modules.",
 	"index": "extension/module/d_seo_module",
@@ -106,6 +106,10 @@
     ],
     "changelog": [
         {
+            "version": "3.0.9",
+            "change": "Bugs fixed"
+        },
+		{
             "version": "3.0.8",
             "change": "New URL Cache"
         },
