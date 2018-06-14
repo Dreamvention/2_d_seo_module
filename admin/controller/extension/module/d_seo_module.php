@@ -1867,6 +1867,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 					$this->model_extension_module_d_event_manager->addEvent($this->codename, 'admin/view/common/dashboard/after', 'extension/module/d_seo_module/dashboard_after');
 				}
 				
+				$this->model_extension_module_d_event_manager->addEvent($this->codename, 'admin/view/common/header/after', 'extension/module/d_seo_module/header_after');
 				$this->model_extension_module_d_event_manager->addEvent($this->codename, 'admin/model/localisation/language/addLanguage/after', 'extension/module/d_seo_module/language_add_language_after');
 				$this->model_extension_module_d_event_manager->addEvent($this->codename, 'admin/model/localisation/language/editLanguage/after', 'extension/module/d_seo_module/language_edit_language_after');
 				$this->model_extension_module_d_event_manager->addEvent($this->codename, 'admin/model/localisation/language/deleteLanguage/after', 'extension/module/d_seo_module/language_delete_language_after');
@@ -2051,6 +2052,48 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 				$this->model_extension_d_opencart_patch_modification->setModification($this->codename . '.xml', 0);
 				$this->model_extension_d_opencart_patch_modification->setModification($this->codename . '.xml', 1);
 				$this->model_extension_d_opencart_patch_modification->refreshCache();
+			}
+		}
+	}
+	
+	public function header_after($route, $data, &$output) {
+		$this->load->language($this->route);
+		
+		$this->load->model($this->route);
+
+		if (file_exists(DIR_SYSTEM . 'library/d_simple_html_dom.php')) {
+			$menu_items = array();
+
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
+					
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/header_menu');
+				if ($info) $menu_items = array_merge($menu_items, $info);
+			}
+		
+			$menu_items = $this->{'model_extension_module_' . $this->codename}->sortArrayByColumn($menu_items, 'sort_order');
+				
+			$html_menu = '<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-search fa-lg"></i></a><ul class="dropdown-menu dropdown-menu-right" style="min-width: 260px">';
+		
+			foreach ($menu_items as $menu_item) {
+				$html_menu .= $menu_item['html'];
+				
+				if ($menu_item != end($menu_items)) {
+					$html_menu .= '<li class="divider"></li>';
+				}
+			}
+		
+			$html_menu .= '</ul></li>';
+		
+			if ($menu_items) {
+				$html_dom = new d_simple_html_dom();
+				$html_dom->load((string)$output, $lowercase = true, $stripRN = false, $defaultBRText = DEFAULT_BR_TEXT);
+		
+				if ($html_dom->find('.navbar .nav')) {
+					$html_dom->find('.navbar .nav li', 0)->outertext .= $html_menu;
+				
+					$output = (string)$html_dom;
+				}
 			}
 		}
 	}
@@ -3423,7 +3466,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 						
 		$this->response->setOutput(json_encode($data));
 	}
-		
+			
 	/*
 	*	Validator Functions.
 	*/		

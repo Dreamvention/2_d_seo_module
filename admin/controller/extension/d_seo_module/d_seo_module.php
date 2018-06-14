@@ -7,7 +7,7 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 			
 	/*
 	*	Functions for SEO Module.
-	*/
+	*/	
 	public function menu() {
 		$_language = new Language();
 		$_language->load($this->route);

@@ -1,8 +1,7 @@
 <?php
 class ModelExtensionDSEOModuleDSEOModule extends Model {
 	private $codename = 'd_seo_module';
-	private $route = 'extension/d_seo_module/d_seo_module';
-	
+		
 	/*
 	*	Add Language.
 	*/
