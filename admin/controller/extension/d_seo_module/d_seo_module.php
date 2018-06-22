@@ -69,13 +69,19 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 	public function setting_tab_general_language() {
 		$this->load->model($this->route);
 		$this->load->model('extension/module/' . $this->codename);
-				
+		
+		if (file_exists(DIR_APPLICATION . 'model/extension/module/d_twig_manager.php')) {
+			$this->load->model('extension/module/d_twig_manager');
+			
+			$this->model_extension_module_d_twig_manager->installCompatibility();
+		}
+						
 		$languages = $this->{'model_extension_module_' . $this->codename}->getLanguages();
 		
 		$this->load->controller('extension/module/d_seo_module/update');
 		
 		$field_info = $this->load->controller('extension/module/d_seo_module/getFieldInfo');
-		
+				
 		if (isset($field_info['sheet']['home']['field'])) {
 			$data['fields'] = $field_info['sheet']['home']['field'];
 		} else {
@@ -122,10 +128,22 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 	}
 	
 	public function setting_style() {		
+		if (file_exists(DIR_APPLICATION . 'model/extension/module/d_twig_manager.php')) {
+			$this->load->model('extension/module/d_twig_manager');
+			
+			$this->model_extension_module_d_twig_manager->installCompatibility();
+		}
+		
 		return $this->load->view($this->route . '/setting_style');
 	}
 	
 	public function setting_script() {			
+		if (file_exists(DIR_APPLICATION . 'model/extension/module/d_twig_manager.php')) {
+			$this->load->model('extension/module/d_twig_manager');
+			
+			$this->model_extension_module_d_twig_manager->installCompatibility();
+		}
+		
 		$url_token = '';
 		
 		if (isset($this->session->data['token'])) {
@@ -139,7 +157,7 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 		$data['route'] = $this->route;
 		$data['url_token'] = $url_token;
 		$data['store_id'] = 0;
-		
+				
 		return $this->load->view($this->route . '/setting_script', $data);
 	}
 	
@@ -161,12 +179,18 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 		$this->load->model($this->route);
 		$this->load->model('extension/module/' . $this->codename);
 		
+		if (file_exists(DIR_APPLICATION . 'model/extension/module/d_twig_manager.php')) {
+			$this->load->model('extension/module/d_twig_manager');
+			
+			$this->model_extension_module_d_twig_manager->installCompatibility();
+		}
+		
 		$languages = $this->{'model_extension_module_' . $this->codename}->getLanguages();
 		
 		$this->load->controller('extension/module/d_seo_module/update');
 		
 		$field_info = $this->load->controller('extension/module/d_seo_module/getFieldInfo');
-		
+				
 		if (isset($field_info['sheet']['home']['field'])) {
 			$data['fields'] = $field_info['sheet']['home']['field'];
 		} else {
@@ -215,10 +239,22 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 	}
 	
 	public function store_form_style() {		
+		if (file_exists(DIR_APPLICATION . 'model/extension/module/d_twig_manager.php')) {
+			$this->load->model('extension/module/d_twig_manager');
+			
+			$this->model_extension_module_d_twig_manager->installCompatibility();
+		}
+		
 		return $this->load->view($this->route . '/store_form_style');
 	}
 	
 	public function store_form_script() {	
+		if (file_exists(DIR_APPLICATION . 'model/extension/module/d_twig_manager.php')) {
+			$this->load->model('extension/module/d_twig_manager');
+			
+			$this->model_extension_module_d_twig_manager->installCompatibility();
+		}
+		
 		$url_token = '';
 		
 		if (isset($this->session->data['token'])) {
@@ -237,7 +273,7 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 		} else {
 			$data['store_id'] = -1;
 		}
-		
+				
 		return $this->load->view($this->route . '/store_form_script', $data);
 	}
 	
@@ -269,12 +305,18 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 		$this->load->model($this->route);
 		$this->load->model('extension/module/' . $this->codename);
 		
+		if (file_exists(DIR_APPLICATION . 'model/extension/module/d_twig_manager.php')) {
+			$this->load->model('extension/module/d_twig_manager');
+			
+			$this->model_extension_module_d_twig_manager->installCompatibility();
+		}
+		
 		$languages = $this->{'model_extension_module_' . $this->codename}->getLanguages();
 		
 		$this->load->controller('extension/module/d_seo_module/update');
 		
 		$field_info = $this->load->controller('extension/module/d_seo_module/getFieldInfo');
-						
+								
 		if (isset($field_info['sheet']['category']['field'])) {
 			$data['fields'] = $field_info['sheet']['category']['field'];
 		} else {
@@ -328,13 +370,19 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 		$this->load->model($this->route);
 		$this->load->model('extension/module/' . $this->codename);
 		
+		if (file_exists(DIR_APPLICATION . 'model/extension/module/d_twig_manager.php')) {
+			$this->load->model('extension/module/d_twig_manager');
+			
+			$this->model_extension_module_d_twig_manager->installCompatibility();
+		}
+		
 		$stores = $this->{'model_extension_module_' . $this->codename}->getStores();
 		$languages = $this->{'model_extension_module_' . $this->codename}->getLanguages();
 		
 		$this->load->controller('extension/module/d_seo_module/update');
 				
 		$field_info = $this->load->controller('extension/module/' . $this->codename . '/getFieldInfo');
-		
+				
 		if (isset($field_info['sheet']['category']['field'])) {
 			$data['fields'] = $field_info['sheet']['category']['field'];
 		} else {
@@ -387,10 +435,22 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 	}
 	
 	public function category_form_style() {		
+		if (file_exists(DIR_APPLICATION . 'model/extension/module/d_twig_manager.php')) {
+			$this->load->model('extension/module/d_twig_manager');
+			
+			$this->model_extension_module_d_twig_manager->installCompatibility();
+		}
+		
 		return $this->load->view($this->route . '/category_form_style');
 	}
 	
 	public function category_form_script() {			
+		if (file_exists(DIR_APPLICATION . 'model/extension/module/d_twig_manager.php')) {
+			$this->load->model('extension/module/d_twig_manager');
+			
+			$this->model_extension_module_d_twig_manager->installCompatibility();
+		}
+		
 		$url_token = '';
 		
 		if (isset($this->session->data['token'])) {
@@ -403,7 +463,7 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 		
 		$data['route'] = $this->route;
 		$data['url_token'] = $url_token;
-		
+				
 		return $this->load->view($this->route . '/category_form_script', $data);
 	}
 	
@@ -429,12 +489,18 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 		$this->load->model($this->route);
 		$this->load->model('extension/module/' . $this->codename);
 		
+		if (file_exists(DIR_APPLICATION . 'model/extension/module/d_twig_manager.php')) {
+			$this->load->model('extension/module/d_twig_manager');
+			
+			$this->model_extension_module_d_twig_manager->installCompatibility();
+		}
+		
 		$languages = $this->{'model_extension_module_' . $this->codename}->getLanguages();
 		
 		$this->load->controller('extension/module/d_seo_module/update');
 		
 		$field_info = $this->load->controller('extension/module/' . $this->codename . '/getFieldInfo');
-		
+				
 		if (isset($field_info['sheet']['product']['field'])) {
 			$data['fields'] = $field_info['sheet']['product']['field'];
 		} else {
@@ -488,13 +554,19 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 		$this->load->model($this->route);
 		$this->load->model('extension/module/' . $this->codename);
 		
+		if (file_exists(DIR_APPLICATION . 'model/extension/module/d_twig_manager.php')) {
+			$this->load->model('extension/module/d_twig_manager');
+			
+			$this->model_extension_module_d_twig_manager->installCompatibility();
+		}
+		
 		$stores = $this->{'model_extension_module_' . $this->codename}->getStores();
 		$languages = $this->{'model_extension_module_' . $this->codename}->getLanguages();
 		
 		$this->load->controller('extension/module/d_seo_module/update');
 				
 		$field_info = $this->load->controller('extension/module/' . $this->codename . '/getFieldInfo');
-		
+				
 		if (isset($field_info['sheet']['product']['field'])) {
 			$data['fields'] = $field_info['sheet']['product']['field'];
 		} else {
@@ -547,12 +619,24 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 	}
 	
 	public function product_form_style() {		
+		if (file_exists(DIR_APPLICATION . 'model/extension/module/d_twig_manager.php')) {
+			$this->load->model('extension/module/d_twig_manager');
+			
+			$this->model_extension_module_d_twig_manager->installCompatibility();
+		}
+		
 		return $this->load->view($this->route . '/product_form_style');
 	}
 	
 	public function product_form_script() {	
 		$_language = new Language();
 		$_language->load($this->route);
+		
+		if (file_exists(DIR_APPLICATION . 'model/extension/module/d_twig_manager.php')) {
+			$this->load->model('extension/module/d_twig_manager');
+			
+			$this->model_extension_module_d_twig_manager->installCompatibility();
+		}
 		
 		$url_token = '';
 		
@@ -567,7 +651,7 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 		$data['route'] = $this->route;
 		$data['url_token'] = $url_token;
 		$data['text_none'] = $_language->get('text_none');
-		
+				
 		return $this->load->view($this->route . '/product_form_script', $data);
 	}
 	
@@ -593,12 +677,18 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 		$this->load->model($this->route);
 		$this->load->model('extension/module/' . $this->codename);
 		
+		if (file_exists(DIR_APPLICATION . 'model/extension/module/d_twig_manager.php')) {
+			$this->load->model('extension/module/d_twig_manager');
+			
+			$this->model_extension_module_d_twig_manager->installCompatibility();
+		}
+		
 		$languages = $this->{'model_extension_module_' . $this->codename}->getLanguages();
 		
 		$this->load->controller('extension/module/d_seo_module/update');
 		
 		$field_info = $this->load->controller('extension/module/' . $this->codename . '/getFieldInfo');
-		
+				
 		if (isset($field_info['sheet']['manufacturer']['field'])) {
 			$data['fields'] = $field_info['sheet']['manufacturer']['field'];
 		} else {
@@ -652,13 +742,19 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 		$this->load->model($this->route);
 		$this->load->model('extension/module/' . $this->codename);
 		
+		if (file_exists(DIR_APPLICATION . 'model/extension/module/d_twig_manager.php')) {
+			$this->load->model('extension/module/d_twig_manager');
+			
+			$this->model_extension_module_d_twig_manager->installCompatibility();
+		}
+		
 		$stores = $this->{'model_extension_module_' . $this->codename}->getStores();
 		$languages = $this->{'model_extension_module_' . $this->codename}->getLanguages();
 		
 		$this->load->controller('extension/module/d_seo_module/update');
 				
 		$field_info = $this->load->controller('extension/module/' . $this->codename . '/getFieldInfo');
-		
+				
 		if (isset($field_info['sheet']['manufacturer']['field'])) {
 			$data['fields'] = $field_info['sheet']['manufacturer']['field'];
 		} else {
@@ -711,10 +807,22 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 	}
 	
 	public function manufacturer_form_style() {		
+		if (file_exists(DIR_APPLICATION . 'model/extension/module/d_twig_manager.php')) {
+			$this->load->model('extension/module/d_twig_manager');
+			
+			$this->model_extension_module_d_twig_manager->installCompatibility();
+		}
+		
 		return $this->load->view($this->route . '/manufacturer_form_style');
 	}
 	
 	public function manufacturer_form_script() {	
+		if (file_exists(DIR_APPLICATION . 'model/extension/module/d_twig_manager.php')) {
+			$this->load->model('extension/module/d_twig_manager');
+			
+			$this->model_extension_module_d_twig_manager->installCompatibility();
+		}
+		
 		$url_token = '';
 		
 		if (isset($this->session->data['token'])) {
@@ -753,12 +861,18 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 		$this->load->model($this->route);
 		$this->load->model('extension/module/' . $this->codename);
 		
+		if (file_exists(DIR_APPLICATION . 'model/extension/module/d_twig_manager.php')) {
+			$this->load->model('extension/module/d_twig_manager');
+			
+			$this->model_extension_module_d_twig_manager->installCompatibility();
+		}
+		
 		$languages = $this->{'model_extension_module_' . $this->codename}->getLanguages();
 		
 		$this->load->controller('extension/module/d_seo_module/update');
 		
 		$field_info = $this->load->controller('extension/module/' . $this->codename . '/getFieldInfo');
-		
+				
 		if (isset($field_info['sheet']['information']['field'])) {
 			$data['fields'] = $field_info['sheet']['information']['field'];
 		} else {
@@ -811,6 +925,12 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 	public function information_form_tab_general_store_language() {		
 		$this->load->model($this->route);
 		$this->load->model('extension/module/' . $this->codename);
+		
+		if (file_exists(DIR_APPLICATION . 'model/extension/module/d_twig_manager.php')) {
+			$this->load->model('extension/module/d_twig_manager');
+			
+			$this->model_extension_module_d_twig_manager->installCompatibility();
+		}
 		
 		$stores = $this->{'model_extension_module_' . $this->codename}->getStores();
 		$languages = $this->{'model_extension_module_' . $this->codename}->getLanguages();
@@ -871,10 +991,22 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 	}
 	
 	public function information_form_style() {		
+		if (file_exists(DIR_APPLICATION . 'model/extension/module/d_twig_manager.php')) {
+			$this->load->model('extension/module/d_twig_manager');
+			
+			$this->model_extension_module_d_twig_manager->installCompatibility();
+		}
+		
 		return $this->load->view($this->route . '/information_form_style');
 	}
 	
 	public function information_form_script() {	
+		if (file_exists(DIR_APPLICATION . 'model/extension/module/d_twig_manager.php')) {
+			$this->load->model('extension/module/d_twig_manager');
+			
+			$this->model_extension_module_d_twig_manager->installCompatibility();
+		}
+		
 		$url_token = '';
 		
 		if (isset($this->session->data['token'])) {
@@ -887,7 +1019,7 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 		
 		$data['route'] = $this->route;
 		$data['url_token'] = $url_token;
-		
+				
 		return $this->load->view($this->route . '/information_form_script', $data);
 	}
 	

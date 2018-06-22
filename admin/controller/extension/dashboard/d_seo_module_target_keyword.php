@@ -26,6 +26,12 @@ class ControllerExtensionDashboardDSEOModuleTargetKeyword extends Controller {
 			$this->model_extension_d_shopunity_mbooth->validateDependencies($this->main_codename);
 		}
 		
+		if (file_exists(DIR_APPLICATION . 'model/extension/module/d_twig_manager.php')) {
+			$this->load->model('extension/module/d_twig_manager');
+			
+			$this->model_extension_module_d_twig_manager->installCompatibility();
+		}
+		
 		$this->load->controller('extension/module/d_seo_module/update');
 		
 		$url_token = '';
@@ -187,6 +193,12 @@ class ControllerExtensionDashboardDSEOModuleTargetKeyword extends Controller {
 	public function dashboard() {
 		$this->load->language($this->route);
 		
+		if (file_exists(DIR_APPLICATION . 'model/extension/module/d_twig_manager.php')) {
+			$this->load->model('extension/module/d_twig_manager');
+			
+			$this->model_extension_module_d_twig_manager->installCompatibility();
+		}
+		
 		$this->load->controller('extension/module/d_seo_module/update');
 				
 		$url_token = '';
@@ -216,6 +228,12 @@ class ControllerExtensionDashboardDSEOModuleTargetKeyword extends Controller {
 		$this->load->model($this->route);
 		$this->load->model('setting/setting');
 		$this->load->model('localisation/language');
+		
+		if (file_exists(DIR_APPLICATION . 'model/extension/module/d_twig_manager.php')) {
+			$this->load->model('extension/module/d_twig_manager');
+			
+			$this->model_extension_module_d_twig_manager->installCompatibility();
+		}
 		
 		// Heading
 		$data['heading_title'] = $this->language->get('heading_title_main');
