@@ -1,6 +1,6 @@
 {
     "codename": "d_seo_module",
-    "version": "3.1.0",
+    "version": "3.1.1",
     "name": "SEO Module",
     "description": "SEO Module is the core platform, necessary for the installation of other SEO modules.",
 	"index": "extension/module/d_seo_module",
@@ -106,7 +106,7 @@
     ],
     "changelog": [
         {
-            "version": "3.1.0",
+            "version": "3.1.1",
             "change": "Twig Validation"
         },
 		{

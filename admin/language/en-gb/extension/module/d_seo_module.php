@@ -38,6 +38,7 @@ $_['text_seo']										= 'SEO';
 $_['text_create_default_target_keywords_confirm']	= 'Creation default Target Keywords for Custom Pages will delete all old Target Keywords for Custom Pages. You sure you want to create default Target Keywords for Custom Pages?';
 $_['text_delete_target_keywords_confirm']   		= 'You sure you want to delete selected Target Keywords?';
 $_['text_uninstall_confirm']						= 'After deinstallation is compleate the SEO Module will delete all additional fields in the product, category, manufacturer and information that have been added after installation. Are you sure you want to uninstall the SEO Module? ';
+$_['text_powered_by']               				= 'Tested with <a href="https://shopunity.net/">Shopunity.net</a><br/>Find more extensions at <a href="https://dreamvention.ee/">Dreamvention.com</a>';
 $_['text_instructions_full'] 						= '
 <div class="row">
 	<div class="col-sm-2">

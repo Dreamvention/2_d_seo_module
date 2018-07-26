@@ -132,6 +132,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$data['text_implemented'] = $this->language->get('text_implemented');
 		$data['text_details'] = $this->language->get('text_details');
 		$data['text_no_control_elements'] = $this->language->get('text_no_control_elements');
+		$data['text_powered_by'] = $this->language->get('text_powered_by');
 		
 		// Help
 		$data['help_install'] = $this->language->get('help_install');
@@ -387,8 +388,9 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$data['text_no'] = $this->language->get('text_no');
 		$data['text_enabled'] = $this->language->get('text_enabled');
 		$data['text_disabled'] = $this->language->get('text_disabled');
+		$data['text_powered_by'] = $this->language->get('text_powered_by');
 		$data['text_uninstall_confirm'] = $this->language->get('text_uninstall_confirm');
-		
+				
 		// Help
 		$data['help_install'] = $this->language->get('help_install');
 		$data['help_htaccess_setting'] = $this->language->get('help_htaccess_setting');
@@ -602,6 +604,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$data['text_no'] = $this->language->get('text_no');
 		$data['text_enabled'] = $this->language->get('text_enabled');
 		$data['text_disabled'] = $this->language->get('text_disabled');
+		$data['text_powered_by'] = $this->language->get('text_powered_by');
 		
 		// Help
 		$data['help_install'] = $this->language->get('help_install');
@@ -816,6 +819,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$data['text_no'] = $this->language->get('text_no');
 		$data['text_enabled'] = $this->language->get('text_enabled');
 		$data['text_disabled'] = $this->language->get('text_disabled');
+		$data['text_powered_by'] = $this->language->get('text_powered_by');
 		
 		$data['text_no_results'] = $this->language->get('text_no_results');
 		$data['text_add_target_keyword'] = $this->language->get('text_add_target_keyword');
@@ -1144,7 +1148,8 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$data['text_no'] = $this->language->get('text_no');
 		$data['text_enabled'] = $this->language->get('text_enabled');
 		$data['text_disabled'] = $this->language->get('text_disabled');
-				
+		$data['text_powered_by'] = $this->language->get('text_powered_by');
+		
 		// Help
 		$data['help_install'] = $this->language->get('help_install');
 		
@@ -1331,8 +1336,9 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$data['text_no'] = $this->language->get('text_no');
 		$data['text_enabled'] = $this->language->get('text_enabled');
 		$data['text_disabled'] = $this->language->get('text_disabled');
+		$data['text_powered_by'] = $this->language->get('text_powered_by');
 		$data['text_instructions_full'] = $this->language->get('text_instructions_full');
-		
+				
 		// Help
 		$data['help_install'] = $this->language->get('help_install');
 		
@@ -2073,7 +2079,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		
 			$menu_items = $this->{'model_extension_module_' . $this->codename}->sortArrayByColumn($menu_items, 'sort_order');
 				
-			$html_menu = '<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-search fa-lg"></i></a><ul class="dropdown-menu dropdown-menu-right" style="min-width: 260px">';
+			$html_menu = '<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-search fa-lg"></i> <span class="hidden-xs hidden-sm hidden-md">' . $this->language->get('text_seo') . '</span></a><ul class="dropdown-menu dropdown-menu-right" style="min-width: 260px">';
 		
 			foreach ($menu_items as $menu_item) {
 				$html_menu .= $menu_item['html'];
