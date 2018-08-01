@@ -122,7 +122,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$data['button_install'] = $this->language->get('button_install');
 		$data['button_view'] = $this->language->get('button_view');
 		$data['button_setup'] = $this->language->get('button_setup');
-		$data['button_resetup'] = $this->language->get('button_resetup');
+		$data['button_reset'] = $this->language->get('button_reset');
 		
 		// Text
 		$data['text_edit'] = $this->language->get('text_edit');
@@ -2079,7 +2079,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		
 			$menu_items = $this->{'model_extension_module_' . $this->codename}->sortArrayByColumn($menu_items, 'sort_order');
 				
-			$html_menu = '<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-search fa-lg"></i> <span class="hidden-xs hidden-sm hidden-md">' . $this->language->get('text_seo') . '</span> <i class="fa fa-caret-down fa-fw"></i></a><ul class="dropdown-menu dropdown-menu-right" style="min-width: 260px">';
+			$html_menu = '<li class="dropdown"><a class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-search fa-lg" style="margin-right: 5px"></i> <span class="hidden-xs hidden-sm hidden-md">' . $this->language->get('text_seo') . '</span> <i class="fa fa-caret-down fa-fw"></i></a><ul class="dropdown-menu dropdown-menu-right" style="min-width: 260px">';
 		
 			foreach ($menu_items as $menu_item) {
 				$html_menu .= $menu_item['html'];

@@ -76,7 +76,7 @@
 							<div class="control-extension installed text-center">
 								<img src="{{ catalog }}image/{{ control_extension['image'] }}" title="{{ control_extension['name'] }}" alt="{{ control_extension['name'] }}" class="image"/>
 								<h4 class="name m-b-md">{{ control_extension['name'] }}</h4>
-								<a href="{{ control_extension['href'] }}" target="_blank" class="btn btn-primary">{{ button_view }}</a>
+								<a href="{{ control_extension['href'] }}" class="btn btn-primary">{{ button_view }}</a>
 							</div>
 							{% else %}
 							<div class="control-extension text-center">
@@ -145,7 +145,7 @@
 									<td class="field">
 										<div class="row">
 											<div class="col-sm-3 text-center">
-												<a action="{{ control_element['edit_href'] }}" confirm="{{ control_element['confirm'] }}" class="button-edit btn btn-sm btn-primary">{{ button_resetup }}</a>
+												<a action="{{ control_element['edit_href'] }}" confirm="{{ control_element['confirm'] }}" class="button-edit btn btn-sm btn-primary">{{ button_reset }}</a>
 											</div>
 											<div class="col-sm-9">
 												<h4 class="name m-b-sm"><label class="control-label p-n text-left"><span data-toggle="tooltip" title="{{ control_element['description'] }}">{{ control_element['name'] }}</span></label></h4>
