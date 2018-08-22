@@ -589,6 +589,7 @@
 }
 .panel-install .planet {
 	display: block;
+	max-width: 100%;
 	margin: 0px auto;
 }
 .panel-install .features {
@@ -620,9 +621,9 @@
 	color: #62a975;
 }
 .alert-info {
-	background-color: #e5f4e9;
-	border-color: #c1e6cb;
-	color: #62a975;
+	background-color: #d9edf7;
+	border-color: #bce8f1;
+	color: #31708f;
 }
 .alert-info hr {
     border-top-color: #c1e6cb;
