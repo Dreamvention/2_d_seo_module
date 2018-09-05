@@ -27,11 +27,15 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
 		
 			foreach ($installed_seo_extensions as $installed_seo_extension) {
-				$this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/seo_url');
+				$this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/seo_url_add_rewrite');
 			}
 			
 			foreach ($installed_seo_extensions as $installed_seo_extension) {
-				$this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/seo_url_check');
+				$this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/seo_url_analyse');
+			}
+			
+			foreach ($installed_seo_extensions as $installed_seo_extension) {
+				$this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/seo_url_validate');
 			}
 		}
 	}
