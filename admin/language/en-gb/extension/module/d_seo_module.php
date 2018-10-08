@@ -24,6 +24,9 @@ $_['text_htaccess'] 								= '.htaccess';
 $_['text_robots'] 									= 'robots.txt';
 $_['text_export'] 									= 'Export';
 $_['text_import'] 									= 'Import';
+$_['text_setup']									= 'Install SEO Module now';
+$_['text_full_setup']								= 'Full';
+$_['text_custom_setup']								= 'Custom';
 $_['text_all_stores']			 					= 'All Stores';
 $_['text_all_languages']							= 'All Languages';
 $_['text_yes'] 										= 'Yes';
@@ -226,9 +229,9 @@ $_['entry_import']        							= 'Import from File';
 $_['button_save'] 									= 'Save';
 $_['button_save_and_stay'] 							= 'Save and Stay';
 $_['button_cancel'] 								= 'Cancel';
+$_['button_setup'] 									= 'Setup';
 $_['button_install'] 								= 'Install';
 $_['button_uninstall'] 								= 'Uninstall';
-$_['button_setup'] 									= 'Setup';
 $_['button_reset'] 									= 'Reset';
 $_['button_view_store_setting'] 					= 'View store settings';
 $_['button_filter'] 								= 'Filter';
@@ -241,11 +244,9 @@ $_['button_export'] 								= 'Export';
 $_['button_import'] 								= 'Import';
 
 // Help
-$_['help_install']									= '<br/>
-<h1>Install SEO Module now</h1>
-<br/>
-<p>You are one step away from installing the best SEO extension on the market. SEO module is just the begining. It will set ground features and an API for ther SEO modules that you can install. They will improve your Store search ranking and help you mamange your SEO like a pro. Click install! </p>
-<br/>';
+$_['help_setup']									= 'You are one step away from installing the best SEO extension on the market. SEO module is just the begining. It will set ground features and an API for ther SEO modules that you can install. They will improve your Store search ranking and help you mamange your SEO like a pro. Click setup!';
+$_['help_full_setup']								= 'Full Setup will install all available SEO modules and automatically generate meta data and SEO URLs for all pages of your store. Recommended for installing on the new store.';
+$_['help_custom_setup']								= 'Custom Setup will install only required SEO modules. All further settings you have to do manually. Recommended for installing on the work store.';
 $_['help_htaccess_setting']							= '<h4>Important!</h4>
 <p>Turning this option on  will uncomment the file .htaccess on apache server. But for the SEO urls to start working, you must visit Opencart Store Settings / tab Server and activate "Use SEO URLs"</p>';
 $_['help_htaccess_subfolder']						= '<h4>If you have a subfolder!</h4>

@@ -176,8 +176,8 @@
     box-shadow: none;
     color: #fff;
 }
-.panel-default .panel-body .btn-default:active, .panel-default .panel-body .btn-default:focus, .panel-default .panel-body .btn-default:active:focus, .panel-default .panel-body .btn-default:focus:active,
-.modal-dialog .btn-default:active, .modal-dialog .btn-default:focus, .modal-dialog .btn-default:active:focus, .modal-dialog .btn-default:focus:active {
+.panel-default .panel-body .btn-default.active, .panel-default .panel-body .btn-default:active, .panel-default .panel-body .btn-default:focus, .panel-default .panel-body .btn-default:active:focus, .panel-default .panel-body .btn-default:focus:active,
+.modal-dialog .btn-default.active, .modal-dialog .btn-default:active, .modal-dialog .btn-default:focus, .modal-dialog .btn-default:active:focus, .modal-dialog .btn-default:focus:active {
     box-shadow: none;
     border-color: #757575;
     background-color: #959595;
@@ -196,8 +196,8 @@
     background-color: #27b7fd;
     border-color: #229cd8;
 }
-.panel-default .panel-body .btn-primary:active, .panel-default .panel-body .btn-primary:focus, .panel-default .panel-body .btn-primary:active:focus, .panel-default .panel-body .btn-primary:focus:active,
-.modal-dialog .btn-primary:active, .modal-dialog .btn-primary:focus, .modal-dialog .btn-primary:active:focus, .modal-dialog .btn-primary:focus:active {
+.panel-default .panel-body .btn-primary.active, .panel-default .panel-body .btn-primary:active, .panel-default .panel-body .btn-primary:focus, .panel-default .panel-body .btn-primary:active:focus, .panel-default .panel-body .btn-primary:focus:active,
+.modal-dialog .btn-primary.active, .modal-dialog .btn-primary:active, .modal-dialog .btn-primary:focus, .modal-dialog .btn-primary:active:focus, .modal-dialog .btn-primary:focus:active {
     box-shadow: none;
     border-color: #0871a5;
     background-color: #1589c1;
@@ -227,8 +227,8 @@
     background-color: #da3d3d;
     border-color: #bf1f1f;
 }
-.panel-default .panel-body .btn-danger:active, .panel-default .panel-body .btn-danger:focus, .panel-default .panel-body .btn-danger:active:focus, .panel-default .panel-body .btn-danger:focus:active,
-.modal-dialog .btn-danger:active, .modal-dialog .btn-danger:focus, .modal-dialog .btn-danger:active:focus, .modal-dialog .btn-danger:focus:active {
+.panel-default .panel-body .btn-danger.active, .panel-default .panel-body .btn-danger:active, .panel-default .panel-body .btn-danger:focus, .panel-default .panel-body .btn-danger:active:focus, .panel-default .panel-body .btn-danger:focus:active,
+.modal-dialog .btn-danger.active, .modal-dialog .btn-danger:active, .modal-dialog .btn-danger:focus, .modal-dialog .btn-danger:active:focus, .modal-dialog .btn-danger:focus:active {
     box-shadow: none;
     border-color: #a12929;
     background-color: #bc3a3a;
@@ -246,8 +246,8 @@
     background-color: #2cbd53;
     border-color: #18a03c;
 }
-.panel-default .panel-body .btn-success:active, .panel-default .panel-body .btn-success:focus, .panel-default .panel-body .btn-success:active:focus, .panel-default .panel-body .btn-success:focus:active,
-.modal-dialog .btn-success:active, .modal-dialog .btn-success:focus, .modal-dialog .btn-success:active:focus, .modal-dialog .btn-success:focus:active {
+.panel-default .panel-body .btn-success.active, .panel-default .panel-body .btn-success:active, .panel-default .panel-body .btn-success:focus, .panel-default .panel-body .btn-success:active:focus, .panel-default .panel-body .btn-success:focus:active,
+.modal-dialog .btn-success.active, .modal-dialog .btn-success:active, .modal-dialog .btn-success:focus, .modal-dialog .btn-success:active:focus, .modal-dialog .btn-success:focus:active {
     box-shadow: none;
     border-color: #309c4c;
     background-color: #4faf68;
@@ -265,8 +265,8 @@
     background-color: #eba612;
     border-color: #cd910f;
 }
-.panel-default .panel-body .btn-warning:active, .panel-default .panel-body .btn-warning:focus, .panel-default .panel-body .btn-warning:active:focus, .panel-default .panel-body .btn-warning:focus:active,
-.modal-dialog .btn-warning:active, .modal-dialog .btn-warning:focus, .modal-dialog .btn-warning:active:focus, .modal-dialog .btn-warning:focus:active {
+.panel-default .panel-body .btn-warning.active, .panel-default .panel-body .btn-warning:active, .panel-default .panel-body .btn-warning:focus, .panel-default .panel-body .btn-warning:active:focus, .panel-default .panel-body .btn-warning:focus:active,
+.modal-dialog .btn-warning.active, .modal-dialog .btn-warning:active, .modal-dialog .btn-warning:focus, .modal-dialog .btn-warning:active:focus, .modal-dialog .btn-warning:focus:active {
     box-shadow: none;
     border-color: #a8770e;
     background-color: #d59202;
@@ -274,21 +274,21 @@
 .panel-default .panel-body .btn-info,
 .modal-dialog .btn-info {
 	box-shadow: none;
-	background: #e0db83;
-	border: 2px solid #c6be60;
-	color: #fff;
+	background: #d9dcec;
+	border: 2px solid #c2cde2;
+	color: #000;
 }
 .panel-default .panel-body .btn-info:hover,
 .modal-dialog .btn-info:hover {
     box-shadow: none;
-    background-color: #ded756;
-    border-color: #cdc53e;
+    background-color: #c6cce4;
+    border-color: #adbcd9;
 }
-.panel-default .panel-body .btn-info:active, .panel-default .panel-body .btn-info:focus, .panel-default .panel-body .btn-info:active:focus, .panel-default .panel-body .btn-info:focus:active,
-.modal-dialog .btn-info:active, .modal-dialog .btn-info:focus, .modal-dialog .btn-info:active:focus, .modal-dialog .btn-info:focus:active {
+.panel-default .panel-body .btn-info.active, .panel-default .panel-body .btn-info:active, .panel-default .panel-body .btn-info:focus, .panel-default .panel-body .btn-info:active:focus, .panel-default .panel-body .btn-info:focus:active,
+.modal-dialog .btn-info.active, .modal-dialog .btn-info:active, .modal-dialog .btn-info:focus, .modal-dialog .btn-info:active:focus, .modal-dialog .btn-info:focus:active {
     box-shadow: none;
-    border-color: #b8b01c;
-    background-color: #d0c946;
+    border-color: #93a6c9;
+    background-color: #abb2d8;
 }
 .panel-default .panel-body .btn-lg, .panel-default .panel-body .btn-group-lg > .btn,
 .modal-dialog .btn-lg, .modal-dialog .btn-group-lg > .btn {
@@ -353,6 +353,9 @@
 .panel-default .panel-body .table {
 	border-collapse: separate;
 	border-spacing: 0;
+}
+.panel-default .panel-body .table-responsive {
+	border: none;
 }
 .panel-default .panel-body .table-bordered {
 	border: 1px solid #dbdfef;
@@ -582,29 +585,34 @@
 	cursor: pointer;
 }
 
-/* Panel Install */
-.panel-install {
+/* Panel Setup */
+.panel-default .panel-setup {
 	padding-bottom: 0px;
 	background-color: #ecf1fb;
 }
-.panel-install .planet {
+.panel-default .panel-setup .setup-info {
+    max-width: 500px;
+    margin: auto;
+	text-align: center;
+}
+.panel-default .panel-setup .planet {
 	display: block;
 	max-width: 100%;
 	margin: 0px auto;
 }
-.panel-install .features {
+.panel-default .panel-setup .features {
 	margin: 30px 0px;
 }
-.panel-install .feature {
+.panel-default .panel-setup .feature {
 	display: block;
 	float: left;
 	width: 20%;
 	height: 170px;
 }
-.panel-install .feature .feature-wrap {
+.panel-default .panel-setup .feature .feature-wrap {
 	padding: 15px 15px;
 }
-.panel-install .feature .image {
+.panel-default .panel-setup .feature .image {
 	margin-bottom: 10px;
 }
 

@@ -71,6 +71,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$data['codename'] = $this->codename;
 		$data['route'] = $this->route;
 		$data['version'] = $this->extension['version'];
+		$data['extension_id'] = $this->extension['extension_id'];
 		$data['config'] = $this->config_file;
 		$data['d_shopunity'] = $this->d_shopunity;
 		$data['store_id'] = $store_id;
@@ -98,6 +99,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$data['href_instruction'] = $this->url->link($this->route . '/instruction', $url_token . '&' . $url_store, true);
 			
 		$data['module_link'] = $this->url->link($this->route, $url_token . '&' . $url_store, true);
+		$data['setup'] = $this->url->link($this->route . '/setupExtension', $url_token, true);
 		$data['install'] = $this->url->link($this->route . '/installExtension', $url_token, true);
 		$data['uninstall'] = $this->url->link($this->route . '/uninstallExtension', $url_token, true);
 					
@@ -119,14 +121,17 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		
 		// Button
 		$data['button_cancel'] = $this->language->get('button_cancel');
+		$data['button_setup'] = $this->language->get('button_setup');
 		$data['button_install'] = $this->language->get('button_install');
 		$data['button_view'] = $this->language->get('button_view');
-		$data['button_setup'] = $this->language->get('button_setup');
 		$data['button_reset'] = $this->language->get('button_reset');
 		
 		// Text
 		$data['text_edit'] = $this->language->get('text_edit');
 		$data['text_install'] = $this->language->get('text_install');
+		$data['text_setup'] = $this->language->get('text_setup');
+		$data['text_full_setup'] = $this->language->get('text_full_setup');
+		$data['text_custom_setup'] = $this->language->get('text_custom_setup');
 		$data['text_seo_extensions'] = $this->language->get('text_seo_extensions');
 		$data['text_quick_setup'] = $this->language->get('text_quick_setup');
 		$data['text_implemented'] = $this->language->get('text_implemented');
@@ -135,7 +140,9 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$data['text_powered_by'] = $this->language->get('text_powered_by');
 		
 		// Help
-		$data['help_install'] = $this->language->get('help_install');
+		$data['help_setup'] = $this->language->get('help_setup');
+		$data['help_full_setup'] = $this->language->get('help_full_setup');
+		$data['help_custom_setup'] = $this->language->get('help_custom_setup');
 								
 		// Notification
 		foreach ($this->error as $key => $error) {
@@ -150,7 +157,8 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		}
 		
 		if (!file_exists(DIR_SYSTEM . '/library/d_shopunity/extension/d_seo_module_pack.json')) {
-			$data['info'] = $this->language->get('help_d_seo_module_pack');
+			$data['d_seo_module_pack']['info'] = $this->language->get('help_d_seo_module_pack');
+			$data['d_seo_module_pack']['extension_id'] = 130;
 		}
 
 		// Breadcrumbs
@@ -344,6 +352,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 			
 		$data['module_link'] = $this->url->link($this->route, $url_token . '&' . $url_store, true);
 		$data['action'] = $this->url->link($this->route . '/save', $url_token . '&' . $url_store, true);
+		$data['setup'] = $this->url->link($this->route . '/setupExtension', $url_token, true);
 		$data['install'] = $this->url->link($this->route . '/installExtension', $url_token, true);
 		$data['uninstall'] = $this->url->link($this->route . '/uninstallExtension', $url_token, true);
 		$data['store_setting'] = $this->url->link('setting/setting', $url_token, true);
@@ -371,7 +380,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$data['button_save'] = $this->language->get('button_save');
 		$data['button_save_and_stay'] = $this->language->get('button_save_and_stay');
 		$data['button_cancel'] = $this->language->get('button_cancel');
-		$data['button_install'] = $this->language->get('button_install');
+		$data['button_setup'] = $this->language->get('button_setup');
 		$data['button_uninstall'] = $this->language->get('button_uninstall');
 		$data['button_view_store_setting'] = $this->language->get('button_view_store_setting');
 		
@@ -384,6 +393,9 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		// Text
 		$data['text_edit'] = $this->language->get('text_edit');
 		$data['text_install'] = $this->language->get('text_install');
+		$data['text_setup'] = $this->language->get('text_setup');
+		$data['text_full_setup'] = $this->language->get('text_full_setup');
+		$data['text_custom_setup'] = $this->language->get('text_custom_setup');
 		$data['text_yes'] = $this->language->get('text_yes');
 		$data['text_no'] = $this->language->get('text_no');
 		$data['text_enabled'] = $this->language->get('text_enabled');
@@ -392,7 +404,9 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$data['text_uninstall_confirm'] = $this->language->get('text_uninstall_confirm');
 				
 		// Help
-		$data['help_install'] = $this->language->get('help_install');
+		$data['help_setup'] = $this->language->get('help_setup');
+		$data['help_full_setup'] = $this->language->get('help_full_setup');
+		$data['help_custom_setup'] = $this->language->get('help_custom_setup');
 		$data['help_htaccess_setting'] = $this->language->get('help_htaccess_setting');
 		$data['help_htaccess_subfolder'] = $this->language->get('help_htaccess_subfolder');
 		$data['help_robots'] = $this->language->get('help_robots');
@@ -569,6 +583,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$data['href_instruction'] = $this->url->link($this->route . '/instruction', $url_token . '&' . $url_store, true);
 			
 		$data['action'] = $this->url->link($this->route . '/save', $url_token, true);
+		$data['setup'] = $this->url->link($this->route . '/setupExtension', $url_token, true);
 		$data['install'] = $this->url->link($this->route . '/installExtension', $url_token, true);
 					
 		if (VERSION >= '3.0.0.0') {
@@ -591,8 +606,8 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$data['button_save'] = $this->language->get('button_save');
 		$data['button_save_and_stay'] = $this->language->get('button_save_and_stay');
 		$data['button_cancel'] = $this->language->get('button_cancel');
-		$data['button_install'] = $this->language->get('button_install');
-				
+		$data['button_setup'] = $this->language->get('button_setup');
+						
 		// Column
 		$data['column_field'] = $this->language->get('column_field');
 		$data['column_multi_store_status'] = $this->language->get('column_multi_store_status');
@@ -600,6 +615,9 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		// Text
 		$data['text_edit'] = $this->language->get('text_edit');
 		$data['text_install'] = $this->language->get('text_install');
+		$data['text_setup'] = $this->language->get('text_setup');
+		$data['text_full_setup'] = $this->language->get('text_full_setup');
+		$data['text_custom_setup'] = $this->language->get('text_custom_setup');
 		$data['text_yes'] = $this->language->get('text_yes');
 		$data['text_no'] = $this->language->get('text_no');
 		$data['text_enabled'] = $this->language->get('text_enabled');
@@ -607,7 +625,9 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$data['text_powered_by'] = $this->language->get('text_powered_by');
 		
 		// Help
-		$data['help_install'] = $this->language->get('help_install');
+		$data['help_setup'] = $this->language->get('help_setup');
+		$data['help_full_setup'] = $this->language->get('help_full_setup');
+		$data['help_custom_setup'] = $this->language->get('help_custom_setup');
 				
 		// Notification
 		foreach ($this->error as $key => $error) {
@@ -775,6 +795,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		
 		$data['module_link'] = $this->url->link($this->route, $url_token . '&' . $url_store, true);
 		$data['store_url'] = $this->url->link($this->route . '/target_keyword', $url_token . '&' . $url_sheet, true);
+		$data['setup'] = $this->url->link($this->route . '/setupExtension', $url_token, true);
 		$data['install'] = $this->url->link($this->route . '/installExtension', $url_token, true);
 		
 		if (VERSION >= '3.0.0.0') {
@@ -797,7 +818,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$data['button_save'] = $this->language->get('button_save');
 		$data['button_save_and_stay'] = $this->language->get('button_save_and_stay');
 		$data['button_cancel'] = $this->language->get('button_cancel');	
-		$data['button_install'] = $this->language->get('button_install');
+		$data['button_setup'] = $this->language->get('button_setup');
 		$data['button_filter'] = $this->language->get('button_filter');
 		$data['button_clear_filter'] = $this->language->get('button_clear_filter');
 		$data['button_create_default_target_keywords'] = $this->language->get('button_create_default_target_keywords');
@@ -815,6 +836,9 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		// Text
 		$data['text_edit'] = $this->language->get('text_edit');
 		$data['text_install'] = $this->language->get('text_install');
+		$data['text_setup'] = $this->language->get('text_setup');
+		$data['text_full_setup'] = $this->language->get('text_full_setup');
+		$data['text_custom_setup'] = $this->language->get('text_custom_setup');
 		$data['text_yes'] = $this->language->get('text_yes');
 		$data['text_no'] = $this->language->get('text_no');
 		$data['text_enabled'] = $this->language->get('text_enabled');
@@ -827,7 +851,9 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$data['text_create_default_target_keywords_confirm'] = $this->language->get('text_create_default_target_keywords_confirm');
 		
 		// Help
-		$data['help_install'] = $this->language->get('help_install');
+		$data['help_setup'] = $this->language->get('help_setup');
+		$data['help_full_setup'] = $this->language->get('help_full_setup');
+		$data['help_custom_setup'] = $this->language->get('help_custom_setup');
 		
 		// Notification
 		foreach ($this->error as $key => $error) {
@@ -1105,6 +1131,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$data['href_instruction'] = $this->url->link($this->route . '/instruction', $url_token . '&' . $url_store, true);
 		
 		$data['module_link'] = $this->url->link($this->route, $url_token . '&' . $url_store, true);
+		$data['setup'] = $this->url->link($this->route . '/setupExtension', $url_token, true);
 		$data['install'] = $this->url->link($this->route . '/installExtension', $url_token, true);
 		$data['export'] = $this->url->link($this->route . '/export', $url_token, true);
 		$data['import'] = $this->url->link($this->route . '/import', $url_token, true);
@@ -1130,7 +1157,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 				
 		// Button
 		$data['button_cancel'] = $this->language->get('button_cancel');	
-		$data['button_install'] = $this->language->get('button_install');
+		$data['button_setup'] = $this->language->get('button_setup');
 		$data['button_export'] = $this->language->get('button_export');
 		$data['button_import'] = $this->language->get('button_import');
 				
@@ -1144,6 +1171,9 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		// Text
 		$data['text_edit'] = $this->language->get('text_edit');
 		$data['text_install'] = $this->language->get('text_install');
+		$data['text_setup'] = $this->language->get('text_setup');
+		$data['text_full_setup'] = $this->language->get('text_full_setup');
+		$data['text_custom_setup'] = $this->language->get('text_custom_setup');
 		$data['text_yes'] = $this->language->get('text_yes');
 		$data['text_no'] = $this->language->get('text_no');
 		$data['text_enabled'] = $this->language->get('text_enabled');
@@ -1151,7 +1181,9 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$data['text_powered_by'] = $this->language->get('text_powered_by');
 		
 		// Help
-		$data['help_install'] = $this->language->get('help_install');
+		$data['help_setup'] = $this->language->get('help_setup');
+		$data['help_full_setup'] = $this->language->get('help_full_setup');
+		$data['help_custom_setup'] = $this->language->get('help_custom_setup');
 		
 		// Notification
 		foreach ($this->error as $key => $error) {
@@ -1307,6 +1339,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$data['href_export_import'] = $this->url->link($this->route . '/export_import', $url_token . '&' . $url_store, true);
 		$data['href_instruction'] = $this->url->link($this->route . '/instruction', $url_token . '&' . $url_store, true);
 		
+		$data['setup'] = $this->url->link($this->route . '/setupExtension', $url_token, true);
 		$data['install'] = $this->url->link($this->route . '/installExtension', $url_token, true);
 		
 		if (VERSION >= '3.0.0.0') {
@@ -1327,11 +1360,14 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 						
 		// Button
 		$data['button_cancel'] = $this->language->get('button_cancel');	
-		$data['button_install'] = $this->language->get('button_install');
-										
+		$data['button_setup'] = $this->language->get('button_setup');
+												
 		// Text
 		$data['text_edit'] = $this->language->get('text_edit');
 		$data['text_install'] = $this->language->get('text_install');
+		$data['text_setup'] = $this->language->get('text_setup');
+		$data['text_full_setup'] = $this->language->get('text_full_setup');
+		$data['text_custom_setup'] = $this->language->get('text_custom_setup');
 		$data['text_yes'] = $this->language->get('text_yes');
 		$data['text_no'] = $this->language->get('text_no');
 		$data['text_enabled'] = $this->language->get('text_enabled');
@@ -1340,7 +1376,9 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$data['text_instructions_full'] = $this->language->get('text_instructions_full');
 				
 		// Help
-		$data['help_install'] = $this->language->get('help_install');
+		$data['help_setup'] = $this->language->get('help_setup');
+		$data['help_full_setup'] = $this->language->get('help_full_setup');
+		$data['help_custom_setup'] = $this->language->get('help_custom_setup');
 		
 		// Notification
 		foreach ($this->error as $key => $error) {
@@ -1512,11 +1550,11 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 				if (isset($info['error'])) {
 					$this->error = array_replace_recursive($this->error, $info['error']);
 				}
-						
-				if (!$this->error) {					
-					$data['success'] = $this->language->get('success_execute');
-				}
 			}
+		}
+		
+		if (!$this->error) {					
+			$data['success'] = $this->language->get('success_execute');
 		}
 		
 		$data['error'] = $this->error;
@@ -1850,12 +1888,84 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$this->response->setOutput(json_encode($data));
 	}
 	
+	public function setupExtension() {
+		$this->load->model($this->route);
+						
+		$seo_extensions = $this->{'model_extension_module_' . $this->codename}->getSEOExtensions();
+		$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
+		
+		// Install SEO Modules
+		foreach ($seo_extensions as $seo_extension) {
+			if (!in_array($seo_extension, $installed_seo_extensions)) {
+				$info = $this->load->controller('extension/' . $this->codename . '/' . $seo_extension . '/control_install_extension');
+				
+				if (isset($info['error'])) {
+					$this->error = array_replace_recursive($this->error, $info['error']);
+				}
+			}
+		}
+				
+		if (!$this->error) {
+			$installed_seo_extensions = $this->{'model_extension_module_' . $this->codename}->getInstalledSEOExtensions();
+			
+			$stores = $this->{'model_extension_module_' . $this->codename}->getStores();
+				
+			foreach ($stores as $store) {
+				$control_elements = array();
+		
+				foreach ($installed_seo_extensions as $installed_seo_extension) {
+					$info = $this->load->controller('extension/' . $this->codename . '/' . $installed_seo_extension . '/control_elements', array('store_id' => $store['store_id']));
+					if ($info) $control_elements = array_merge($control_elements, $info);
+				}
+				
+				$control_elements = $this->{'model_extension_module_' . $this->codename}->sortArrayByColumn($control_elements, 'weight', SORT_DESC);
+				
+				foreach ($control_elements as $control_element) {
+					if (isset($control_element['extension_code']) && isset($control_element['element_code']) && isset($control_element['name']) && isset($control_element['description']) && isset($control_element['confirm']) && isset($control_element['implemented'])) {								
+						if ($control_element['extension_code'] && $control_element['element_code']) {
+							$control_element_data = array(
+								'store_id'			=> $store['store_id'],
+								'element_code'		=> $control_element['element_code']
+							);
+			
+							$info = $this->load->controller('extension/' . $this->codename . '/' . $control_element['extension_code'] . '/control_execute_element', $control_element_data);
+				
+							if (isset($info['error'])) {
+								$this->error = array_replace_recursive($this->error, $info['error']);
+							}
+						}
+					}
+				}
+			}
+		}
+		
+		$this->load->language($this->route);
+		
+		if (!$this->error) {
+			$data['success'] = $this->language->get('success_install');
+		}
+		
+		$data['error'] = $this->error;
+
+		$this->response->setOutput(json_encode($data));
+	}
+	
 	public function installExtension() {
 		$this->load->language($this->route);
 
 		$this->load->model($this->route);
 		$this->load->model('setting/setting');
 		$this->load->model('user/user_group');
+		
+		if (isset($this->request->server['HTTPS']) && (($this->request->server['HTTPS'] == 'on') || ($this->request->server['HTTPS'] == '1'))) {
+			$server = HTTPS_SERVER;
+			$catalog = HTTPS_CATALOG;
+		} else {
+			$server = HTTP_SERVER;
+			$catalog = HTTP_CATALOG;
+		}
+		
+		$catalog_url_info = $this->{'model_extension_module_' . $this->codename}->getURLInfo($catalog);
 				
 		if ($this->validateInstall()) {
 			$this->{'model_extension_module_' . $this->codename}->installExtension();
@@ -1948,7 +2058,50 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 					$this->model_user_user_group->addPermission($user_group_id, 'access', 'extension/module/d_seo_module');
 					$this->model_user_user_group->addPermission($user_group_id, 'modify', 'extension/module/d_seo_module');
 				}
-						
+				
+				$stores = $this->{'model_extension_module_' . $this->codename}->getStores();
+				
+				foreach ($stores as $store) {
+					$setting = $this->model_setting_setting->getSetting('module_' . $this->codename, $store['store_id']);
+										
+					$setting['module_' . $this->codename . '_status'] = 1;
+					$setting['module_' . $this->codename . '_setting']['control_element']['enable_status']['implemented'] = 1;
+					$setting['module_' . $this->codename . '_setting']['control_element']['enable_seo_url']['implemented'] = 1;
+					$setting['module_' . $this->codename . '_setting']['control_element']['enable_htaccess']['implemented'] = 1;
+					$setting['module_' . $this->codename . '_setting']['control_element']['enable_robots']['implemented'] = 1;
+								
+					$this->model_setting_setting->editSetting('module_' . $this->codename, $setting, $store['store_id']);
+				}
+				
+				$store_setting = $this->model_setting_setting->getSetting('config');
+				$store_setting['config_seo_url'] = 1;
+			
+				$this->model_setting_setting->editSetting('config', $store_setting);
+				
+				$this->config->load($this->config_file);
+				$config_setting = ($this->config->get($this->codename . '_setting')) ? $this->config->get($this->codename . '_setting') : array();
+				
+				$htaccess = $this->{'model_extension_module_' . $this->codename}->getFileData('htaccess');		
+			
+				if (!$htaccess['status'] && !trim($htaccess['text'])) {
+					$htaccess['text'] = str_replace('[catalog_url_path]', $catalog_url_info['path'], $config_setting['default_htaccess']);
+				}
+			
+				$htaccess['status'] = 1;
+		
+				$this->{'model_extension_module_' . $this->codename}->saveFileData('htaccess', $htaccess);
+				
+				$robots = $this->{'model_extension_module_' . $this->codename}->getFileData('robots');		
+			
+				if (!$robots['status'] && !trim($robots['text'])) {
+					$robots['text'] = str_replace('[catalog_url]', $catalog, $config_setting['default_robots']);
+					$robots['text'] = str_replace('[catalog_url_host]', $catalog_url_info['host'], $robots['text']);
+				}
+			
+				$robots['status'] = 1;
+			
+				$this->{'model_extension_module_' . $this->codename}->saveFileData('robots', $robots);
+												
 				// Install SEO Module Target Keyword
 				if (!$this->model_extension_d_opencart_patch_extension->isInstalled('d_seo_module_target_keyword')) {
 					$this->model_extension_d_opencart_patch_extension->install('dashboard', 'd_seo_module_target_keyword');

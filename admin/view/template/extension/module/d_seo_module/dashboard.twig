@@ -35,9 +35,12 @@
 			<button type="button" class="close" data-dismiss="alert">&times;</button>
 		</div>
 		{% endif %}
-		{% if info %}
-		{{ info }}
+		<div class="shopunity-widget-update"></div>
+		{% if d_seo_module_pack %}
+		{{ d_seo_module_pack['info'] }}
 		{% endif %}
+	</div>
+	<div class="container-fluid {% if d_seo_module_pack %}col-sm-9{% endif %}">
 		<div class="panel panel-default panel-resizable">
 			<div class="panel-heading">
 				<h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
@@ -65,7 +68,7 @@
 				</ul>
 				
 				<form action="{{ action }}" method="post" enctype="multipart/form-data" id="form" class="form-horizontal">
-					<div class="col-sm-12 m-b-xl">
+					<div class="col-md-12 m-b-xl">
 						{% if control_extensions %}
 						<div class="page-header">
 							<h3>{{ text_seo_extensions }} <span class="info-window-item" data-href="https://opencartseomodule.com/seo-module-dashboard"><i class="fa fa-question"></i></span></h3>
@@ -90,7 +93,7 @@
 						</div>
 						{% endif %}
 					</div>
-					<div class="table-responsive col-sm-6">
+					<div class="table-responsive col-md-6">
 						<table class="table table-bordered table-hover control-elements">
 							<thead>
 								<tr class="fields">
@@ -106,10 +109,10 @@
 								<tr class="control-element">
 									<td class="field">
 										<div class="row">
-											<div class="col-sm-3 text-center">
+											<div class="col-xs-3 text-center">
 												<a action="{{ control_element['edit_href'] }}" confirm="{{ control_element['confirm'] }}" class="button-edit btn btn-sm btn-success">{{ button_setup }}</a>
 											</div>
-											<div class="col-sm-9">
+											<div class="col-xs-9">
 												<h4 class="name m-b-sm"><label class="control-label p-n text-left"><span data-toggle="tooltip" title="{{ control_element['description'] }}">{{ control_element['name'] }}</span></label></h4>
 												<p class="extension-name">{{ control_element['extension_name'] }}</p>
 												<a href="{{ control_element['href'] }}" target="_blank" class="details">{{ text_details }}</a>
@@ -128,7 +131,7 @@
 							</tbody>
 						</table>
 					</div>
-					<div class="table-responsive col-sm-6">
+					<div class="table-responsive col-md-6">
 						<table class="table table-bordered table-hover control-elements">
 							<thead>
 								<tr class="fields">
@@ -144,10 +147,10 @@
 								<tr class="control-element">
 									<td class="field">
 										<div class="row">
-											<div class="col-sm-3 text-center">
+											<div class="col-xs-3 text-center">
 												<a action="{{ control_element['edit_href'] }}" confirm="{{ control_element['confirm'] }}" class="button-edit btn btn-sm btn-primary">{{ button_reset }}</a>
 											</div>
-											<div class="col-sm-9">
+											<div class="col-xs-9">
 												<h4 class="name m-b-sm"><label class="control-label p-n text-left"><span data-toggle="tooltip" title="{{ control_element['description'] }}">{{ control_element['name'] }}</span></label></h4>
 												<p class="extension-name">{{ control_element['extension_name'] }}</p>
 												<a href="{{ control_element['href'] }}" target="_blank" class="details">{{ text_details }}</a>
@@ -179,9 +182,43 @@
 				</div>
 			</div>
 		</div>
-		<br class="clear"/>
+		<br class="clear" />
 	</div>
+	{% if d_seo_module_pack %}
+	<div class="container-fluid col-sm-3">
+        <div class="shopunity-widget-seo-module-pack"></div>
+    </div>
+	<br class="clear" />
+	{% endif %}
 </div>
+{% if d_shopunity %}
+<script src="view/javascript/d_shopunity/d_shopunity_widget.js" type="text/javascript"></script>
+{% if d_seo_module_pack %}
+<script type="text/javascript">
+    
+var d_shopunity_widget_seo_module_pack = jQuery.extend(true, {}, d_shopunity_widget);
+
+d_shopunity_widget_seo_module_pack.init({
+    class: '.shopunity-widget-seo-module-pack',
+    token: '{{ (url_token|split('='))|last }}',
+    extension_id: '{{ d_seo_module_pack['extension_id'] }}'
+});
+
+</script>
+{% endif %}
+<script type="text/javascript">
+
+var d_shopunity_widget_update = jQuery.extend(true, {}, d_shopunity_widget);
+        
+d_shopunity_widget_update.init({
+    class: '.shopunity-widget-update',
+    token: '{{ (url_token|split('='))|last }}',
+    action: 'loadUpdate',
+    extension_id: '{{ extension_id }}'
+});
+
+</script>
+{% endif %}
 <script type="text/javascript">
 
 var info_window = {
@@ -223,7 +260,7 @@ $('.info-window .info-window-close').on('click', function() {
 function refresh() {
 	var url = 'index.php?route={{ route }}/dashboard&{{ url_token }}&store_id={{ store_id }}';
 					
-	$("#form").load(url + ' #form >');
+	$('#form').load(url + ' #form >');
 }
 
 function showAlert(json) {
@@ -232,7 +269,7 @@ function showAlert(json) {
 						
 	if (json['error']) {
 		if (json['error']['warning']) {
-			$('#content > .container-fluid').prepend('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+			$('#content > .container-fluid').first().prepend('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
 		}				
 				
 		for (i in json['error']) {
@@ -249,7 +286,7 @@ function showAlert(json) {
 	}
 			
 	if (json['success']) {
-		$('#content > .container-fluid').prepend('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success'] + '  <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+		$('#content > .container-fluid').first().prepend('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success'] + '  <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
 	}
 }
 

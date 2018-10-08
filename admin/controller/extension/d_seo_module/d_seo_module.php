@@ -82,18 +82,18 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 		
 		$field_info = $this->load->controller('extension/module/d_seo_module/getFieldInfo');
 				
-		if (isset($field_info['sheet']['home']['field'])) {
-			$data['fields'] = $field_info['sheet']['home']['field'];
+		if (isset($field_info['sheet']['custom_page']['field'])) {
+			$data['fields'] = $field_info['sheet']['custom_page']['field'];
 		} else {
 			$data['fields'] = array();
 		}
-							
+						
 		if (isset($this->request->post['target_keyword'])) {
 			$data['target_keyword'] = $this->request->post['target_keyword'];
 		} else {
 			$data['target_keyword'] = $this->{'model_extension_d_seo_module_' . $this->codename}->getHomeTargetKeyword();
 		}
-				
+			
 		$html_tab_general_language = array();
 						
 		foreach ($languages as $language) {
@@ -191,8 +191,8 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 		
 		$field_info = $this->load->controller('extension/module/d_seo_module/getFieldInfo');
 				
-		if (isset($field_info['sheet']['home']['field'])) {
-			$data['fields'] = $field_info['sheet']['home']['field'];
+		if (isset($field_info['sheet']['custom_page']['field'])) {
+			$data['fields'] = $field_info['sheet']['custom_page']['field'];
 		} else {
 			$data['fields'] = array();
 		}
@@ -1039,6 +1039,20 @@ class ControllerExtensionDSEOModuleDSEOModule extends Controller {
 		$this->load->model($this->route);
 		
 		$this->{'model_extension_d_seo_module_' . $this->codename}->deleteInformationTargetKeyword($data);
+	}
+	
+	public function control_setup_extension() {
+		$this->load->controller('extension/module/' . $this->codename . '/setupExtension');
+			
+		$json = $this->response->getOutput();
+			
+		if ($json) {
+			$data = json_decode($json, true);
+			
+			return $data;
+		}
+		
+		return false;
 	}
 	
 	public function control_install_extension() {

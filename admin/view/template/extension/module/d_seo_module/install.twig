@@ -28,15 +28,23 @@
 			<div class="panel-heading">
 				<h3 class="panel-title">{{ text_install }}</h3>
 			</div>
-			<div class="panel-body panel-install" style="background-image: url({{ catalog }}image/catalog/{{ codename }}/background.svg)">
+			<div class="panel-body panel-setup" style="background-image: url({{ catalog }}image/catalog/{{ codename }}/background.svg)">
 				<div class="row">
-					<div class="col-md-6 col-md-offset-3 text-center">
-					{{ help_install }}
-					</div>
-				</div>
-				<div class="row">
-					<div class="col-md-6 col-md-offset-3 text-center">
-						<a action="{{ install }}" id="button_install" class="btn btn-success btn-lg">{{ button_install }}</a>
+					<div class="col-md-8 col-md-offset-2 text-center">
+						<div class="setup-info">
+							<h1 class="title m-t-lg m-b-lg">{{ text_setup }}</h1>
+							<p class="description m-b-lg">{{ help_setup }}</p>
+							<div class="btn-group m-b-lg" data-toggle="buttons">
+								<label class="btn btn-info active" data-toggle="tooltip" title="{{ help_full_setup }}">
+									<input type="radio" name="action" value="{{ setup }}" checked="checked" /> {{ text_full_setup }}
+								</label>
+								<label class="btn btn-info" data-toggle="tooltip" title="{{ help_custom_setup }}">
+									<input type="radio" name="action" value="{{ install }}" /> {{ text_custom_setup }}
+								</label>
+							</div>
+							<br/>
+							<a id="button_setup" class="btn btn-danger btn-lg">{{ button_setup }}</a>
+						</div>
 					</div>
 				</div>
 				<div class="row">
@@ -143,10 +151,10 @@ $('.info-window .info-window-close').on('click', function() {
 	$('.panel-resizable').removeClass('resized');
 });
 
-$('body').on('click', '#button_install', function(){
+$('body').on('click', '#button_setup', function(){
 	$.ajax({
 		type: 'post',
-		url: $(this).attr('action'),
+		url: $('[name="action"]:checked').val(),
 		data: '',
 		dataType: 'json',
 		beforeSend: function() {

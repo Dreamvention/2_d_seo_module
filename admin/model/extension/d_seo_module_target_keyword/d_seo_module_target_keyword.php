@@ -166,6 +166,10 @@ class ModelExtensionDSEOModuleTargetKeywordDSEOModuleTargetKeyword extends Model
 			if (!in_array($result['route'], $custom_page_exception_routes)) {
 				$target_elements[$result['route']]['route'] = $result['route'];
 				
+				if (!isset($target_elements[$result['route']]['target_keyword'])) {
+					$target_elements[$result['route']]['target_keyword'] = array();
+				}
+				
 				if ((isset($field_info['sheet']['custom_page']['field']['target_keyword']['multi_store']) && $field_info['sheet']['custom_page']['field']['target_keyword']['multi_store'] && isset($field_info['sheet']['custom_page']['field']['target_keyword']['multi_store_status']) && $field_info['sheet']['custom_page']['field']['target_keyword']['multi_store_status'])) {
 					$target_elements[$route]['target_keyword'][$result['store_id']][$result['language_id']][$result['sort_order']] = $result['keyword'];
 				} elseif ($result['store_id'] == 0) {
