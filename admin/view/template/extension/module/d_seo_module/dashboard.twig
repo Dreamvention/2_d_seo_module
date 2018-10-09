@@ -77,13 +77,13 @@
 							{% for control_extension in control_extensions %}
 							{% if control_extension['installed'] %}
 							<div class="control-extension installed text-center">
-								<img src="{{ catalog }}image/{{ control_extension['image'] }}" title="{{ control_extension['name'] }}" alt="{{ control_extension['name'] }}" class="image"/>
+								<img src="view/image/{{ control_extension['image'] }}" title="{{ control_extension['name'] }}" alt="{{ control_extension['name'] }}" class="image"/>
 								<h4 class="name m-b-md">{{ control_extension['name'] }}</h4>
 								<a href="{{ control_extension['href'] }}" class="btn btn-primary">{{ button_view }}</a>
 							</div>
 							{% else %}
 							<div class="control-extension text-center">
-								<img src="{{ catalog }}image/{{ control_extension['image'] }}" title="{{ control_extension['name'] }}" alt="{{ control_extension['name'] }}" class="image"/>
+								<img src="view/image/{{ control_extension['image'] }}" title="{{ control_extension['name'] }}" alt="{{ control_extension['name'] }}" class="image"/>
 								<h4 class="name m-b-md">{{ control_extension['name'] }}</h4>
 								<a action="{{ control_extension['install_href'] }}" class="button-install btn btn-success">{{ button_install }}</a>
 							</div>

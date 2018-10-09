@@ -306,52 +306,52 @@ $_['d_seo_module_manager_setting'] = array(
 $_['d_seo_module_feature_setting'] = array(
 	'dashboard_widget_for_duplicate_and_empty_target_keywords' => array(
 		'name' => 'text_dashboard_widget_for_duplicate_and_empty_target_keywords',
-		'image' => 'catalog/d_seo_module/feature/dashboard_widget_for_duplicate_and_empty_target_keywords.svg',
+		'image' => 'd_seo_module/feature/dashboard_widget_for_duplicate_and_empty_target_keywords.svg',
 		'href' => 'https://opencartseomodule.com/dashboard-widget-for-duplicate-target-keywords',
 	),
 	'opencart_tag_search_fix' => array(
 		'name' => 'text_opencart_tag_search_fix',
-		'image' => 'catalog/d_seo_module/feature/opencart_tag_search_fix.svg',
+		'image' => 'd_seo_module/feature/opencart_tag_search_fix.svg',
 		'href' => 'https://opencartseomodule.com/opencart-tag-search-fix',
 	),
 	'opencart_first_load_of_comments_fix' => array(
 		'name' => 'text_opencart_first_load_of_comments_fix',
-		'image' => 'catalog/d_seo_module/feature/opencart_first_load_of_comments_fix.svg',
+		'image' => 'd_seo_module/feature/opencart_first_load_of_comments_fix.svg',
 		'href' => 'https://opencartseomodule.com/opencart-first-load-of-comments-fix',
 	),
 	'target_keyword_planner' => array(
 		'name' => 'text_target_keyword_planner',
-		'image' => 'catalog/d_seo_module/feature/target_keyword_planner.svg',
+		'image' => 'd_seo_module/feature/target_keyword_planner.svg',
 		'href' => 'https://opencartseomodule.com/target-keyword-planner',
 	),
 	'seo_module_api' => array(
 		'name' => 'text_seo_module_api',
-		'image' => 'catalog/d_seo_module/feature/seo_module_api.svg',
+		'image' => 'd_seo_module/feature/seo_module_api.svg',
 		'href' => 'https://opencartseomodule.com/seo-module-api',
 	),
 	'export_import_target_keywords_for_custom_pages' => array(
 		'name' => 'text_export_import_target_keywords_for_custom_pages',
-		'image' => 'catalog/d_seo_module/feature/export_import_target_keywords_for_custom_pages.svg',
+		'image' => 'd_seo_module/feature/export_import_target_keywords_for_custom_pages.svg',
 		'href' => 'https://opencartseomodule.com/export-import-for-custom-page-keywords',
 	),
 	'robots_txt_editor' => array(
 		'name' => 'text_robots_txt_editor',
-		'image' => 'catalog/d_seo_module/feature/robots_txt_editor.svg',
+		'image' => 'd_seo_module/feature/robots_txt_editor.svg',
 		'href' => 'https://opencartseomodule.com/robots-txt-editor',
 	),
 	'htaccess_editor' => array(
 		'name' => 'text_htaccess_editor',
-		'image' => 'catalog/d_seo_module/feature/htaccess_editor.svg',
+		'image' => 'd_seo_module/feature/htaccess_editor.svg',
 		'href' => 'https://opencartseomodule.com/opencart-htaccess-editor',
 	),
 	'seo_module_multi_store_support' => array(
 		'name' => 'text_seo_module_multi_store_support',
-		'image' => 'catalog/d_seo_module/feature/seo_module_multi_store_support.svg',
+		'image' => 'd_seo_module/feature/seo_module_multi_store_support.svg',
 		'href' => 'https://opencartseomodule.com/multistore-seo-support',
 	),
 	'seo_module_quick_setup' => array(
 		'name' => 'text_seo_module_quick_setup',
-		'image' => 'catalog/d_seo_module/feature/seo_module_quick_setup.svg',
+		'image' => 'd_seo_module/feature/seo_module_quick_setup.svg',
 		'href' => 'https://opencartseomodule.com/quick-setup',
 	)
 );

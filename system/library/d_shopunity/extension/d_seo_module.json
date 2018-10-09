@@ -103,7 +103,7 @@
 	"dirs": [
         "admin/view/template/extension/module/d_seo_module",
 		"admin/view/template/extension/d_seo_module/d_seo_module",
-		"image/catalog/d_seo_module"
+		"admin/view/image/d_seo_module"
     ],
     "changelog": [
         {
