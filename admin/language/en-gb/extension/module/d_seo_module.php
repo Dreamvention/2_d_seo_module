@@ -38,8 +38,8 @@ $_['text_add_target_keyword']   					= 'Add Target Keyword';
 $_['text_general']									= 'General';
 $_['text_data']										= 'Data';
 $_['text_seo']										= 'SEO';
-$_['text_create_default_target_keywords_confirm']	= 'Creation default Target Keywords for Custom Pages will delete all old Target Keywords for Custom Pages. You sure you want to create default Target Keywords for Custom Pages?';
-$_['text_delete_target_keywords_confirm']   		= 'You sure you want to delete selected Target Keywords?';
+$_['text_create_default_target_keywords_confirm']	= 'Creation default Target Keywords for Custom Pages will delete all old Target Keywords for Custom Pages. Are you sure you want to create default Target Keywords for Custom Pages?';
+$_['text_delete_target_keywords_confirm']   		= 'Are you sure you want to delete selected Target Keywords?';
 $_['text_uninstall_confirm']						= 'After deinstallation is compleate the SEO Module will delete all additional fields in the product, category, manufacturer and information that have been added after installation. Are you sure you want to uninstall the SEO Module? ';
 $_['text_powered_by']               				= 'Tested with <a href="https://shopunity.net/">Shopunity.net</a><br/>Find more extensions at <a href="https://dreamvention.ee/">Dreamvention.com</a>';
 $_['text_instructions_full'] 						= '
@@ -250,7 +250,7 @@ $_['help_custom_setup']								= 'Custom Setup will install only required SEO mo
 $_['help_htaccess_setting']							= '<h4>Important!</h4>
 <p>Turning this option on  will uncomment the file .htaccess on apache server. But for the SEO urls to start working, you must visit Opencart Store Settings / tab Server and activate "Use SEO URLs"</p>';
 $_['help_htaccess_subfolder']						= '<h4>If you have a subfolder!</h4>
-<p>You your store is located in a subfolder (ex. http://myshop.com/store/) then you are required to set the RewriteBase (ex. from  <code>RewriteBase /</code> to <code>RewriteBase /store/</code> in the file above)</p>';
+<p>If your store is located in a subfolder (ex. http://myshop.com/store/) then you are required to set the RewriteBase (ex. from  <code>RewriteBase /</code> to <code>RewriteBase /store/</code> in the file above)</p>';
 $_['help_robots']									= '<h4>Important!</h4>
 <p>Robots.txt is a recomendation to the Search bot. You can start with the following default settings.</p>';
 $_['help_d_seo_module_pack']						= '<div class="alert alert-info text-center" style="cursor: pointer" onclick="window.open(\'http://opencartseomodule.com/seo-module-complete\', \'_blank\')">You can also buy <strong>SEO Module Pro</strong> which contains the complete package of SEO modules.</div>';
