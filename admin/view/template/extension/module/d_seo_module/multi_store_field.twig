@@ -68,7 +68,7 @@
 								{% for sheet in field_setting['sheet'] %}
 								<div id="vtab_{{ sheet['code'] }}" class="tab-pane {% if (sheet == field_setting['sheet']|first) %}active{% endif %}">
 									<div class="page-header">
-										<h3>{{ sheet['name'] }}</h3>
+										<h3><strong>{{ sheet['name'] }}</strong></h3>
 									</div>
 									<div class="table-responsive">
 										<table class="table table-bordered table-hover m-b-none">

@@ -61,6 +61,8 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$this->document->addStyle('view/stylesheet/d_bootstrap_extra/bootstrap.css');
 		$this->document->addScript('view/javascript/d_bootstrap_switch/js/bootstrap-switch.min.js');
         $this->document->addStyle('view/javascript/d_bootstrap_switch/css/bootstrap-switch.css');
+		$this->document->addStyle('view/stylesheet/d_admin_style/core/normalize/normalize.css');
+		$this->document->addStyle('view/stylesheet/d_admin_style/themes/light/light.css');
 		$this->document->addStyle('view/stylesheet/d_seo_module.css');
 
 		// Heading
@@ -313,6 +315,8 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$this->document->addStyle('view/stylesheet/d_bootstrap_extra/bootstrap.css');
 		$this->document->addScript('view/javascript/d_bootstrap_switch/js/bootstrap-switch.min.js');
         $this->document->addStyle('view/javascript/d_bootstrap_switch/css/bootstrap-switch.css');
+		$this->document->addStyle('view/stylesheet/d_admin_style/core/normalize/normalize.css');
+		$this->document->addStyle('view/stylesheet/d_admin_style/themes/light/light.css');
 		$this->document->addStyle('view/stylesheet/d_seo_module.css');
 
 		// Heading
@@ -547,6 +551,8 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$this->document->addStyle('view/stylesheet/d_bootstrap_extra/bootstrap.css');
 		$this->document->addScript('view/javascript/d_bootstrap_switch/js/bootstrap-switch.min.js');
         $this->document->addStyle('view/javascript/d_bootstrap_switch/css/bootstrap-switch.css');
+		$this->document->addStyle('view/stylesheet/d_admin_style/core/normalize/normalize.css');
+		$this->document->addStyle('view/stylesheet/d_admin_style/themes/light/light.css');
 		$this->document->addStyle('view/stylesheet/d_seo_module.css');
 
 		// Heading
@@ -755,6 +761,8 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$this->document->addStyle('view/stylesheet/d_bootstrap_extra/bootstrap.css');
 		$this->document->addScript('view/javascript/d_bootstrap_switch/js/bootstrap-switch.min.js');
         $this->document->addStyle('view/javascript/d_bootstrap_switch/css/bootstrap-switch.css');
+		$this->document->addStyle('view/stylesheet/d_admin_style/core/normalize/normalize.css');
+		$this->document->addStyle('view/stylesheet/d_admin_style/themes/light/light.css');
 		$this->document->addStyle('view/stylesheet/d_seo_module.css');
 						
 		// Heading
@@ -1096,6 +1104,8 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$this->document->addStyle('view/stylesheet/d_bootstrap_extra/bootstrap.css');
 		$this->document->addScript('view/javascript/d_bootstrap_switch/js/bootstrap-switch.min.js');
         $this->document->addStyle('view/javascript/d_bootstrap_switch/css/bootstrap-switch.css');
+		$this->document->addStyle('view/stylesheet/d_admin_style/core/normalize/normalize.css');
+		$this->document->addStyle('view/stylesheet/d_admin_style/themes/light/light.css');
 		$this->document->addStyle('view/stylesheet/d_seo_module.css');
 				
 		// Heading
@@ -1306,6 +1316,8 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		$this->document->addStyle('view/stylesheet/d_bootstrap_extra/bootstrap.css');
 		$this->document->addScript('view/javascript/d_bootstrap_switch/js/bootstrap-switch.min.js');
         $this->document->addStyle('view/javascript/d_bootstrap_switch/css/bootstrap-switch.css');
+		$this->document->addStyle('view/stylesheet/d_admin_style/core/normalize/normalize.css');
+		$this->document->addStyle('view/stylesheet/d_admin_style/themes/light/light.css');
 		$this->document->addStyle('view/stylesheet/d_seo_module.css');
 				
 		// Heading
