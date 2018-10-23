@@ -171,10 +171,10 @@ class ModelExtensionDSEOModuleTargetKeywordDSEOModuleTargetKeyword extends Model
 				}
 				
 				if ((isset($field_info['sheet']['custom_page']['field']['target_keyword']['multi_store']) && $field_info['sheet']['custom_page']['field']['target_keyword']['multi_store'] && isset($field_info['sheet']['custom_page']['field']['target_keyword']['multi_store_status']) && $field_info['sheet']['custom_page']['field']['target_keyword']['multi_store_status'])) {
-					$target_elements[$route]['target_keyword'][$result['store_id']][$result['language_id']][$result['sort_order']] = $result['keyword'];
+					$target_elements[$result['route']]['target_keyword'][$result['store_id']][$result['language_id']][$result['sort_order']] = $result['keyword'];
 				} elseif ($result['store_id'] == 0) {
 					foreach ($stores as $store) {
-						$target_elements[$route]['target_keyword'][$store['store_id']][$result['language_id']][$result['sort_order']] = $result['keyword'];
+						$target_elements[$result['route']]['target_keyword'][$store['store_id']][$result['language_id']][$result['sort_order']] = $result['keyword'];
 					}
 				}
 			}
