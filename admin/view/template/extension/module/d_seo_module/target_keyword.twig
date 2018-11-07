@@ -31,14 +31,10 @@
 	</div>
 	<div class="container-fluid">
 		{% if error['warning'] %}
-		<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> {{ error['warning'] }}
-			<button type="button" class="close" data-dismiss="alert">&times;</button>
-		</div>
+		<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i><button type="button" class="close" data-dismiss="alert">&times;</button> {{ error['warning'] }}</div>
 		{% endif %}
 		{% if success %}
-		<div class="alert alert-success"><i class="fa fa-exclamation-circle"></i> {{ success }}
-			<button type="button" class="close" data-dismiss="alert">&times;</button>
-		</div>
+		<div class="alert alert-success"><i class="fa fa-exclamation-circle"></i><button type="button" class="close" data-dismiss="alert">&times;</button> {{ success }}</div>
 		{% endif %}
 		<div class="panel panel-default panel-resizable">
 			<div class="panel-heading">
@@ -246,9 +242,9 @@ function showAlert(json) {
 	if (json['error']) {
 		if (json['error']['warning']) {
 			if ($('#modal-dialog').length > 0) {
-				$('#modal-dialog .modal-body').prepend('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+				$('#modal-dialog .modal-body').prepend('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i><button type="button" class="close" data-dismiss="alert">&times;</button> ' + json['error']['warning'] + '</div>');
 			} else {
-				$('#content > .container-fluid').prepend('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+				$('#content > .container-fluid').prepend('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i><button type="button" class="close" data-dismiss="alert">&times;</button> ' + json['error']['warning'] + '</div>');
 			}
 		}				
 				
@@ -266,7 +262,7 @@ function showAlert(json) {
 	}
 			
 	if (json['success']) {
-		$('#content > .container-fluid').prepend('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success'] + '  <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+		$('#content > .container-fluid').prepend('<div class="alert alert-success"><i class="fa fa-check-circle"></i><button type="button" class="close" data-dismiss="alert">&times;</button> ' + json['success'] + '</div>');
 	}
 }
 </script> 

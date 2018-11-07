@@ -38,6 +38,7 @@ $_['text_add_target_keyword']   					= 'Add Target Keyword';
 $_['text_general']									= 'General';
 $_['text_data']										= 'Data';
 $_['text_seo']										= 'SEO';
+$_['text_seo_module']   							= 'SEO Module';
 $_['text_create_default_target_keywords_confirm']	= 'Creation default Target Keywords for Custom Pages will delete all old Target Keywords for Custom Pages. Are you sure you want to create default Target Keywords for Custom Pages?';
 $_['text_delete_target_keywords_confirm']   		= 'Are you sure you want to delete selected Target Keywords?';
 $_['text_uninstall_confirm']						= 'After deinstallation is compleate the SEO Module will delete all additional fields in the product, category, manufacturer and information that have been added after installation. Are you sure you want to uninstall the SEO Module? ';

@@ -32,7 +32,7 @@ function {{ codename }}_showAlert(json) {
 						
 	if (json['error']) {
 		if (json['error']['warning']) {
-			$('#{{ codename }} .panel-body').prepend('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i> ' + json['error']['warning'] + ' <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+			$('#{{ codename }} .panel-body').prepend('<div class="alert alert-danger"><i class="fa fa-exclamation-circle"></i><button type="button" class="close" data-dismiss="alert">&times;</button> ' + json['error']['warning'] + '</div>');
 		}				
 				
 		for (i in json['error']) {
@@ -49,7 +49,7 @@ function {{ codename }}_showAlert(json) {
 	}
 			
 	if (json['success']) {
-		$('#{{ codename }} .panel-body').prepend('<div class="alert alert-success"><i class="fa fa-check-circle"></i> ' + json['success'] + '  <button type="button" class="close" data-dismiss="alert">&times;</button></div>');
+		$('#{{ codename }} .panel-body').prepend('<div class="alert alert-success"><i class="fa fa-check-circle"></i><button type="button" class="close" data-dismiss="alert">&times;</button> ' + json['success'] + '</div>');
 	}
 }
 </script>

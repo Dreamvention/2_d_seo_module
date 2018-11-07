@@ -189,7 +189,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		}
 
 		$data['breadcrumbs'][] = array(
-			'text' => $this->language->get('heading_title_main'),
+			'text' => $this->language->get('text_seo_module'),
 			'href' => $this->url->link($this->route, $url_token . '&' . $url_store, true)
 		);
 		
@@ -453,7 +453,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		}
 
 		$data['breadcrumbs'][] = array(
-			'text' => $this->language->get('heading_title_main'),
+			'text' => $this->language->get('text_seo_module'),
 			'href' => $this->url->link($this->route, $url_token . '&' . $url_store, true)
 		);
 		
@@ -673,7 +673,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		}
 
 		$data['breadcrumbs'][] = array(
-			'text' => $this->language->get('heading_title_main'),
+			'text' => $this->language->get('text_seo_module'),
 			'href' => $this->url->link($this->route, $url_token . '&' . $url_store, true)
 		);
 		
@@ -935,7 +935,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		}
 
 		$data['breadcrumbs'][] = array(
-			'text' => $this->language->get('heading_title_main'),
+			'text' => $this->language->get('text_seo_module'),
 			'href' => $this->url->link($this->route, $url_token . '&' . $url_store, true)
 		);
 		
@@ -1233,7 +1233,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		}
 
 		$data['breadcrumbs'][] = array(
-			'text' => $this->language->get('heading_title_main'),
+			'text' => $this->language->get('text_seo_module'),
 			'href' => $this->url->link($this->route, $url_token . '&' . $url_store, true)
 		);
 		
@@ -1430,7 +1430,7 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 		}
 
 		$data['breadcrumbs'][] = array(
-			'text' => $this->language->get('heading_title_main'),
+			'text' => $this->language->get('text_seo_module'),
 			'href' => $this->url->link($this->route, $url_token . '&' . $url_store, true)
 		);
 		
