@@ -39,7 +39,7 @@
 								</label>
 							</div>
 							<br/>
-							<a id="button_setup" class="btn btn-danger btn-lg">{{ button_setup }}</a>
+							<a action="{{ setup }}" id="button_setup" class="btn btn-danger btn-lg"><i class="fa fa-cog"></i><i class="fa fa-refresh rotate hide"></i> {{ button_setup }}</a>
 						</div>
 					</div>
 				</div>
@@ -154,10 +154,12 @@ $('body').on('click', '#button_setup', function(){
 		data: '',
 		dataType: 'json',
 		beforeSend: function() {
-			$('#content').fadeTo('slow', 0.5);
+			$('#button_setup .fa-refresh').removeClass('hide');
+			$('#button_setup .fa-cog').addClass('hide');
 		},
 		complete: function() {
-			$('#content').fadeTo('slow', 1);
+			$('#button_setup .fa-refresh').addClass('hide');
+			$('#button_setup .fa-cog').removeClass('hide');
 		},
 		success: function(json) {
 			showAlert(json);

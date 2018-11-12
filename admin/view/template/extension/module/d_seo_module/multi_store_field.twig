@@ -3,8 +3,8 @@
 	<div class="page-header">
 		<div class="container-fluid">
 			<div class="form-inline pull-right">
-				<button id="save_and_stay" data-toggle="tooltip" title="{{ button_save_and_stay }}" class="btn btn-success"><i class="fa fa-save"></i></button>
-				<button id="save_and_exit" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i></button>
+				<button id="button_save_and_stay" data-toggle="tooltip" title="{{ button_save_and_stay }}" class="btn btn-success"><i class="fa fa-save"></i><i class="fa fa-refresh rotate hide"></i></button>
+				<button id="button_save_and_exit" data-toggle="tooltip" title="{{ button_save }}" class="btn btn-primary"><i class="fa fa-save"></i><i class="fa fa-refresh rotate hide"></i></button>
 				<a href="{{ cancel }}" data-toggle="tooltip" title="{{ button_cancel }}" class="btn btn-default"><i class="fa fa-reply"></i></a>
 			</div>
 			<h1>{{ heading_title }} {{ version }}</h1>
@@ -183,17 +183,19 @@ function showAlert(json) {
 </script> 
 <script type="text/javascript">
 
-$('body').on('click', '#save_and_stay', function() {
+$('body').on('click', '#button_save_and_stay', function() {
     $.ajax({
 		type: 'post',
 		url: $('#form').attr('action'),
 		data: $('#form').serialize(),
 		dataType: 'json',
 		beforeSend: function() {
-			$('#content').fadeTo('slow', 0.5);
+			$('#button_save_and_stay .fa-refresh').removeClass('hide');
+			$('#button_save_and_stay .fa-save').addClass('hide');
 		},
 		complete: function() {
-			$('#content').fadeTo('slow', 1);   
+			$('#button_save_and_stay .fa-refresh').addClass('hide');
+			$('#button_save_and_stay .fa-save').removeClass('hide');
 		},
 		success: function(json) {
 			showAlert(json);
@@ -204,17 +206,19 @@ $('body').on('click', '#save_and_stay', function() {
     });  
 });
 	
-$('body').on('click', '#save_and_exit', function() {
+$('body').on('click', '#button_save_and_exit', function() {
     $.ajax({
 		type: 'post',
 		url: $('#form').attr('action'),
 		data: $('#form').serialize(),
 		dataType: 'json',
 		beforeSend: function() {
-			$('#content').fadeTo('slow', 0.5);
+			$('#button_save_and_exit .fa-refresh').removeClass('hide');
+			$('#button_save_and_exit .fa-save').addClass('hide');
 		},
 		complete: function() {
-			$('#content').fadeTo('slow', 1);   
+			$('#button_save_and_exit .fa-refresh').addClass('hide');
+			$('#button_save_and_exit .fa-save').removeClass('hide');
 		},
 		success: function(json) {
 			showAlert(json);

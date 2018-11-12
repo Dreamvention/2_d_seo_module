@@ -87,7 +87,7 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label">{{ entry_export }}</label>
 										<div class="col-sm-9">
-											<a id="button_export" class="btn btn-primary">{{ button_export }}</a>
+											<a id="button_export" class="btn btn-primary"><i class="fa fa-download"></i> {{ button_export }}</a>
 										</div>
 									</div>	
 								</form>
@@ -120,7 +120,7 @@
 									<div class="form-group">
 										<label class="col-sm-3 control-label">{{ entry_import }}</label>
 										<div class="col-sm-9">
-											<a id="button_import" class="btn btn-primary">{{ button_import }}</a>
+											<a id="button_import" class="btn btn-primary"><i class="fa fa-upload"></i><i class="fa fa-refresh rotate hide"></i> {{ button_import }}</a>
 										</div>
 									</div>	
 								</form>	
@@ -228,6 +228,14 @@ $('body').on('click', '#button_import', function() {
 		dataType: 'json',
 		processData: false,
 		contentType: false,
+		beforeSend: function() {
+			$('#button_import .fa-refresh').removeClass('hide');
+			$('#button_import .fa-upload').addClass('hide');
+		},
+		complete: function() {
+			$('#button_import .fa-refresh').addClass('hide');
+			$('#button_import .fa-upload').removeClass('hide');
+		},
 		success: function(json) {
 			showAlert(json);
 		},

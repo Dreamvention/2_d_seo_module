@@ -75,13 +75,13 @@
 							<div class="control-extension installed text-center">
 								<img src="view/image/{{ control_extension['image'] }}" title="{{ control_extension['name'] }}" alt="{{ control_extension['name'] }}" class="image"/>
 								<h4 class="name m-b-md">{{ control_extension['name'] }}</h4>
-								<a href="{{ control_extension['href'] }}" class="btn btn-primary">{{ button_view }}</a>
+								<a href="{{ control_extension['href'] }}" class="btn btn-primary"><i class="fa fa-search"></i> {{ button_view }}</a>
 							</div>
 							{% else %}
 							<div class="control-extension text-center">
 								<img src="view/image/{{ control_extension['image'] }}" title="{{ control_extension['name'] }}" alt="{{ control_extension['name'] }}" class="image"/>
 								<h4 class="name m-b-md">{{ control_extension['name'] }}</h4>
-								<a action="{{ control_extension['install_href'] }}" class="button-install btn btn-success">{{ button_install }}</a>
+								<a action="{{ control_extension['install_href'] }}" class="button-install btn btn-success"><i class="fa fa-cog"></i><i class="fa fa-refresh rotate hide"></i> {{ button_install }}</a>
 							</div>
 							{% endif %}
 							{% endfor %}
@@ -106,7 +106,7 @@
 									<td class="field">
 										<div class="row">
 											<div class="col-xs-3 text-center">
-												<a action="{{ control_element['edit_href'] }}" confirm="{{ control_element['confirm'] }}" class="button-edit btn btn-sm btn-success">{{ button_setup }}</a>
+												<a action="{{ control_element['edit_href'] }}" confirm="{{ control_element['confirm'] }}" class="button-edit btn btn-sm btn-success"><i class="fa fa-cog"></i><i class="fa fa-refresh rotate hide"></i> {{ button_setup }}</a>
 											</div>
 											<div class="col-xs-9">
 												<h4 class="name m-b-sm"><label class="control-label p-n text-left"><span data-toggle="tooltip" title="{{ control_element['description'] }}">{{ control_element['name'] }}</span></label></h4>
@@ -144,7 +144,7 @@
 									<td class="field">
 										<div class="row">
 											<div class="col-xs-3 text-center">
-												<a action="{{ control_element['edit_href'] }}" confirm="{{ control_element['confirm'] }}" class="button-edit btn btn-sm btn-primary">{{ button_reset }}</a>
+												<a action="{{ control_element['edit_href'] }}" confirm="{{ control_element['confirm'] }}" class="button-edit btn btn-sm btn-primary"><i class="fa fa-cog"></i><i class="fa fa-refresh rotate hide"></i> {{ button_reset }}</a>
 											</div>
 											<div class="col-xs-9">
 												<h4 class="name m-b-sm"><label class="control-label p-n text-left"><span data-toggle="tooltip" title="{{ control_element['description'] }}">{{ control_element['name'] }}</span></label></h4>
@@ -290,16 +290,20 @@ function showAlert(json) {
 <script type="text/javascript">
 
 $('body').on('click', '.button-install', function() {
+	var button_install = $(this);
+	
 	$.ajax({
 		type: 'post',
 		url: $(this).attr('action'),
 		data: '',
 		dataType: 'json',
 		beforeSend: function() {
-			$('#content').fadeTo('slow', 0.5);
+			button_install.children('.fa-refresh').removeClass('hide');
+			button_install.children('.fa-cog').addClass('hide');
 		},
 		complete: function() {
-			$('#content').fadeTo('slow', 1);
+			button_install.children('.fa-refresh').addClass('hide');
+			button_install.children('.fa-cog').removeClass('hide');
 		},
 		success: function(json) {
 			showAlert(json);
@@ -315,6 +319,7 @@ $('body').on('click', '.button-install', function() {
 });
 
 $('body').on('click', '.button-edit', function() {
+	var button_edit = $(this);
 	var validate = false;
 	
 	if ($(this).attr('confirm')) {
@@ -332,10 +337,12 @@ $('body').on('click', '.button-edit', function() {
 			data: '',
 			dataType: 'json',
 			beforeSend: function() {
-				$('#content').fadeTo('slow', 0.5);
+				button_edit.children('.fa-refresh').removeClass('hide');
+				button_edit.children('.fa-cog').addClass('hide');
 			},
 			complete: function() {
-				$('#content').fadeTo('slow', 1);
+				button_edit.children('.fa-refresh').addClass('hide');
+				button_edit.children('.fa-cog').removeClass('hide');
 			},
 			success: function(json) {
 				showAlert(json);
