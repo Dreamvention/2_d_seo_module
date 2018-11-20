@@ -64,6 +64,13 @@
     margin: auto;
 	text-align: center;
 }
+.panel-default .panel-setup .title {
+	font-size: 30px;
+	font-weight: bold;
+}
+.panel-default .panel-setup .description {
+	font-size: 15px;
+}
 .panel-default .panel-setup .planet {
 	display: block;
 	max-width: 100%;
