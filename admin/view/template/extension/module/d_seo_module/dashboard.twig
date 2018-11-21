@@ -36,7 +36,7 @@
 		{{ d_seo_module_pack['info'] }}
 		{% endif %}
 	</div>
-	<div class="container-fluid {% if d_seo_module_pack %}col-sm-9{% endif %}">
+	<div class="container-fluid {% if d_shopunity and d_seo_module_pack %}col-sm-9{% endif %}">
 		<div class="panel panel-default panel-resizable">
 			<div class="panel-heading">
 				<h3 class="panel-title"><i class="fa fa-pencil"></i> {{ text_edit }}</h3>
@@ -180,7 +180,7 @@
 		</div>
 		<br class="clear" />
 	</div>
-	{% if d_seo_module_pack %}
+	{% if d_shopunity and d_seo_module_pack %}
 	<div class="container-fluid col-sm-3">
         <div class="shopunity-widget-seo-module-pack"></div>
     </div>
@@ -189,6 +189,18 @@
 </div>
 {% if d_shopunity %}
 <script src="view/javascript/d_shopunity/d_shopunity_widget.js" type="text/javascript"></script>
+<script type="text/javascript">
+
+var d_shopunity_widget_update = jQuery.extend(true, {}, d_shopunity_widget);
+        
+d_shopunity_widget_update.init({
+    class: '.shopunity-widget-update',
+    token: '{{ (url_token|split('='))|last }}',
+    action: 'loadUpdate',
+    extension_id: '{{ extension_id }}'
+});
+
+</script>
 {% if d_seo_module_pack %}
 <script type="text/javascript">
     
@@ -202,18 +214,6 @@ d_shopunity_widget_seo_module_pack.init({
 
 </script>
 {% endif %}
-<script type="text/javascript">
-
-var d_shopunity_widget_update = jQuery.extend(true, {}, d_shopunity_widget);
-        
-d_shopunity_widget_update.init({
-    class: '.shopunity-widget-update',
-    token: '{{ (url_token|split('='))|last }}',
-    action: 'loadUpdate',
-    extension_id: '{{ extension_id }}'
-});
-
-</script>
 {% endif %}
 <script type="text/javascript">
 
