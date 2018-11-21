@@ -248,13 +248,13 @@ $_['button_import'] 								= 'Import';
 $_['help_setup']									= 'You are one step away from installing the best SEO extension on the market. SEO module is just the begining. It will set ground features and an API for ther SEO modules that you can install. They will improve your Store search ranking and help you mamange your SEO like a pro. Click setup!';
 $_['help_full_setup']								= 'Full Setup will install all available SEO modules and automatically generate meta data and SEO URLs for all pages of your store. Recommended for installing on the new store.';
 $_['help_custom_setup']								= 'Custom Setup will install only required SEO modules. All further settings you have to do manually. Recommended for installing on the work store.';
+$_['help_d_seo_module_pack']						= '<div class="alert alert-info text-center" style="cursor: pointer" onclick="window.open(\'https://opencartseomodule.com/seo-module-complete\', \'_blank\')">You can also buy <strong>SEO Module Pro</strong> which contains the complete package of SEO modules.</div>';
 $_['help_htaccess_setting']							= '<h4>Important!</h4>
 <p>Turning this option on  will uncomment the file .htaccess on apache server. But for the SEO urls to start working, you must visit Opencart Store Settings / tab Server and activate "Use SEO URLs"</p>';
 $_['help_htaccess_subfolder']						= '<h4>If you have a subfolder!</h4>
 <p>If your store is located in a subfolder (ex. http://myshop.com/store/) then you are required to set the RewriteBase (ex. from  <code>RewriteBase /</code> to <code>RewriteBase /store/</code> in the file above)</p>';
 $_['help_robots']									= '<h4>Important!</h4>
 <p>Robots.txt is a recomendation to the Search bot. You can start with the following default settings.</p>';
-$_['help_d_seo_module_pack']						= '<div class="alert alert-info text-center" style="cursor: pointer" onclick="window.open(\'http://opencartseomodule.com/seo-module-complete\', \'_blank\')">You can also buy <strong>SEO Module Pro</strong> which contains the complete package of SEO modules.</div>';
 
 // Success
 $_['success_save']									= 'Success: You have modified SEO Module!';
