@@ -9,8 +9,9 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 	public function __construct($registry) {
 		parent::__construct($registry);
 
-		$this->d_shopunity = (file_exists(DIR_SYSTEM . 'library/d_shopunity/extension/d_shopunity.json'));
-		$this->extension = json_decode(file_get_contents(DIR_SYSTEM . 'library/d_shopunity/extension/' . $this->codename . '.json'), true);
+        $this->extension = json_decode(file_get_contents(DIR_SYSTEM . 'library/d_shopunity/extension/' . $this->codename . '.json'), true);
+        $this->d_shopunity = (file_exists(DIR_SYSTEM . 'library/d_shopunity/extension/d_shopunity.json'));
+        $this->d_validator = (file_exists(DIR_SYSTEM . 'library/d_shopunity/extension/d_validator.json'));
 	}
 	
 	public function index() {		
@@ -30,6 +31,11 @@ class ControllerExtensionModuleDSEOModule extends Controller {
 				
 			$this->model_extension_d_shopunity_mbooth->validateDependencies($this->codename);
 		}
+
+		if ($this->d_validator) {
+            $this->load->model('extension/d_shopunity/d_validator');
+            $this->model_extension_d_shopunity_d_validator->installCompatibility();
+        }
 		
 		if (file_exists(DIR_APPLICATION . 'model/extension/module/d_twig_manager.php')) {
 			$this->load->model('extension/module/d_twig_manager');
