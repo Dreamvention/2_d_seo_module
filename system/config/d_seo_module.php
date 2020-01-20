@@ -1,7 +1,6 @@
 <?php 
 $_['d_seo_module_setting'] = array(
 	'list_limit' => '20',
-	'cache_expire' => '2592000',
 	'default_target_keywords' => array(
 		'common/home' => array('webshop'),
 		'product/manufacturer' => array('brand'),
